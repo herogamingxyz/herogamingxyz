@@ -1,284 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gaming Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming Hub</title>
 
-  <style>
+<style>
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial, sans-serif;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
 
-    body{
-      background:#0f0f0f;
-      color:white;
-    }
+body{
+  background:#0f0f0f;
+  color:white;
+}
 
-    header{
-      background:linear-gradient(90deg,#00ff99,#00bfff);
-      padding:30px;
-      text-align:center;
-    }
+header{
+  background:linear-gradient(90deg,#00ff99,#00bfff);
+  padding:30px;
+  text-align:center;
+}
 
-    header h1{
-      font-size:50px;
-      color:black;
-    }
+header h1{
+  font-size:50px;
+  color:black;
+}
 
-    header p{
-      color:#111;
-      margin-top:10px;
-      font-size:18px;
-    }
+header p{
+  color:#111;
+  margin-top:10px;
+  font-size:18px;
+}
 
-    nav{
-      background:#1b1b1b;
-      padding:15px;
-      text-align:center;
-    }
+nav{
+  background:#1b1b1b;
+  padding:15px;
+  text-align:center;
+}
 
-    nav a{
-      color:white;
-      text-decoration:none;
-      margin:15px;
-      font-size:18px;
-      transition:0.3s;
-    }
+nav a{
+  color:white;
+  text-decoration:none;
+  margin:15px;
+  font-size:18px;
+}
 
-    nav a:hover{
-      color:#00ff99;
-    }
+nav a:hover{
+  color:#00ff99;
+}
 
-    .hero{
-      text-align:center;
-      padding:80px 20px;
-      background:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200') center/cover;
-    }
+.hero{
+  text-align:center;
+  padding:80px 20px;
+  background:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200') center/cover;
+}
 
-    .hero h2{
-      font-size:55px;
-      margin-bottom:20px;
-      text-shadow:2px 2px 10px black;
-    }
+.hero h2{
+  font-size:55px;
+  margin-bottom:20px;
+  text-shadow:2px 2px 10px black;
+}
 
-    .hero p{
-      font-size:20px;
-      max-width:700px;
-      margin:auto;
-      text-shadow:2px 2px 10px black;
-    }
+.hero p{
+  font-size:20px;
+  max-width:700px;
+  margin:auto;
+  text-shadow:2px 2px 10px black;
+}
 
-    .btn{
-      display:inline-block;
-      margin-top:25px;
-      padding:15px 30px;
-      background:#00ff99;
-      color:black;
-      font-weight:bold;
-      border-radius:10px;
-      text-decoration:none;
-      transition:0.3s;
-    }
+.btn{
+  display:inline-block;
+  margin-top:20px;
+  padding:12px 25px;
+  background:#00ff99;
+  color:black;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+}
 
-    .btn:hover{
-      background:#00cc77;
-      transform:scale(1.05);
-    }
+.btn:hover{
+  background:#00cc77;
+}
 
-    .section-title{
-      text-align:center;
-      margin-top:50px;
-      font-size:40px;
-      color:#00ff99;
-    }
+.section-title{
+  text-align:center;
+  margin-top:50px;
+  font-size:40px;
+  color:#00ff99;
+}
 
-    .cards{
-      display:flex;
-      justify-content:center;
-      gap:25px;
-      flex-wrap:wrap;
-      padding:40px;
-    }
+.cards{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  flex-wrap:wrap;
+  padding:40px;
+}
 
-    .card{
-      background:#1b1b1b;
-      width:300px;
-      border-radius:15px;
-      overflow:hidden;
-      transition:0.3s;
-      box-shadow:0 0 10px rgba(0,0,0,0.5);
-    }
+.card{
+  background:#1b1b1b;
+  width:300px;
+  border-radius:15px;
+  overflow:hidden;
+  transition:0.3s;
+  box-shadow:0 0 10px rgba(0,0,0,0.5);
+}
 
-    .card:hover{
-      transform:translateY(-10px);
-    }
+.card:hover{
+  transform:translateY(-10px);
+}
 
-    .card img{
-      width:100%;
-      height:200px;
-      object-fit:cover;
-    }
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
 
-    .card-content{
-      padding:20px;
-    }
+.card-content{
+  padding:20px;
+}
 
-    .card-content h3{
-      margin-bottom:10px;
-      color:#00ff99;
-    }
+.card-content h3{
+  margin-bottom:10px;
+  color:#00ff99;
+}
 
-    .card-content p{
-      color:#ccc;
-      line-height:1.5;
-    }
+.card-content p{
+  color:#ccc;
+  line-height:1.6;
+}
 
-    .news{
-      padding:50px 20px;
-      text-align:center;
-    }
+.news{
+  padding:50px 20px;
+  text-align:center;
+}
 
-    .news-box{
-      background:#1b1b1b;
-      max-width:900px;
-      margin:auto;
-      padding:30px;
-      border-radius:15px;
-    }
+.news-box{
+  background:#1b1b1b;
+  max-width:900px;
+  margin:auto;
+  padding:30px;
+  border-radius:15px;
+}
 
-    footer{
-      background:#111;
-      text-align:center;
-      padding:25px;
-      margin-top:50px;
-      color:#888;
-    }
+footer{
+  background:#111;
+  text-align:center;
+  padding:25px;
+  margin-top:50px;
+  color:#888;
+}
 
-    @media(max-width:768px){
+footer a{
+  color:#00ff99;
+  margin:10px;
+  text-decoration:none;
+}
 
-      .hero h2{
-        font-size:35px;
-      }
+@media(max-width:768px){
 
-      .cards{
-        padding:20px;
-      }
+.hero h2{
+  font-size:35px;
+}
 
-      .card{
-        width:100%;
-      }
+.card{
+  width:100%;
+}
 
-    }
+}
 
-  </style>
+</style>
 
 </head>
 <body>
 
-  <header>
-    <h1>Gaming Hub</h1>
-    <p>Minecraft Mods, Texture Packs, Gaming News & More</p>
-  </header>
-<div class="card">
+<header>
+  <h1>Gaming Hub</h1>
+  <p>Minecraft Mods, Texture Packs, Gaming News & More</p>
+</header>
 
-  </div>
+<nav>
+  <a href="#">Home</a>
+  <a href="#">Minecraft</a>
+  <a href="#">Mods</a>
+  <a href="#">Texture Packs</a>
+  <a href="#">Gaming News</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
-</div>
-  
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Minecraft</a>
-    <a href="#">Mods</a>
-    <a href="#">Texture Packs</a>
-    <a href="#">Gaming News</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+<section class="hero">
 
-  <section class="hero">
-    <h2>Ultimate Gaming Website</h2>
-    <p>
-      Explore Minecraft mods, FPS boost texture packs,
-      gaming news, tutorials and much more.
-    </p>
+  <h2>Ultimate Gaming Website</h2>
 
-    <a href="#" class="btn">Explore Now</a>
-  </section>
+  <p>
+    Explore Minecraft mods, FPS boost texture packs,
+    gaming news, tutorials and much more.
+  </p>
 
-  <h2 class="section-title">Popular Categories</h2>
+  <a href="#" class="btn">Explore Now</a>
 
-  <section class="cards">
+</section>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1200">
+<h2 class="section-title">Popular Categories</h2>
 
-      <div class="card-content">
-        <h3>Minecraft Mods</h3>
+<section class="cards">
 
-        <p>
-          Discover the best Minecraft mods for survival,
-          FPS boost and adventure gameplay.
-        </p>
-      </div>
-    </div>
+  <div class="card">
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200">
+    <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1200">
 
-    
-        <p>
-          Download stylish and smooth texture packs
-          for low-end and high-end devices.
-        </p>
-      </div>
-    </div>
+    <div class="card-content">
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200">
+      <h3>Minecraft Mods</h3>
 
-      <div class="card-content">
-        <h3>Gaming News</h3>
-        
-
-        <p>
-          Stay updated with latest gaming updates,
-          events and trending releases.
-        </p>
-        <a href="gta6-hype.html" class="btn">Read Article</a>
-        
-      </div>
-    </div>
-
-  </section>
-
-  <section class="news">
-
-    <h2 class="section-title">Latest Update</h2>
-
-    <div class="news-box">
-
-      <h2>Minecraft New Update Released</h2>
-
-      <p style="margin-top:15px; color:#ccc; line-height:1.7;">
-        The latest Minecraft update brings better graphics,
-        new mobs, exciting blocks and improved gameplay experience.
+      <p>
+        Discover the best Minecraft mods for survival,
+        FPS boost and adventure gameplay.
       </p>
 
     </div>
 
-  </section>
+  </div>
 
-  <footer>
-    © 2026 Gaming Hub | Created By Hero Gaming
-    <br>
-<a href="privacy-policy.html">Privacy Policy</a>
-    <a href="about.html">About</a>
- 
-  </footer>
+  <div class="card">
+
+    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200">
+
+    <div class="card-content">
+
+      <h3>Texture Packs</h3>
+
+      <p>
+        Download stylish and smooth texture packs
+        for low-end and high-end devices.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200">
+
+    <div class="card-content">
+
+      <h3>Gaming News</h3>
+
+      <p>
+        Stay updated with latest gaming updates,
+        events and trending releases.
+      </p>
+
+      <a href="gta6-hype.html" class="btn">
+        Read Article
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <img src="sodium1.jpg">
+
+    <div class="card-content">
+
+      <h3>Sodium Mod</h3>
+
+      <p>
+        Best FPS Boost Mod For Minecraft Java Edition.
+      </p>
+
+      <a href="sodium.html" class="btn">
+        Get Link
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="news">
+
+  <h2 class="section-title">Latest Update</h2>
+
+  <div class="news-box">
+
+    <h2>Minecraft New Update Released</h2>
+
+    <p style="margin-top:15px; color:#ccc; line-height:1.7;">
+
+      The latest Minecraft update brings better graphics,
+      new mobs, exciting blocks and improved gameplay experience.
+
+    </p>
+
+  </div>
+
+</section>
+
+<footer>
+
+  © 2026 Gaming Hub | Created By Hero Gaming
+
+  <br><br>
+
+  <a href="privacy-policy.html">Privacy Policy</a>
+
+  <a href="about.html">About</a>
+
+</footer>
 
 </body>
 </html>
