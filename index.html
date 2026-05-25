@@ -6,7 +6,64 @@
 <title>Hero Gaming</title>
 
 <style>
+/* GLOW EFFECT */
 
+.hero h2{
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+
+  from{
+    text-shadow:0 0 10px #00ff99;
+  }
+
+  to{
+    text-shadow:
+    0 0 20px #00ff99,
+    0 0 40px #00ff99;
+  }
+
+}
+
+/* MOVING BACKGROUND */
+
+.hero{
+  animation: zoomBg 10s infinite alternate;
+}
+
+@keyframes zoomBg{
+
+  from{
+    background-size:100%;
+  }
+
+  to{
+    background-size:110%;
+  }
+
+}
+
+/* TRENDING SECTION */
+
+.trending{
+  padding:60px 20px;
+  text-align:center;
+}
+
+.trending-box{
+  background:#1b1b1b;
+  margin:20px auto;
+  max-width:900px;
+  padding:25px;
+  border-radius:15px;
+  transition:0.3s;
+}
+
+.trending-box:hover{
+  transform:scale(1.03);
+  box-shadow:0 0 20px #00ff99;
+}
 *{
   margin:0;
   padding:0;
