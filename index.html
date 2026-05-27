@@ -682,6 +682,34 @@ YouTube
 </p>
 
 </footer>
+<script>
+
+const sliders = document.querySelectorAll('.slider-track');
+
+sliders.forEach(slider => {
+
+setInterval(() => {
+
+slider.scrollBy({
+left:300,
+behavior:'smooth'
+});
+
+if(
+slider.scrollLeft + slider.clientWidth
+>= slider.scrollWidth - 10
+){
+slider.scrollTo({
+left:0,
+behavior:'smooth'
+});
+}
+
+},3000);
+
+});
+
+</script>
 
 </body>
 </html>
