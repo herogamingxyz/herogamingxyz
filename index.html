@@ -753,6 +753,30 @@ YouTube
 </footer>
 <script>
 
+const quotes = [
+
+"🎮 Eat. Sleep. Game. Repeat.",
+
+"🔥 Legends Never Rage Quit.",
+
+"⚡ Gamers Don’t Die, They Respawn.",
+
+"👑 Victory Loves Preparation.",
+
+"💀 One More Game...",
+
+"🚀 Gaming Is My Escape.",
+
+"🎯 Skill Beats Luck."
+
+];
+
+const randomQuote =
+quotes[Math.floor(Math.random()*quotes.length)];
+
+document.getElementById("quote").innerText =
+randomQuote;
+
 const sliders = document.querySelectorAll('.slider-track');
 
 sliders.forEach(slider => {
@@ -780,28 +804,5 @@ behavior:'smooth'
 
 </script>
 
-const quotes = [
-
-"🎮 Eat. Sleep. Game. Repeat.",
-
-"🔥 Legends Never Rage Quit.",
-
-"⚡ Gamers Don’t Die, They Respawn.",
-
-"👑 Victory Loves Preparation.",
-
-"💀 One More Game...",
-
-"🚀 Gaming Is My Escape.",
-
-"🎯 Skill Beats Luck."
-
-];
-
-const randomQuote =
-quotes[Math.floor(Math.random()*quotes.length)];
-
-document.getElementById("quote").innerText =
-randomQuote;
 </body>
 </html>
