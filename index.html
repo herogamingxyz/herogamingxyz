@@ -3,568 +3,685 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hero Gaming</title>
+<title>Hero Hub</title>
 
 <style>
-/* GLOW EFFECT */
 
-.hero h2{
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow{
-
-  from{
-    text-shadow:0 0 10px #00ff99;
-  }
-
-  to{
-    text-shadow:
-    0 0 20px #00ff99,
-    0 0 40px #00ff99;
-  }
-
-}
-
-/* MOVING BACKGROUND */
-
-.hero{
-  animation: zoomBg 10s infinite alternate;
-}
-
-@keyframes zoomBg{
-
-  from{
-    background-size:100%;
-  }
-
-  to{
-    background-size:110%;
-  }
-
-}
-
-/* TRENDING SECTION */
-
-.trending{
-  padding:60px 20px;
-  text-align:center;
-}
-
-.trending-box{
-  background:#1b1b1b;
-  margin:20px auto;
-  max-width:900px;
-  padding:25px;
-  border-radius:15px;
-  transition:0.3s;
-}
-
-.trending-box:hover{
-  transform:scale(1.03);
-  box-shadow:0 0 20px #00ff99;
-}
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
-  background:#0f0f0f;
-  color:white;
+background:#0a0a0a;
+color:white;
+overflow-x:hidden;
 }
 
-header{
-  background:linear-gradient(90deg,#00ff99,#00bfff);
-  padding:30px;
-  text-align:center;
+/* HEADER */
+
+.top-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 40px;
+background:#0d0d0d;
+border-bottom:2px solid #111;
+flex-wrap:wrap;
 }
 
-header h1{
-  color:black;
-  font-size:50px;
+.logo{
+font-size:55px;
+font-weight:bold;
+color:#00ff99;
+text-shadow:
+0 0 10px #00ff99,
+0 0 25px #00ff99;
 }
 
-header p{
-  color:#111;
-  margin-top:10px;
-  font-size:18px;
-}
-
-nav{
 .search-box{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:15px;
-  margin:30px auto;
-  flex-wrap:wrap;
+display:flex;
+align-items:center;
+gap:15px;
 }
 
 .search-box input{
-  width:500px;
-  max-width:90%;
-  padding:16px 22px;
-  border:none;
-  outline:none;
-  border-radius:50px;
-  background:#1b1b1b;
-  color:white;
-  font-size:18px;
-  box-shadow:0 0 15px rgba(0,255,153,0.3);
-  transition:0.3s;
-}
-
-.search-box input:focus{
-  box-shadow:
-  0 0 15px #00ff99,
-  0 0 35px #00ff99;
+width:380px;
+max-width:90vw;
+padding:16px 22px;
+border:none;
+outline:none;
+border-radius:50px;
+background:#1b1b1b;
+color:white;
+font-size:17px;
+box-shadow:0 0 15px rgba(0,255,153,0.2);
 }
 
 .search-box button{
-  padding:16px 28px;
-  border:none;
-  border-radius:50px;
-  background:linear-gradient(90deg,#00ff99,#00ccff);
-  color:black;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-  transition:0.3s;
+padding:15px 28px;
+border:none;
+border-radius:50px;
+background:linear-gradient(90deg,#00ff99,#00ccff);
+color:black;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
 }
 
 .search-box button:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 20px #00ff99;
+transform:scale(1.08);
+box-shadow:0 0 20px #00ff99;
 }
 
-}
+/* NAVBAR */
 
-.search-box button{
-  padding:15px 25px;
-  border:none;
-  border-radius:12px;
-  background:#00ff99;
-  color:black;
-  font-size:17px;
-  font-weight:bold;
-  margin-left:10px;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.search-box button:hover{
-  background:#00cc77;
-  transform:scale(1.05);
-}
-  background:#1b1b1b;
-  padding:15px;
-  text-align:center;
+nav{
+background:#111;
+padding:18px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:999;
 }
 
 nav a{
-  color:white;
-  text-decoration:none;
-  margin:15px;
-  font-size:18px;
-  transition:0.3s;
+color:white;
+text-decoration:none;
+margin:18px;
+font-size:18px;
+transition:0.3s;
 }
 
 nav a:hover{
-  color:#00ff99;
+color:#00ff99;
 }
+
+/* HERO */
 
 .hero{
-  text-align:center;
-  padding:90px 20px;
-  background:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200') center/cover;
+height:85vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:
+linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),
+url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1400') center/cover;
+animation:zoomBg 10s infinite alternate;
 }
 
-.hero h2{
-  font-size:55px;
-  text-shadow:2px 2px 10px black;
+@keyframes zoomBg{
+from{
+background-size:100%;
+}
+to{
+background-size:110%;
+}
 }
 
-.hero p{
-  margin-top:20px;
-  font-size:20px;
-  max-width:700px;
-  margin-left:auto;
-  margin-right:auto;
-  text-shadow:2px 2px 10px black;
+.hero-content h1{
+font-size:75px;
+color:white;
+text-shadow:
+0 0 10px #00ff99,
+0 0 30px #00ff99;
 }
 
-.btn{
-  display:inline-block;
-  margin-top:25px;
-  padding:14px 30px;
-  background:#00ff99;
-  color:black;
-  text-decoration:none;
-  border-radius:10px;
-  font-weight:bold;
-  transition:0.3s;
+.hero-content p{
+margin-top:20px;
+font-size:22px;
+max-width:800px;
+line-height:1.7;
+color:#ddd;
 }
 
-.btn:hover{
-  background:#00cc77;
-  transform:scale(1.05);
+.hero-btn{
+display:inline-block;
+margin-top:30px;
+padding:16px 35px;
+background:#00ff99;
+color:black;
+font-weight:bold;
+border-radius:14px;
+text-decoration:none;
+transition:0.3s;
+}
+
+.hero-btn:hover{
+transform:scale(1.08);
+box-shadow:0 0 20px #00ff99;
+}
+
+/* SECTION */
+
+.section{
+padding:60px 40px;
 }
 
 .section-title{
-  text-align:center;
-  margin-top:60px;
-  font-size:40px;
-  color:#00ff99;
+font-size:42px;
+margin-bottom:35px;
+color:#00ff99;
 }
 
-.cards{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:25px;
-  padding:40px;
+/* SLIDER */
+
+.slider{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.slider-track{
+display:flex;
+gap:25px;
+overflow-x:auto;
+padding-bottom:10px;
+}
+
+.slider-track::-webkit-scrollbar{
+height:8px;
+}
+
+.slider-track::-webkit-scrollbar-thumb{
+background:#00ff99;
+border-radius:20px;
 }
 
 .card{
-  background:#1b1b1b;
-  width:320px;
-  border-radius:15px;
-  overflow:hidden;
-  transition:0.3s;
-  box-shadow:0 0 10px rgba(0,0,0,0.5);
+min-width:260px;
+background:#141414;
+border-radius:22px;
+overflow:hidden;
+text-decoration:none;
+color:white;
+transition:0.3s;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
 }
 
 .card:hover{
-  transform:translateY(-10px);
+transform:translateY(-10px);
+box-shadow:0 0 25px #00ff99;
 }
 
 .card img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
+width:100%;
+height:190px;
+object-fit:cover;
 }
 
 .card-content{
-  padding:20px;
+padding:20px;
 }
 
 .card-content h3{
-  color:#00ff99;
-  margin-bottom:10px;
+color:#00ff99;
+margin-bottom:12px;
 }
 
 .card-content p{
-  color:#ccc;
-  line-height:1.6;
+color:#ccc;
+line-height:1.6;
 }
 
-.news{
-  padding:50px 20px;
-  text-align:center;
+/* CENTER GRID */
+
+.center-grid{
+display:grid;
+grid-template-columns:1fr 2fr 1fr;
+gap:30px;
+padding:50px 40px;
 }
 
-.news-box{
-  background:#1b1b1b;
-  max-width:900px;
-  margin:auto;
-  padding:30px;
-  border-radius:15px;
+.side-box,
+.latest-box{
+background:#141414;
+border-radius:22px;
+padding:30px;
 }
 
-footer{
-  background:#111;
-  text-align:center;
-  padding:25px;
-  margin-top:50px;
-  color:#888;
+.side-box h2,
+.latest-box h2{
+margin-bottom:20px;
+color:#00ff99;
 }
 
-footer a{
-  color:#00ff99;
-  text-decoration:none;
-  margin:10px;
+.side-btn{
+display:inline-block;
+margin-top:20px;
+padding:14px 24px;
+background:#00ff99;
+color:black;
+border-radius:12px;
+text-decoration:none;
+font-weight:bold;
+transition:0.3s;
 }
 
-@media(max-width:768px){
-
-.hero h2{
-  font-size:35px;
+.side-btn:hover{
+transform:scale(1.06);
 }
 
-.card{
-  width:100%;
+.update-card{
+background:#0d0d0d;
+padding:25px;
+border-radius:18px;
+margin-top:15px;
 }
 
+.update-card h3{
+margin-bottom:15px;
 }
+
+.update-card p{
+color:#ccc;
+line-height:1.7;
+}
+
+/* FOOTER */
+
 .footer{
-  background:#050505;
-  padding:60px 40px;
-  margin-top:60px;
+background:#050505;
+padding:60px 40px;
+margin-top:60px;
+border-top:1px solid #111;
 }
 
 .footer-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:40px;
-  max-width:1200px;
-  margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:40px;
+max-width:1300px;
+margin:auto;
 }
 
 .footer h3{
-  color:white;
-  margin-bottom:20px;
-  font-size:22px;
+margin-bottom:20px;
+font-size:24px;
 }
 
 .footer a{
-  display:block;
-  color:#aaa;
-  text-decoration:none;
-  margin-bottom:14px;
-  transition:0.3s;
+display:block;
+color:#999;
+margin-bottom:14px;
+text-decoration:none;
+transition:0.3s;
 }
 
 .footer a:hover{
-  color:#00ff99;
-  transform:translateX(5px);
-}
-
-.footer hr{
-  margin-top:40px;
-  border:1px solid #222;
+color:#00ff99;
+transform:translateX(5px);
 }
 
 .copyright{
-  text-align:center;
-  color:#777;
-  margin-top:25px;
+text-align:center;
+margin-top:40px;
+color:#666;
 }
-  
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero-content h1{
+font-size:50px;
+}
+
+.center-grid{
+grid-template-columns:1fr;
+}
+
+.top-header{
+justify-content:center;
+gap:20px;
+}
+
+nav a{
+display:inline-block;
+margin:10px;
+}
+
+}
+
 </style>
 
 </head>
+
 <body>
 
-<header>
+<!-- HEADER -->
 
-  <h1>Hero Gaming</h1>
+<header class="top-header">
 
-  <p>
-    Minecraft Mods, Texture Packs, Gaming News & More
-  </p>
+<div class="logo">
+Hero Hub
+</div>
 
-</header>
-
-<nav>
-
-  <a href="#">Home</a>
-  <a href="#">Minecraft</a>
-  <a href="#">Mods</a>
-  <a href="#">Texture Packs</a>
-  <a href="#">Gaming News</a>
-  <a href="about.html">About</a>
-  <a href="help-center.html">Help Center</a>
-</nav>
 <div class="search-box">
 
-<input type="text" placeholder="🔍 Search mods, article, games...">
+<input type="text" placeholder="🔍 Search mods, games, shaders...">
 
 <button>Search</button>
 
 </div>
-  
+
+</header>
+
+<!-- NAV -->
+
+<nav>
+
+<a href="#">Home</a>
+<a href="sodium.html">Mods</a>
+<a href="iris-shaders.html">Shaders</a>
+<a href="products.html">Products</a>
+<a href="gta6-hype.html">News</a>
+<a href="help-center.html">Help Center</a>
+<a href="about.html">About</a>
+
+</nav>
+
+<!-- HERO -->
+
 <section class="hero">
 
-  <h2>Ultimate Gaming Website</h2>
+<div class="hero-content">
 
-  <p>
-    Explore Minecraft mods, FPS boost texture packs,
-    gaming tutorials and latest gaming news.
-  </p>
+<h1>Ultimate Gaming Hub</h1>
 
-  <a href="#" class="btn">Explore Now</a>
+<p>
+
+Explore Minecraft mods, FPS boosts, shaders,
+gaming products, latest gaming articles and tutorials.
+
+</p>
+
+<a href="sodium.html" class="hero-btn">
+Explore Mods
+</a>
+
+</div>
 
 </section>
 
-<h2 class="section-title">Popular Categories</h2>
-<h2 class="section-title">Gaming Products</h2>
+<!-- MODS -->
 
-<section class="cards">
+<section class="section">
 
-  <div class="card">
+<h2 class="section-title">
+🔥 Trending Mods
+</h2>
+
+<div class="slider">
+
+<div class="slider-track">
+
+<a href="sodium.html" class="card">
+
+<img src="sodium1.jpg">
+
+<div class="card-content">
+
+<h3>Sodium FPS Boost</h3>
+
+<p>
+Boost FPS and improve Minecraft performance smoothly.
+</p>
+
+</div>
+
+</a>
+
+<a href="iris-shaders.html" class="card">
+
+<img src="iris.html1.jpg">
+
+<div class="card-content">
+
+<h3>Iris Shaders</h3>
+
+<p>
+Beautiful shaders with realistic lighting and smooth gameplay.
+</p>
+
+</div>
+
+</a>
+
+<a href="sodium.html" class="card">
+
+<img src="sodium2.jpg">
+
+<div class="card-content">
+
+<h3>Best Minecraft Mods</h3>
+
+<p>
+Explore survival, PvP and adventure enhancing mods.
+</p>
+
+</div>
+
+</a>
+
+<a href="iris-shaders.html" class="card">
+
+<img src="iris.html2.jpg">
+
+<div class="card-content">
+
+<h3>Realistic Graphics</h3>
+
+<p>
+Turn Minecraft into a realistic looking game.
+</p>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ARTICLES -->
+
+<section class="section">
+
+<h2 class="section-title">
+📰 Gaming Articles
+</h2>
+
+<div class="slider">
+
+<div class="slider-track">
+
+<a href="gta6-hype.html" class="card">
+
+<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200">
+
+<div class="card-content">
+
+<h3>GTA 6 Hype</h3>
+
+<p>
+Everything about Rockstar's biggest upcoming game.
+</p>
+
+</div>
+
+</a>
+
+<a href="elden-ring-nightreign.html" class="card">
 
 <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200">
 
-    <div class="card-content">
+<div class="card-content">
 
-      <h3>Gaming Products</h3>
+<h3>Elden Ring</h3>
 
-      <p>
-        High quality gaming products for gamers.
-      </p>
+<p>
+Explore the dark fantasy world and latest updates.
+</p>
 
-      <a href="products.html" class="btn">
-Get Products
+</div>
+
 </a>
 
-    </div>
+<a href="goat-simulator-3.html" class="card">
 
-  </div>
+<img src="goat.html.jpg">
 
-</section>
-<section class="cards">
+<div class="card-content">
 
-  <div class="card">
+<h3>Funny Goat Game</h3>
 
-    <img src="sodium1.jpg">
+<p>
+One of the funniest open world games ever created.
+</p>
 
-    <div class="card-content">
+</div>
 
-      <h3>Minecraft Mods</h3>
-
-      <p>
-        Discover the best Minecraft mods for survival,
-        FPS boost and adventure gameplay.
-      </p>
-
-      <a href="sodium.html" class="btn">
-        Explore Mods
-      </a>
-
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200">
-
-    <div class="card-content">
-
-      <h3>Texture Packs</h3>
-      <a href="iris-shaders.html" class="btn">
-Explore Shaders
 </a>
-      <p>
-        Download stylish and smooth texture packs
-        for low-end and high-end devices.
-      </p>
 
-    </div>
+</div>
 
-  </div>
-
-  <div class="card">
-
-    <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200">
-
-    <div class="card-content">
-
-      <h3>Gaming News</h3>
-
-      <p>
-        Stay updated with latest gaming updates,
-        events and trending releases.
-      </p>
-
-      <a href="gta6-hype.html" class="btn">
-        Read Article
-      </a>
-
-      <br><br>
-<br><br>
-
-<a href="goat-simulator-3.html" class="btn">
-Funny Goat Game
-</a>
-<a href="elden-ring-nightreign.html" class="btn">
-  Elden Ring Article
-</a>
-      
-    </div>
-
-  </div>
+</div>
 
 </section>
 
-<section class="news">
+<!-- CENTER SECTION -->
 
-  <h2 class="section-title">Latest Update</h2>
+<section class="center-grid">
 
-  <div class="news-box">
+<div class="side-box">
 
-    <h2>Minecraft New Update Released</h2>
+<h2>
+🛒 Products
+</h2>
 
-    <p style="margin-top:15px; color:#ccc; line-height:1.7;">
+<p>
+Gaming accessories and products for mobile & PC gamers.
+</p>
 
-      The latest Minecraft update brings better graphics,
-      new mobs, exciting blocks and improved gameplay experience.
+<a href="products.html" class="side-btn">
+View Products
+</a>
 
-    </p>
+</div>
 
-  </div>
-</section>  
+<div class="latest-box">
+
+<h2>
+🔥 Latest Update
+</h2>
+
+<div class="update-card">
+
+<h3>Minecraft New Update Released</h3>
+
+<p>
+
+The latest Minecraft update brings better graphics,
+new mobs, exciting blocks and smoother gameplay.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="side-box">
+
+<h2>
+▶ Hero Gaming
+</h2>
+
+<p>
+Subscribe for mods, gaming videos and tutorials.
+</p>
+
+<a href="https://youtube.com/@herogamingxyz?si=aRTZqSUwuIjctIzI" class="side-btn">
+YouTube
+</a>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
 
 <footer class="footer">
 
 <div class="footer-grid">
 
 <div>
-<h3>Games</h3>
 
-<a href="#">Minecraft</a>
-<a href="#">GTA 6</a>
-<a href="#">Elden Ring</a>
-<a href="#">Valorant</a>
-<a href="#">Free Fire</a>
-<a href="#">Roblox</a>
-<a href="#">Other Games</a>
-
-</div>
-
-<div>
 <h3>Create</h3>
 
 <a href="products.html">Gaming Products</a>
 <a href="sodium.html">Minecraft Mods</a>
-<a href="#">Gaming News</a>
-<a href="#">Best Games</a>
+<a href="iris-shaders.html">Shaders</a>
+<a href="gta6-hype.html">Gaming News</a>
 
 </div>
 
 <div>
+
+<h3>Games</h3>
+
+<a href="#">Minecraft</a>
+<a href="#">Roblox</a>
+<a href="#">Valorant</a>
+<a href="#">Free Fire</a>
+
+</div>
+
+<div>
+
 <h3>Community</h3>
 
-<a href="https://discord.gg/eXZ227G5">Discord Server</a>
-
-<a href="https://youtube.com/@herogamingxyz?si=aRTZqSUwuIjctIzI">
-YouTube Channel
+<a href="https://discord.gg/eXZ227G5">
+Discord
 </a>
 
 <a href="https://www.instagram.com/hero_gamingxyz/?__pwa=1#">
 Instagram
 </a>
 
+<a href="https://youtube.com/@herogamingxyz?si=aRTZqSUwuIjctIzI">
+YouTube
+</a>
+
 </div>
 
 <div>
+
 <h3>Support</h3>
 
-<a href="about.html">About Us</a>
-<a href="privacy-policy.html">Privacy Policy</a>
 <a href="help-center.html">Help Center</a>
+<a href="privacy-policy.html">Privacy Policy</a>
+<a href="about.html">About Us</a>
 <a href="contact.html">Contact</a>
-</div>
 
 </div>
 
-<hr>
+</div>
 
 <p class="copyright">
-© 2026 Hero Gaming | All rights reserved.
+
+© 2026 Hero Gamingxyz | All Rights Reserved
+
 </p>
 
 </footer>
+
+</body>
+</html>
