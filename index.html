@@ -94,22 +94,52 @@ header p{
 }
 
 nav{
-  .search-box{
-  text-align:center;
-  margin:25px;
+.search-box{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  margin:30px auto;
+  flex-wrap:wrap;
 }
 
 .search-box input{
-  width:60%;
-  max-width:500px;
-  padding:15px;
+  width:500px;
+  max-width:90%;
+  padding:16px 22px;
   border:none;
   outline:none;
-  border-radius:12px;
-  font-size:18px;
+  border-radius:50px;
   background:#1b1b1b;
   color:white;
-  box-shadow:0 0 10px rgba(0,255,153,0.2);
+  font-size:18px;
+  box-shadow:0 0 15px rgba(0,255,153,0.3);
+  transition:0.3s;
+}
+
+.search-box input:focus{
+  box-shadow:
+  0 0 15px #00ff99,
+  0 0 35px #00ff99;
+}
+
+.search-box button{
+  padding:16px 28px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(90deg,#00ff99,#00ccff);
+  color:black;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.search-box button:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 20px #00ff99;
+}
+
 }
 
 .search-box button{
@@ -340,7 +370,7 @@ footer a{
 </nav>
 <div class="search-box">
 
-<input type="text" placeholder="Search mods, shaders, games...">
+<input type="text" placeholder="🔍 Search mods, article, games...">
 
 <button>Search</button>
 
