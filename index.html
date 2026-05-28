@@ -29,19 +29,34 @@ overflow-x:hidden;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 40px;
+padding:18px 40px;
 background:#0d0d0d;
 border-bottom:2px solid #111;
-flex-wrap:wrap;
+position:sticky;
+top:0;
+z-index:9999;
 }
 
-.logo{
-font-size:55px;
+.logo-box{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.site-logo{
+width:55px;
+height:55px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid #00ff99;
+box-shadow:0 0 15px #00ff99;
+}
+
+.logo-text{
+font-size:30px;
 font-weight:bold;
 color:#00ff99;
-text-shadow:
-0 0 10px #00ff99,
-0 0 25px #00ff99;
+text-shadow:0 0 15px #00ff99;
 }
 
 .search-box{
@@ -51,43 +66,35 @@ gap:15px;
 }
 
 .search-box input{
-width:380px;
+width:340px;
 max-width:90vw;
-padding:16px 22px;
+padding:14px 22px;
 border:none;
 outline:none;
 border-radius:50px;
 background:#1b1b1b;
 color:white;
-font-size:17px;
-box-shadow:0 0 15px rgba(0,255,153,0.2);
+font-size:16px;
 }
 
 .search-box button{
-padding:15px 28px;
+padding:14px 24px;
 border:none;
 border-radius:50px;
-background:linear-gradient(90deg,#00ff99,#00ccff);
+background:#00ff99;
 color:black;
-font-size:17px;
 font-weight:bold;
 cursor:pointer;
-transition:0.3s;
-}
-
-.search-box button:hover{
-transform:scale(1.08);
-box-shadow:0 0 20px #00ff99;
 }
 
 /* NAVBAR */
 
 nav{
 background:#111;
-padding:18px;
+padding:16px;
 text-align:center;
 position:sticky;
-top:0;
+top:92px;
 z-index:999;
 }
 
@@ -103,51 +110,41 @@ nav a:hover{
 color:#00ff99;
 }
 
-/* HERO */
+/* FEATURED */
 
-.hero{
-height:85vh;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
+.featured-section{
+height:78vh;
+margin:40px;
+border-radius:30px;
+overflow:hidden;
 background:
-linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),
-url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1400') center/cover;
-
-animation:zoomBg 10s infinite alternate;
+linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)),
+url('mutant1.jpg') center/cover;
+display:flex;
+align-items:center;
+padding:60px;
+box-shadow:0 0 40px rgba(0,255,153,0.15);
 }
 
-@keyframes zoomBg{
-
-from{
-background-size:100%;
+.featured-overlay h1{
+font-size:28px;
+color:#00ff99;
+margin-bottom:15px;
 }
 
-to{
-background-size:110%;
+.featured-overlay h2{
+font-size:65px;
+margin-bottom:20px;
 }
 
-}
-
-.hero-content h1{
-font-size:75px;
-color:white;
-
-text-shadow:
-0 0 10px #00ff99,
-0 0 30px #00ff99;
-}
-
-.hero-content p{
-margin-top:20px;
+.featured-overlay p{
+max-width:700px;
 font-size:22px;
-max-width:800px;
 line-height:1.7;
 color:#ddd;
 }
 
-.hero-btn{
+.featured-btn{
 display:inline-block;
 margin-top:30px;
 padding:16px 35px;
@@ -159,9 +156,22 @@ text-decoration:none;
 transition:0.3s;
 }
 
-.hero-btn:hover{
+.featured-btn:hover{
 transform:scale(1.08);
 box-shadow:0 0 20px #00ff99;
+}
+
+/* QUOTE */
+
+.quote-box{
+padding:35px;
+text-align:center;
+}
+
+.quote-box h2{
+font-size:35px;
+color:#00ff99;
+text-shadow:0 0 15px #00ff99;
 }
 
 /* SECTION */
@@ -177,12 +187,6 @@ color:#00ff99;
 }
 
 /* SLIDER */
-
-.slider{
-display:flex;
-align-items:center;
-gap:20px;
-}
 
 .slider-track{
 display:flex;
@@ -201,16 +205,17 @@ background:#00ff99;
 border-radius:20px;
 }
 
+/* CARD */
+
 .card{
-min-width:260px;
-max-width:260px;
+min-width:280px;
+max-width:280px;
 background:#141414;
 border-radius:22px;
 overflow:hidden;
 text-decoration:none;
 color:white;
 transition:0.3s;
-box-shadow:0 0 15px rgba(0,0,0,0.4);
 position:relative;
 flex-shrink:0;
 }
@@ -250,12 +255,6 @@ color:black;
 text-decoration:none;
 border-radius:10px;
 font-weight:bold;
-transition:0.3s;
-}
-
-.btn:hover{
-transform:scale(1.06);
-box-shadow:0 0 15px #00ff99;
 }
 
 .badge{
@@ -300,11 +299,6 @@ color:black;
 border-radius:12px;
 text-decoration:none;
 font-weight:bold;
-transition:0.3s;
-}
-
-.side-btn:hover{
-transform:scale(1.06);
 }
 
 .update-card{
@@ -314,13 +308,25 @@ border-radius:18px;
 margin-top:15px;
 }
 
-.update-card h3{
-margin-bottom:15px;
+/* REVIEWS */
+
+.review-box{
+background:#141414;
+padding:30px;
+border-radius:22px;
+margin-top:30px;
 }
 
-.update-card p{
-color:#ccc;
-line-height:1.7;
+.review-box h2{
+color:#00ff99;
+margin-bottom:20px;
+}
+
+.review{
+margin-top:18px;
+padding:18px;
+background:#0d0d0d;
+border-radius:14px;
 }
 
 /* FOOTER */
@@ -350,12 +356,10 @@ display:block;
 color:#999;
 margin-bottom:14px;
 text-decoration:none;
-transition:0.3s;
 }
 
 .footer a:hover{
 color:#00ff99;
-transform:translateX(5px);
 }
 
 .copyright{
@@ -364,53 +368,68 @@ margin-top:40px;
 color:#666;
 }
 
-/* QUOTE */
+/* POPUP */
 
-.quote-box{
-padding:35px;
-text-align:center;
+.popup{
+position:fixed;
+bottom:25px;
+right:25px;
+background:#00ff99;
+color:black;
+padding:18px 25px;
+border-radius:14px;
+font-weight:bold;
+z-index:9999;
+box-shadow:0 0 25px #00ff99;
 }
 
-.quote-box h2{
-font-size:35px;
-color:#00ff99;
-text-shadow:0 0 15px #00ff99;
-animation:glowText 2s infinite alternate;
-}
+/* DISCORD FLOAT */
 
-@keyframes glowText{
-
-from{
-opacity:0.7;
-}
-
-to{
-opacity:1;
-transform:scale(1.03);
-}
-
+.discord-float{
+position:fixed;
+right:20px;
+bottom:110px;
+width:65px;
+height:65px;
+background:#5865F2;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+text-decoration:none;
+color:white;
+z-index:9999;
 }
 
 /* MOBILE */
 
 @media(max-width:900px){
 
-.hero-content h1{
-font-size:50px;
+.top-header{
+flex-direction:column;
+gap:20px;
 }
 
 .center-grid{
 grid-template-columns:1fr;
 }
 
-.top-header{
-justify-content:center;
-gap:20px;
+.featured-overlay h2{
+font-size:42px;
 }
 
-nav a{
-display:inline-block;
-margin:10px;
+.featured-overlay p{
+font-size:18px;
+}
+
+.featured-section{
+height:auto;
+padding:40px 25px;
+}
+
+nav{
+top:130px;
 }
 
 }
@@ -421,15 +440,23 @@ margin:10px;
 
 <body>
 
+<!-- HEADER -->
+
 <header class="top-header">
 
-<div class="logo">
+<div class="logo-box">
+
+<img src="hero.gaming.jpg" class="site-logo">
+
+<div class="logo-text">
 Hero Hub
+</div>
+
 </div>
 
 <div class="search-box">
 
-<input type="text" placeholder="🔍 Search mods, games, shaders...">
+<input type="text" placeholder="🔍 Search mods, games, products...">
 
 <button>
 Search
@@ -439,38 +466,47 @@ Search
 
 </header>
 
+<!-- NAVBAR -->
+
 <nav>
 
 <a href="#">Home</a>
-<a href="sodium.html">Mods</a>
-<a href="iris-shaders.html">Shaders</a>
+<a href="mods.html">Mods</a>
+<a href="articles.html">Articles</a>
 <a href="products.html">Products</a>
-<a href="gta6-hype.html">News</a>
-<a href="help-center.html">Help Center</a>
-<a href="about.html">About</a>
+<a href="community.html">Community</a>
+<a href="downloads.html">Downloads</a>
 
 </nav>
 
-<section class="hero">
+<!-- FEATURED -->
 
-<div class="hero-content">
+<section class="featured-section">
+
+<div class="featured-overlay">
 
 <h1>
-Ultimate Gaming Hub
+🔥 Featured Mod
 </h1>
 
+<h2>
+Mutant Creatures MCPE
+</h2>
+
 <p>
-Explore Minecraft mods, FPS boosts, shaders,
-gaming products, latest gaming articles and tutorials.
+Fight giant mutant mobs and dangerous bosses
+inside Minecraft Pocket Edition.
 </p>
 
-<a href="sodium.html" class="hero-btn">
-Explore Mods
+<a href="mutant-creatures-mcpe.html" class="featured-btn">
+Download Now
 </a>
 
 </div>
 
 </section>
+
+<!-- QUOTE -->
 
 <section class="quote-box">
 
@@ -488,13 +524,11 @@ Explore Mods
 🔥 Trending Mods
 </h2>
 
-<div class="slider">
-
 <div class="slider-track">
 
-<a href="sodium.html" class="card">
+<a href="mutant-creatures-mcpe.html" class="card">
 
-<img src="sodium1.jpg">
+<img src="mutant1.jpg">
 
 <div class="badge">
 🔥 TRENDING
@@ -502,10 +536,26 @@ Explore Mods
 
 <div class="card-content">
 
+<h3>Mutant Creatures</h3>
+
+<p>
+Fight giant mutant mobs and bosses.
+</p>
+
+</div>
+
+</a>
+
+<a href="sodium.html" class="card">
+
+<img src="sodium1.jpg">
+
+<div class="card-content">
+
 <h3>Sodium FPS Boost</h3>
 
 <p>
-Boost FPS and improve Minecraft performance smoothly.
+Boost Minecraft FPS and gameplay.
 </p>
 
 </div>
@@ -521,134 +571,26 @@ Boost FPS and improve Minecraft performance smoothly.
 <h3>Iris Shaders</h3>
 
 <p>
-Beautiful shaders with realistic lighting and smooth gameplay.
+Beautiful realistic shaders for Minecraft.
 </p>
 
 </div>
 
 </a>
-
-<a href="sodium.html" class="card">
-
-<img src="sodium2.jpg">
-
-<div class="card-content">
-
-<h3>Best Minecraft Mods</h3>
-
-<p>
-Explore survival, PvP and adventure enhancing mods.
-</p>
-
-</div>
-
-</a>
-
-<a href="iris-shaders.html" class="card">
-
-<img src="iris.html2.jpg">
-
-<div class="card-content">
-
-<h3>Realistic Graphics</h3>
-
-<p>
-Turn Minecraft into a realistic looking game.
-</p>
-
-</div>
-
-</a>
-<a href="mutant-creatures-mcpe.html" class="card">
-
-<img src="mutant1.jpg">
-
-<div class="card-content">
-
-<h3>Mutant Creatures MCPE</h3>
-
-<p>
-Fight giant mutant mobs and dangerous bosses in Minecraft PE.
-</p>
-
-</div>
-
-</a>
-
-</div>
 
 </div>
 
 </section>
 
 <!-- ARTICLES -->
-<!-- ARTICLES -->
 
 <section class="section">
 
 <h2 class="section-title">
-📰 Gaming Articles
+📰 Latest Articles
 </h2>
 
-<div class="slider">
-
 <div class="slider-track">
-
-<!-- GTA 6 -->
-
-<a href="gta6-hype.html" class="card">
-
-<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200">
-
-<div class="card-content">
-
-<h3>GTA 6 Hype</h3>
-
-<p>
-Everything about Rockstar's biggest upcoming game.
-</p>
-
-</div>
-
-</a>
-
-<!-- ELDEN RING -->
-
-<a href="elden-ring-nightreign.html" class="card">
-
-<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200">
-
-<div class="card-content">
-
-<h3>Elden Ring</h3>
-
-<p>
-Explore the dark fantasy world and latest updates.
-</p>
-
-</div>
-
-</a>
-
-<!-- GOAT -->
-
-<a href="goat-simulator-3.html" class="card">
-
-<img src="goat.html.jpg">
-
-<div class="card-content">
-
-<h3>Funny Goat Game</h3>
-
-<p>
-One of the funniest open world games ever created.
-</p>
-
-</div>
-
-</a>
-
-<!-- ROBLOX -->
 
 <a href="roblox-guide.html" class="card">
 
@@ -659,8 +601,7 @@ One of the funniest open world games ever created.
 <h3>Roblox Article</h3>
 
 <p>
-Explore Roblox adventures, obby games,
-creative worlds and multiplayer fun.
+Explore Roblox adventures and games.
 </p>
 
 <span class="btn">
@@ -680,7 +621,7 @@ Read More
 <h3>GTA 5 Chaos Mod</h3>
 
 <p>
-One of the funniest GTA 5 mods ever created.
+One of the funniest GTA mods ever.
 </p>
 
 </div>
@@ -689,10 +630,10 @@ One of the funniest GTA 5 mods ever created.
 
 </div>
 
-</div>
-
 </section>
-  
+
+<!-- CENTER -->
+
 <section class="center-grid">
 
 <div class="side-box">
@@ -702,7 +643,7 @@ One of the funniest GTA 5 mods ever created.
 </h2>
 
 <p>
-Gaming accessories and products for mobile & PC gamers.
+Gaming accessories and setup products.
 </p>
 
 <a href="products.html" class="side-btn">
@@ -724,9 +665,24 @@ Minecraft New Update Released
 </h3>
 
 <p>
-The latest Minecraft update brings better graphics,
-new mobs, exciting blocks and smoother gameplay.
+Better graphics, new mobs and smoother gameplay.
 </p>
+
+</div>
+
+<div class="review-box">
+
+<h2>
+⭐ Reviews
+</h2>
+
+<div class="review">
+🔥 “Best gaming website for mods.”
+</div>
+
+<div class="review">
+⚡ “Very smooth and professional UI.”
+</div>
 
 </div>
 
@@ -735,26 +691,25 @@ new mobs, exciting blocks and smoother gameplay.
 <div class="side-box">
 
 <h2>
-🎮 Hero Gaming
+🎮 Community
 </h2>
 
 <iframe
 src="https://discord.com/widget?id=1267870102108377128&theme=dark"
 width="100%"
 height="320"
-allowtransparency="true"
 frameborder="0">
 </iframe>
 
-<br><br>
-
 <a href="https://discord.gg/eXZ227G5" class="side-btn">
-Join Discord Server
+Join Discord
 </a>
 
 </div>
 
 </section>
+
+<!-- FOOTER -->
 
 <footer class="footer">
 
@@ -762,23 +717,21 @@ Join Discord Server
 
 <div>
 
-<h3>Create</h3>
+<h3>Mods</h3>
 
-<a href="products.html">Gaming Products</a>
-<a href="sodium.html">Minecraft Mods</a>
-<a href="iris-shaders.html">Shaders</a>
-<a href="gta6-hype.html">Gaming News</a>
+<a href="#">Minecraft Mods</a>
+<a href="#">Shaders</a>
+<a href="#">FPS Boost</a>
 
 </div>
 
 <div>
 
-<h3>Games</h3>
+<h3>Articles</h3>
 
-<a href="#">Minecraft</a>
-<a href="#">Roblox</a>
-<a href="#">Valorant</a>
-<a href="#">Free Fire</a>
+<a href="#">Gaming News</a>
+<a href="#">Tutorials</a>
+<a href="#">Reviews</a>
 
 </div>
 
@@ -790,34 +743,41 @@ Join Discord Server
 Discord
 </a>
 
-<a href="https://www.instagram.com/hero_gamingxyz/?__pwa=1#">
+<a href="#">
 Instagram
 </a>
 
-<a href="https://youtube.com/@herogamingxyz?si=aRTZqSUwuIjctIzI">
+<a href="#">
 YouTube
 </a>
-
-</div>
-
-<div>
-
-<h3>Support</h3>
-
-<a href="help-center.html">Help Center</a>
-<a href="privacy-policy.html">Privacy Policy</a>
-<a href="about.html">About Us</a>
-<a href="contact.html">Contact</a>
 
 </div>
 
 </div>
 
 <p class="copyright">
-© 2026 Hero Gamingxyz | All Rights Reserved
+
+© 2026 Hero Gamingxyz
+
 </p>
 
 </footer>
+
+<!-- POPUP -->
+
+<div class="popup" id="popup">
+
+🔥 New Gaming Mods Added!
+
+</div>
+
+<!-- FLOAT DISCORD -->
+
+<a href="https://discord.gg/eXZ227G5" class="discord-float">
+
+💬
+
+</a>
 
 <script>
 
@@ -827,9 +787,7 @@ const quotes = [
 "🔥 Legends Never Rage Quit.",
 "⚡ Gamers Don’t Die, They Respawn.",
 "👑 Victory Loves Preparation.",
-"💀 One More Game...",
-"🚀 Gaming Is My Escape.",
-"🎯 Skill Beats Luck."
+"💀 One More Game..."
 
 ];
 
@@ -866,6 +824,12 @@ behavior:'smooth'
 },3000);
 
 });
+
+setTimeout(()=>{
+
+document.getElementById("popup").style.display="none";
+
+},5000);
 
 </script>
 
