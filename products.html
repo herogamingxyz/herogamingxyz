@@ -1,77 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Gaming Products</title>
 
 <style>
 
 body{
-  background:#0f0f0f;
-  color:white;
-  font-family:Arial;
-  margin:0;
+background:#0f0f0f;
+color:white;
+font-family:Arial;
+margin:0;
 }
 
 h1{
-  text-align:center;
-  color:#00ff99;
-  margin-top:40px;
+text-align:center;
+color:#00ff99;
+margin-top:40px;
+font-size:50px;
 }
 
 .products{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:25px;
-  padding:40px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:25px;
+padding:40px;
 }
 
 .card{
-  background:#1b1b1b;
-  width:300px;
-  border-radius:15px;
-  overflow:hidden;
+background:#1b1b1b;
+width:300px;
+border-radius:15px;
+overflow:hidden;
+transition:0.3s;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 20px #00ff99;
 }
 
 .card img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
+width:100%;
+height:220px;
+object-fit:cover;
 }
 
 .content{
-  padding:20px;
+padding:20px;
 }
 
 .content h2{
-  color:#00ff99;
+color:#00ff99;
+margin-bottom:15px;
 }
 
 .content p{
-  color:#ccc;
+color:#ccc;
+line-height:1.7;
 }
 
 .btn{
-  display:inline-block;
-  margin-top:15px;
-  padding:12px 25px;
-  background:#00ff99;
-  color:black;
-  text-decoration:none;
-  border-radius:10px;
-  font-weight:bold;
+display:inline-block;
+margin-top:15px;
+padding:12px 25px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.08);
+box-shadow:0 0 20px #00ff99;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<h1>Gaming Products</h1>
+<h1>
+Gaming Products
+</h1>
 
 <section class="products">
+
+<!-- PRODUCT 1 -->
 
 <div class="card">
 
@@ -79,7 +102,9 @@ h1{
 
 <div class="content">
 
-<h2>4 Pcs Game Wall Art Decor</h2>
+<h2>
+4 Pcs Game Wall Art Decor
+</h2>
 
 <p>
 Best gaming accessories for pro gamers.
@@ -90,22 +115,25 @@ Buy Now
 </a>
 
 </div>
+
 </div>
 
-</section>
+<!-- PRODUCT 2 -->
 
-</body>
-</html>                  <div class="card">
+<div class="card">
 
 <img src="https://m.media-amazon.com/images/I/61ImZC1aiKL._SL1483_.jpg">
 
-<div class="card-content">
+<div class="content">
 
-<h3>Thumbs Finger Sleeve</h3>
+<h2>
+Thumbs Finger Sleeve
+</h2>
 
 <p>
+
 Improve your gaming control, movement and aim with smooth mobile gaming finger sleeves.
-Perfect for PUBG, Free Fire, COD Mobile and other competitive games.
+
 </p>
 
 <a href="https://amzn.to/4dR9RTX" class="btn">
@@ -116,9 +144,13 @@ Buy Now
 
 </div>
 
-<div class="product-card">
+<!-- PRODUCT 3 -->
+
+<div class="card">
 
 <img src="https://m.media-amazon.com/images/I/61xqtRY3pFL._SL1200_.jpg">
+
+<div class="content">
 
 <h2>
 RGB Gaming Mouse
@@ -131,8 +163,15 @@ fast response and gamer style RGB lighting.
 
 </p>
 
-<a href="https://amzn.to/4tZEo7K" class="buy-btn">
+<a href="https://amzn.to/4tZEo7K" class="btn">
 Buy Now
 </a>
 
 </div>
+
+</div>
+
+</section>
+
+</body>
+</html>
