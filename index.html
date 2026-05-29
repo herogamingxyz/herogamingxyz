@@ -35,6 +35,7 @@ border-bottom:2px solid #111;
 position:sticky;
 top:0;
 z-index:9999;
+flex-wrap:wrap;
 }
 
 .logo-box{
@@ -44,8 +45,8 @@ gap:14px;
 }
 
 .site-logo{
-width:55px;
-height:55px;
+width:58px;
+height:58px;
 border-radius:50%;
 object-fit:cover;
 border:2px solid #00ff99;
@@ -53,10 +54,12 @@ box-shadow:0 0 15px #00ff99;
 }
 
 .logo-text{
-font-size:30px;
+font-size:32px;
 font-weight:bold;
 color:#00ff99;
-text-shadow:0 0 15px #00ff99;
+text-shadow:
+0 0 10px #00ff99,
+0 0 25px #00ff99;
 }
 
 .search-box{
@@ -66,42 +69,49 @@ gap:15px;
 }
 
 .search-box input{
-width:340px;
+width:360px;
 max-width:90vw;
-padding:14px 22px;
+padding:15px 22px;
 border:none;
 outline:none;
 border-radius:50px;
 background:#1b1b1b;
 color:white;
 font-size:16px;
+box-shadow:0 0 15px rgba(0,255,153,0.15);
 }
 
 .search-box button{
 padding:14px 24px;
 border:none;
 border-radius:50px;
-background:#00ff99;
+background:linear-gradient(90deg,#00ff99,#00ccff);
 color:black;
 font-weight:bold;
 cursor:pointer;
+transition:0.3s;
+}
+
+.search-box button:hover{
+transform:scale(1.06);
+box-shadow:0 0 20px #00ff99;
 }
 
 /* NAVBAR */
 
 nav{
 background:#111;
-padding:16px;
+padding:18px;
 text-align:center;
 position:sticky;
-top:92px;
+top:95px;
 z-index:999;
 }
 
 nav a{
 color:white;
 text-decoration:none;
-margin:18px;
+margin:16px;
 font-size:18px;
 transition:0.3s;
 }
@@ -110,41 +120,50 @@ nav a:hover{
 color:#00ff99;
 }
 
-/* FEATURED */
+/* HERO */
 
-.featured-section{
-height:78vh;
-margin:40px;
-border-radius:30px;
-overflow:hidden;
-background:
-linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)),
-url('mutant1.jpg') center/cover;
+.hero{
+height:85vh;
 display:flex;
+justify-content:center;
 align-items:center;
-padding:60px;
-box-shadow:0 0 40px rgba(0,255,153,0.15);
+text-align:center;
+
+background:
+linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),
+url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1400') center/cover;
+
+animation:zoomBg 10s infinite alternate;
 }
 
-.featured-overlay h1{
-font-size:28px;
-color:#00ff99;
-margin-bottom:15px;
+@keyframes zoomBg{
+
+from{
+background-size:100%;
 }
 
-.featured-overlay h2{
-font-size:65px;
-margin-bottom:20px;
+to{
+background-size:110%;
 }
 
-.featured-overlay p{
-max-width:700px;
+}
+
+.hero-content h1{
+font-size:75px;
+text-shadow:
+0 0 10px #00ff99,
+0 0 30px #00ff99;
+}
+
+.hero-content p{
+margin-top:20px;
 font-size:22px;
+max-width:850px;
 line-height:1.7;
 color:#ddd;
 }
 
-.featured-btn{
+.hero-btn{
 display:inline-block;
 margin-top:30px;
 padding:16px 35px;
@@ -156,7 +175,7 @@ text-decoration:none;
 transition:0.3s;
 }
 
-.featured-btn:hover{
+.hero-btn:hover{
 transform:scale(1.08);
 box-shadow:0 0 20px #00ff99;
 }
@@ -172,6 +191,20 @@ text-align:center;
 font-size:35px;
 color:#00ff99;
 text-shadow:0 0 15px #00ff99;
+animation:glowText 2s infinite alternate;
+}
+
+@keyframes glowText{
+
+from{
+opacity:0.7;
+}
+
+to{
+opacity:1;
+transform:scale(1.03);
+}
+
 }
 
 /* SECTION */
@@ -208,8 +241,8 @@ border-radius:20px;
 /* CARD */
 
 .card{
-min-width:280px;
-max-width:280px;
+min-width:270px;
+max-width:270px;
 background:#141414;
 border-radius:22px;
 overflow:hidden;
@@ -218,6 +251,7 @@ color:white;
 transition:0.3s;
 position:relative;
 flex-shrink:0;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
 }
 
 .card:hover{
@@ -255,6 +289,12 @@ color:black;
 text-decoration:none;
 border-radius:10px;
 font-weight:bold;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.06);
+box-shadow:0 0 15px #00ff99;
 }
 
 .badge{
@@ -299,6 +339,11 @@ color:black;
 border-radius:12px;
 text-decoration:none;
 font-weight:bold;
+transition:0.3s;
+}
+
+.side-btn:hover{
+transform:scale(1.06);
 }
 
 .update-card{
@@ -308,25 +353,27 @@ border-radius:18px;
 margin-top:15px;
 }
 
-/* REVIEWS */
-
-.review-box{
-background:#141414;
-padding:30px;
-border-radius:22px;
-margin-top:30px;
+.update-card h3{
+margin-bottom:15px;
 }
 
-.review-box h2{
-color:#00ff99;
-margin-bottom:20px;
+.update-card p{
+color:#ccc;
+line-height:1.7;
+}
+
+/* REVIEW */
+
+.review-box{
+margin-top:25px;
 }
 
 .review{
-margin-top:18px;
-padding:18px;
 background:#0d0d0d;
-border-radius:14px;
+padding:18px;
+border-radius:15px;
+margin-top:15px;
+color:#ccc;
 }
 
 /* FOOTER */
@@ -349,6 +396,7 @@ margin:auto;
 .footer h3{
 margin-bottom:20px;
 font-size:24px;
+color:white;
 }
 
 .footer a{
@@ -356,10 +404,12 @@ display:block;
 color:#999;
 margin-bottom:14px;
 text-decoration:none;
+transition:0.3s;
 }
 
 .footer a:hover{
 color:#00ff99;
+transform:translateX(5px);
 }
 
 .copyright{
@@ -406,30 +456,26 @@ z-index:9999;
 
 @media(max-width:900px){
 
-.top-header{
-flex-direction:column;
-gap:20px;
+.hero-content h1{
+font-size:50px;
 }
 
 .center-grid{
 grid-template-columns:1fr;
 }
 
-.featured-overlay h2{
-font-size:42px;
-}
-
-.featured-overlay p{
-font-size:18px;
-}
-
-.featured-section{
-height:auto;
-padding:40px 25px;
+.top-header{
+justify-content:center;
+gap:20px;
 }
 
 nav{
-top:130px;
+top:140px;
+}
+
+nav a{
+display:inline-block;
+margin:10px;
 }
 
 }
@@ -471,35 +517,40 @@ Search
 <nav>
 
 <a href="#">Home</a>
+
 <a href="mods.html">Mods</a>
+
 <a href="articles.html">Articles</a>
+
 <a href="products.html">Products</a>
+
 <a href="community.html">Community</a>
+
 <a href="downloads.html">Downloads</a>
+
+<a href="help-center.html">Help Center</a>
+
+<a href="about.html">About</a>
 
 </nav>
 
-<!-- FEATURED -->
+<!-- HERO -->
 
-<section class="featured-section">
+<section class="hero">
 
-<div class="featured-overlay">
+<div class="hero-content">
 
 <h1>
-🔥 Featured Mod
+Ultimate Gaming Hub
 </h1>
 
-<h2>
-Mutant Creatures MCPE
-</h2>
-
 <p>
-Fight giant mutant mobs and dangerous bosses
-inside Minecraft Pocket Edition.
+Explore Minecraft mods, shaders, gaming products,
+FPS boosts, gaming articles and tutorials.
 </p>
 
-<a href="mutant-creatures-mcpe.html" class="featured-btn">
-Download Now
+<a href="mods.html" class="hero-btn">
+Explore Mods
 </a>
 
 </div>
@@ -526,9 +577,9 @@ Download Now
 
 <div class="slider-track">
 
-<a href="mutant-creatures-mcpe.html" class="card">
+<a href="sodium.html" class="card">
 
-<img src="mutant1.jpg">
+<img src="sodium1.jpg">
 
 <div class="badge">
 🔥 TRENDING
@@ -536,26 +587,10 @@ Download Now
 
 <div class="card-content">
 
-<h3>Mutant Creatures</h3>
-
-<p>
-Fight giant mutant mobs and bosses.
-</p>
-
-</div>
-
-</a>
-
-<a href="sodium.html" class="card">
-
-<img src="sodium1.jpg">
-
-<div class="card-content">
-
 <h3>Sodium FPS Boost</h3>
 
 <p>
-Boost Minecraft FPS and gameplay.
+Boost FPS and improve Minecraft performance smoothly.
 </p>
 
 </div>
@@ -571,7 +606,39 @@ Boost Minecraft FPS and gameplay.
 <h3>Iris Shaders</h3>
 
 <p>
-Beautiful realistic shaders for Minecraft.
+Beautiful shaders with realistic lighting and smooth gameplay.
+</p>
+
+</div>
+
+</a>
+
+<a href="mutant-creatures-mcpe.html" class="card">
+
+<img src="mutant1.jpg">
+
+<div class="card-content">
+
+<h3>Mutant Creatures MCPE</h3>
+
+<p>
+Fight giant mutant mobs and dangerous bosses.
+</p>
+
+</div>
+
+</a>
+
+<a href="sodium.html" class="card">
+
+<img src="sodium2.jpg">
+
+<div class="card-content">
+
+<h3>Best Minecraft Mods</h3>
+
+<p>
+Explore survival, PvP and adventure enhancing mods.
 </p>
 
 </div>
@@ -587,10 +654,62 @@ Beautiful realistic shaders for Minecraft.
 <section class="section">
 
 <h2 class="section-title">
-📰 Latest Articles
+📰 Gaming Articles
 </h2>
 
 <div class="slider-track">
+
+<a href="gta6-hype.html" class="card">
+
+<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200">
+
+<div class="card-content">
+
+<h3>GTA 6 Hype</h3>
+
+<p>
+Everything about Rockstar's biggest upcoming game.
+</p>
+
+</div>
+
+</a>
+
+<a href="elden-ring-nightreign.html" class="card">
+
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200">
+
+<div class="card-content">
+
+<h3>Elden Ring</h3>
+
+<p>
+Explore the dark fantasy world and latest updates.
+</p>
+
+</div>
+
+</a>
+
+<a href="goat-simulator-3.html" class="card">
+
+<img src="goat1.jpg">
+
+<div class="card-content">
+
+<h3>Goat Simulator 3</h3>
+
+<p>
+The funniest and craziest open world game ever.
+</p>
+
+<span class="btn">
+Read More
+</span>
+
+</div>
+
+</a>
 
 <a href="roblox-guide.html" class="card">
 
@@ -601,7 +720,7 @@ Beautiful realistic shaders for Minecraft.
 <h3>Roblox Article</h3>
 
 <p>
-Explore Roblox adventures and games.
+Explore Roblox adventures and multiplayer fun.
 </p>
 
 <span class="btn">
@@ -621,7 +740,7 @@ Read More
 <h3>GTA 5 Chaos Mod</h3>
 
 <p>
-One of the funniest GTA mods ever.
+One of the funniest GTA 5 mods ever created.
 </p>
 
 </div>
@@ -630,28 +749,9 @@ One of the funniest GTA mods ever.
 
 </div>
 
-<a href="goat-simulator-3.html" class="card">
-
-<img src="goat1.jpg">
-
-<div class="card-content">
-
-<h3>Goat Simulator 3</h3>
-
-<p>
-The funniest and most chaotic open world goat game ever.
-</p>
-
-<span class="btn">
-Read More
-</span>
-
-</div>
-
-</a>
 </section>
 
-<!-- CENTER -->
+<!-- CENTER GRID -->
 
 <section class="center-grid">
 
@@ -662,7 +762,7 @@ Read More
 </h2>
 
 <p>
-Gaming accessories and setup products.
+Gaming accessories and products for mobile & PC gamers.
 </p>
 
 <a href="products.html" class="side-btn">
@@ -684,14 +784,15 @@ Minecraft New Update Released
 </h3>
 
 <p>
-Better graphics, new mobs and smoother gameplay.
+The latest Minecraft update brings better graphics,
+new mobs and smoother gameplay.
 </p>
 
 </div>
 
 <div class="review-box">
 
-<h2>
+<h2 style="margin-top:25px;color:#00ff99;">
 ⭐ Reviews
 </h2>
 
@@ -710,18 +811,21 @@ Better graphics, new mobs and smoother gameplay.
 <div class="side-box">
 
 <h2>
-🎮 Community
+🎮 Hero Gaming
 </h2>
 
 <iframe
 src="https://discord.com/widget?id=1267870102108377128&theme=dark"
 width="100%"
 height="320"
+allowtransparency="true"
 frameborder="0">
 </iframe>
 
+<br><br>
+
 <a href="https://discord.gg/eXZ227G5" class="side-btn">
-Join Discord
+Join Discord Server
 </a>
 
 </div>
@@ -736,21 +840,29 @@ Join Discord
 
 <div>
 
-<h3>Mods</h3>
+<h3>Create</h3>
 
-<a href="#">Minecraft Mods</a>
-<a href="#">Shaders</a>
-<a href="#">FPS Boost</a>
+<a href="products.html">Gaming Products</a>
+
+<a href="sodium.html">Minecraft Mods</a>
+
+<a href="iris-shaders.html">Shaders</a>
+
+<a href="gta6-hype.html">Gaming News</a>
 
 </div>
 
 <div>
 
-<h3>Articles</h3>
+<h3>Games</h3>
 
-<a href="#">Gaming News</a>
-<a href="#">Tutorials</a>
-<a href="#">Reviews</a>
+<a href="#">Minecraft</a>
+
+<a href="#">Roblox</a>
+
+<a href="#">Valorant</a>
+
+<a href="#">Free Fire</a>
 
 </div>
 
@@ -762,11 +874,11 @@ Join Discord
 Discord
 </a>
 
-<a href="#">
+<a href="https://www.instagram.com/hero_gamingxyz/?__pwa=1#">
 Instagram
 </a>
 
-<a href="#">
+<a href="https://youtube.com/@herogamingxyz?si=aRTZqSUwuIjctIzI">
 YouTube
 </a>
 
@@ -777,8 +889,11 @@ YouTube
 <h3>Support</h3>
 
 <a href="help-center.html">Help Center</a>
+
 <a href="privacy-policy.html">Privacy Policy</a>
+
 <a href="about.html">About Us</a>
+
 <a href="contact.html">Contact</a>
 
 </div>
@@ -786,9 +901,7 @@ YouTube
 </div>
 
 <p class="copyright">
-
-© 2026 Hero Gamingxyz
-
+© 2026 Hero Gamingxyz | All Rights Reserved
 </p>
 
 </footer>
@@ -796,17 +909,13 @@ YouTube
 <!-- POPUP -->
 
 <div class="popup" id="popup">
-
 🔥 New Gaming Mods Added!
-
 </div>
 
 <!-- FLOAT DISCORD -->
 
 <a href="https://discord.gg/eXZ227G5" class="discord-float">
-
 💬
-
 </a>
 
 <script>
@@ -817,7 +926,9 @@ const quotes = [
 "🔥 Legends Never Rage Quit.",
 "⚡ Gamers Don’t Die, They Respawn.",
 "👑 Victory Loves Preparation.",
-"💀 One More Game..."
+"💀 One More Game...",
+"🚀 Gaming Is My Escape.",
+"🎯 Skill Beats Luck."
 
 ];
 
@@ -864,4 +975,4 @@ document.getElementById("popup").style.display="none";
 </script>
 
 </body>
-</html>
+  </html>
