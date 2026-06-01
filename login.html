@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HeroVerse Login</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#050505,#0a0a0a,#001f3f);
+overflow:hidden;
+}
+
+.login-box{
+width:400px;
+max-width:90%;
+background:rgba(20,20,20,0.95);
+padding:40px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 0 30px rgba(0,255,255,0.2);
+animation:fadeIn 1s ease;
+}
+
+.logo{
+font-size:42px;
+font-weight:bold;
+color:#00ffff;
+margin-bottom:10px;
+text-shadow:0 0 15px #00ffff;
+}
+
+.subtitle{
+color:#aaa;
+margin-bottom:30px;
+}
+
+.input-box{
+width:100%;
+padding:15px;
+margin:10px 0;
+border:none;
+outline:none;
+border-radius:12px;
+background:#111;
+color:white;
+font-size:16px;
+}
+
+.input-box:focus{
+box-shadow:0 0 15px #00ffff;
+}
+
+.login-btn{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+border-radius:12px;
+background:#00ffff;
+color:black;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.login-btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #00ffff;
+}
+
+.links{
+margin-top:20px;
+}
+
+.links a{
+color:#00ffff;
+text-decoration:none;
+font-size:14px;
+}
+
+.links a:hover{
+text-decoration:underline;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<div class="logo">HeroVerse</div>
+
+<div class="subtitle">
+Powered by HeroGamingXYZ
+</div>
+
+<input type="email" placeholder="Email" class="input-box">
+
+<input type="password" placeholder="Password" class="input-box">
+
+<button class="login-btn">
+LOGIN
+</button>
+
+<div class="links">
+<a href="#">Forgot Password?</a>
+<br><br>
+<a href="#">Create Account</a>
+</div>
+
+</div>
+
+</body>
+  </html>
