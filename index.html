@@ -1104,7 +1104,38 @@ document.getElementById("logoutBtn").style.display = "inline-block";
 }else{
 
 document.getElementById("userInfo").innerHTML =
-'<a href="login.html" style="color:#00ff99;text-decoration:none;">Login</a>';
+`
+<a href="login.html"
+style="
+padding:10px 15px;
+border:none;
+border-radius:10px;
+background:#ff4444;
+color:white;
+cursor:pointer;
+text-decoration:none;
+font-weight:bold;
+display:inline-block;
+margin-right:10px;
+">
+Login
+</a>
+
+<a href="signup.html"
+style="
+padding:10px 15px;
+border:none;
+border-radius:10px;
+background:#ff4444;
+color:white;
+cursor:pointer;
+text-decoration:none;
+font-weight:bold;
+display:inline-block;
+">
+Sign Up
+</a>
+`;
 
 document.getElementById("logoutBtn").style.display = "none";
 
