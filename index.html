@@ -510,6 +510,23 @@ Search
 
 </div>
 
+<div id="userInfo" style="color:white;margin-left:20px;">
+Loading...
+</div>
+
+<button id="logoutBtn"
+style="
+margin-left:10px;
+padding:10px 15px;
+border:none;
+border-radius:10px;
+background:#ff4444;
+color:white;
+cursor:pointer;
+">
+Logout
+</button>
+
 </header>
 
 <!-- NAVBAR -->
@@ -1033,6 +1050,73 @@ setTimeout(()=>{
 document.getElementById("popup").style.display="none";
 
 },5000);
+
+</script>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+authDomain: "hero-verse-67e33.firebaseapp.com",
+projectId: "hero-verse-67e33",
+storageBucket: "hero-verse-67e33.firebasestorage.app",
+messagingSenderId: "227494840218",
+appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(user){
+
+const docRef = doc(db,"users",user.uid);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+document.getElementById("userInfo").innerHTML =
+"👤 " + docSnap.data().username;
+
+}
+
+}else{
+
+window.location.href="login.html";
+
+}
+
+});
+
+document.getElementById("logoutBtn")
+.addEventListener("click",()=>{
+
+signOut(auth).then(()=>{
+
+window.location.href="login.html";
+
+});
+
+});
 
 </script>
 
