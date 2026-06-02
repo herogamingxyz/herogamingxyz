@@ -1112,7 +1112,14 @@ document.getElementById("logoutBtn")
 
 signOut(auth).then(()=>{
 
-window.location.href="login.html";
+}else{
+
+document.getElementById("userInfo").innerHTML =
+'<a href="login.html" style="color:#00ff99;text-decoration:none;">Login</a>';
+
+document.getElementById("logoutBtn").style.display = "none";
+
+}
 
 });
 
