@@ -124,5 +124,55 @@ Already have an account?
 
 </div>
 
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import {
+getAuth,
+createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA"
+authDomain: "hero-verse-67e33.firebaseapp.com",
+projectId: "hero-verse-67e33",
+storageBucket: "hero-verse-67e33.firebasestorage.app",
+messagingSenderId: "227494840218",
+appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+document.getElementById("signupBtn").addEventListener("click", () => {
+
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+const confirmPassword =
+document.getElementById("confirmPassword").value;
+
+if(password !== confirmPassword){
+alert("Passwords do not match!");
+return;
+}
+
+createUserWithEmailAndPassword(auth,email,password)
+.then((userCredential)=>{
+
+alert("Account Created Successfully!");
+
+window.location.href="login.html";
+
+})
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+});
+
+</script>
+
 </body>
 </html>
