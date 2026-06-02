@@ -104,15 +104,15 @@ text-decoration:underline;
 Create Your Hero Account
 </div>
 
-<input type="text" placeholder="Username" class="input-box">
+<input type="text" placeholder="Username" class="input-box" id="username">
 
-<input type="email" placeholder="Email" class="input-box">
+<input type="email" placeholder="Email" class="input-box" id="email">
 
-<input type="password" placeholder="Password" class="input-box">
+<input type="password" placeholder="Password" class="input-box" id="password">
 
-<input type="password" placeholder="Confirm Password" class="input-box">
+<input type="password" placeholder="Confirm Password" class="input-box" id="confirmPassword">
 
-<button class="signup-btn">
+<button class="signup-btn" id="signupBtn">
 CREATE ACCOUNT
 </button>
 
@@ -133,7 +133,7 @@ createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA"
+apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
 authDomain: "hero-verse-67e33.firebaseapp.com",
 projectId: "hero-verse-67e33",
 storageBucket: "hero-verse-67e33.firebasestorage.app",
