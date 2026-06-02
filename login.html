@@ -163,14 +163,14 @@ transform:translateY(0);
 Powered by herogamingxyz
 </div>
 
-<input type="email" placeholder="Email" class="input-box">
+<input type="email" placeholder="Email" class="input-box" id="email">
 
 <div class="password-wrapper">
 <input type="password" id="password" placeholder="Password" class="input-box">
 <button class="eye-btn" onclick="togglePassword()">👁</button>
 </div>
 
-<button class="login-btn">
+<button class="login-btn" id="loginBtn">
 LOGIN
 </button>
 
@@ -183,6 +183,7 @@ LOGIN
 </div>
 
 <script>
+
 function togglePassword(){
 const password=document.getElementById("password");
 
@@ -202,6 +203,48 @@ particle.style.animationDelay=Math.random()*15+"s";
 
 document.body.appendChild(particle);
 }
+</script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import {
+getAuth,
+signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+authDomain: "hero-verse-67e33.firebaseapp.com",
+projectId: "hero-verse-67e33",
+storageBucket: "hero-verse-67e33.firebasestorage.app",
+messagingSenderId: "227494840218",
+appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+document.getElementById("loginBtn").addEventListener("click", () => {
+
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+
+signInWithEmailAndPassword(auth,email,password)
+.then((userCredential)=>{
+
+alert("Login Successful!");
+
+window.location.href="index.html";
+
+})
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+});
+
 </script>
 
 </body>
