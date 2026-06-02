@@ -132,6 +132,12 @@ getAuth,
 createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
+import {
+getFirestore,
+doc,
+setDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
 const firebaseConfig = {
 apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
 authDomain: "hero-verse-67e33.firebaseapp.com",
@@ -143,6 +149,7 @@ appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 document.getElementById("signupBtn").addEventListener("click", () => {
 
@@ -157,13 +164,28 @@ return;
 }
 
 createUserWithEmailAndPassword(auth,email,password)
-.then((userCredential)=>{
+.then(async (userCredential)=>{
+
+const user = userCredential.user;
+
+const username =
+document.getElementById("username").value;
+
+await setDoc(
+doc(db,"users",user.uid),
+{
+username: username,
+email: email,
+joinDate: new Date().toISOString()
+}
+);
 
 alert("Account Created Successfully!");
 
 window.location.href="login.html";
 
 })
+
 .catch((error)=>{
 
 alert(error.message);
