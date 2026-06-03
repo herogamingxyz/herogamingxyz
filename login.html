@@ -234,7 +234,13 @@ signInWithEmailAndPassword(auth,email,password)
 
 alert("Login Successful!");
 
-window.location.href="index.html";
+const params =
+new URLSearchParams(window.location.search);
+
+const redirectPage =
+params.get("redirect") || "index.html";
+
+window.location.href = redirectPage;
 
 })
 .catch((error)=>{
