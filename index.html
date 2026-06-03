@@ -855,8 +855,8 @@ Read More
 </h2>
 
 <div class="slider-track">
-<a href="login.html" class="card">
-
+<a href="#" class="card" id="premiumMod">
+    
 <img src="premium-mod.jpg">
 
 <div class="badge">
@@ -1210,46 +1210,19 @@ location.reload();
 });
 
 });
-document.getElementById("premiumMod")
-.addEventListener("click",(e)=>{
+
+document.getElementById("premiumMod").addEventListener("click",(e)=>{
 
 e.preventDefault();
 
-document.getElementById("premiumMod")
-.addEventListener("click",(e)=>{
+if(auth.currentUser){
 
-e.preventDefault();
-
-onAuthStateChanged(auth,(user)=>{
-
-if(user){
-
-window.location.href="premium-mod.html";
+window.location.href = "premium-mod.html";
 
 }else{
 
-window.location.href=
+window.location.href =
 "login.html?redirect=premium-mod.html";
-
-}
-
-});
-
-});
-
-});
-
-onAuthStateChanged(auth,(user)=>{
-
-if(user){
-
-document.getElementById("testUser").innerHTML =
-"✅ Logged In: " + user.email;
-
-}else{
-
-document.getElementById("testUser").innerHTML =
-"❌ Not Logged In";
 
 }
 
