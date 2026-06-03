@@ -486,6 +486,19 @@ margin:10px;
 
 <body>
 
+<div id="testUser"
+style="
+position:fixed;
+top:10px;
+left:10px;
+background:black;
+color:lime;
+padding:10px;
+z-index:99999;
+">
+Loading...
+</div>
+
 <!-- HEADER -->
 
 <header class="top-header">
@@ -1215,7 +1228,14 @@ document.getElementById("premiumMod")
 
 e.preventDefault();
 
-if(auth.currentUser){
+document.getElementById("premiumMod")
+.addEventListener("click",(e)=>{
+
+e.preventDefault();
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
 
 window.location.href="premium-mod.html";
 
@@ -1226,7 +1246,27 @@ window.location.href=
 
 }
 
-}); 
+});
+
+});
+
+});
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+document.getElementById("testUser").innerHTML =
+"✅ Logged In: " + user.email;
+
+}else{
+
+document.getElementById("testUser").innerHTML =
+"❌ Not Logged In";
+
+}
+
+});
 
 </script>
 
