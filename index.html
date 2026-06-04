@@ -1172,9 +1172,14 @@ const docSnap = await getDoc(docRef);
 if(docSnap.exists()){
 
 document.getElementById("userInfo").innerHTML =
-"👤 " + docSnap.data().username;
-
-}
+`<a href="profile.html"
+style="
+color:white;
+text-decoration:none;
+font-weight:bold;
+">
+👤 ${docSnap.data().username}
+</a>`;
 
 document.getElementById("logoutBtn").style.display = "inline-block";
 
