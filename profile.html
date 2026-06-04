@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile | Hero Verse</title>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+margin:0;
+}
+
+.profile-box{
+max-width:700px;
+margin:80px auto;
+background:#1b1b1b;
+padding:40px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 20px rgba(0,255,153,0.2);
+}
+
+.profile-pic{
+width:120px;
+height:120px;
+border-radius:50%;
+background:#00ff99;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:50px;
+margin:auto;
+color:black;
+font-weight:bold;
+}
+
+h1{
+color:#00ff99;
+}
+
+.info{
+margin-top:25px;
+font-size:20px;
+color:#ddd;
+padding:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="profile-box">
+
+<div class="profile-pic">
+👤
+</div>
+
+<h1>Hero Verse Profile</h1>
+
+<div class="info" id="username">
+Loading Username...
+</div>
+
+<div class="info" id="email">
+Loading Email...
+</div>
+
+<div class="info">
+⭐ Member Status: Active
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+authDomain: "hero-verse-67e33.firebaseapp.com",
+projectId: "hero-verse-67e33",
+storageBucket: "hero-verse-67e33.firebasestorage.app",
+messagingSenderId: "227494840218",
+appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(user){
+
+document.getElementById("email").innerHTML =
+"📧 Email: " + user.email;
+
+const docRef = doc(db,"users",user.uid);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+document.getElementById("username").innerHTML =
+"👤 Username: " + docSnap.data().username;
+
+}
+
+}else{
+
+window.location.href="login.html";
+
+}
+
+});
+
+</script>
