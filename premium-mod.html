@@ -1,23 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Premium Mods</title>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial;
+margin:0;
+}
+
+h1{
+text-align:center;
+color:#FFD700;
+margin-top:40px;
+font-size:50px;
+}
+
+.mods{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:25px;
+padding:40px;
+}
+
+.card{
+background:#1b1b1b;
+width:300px;
+border-radius:15px;
+overflow:hidden;
+transition:0.3s;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
+text-decoration:none;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 20px #FFD700;
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.content{
+padding:20px;
+}
+
+.content h2{
+color:#FFD700;
+margin-bottom:15px;
+}
+
+.content p{
+color:#ccc;
+line-height:1.7;
+}
+
+.btn{
+display:inline-block;
+margin-top:15px;
+padding:12px 25px;
+background:#FFD700;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.08);
+}
+
+.badge{
+position:absolute;
+background:#FFD700;
+color:black;
+padding:5px 10px;
+border-radius:8px;
+font-weight:bold;
+margin:10px;
+}
+
+</style>
+
 </head>
-<body style="background:black;color:white;text-align:center;padding:100px;">
+
+<body>
+
+<h1>
+🔒 Premium Mods
+</h1>
+
+<section class="mods">
 
 <a href="replay-mod.html" class="card">
 
 <img src="replaymod1.jpg">
 
-<div class="badge">
-🎥 JAVA MOD
-</div>
+<div class="content">
 
-<div class="card-content">
-
-<h3>
-Replay Mod
-</h3>
+<h2>
+🎥 Replay Mod
+</h2>
 
 <p>
 Create cinematic Minecraft videos, smooth camera movements,
@@ -25,20 +120,14 @@ timelapses and professional YouTube content.
 </p>
 
 <span class="btn">
-View Mod
+Open Mod
 </span>
-
-.btn{
-display:inline-block;
-margin-top:15px;
-padding:10px 20px;
-background:#00ff99;
-color:black;
-font-weight:bold;
-border-radius:10px;
-text-decoration:none;
-}
 
 </div>
 
 </a>
+
+</section>
+
+</body>
+</html>
