@@ -1169,12 +1169,6 @@ const docRef = doc(db,"users",user.uid);
 
 const docSnap = await getDoc(docRef);
 
-if(user){
-
-const docRef = doc(db,"users",user.uid);
-
-const docSnap = await getDoc(docRef);
-
 if(docSnap.exists()){
 
 document.getElementById("userInfo").innerHTML =
@@ -1191,10 +1185,6 @@ font-weight:bold;
 
 document.getElementById("logoutBtn").style.display =
 "inline-block";
-
-}else{
-
-document.getElementById("logoutBtn").style.display = "inline-block";
 
 }else{
 
@@ -1232,7 +1222,8 @@ Sign Up
 </a>
 `;
 
-document.getElementById("logoutBtn").style.display = "none";
+document.getElementById("logoutBtn").style.display =
+"none";
 
 }
 
