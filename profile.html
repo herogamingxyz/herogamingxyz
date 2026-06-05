@@ -120,7 +120,8 @@ onAuthStateChanged
 import {
 getFirestore,
 doc,
-getDoc
+getDoc,
+updateDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -179,13 +180,23 @@ window.location.href="login.html";
 
 });
 
-document.getElementById("editUsernameBtn").addEventListener("click",()=>{
+document.getElementById("editUsernameBtn").addEventListener("click", async()=>{
+
+const user = auth.currentUser;
+
+if(!user) return;
 
 let newName = prompt("Enter New Username");
 
 if(newName){
 
-alert("Username change feature next step me add karenge 😎");
+await updateDoc(doc(db,"users",user.uid),{
+username:newName
+});
+
+alert("✅ Username Updated Successfully");
+
+location.reload();
 
 }
 
