@@ -73,8 +73,24 @@ Loading Username...
 Loading Email...
 </div>
 
-<div class="info">
-⭐ Member Status: Active
+<div class="info" id="badge">
+👑 Loading Badge...
+</div>
+
+<div class="info" id="joinDate">
+📅 Loading Join Date...
+</div>
+
+<div class="info" id="downloads">
+⬇️ Downloads: 0
+</div>
+
+<div class="info" id="uploads">
+⬆️ Uploads: 0
+</div>
+
+<div class="info" id="status">
+🟢 Loading Status...
 </div>
 
 </div>
@@ -126,6 +142,21 @@ document.getElementById("username").innerHTML =
 "👤 Username: " + docSnap.data().username;
 
 }
+
+document.getElementById("badge").innerHTML =
+"👑 Badge: " + docSnap.data().badge;
+
+document.getElementById("joinDate").innerHTML =
+"📅 Joined: " + docSnap.data().joinDate;
+
+document.getElementById("downloads").innerHTML =
+"⬇️ Downloads: " + docSnap.data().downloads;
+
+document.getElementById("uploads").innerHTML =
+"⬆️ Uploads: " + docSnap.data().uploads;
+
+document.getElementById("status").innerHTML =
+"🟢 Status: " + docSnap.data().status;
 
 }else{
 
