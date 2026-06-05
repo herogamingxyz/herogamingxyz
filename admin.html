@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hero Verse Admin Panel</title>
+
+<style>
+
+body{
+background:#0f0f0f;
+font-family:Arial,sans-serif;
+color:white;
+margin:0;
+padding:0;
+}
+
+.container{
+max-width:700px;
+margin:60px auto;
+background:#1b1b1b;
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 20px rgba(0,255,153,0.2);
+}
+
+h1{
+text-align:center;
+color:#00ff99;
+margin-bottom:30px;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:20px;
+border:none;
+border-radius:10px;
+background:#2a2a2a;
+color:white;
+font-size:16px;
+box-sizing:border-box;
+}
+
+textarea{
+height:120px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:15px;
+background:#00ff99;
+color:black;
+font-size:18px;
+font-weight:bold;
+border:none;
+border-radius:12px;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.02);
+}
+
+#status{
+margin-top:20px;
+text-align:center;
+font-weight:bold;
+color:#00ff99;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+🚀 Hero Verse Admin Panel
+</h1>
+
+<input
+type="text"
+id="title"
+placeholder="Mod Title">
+
+<textarea
+id="description"
+placeholder="Description"></textarea>
+
+<input
+type="text"
+id="image"
+placeholder="Image URL">
+
+<input
+type="text"
+id="download"
+placeholder="Download Link">
+
+<select id="category">
+
+<option>BEDROCK</option>
+
+<option>JAVA</option>
+
+<option>PREMIUM</option>
+
+<option>ARTICLE</option>
+
+<option>PRODUCT</option>
+
+</select>
+
+<button id="publishBtn">
+
+Publish Mod
+
+</button>
+
+<div id="status"></div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+authDomain: "hero-verse-67e33.firebaseapp.com",
+projectId: "hero-verse-67e33",
+storageBucket: "hero-verse-67e33.firebasestorage.app",
+messagingSenderId: "227494840218",
+appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+document.getElementById("publishBtn")
+.addEventListener("click", async()=>{
+
+const title =
+document.getElementById("title").value;
+
+const description =
+document.getElementById("description").value;
+
+const image =
+document.getElementById("image").value;
+
+const download =
+document.getElementById("download").value;
+
+const category =
+document.getElementById("category").value;
+
+if(
+!title ||
+!description ||
+!image ||
+!download
+){
+
+alert("Fill all fields");
+
+return;
+
+}
+
+try{
+
+await addDoc(
+collection(db,"mods"),
+{
+title:title,
+description:description,
+image:image,
+download:download,
+category:category,
+createdAt:new Date().toISOString()
+}
+);
+
+document.getElementById("status").innerHTML =
+"✅ Mod Published Successfully";
+
+document.getElementById("title").value = "";
+document.getElementById("description").value = "";
+document.getElementById("image").value = "";
+document.getElementById("download").value = "";
+
+}
+catch(error){
+
+document.getElementById("status").innerHTML =
+"❌ Error Publishing Mod";
+
+console.log(error);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
