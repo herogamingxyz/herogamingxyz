@@ -93,6 +93,19 @@ Loading Email...
 🟢 Loading Status...
 </div>
 
+<button id="editUsernameBtn" style="
+padding:12px 20px;
+background:#00ff99;
+color:black;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin-top:20px;
+">
+✏️ Change Username
+</button>
+
 </div>
 
 <script type="module">
@@ -161,6 +174,18 @@ document.getElementById("status").innerHTML =
 }else{
 
 window.location.href="login.html";
+
+}
+
+});
+
+document.getElementById("editUsernameBtn").addEventListener("click",()=>{
+
+let newName = prompt("Enter New Username");
+
+if(newName){
+
+alert("Username change feature next step me add karenge 😎");
 
 }
 
