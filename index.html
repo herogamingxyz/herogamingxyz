@@ -1165,7 +1165,9 @@ signOut
 import {
 getFirestore,
 doc,
-getDoc
+getDoc,
+collection,
+getDocs
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -1276,6 +1278,41 @@ window.location.href =
 "login.html?redirect=premium-mod.html";
 
 }
+
+});
+const modsContainer =
+document.getElementById("modsContainer");
+
+getDocs(collection(db,"mods"))
+.then((querySnapshot)=>{
+
+querySnapshot.forEach((docu)=>{
+
+const mod = docu.data();
+
+modsContainer.innerHTML += `
+
+<a href="${mod.download}" class="card">
+
+<img src="${mod.image}">
+
+<div class="badge">
+🔥 ${mod.category}
+</div>
+
+<div class="card-content">
+
+<h3>${mod.title}</h3>
+
+<p>${mod.description}</p>
+
+</div>
+
+</a>
+
+`;
+
+});
 
 });
 
