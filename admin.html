@@ -106,6 +106,45 @@ type="text"
 id="download"
 placeholder="Download Link">
 
+<input
+type="text"
+id="image2"
+placeholder="Second Image URL">
+
+<input
+type="text"
+id="image3"
+placeholder="Third Image URL">
+
+<input
+type="text"
+id="feature1"
+placeholder="Feature 1">
+
+<input
+type="text"
+id="feature2"
+placeholder="Feature 2">
+
+<input
+type="text"
+id="feature3"
+placeholder="Feature 3">
+
+<input
+type="text"
+id="download2"
+placeholder="Second Download Link">
+
+<input
+type="text"
+id="download3"
+placeholder="Third Download Link">
+
+<textarea
+id="credits"
+placeholder="Credits"></textarea>
+
 <select id="category">
 
 <option>BEDROCK</option>
@@ -171,6 +210,30 @@ document.getElementById("download").value;
 const category =
 document.getElementById("category").value;
 
+const image2 =
+document.getElementById("image2").value;
+
+const image3 =
+document.getElementById("image3").value;
+
+const feature1 =
+document.getElementById("feature1").value;
+
+const feature2 =
+document.getElementById("feature2").value;
+
+const feature3 =
+document.getElementById("feature3").value;
+
+const download2 =
+document.getElementById("download2").value;
+
+const download3 =
+document.getElementById("download3").value;
+
+const credits =
+document.getElementById("credits").value;
+
 if(
 !title ||
 !description ||
@@ -195,7 +258,17 @@ image:image,
 download:download,
 category:category,
 createdAt:new Date().toISOString()
-}
+image2:image2,
+image3:image3,
+
+feature1:feature1,
+feature2:feature2,
+feature3:feature3,
+
+download2:download2,
+download3:download3,
+
+credits:credits,}
 );
 
 document.getElementById("status").innerHTML =
