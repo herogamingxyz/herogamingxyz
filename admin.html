@@ -12,16 +12,16 @@
 body{
 background:#0f0f0f;
 font-family:Arial,sans-serif;
-color:white;
 margin:0;
 padding:0;
+color:white;
 }
 
 .container{
-max-width:700px;
-margin:60px auto;
-background:#1b1b1b;
+max-width:800px;
+margin:50px auto;
 padding:30px;
+background:#1b1b1b;
 border-radius:20px;
 box-shadow:0 0 20px rgba(0,255,153,0.2);
 }
@@ -32,12 +32,17 @@ color:#00ff99;
 margin-bottom:30px;
 }
 
+label{
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+color:#00ff99;
+}
+
 input,
-textarea,
-select{
+textarea{
 width:100%;
 padding:12px;
-margin-top:10px;
 margin-bottom:20px;
 border:none;
 border-radius:10px;
@@ -48,19 +53,19 @@ box-sizing:border-box;
 }
 
 textarea{
-height:120px;
+height:140px;
 resize:none;
 }
 
 button{
 width:100%;
 padding:15px;
+border:none;
+border-radius:12px;
 background:#00ff99;
 color:black;
 font-size:18px;
 font-weight:bold;
-border:none;
-border-radius:12px;
 cursor:pointer;
 }
 
@@ -72,7 +77,6 @@ transform:scale(1.02);
 margin-top:20px;
 text-align:center;
 font-weight:bold;
-color:#00ff99;
 }
 
 </style>
@@ -84,85 +88,80 @@ color:#00ff99;
 <div class="container">
 
 <h1>
-🚀 Hero Verse Admin Panel
+🚀 Hero Verse Admin Panel V2
 </h1>
+
+<label>
+Mod Title
+</label>
 
 <input
 type="text"
 id="title"
-placeholder="Mod Title">
+placeholder="Enter Mod Title">
 
-<textarea
-id="description"
-placeholder="Description"></textarea>
+<label>
+Image 1 URL
+</label>
 
 <input
 type="text"
-id="image"
-placeholder="Image URL">
+id="image1"
+placeholder="Top Image URL">
+
+<label>
+Description
+</label>
+
+<textarea
+id="description"
+placeholder="Mod Description"></textarea>
+
+<label>
+Image 2 URL
+</label>
+
+<input
+type="text"
+id="image2"
+placeholder="Middle Image URL">
+
+<label>
+Installation Guide
+</label>
+
+<textarea
+id="installation"
+placeholder="Installation Guide"></textarea>
+
+<label>
+Image 3 URL
+</label>
+
+<input
+type="text"
+id="image3"
+placeholder="Last Image URL">
+
+<label>
+Download Link
+</label>
 
 <input
 type="text"
 id="download"
 placeholder="Download Link">
 
-<input
-type="text"
-id="image2"
-placeholder="Second Image URL">
-
-<input
-type="text"
-id="image3"
-placeholder="Third Image URL">
-
-<input
-type="text"
-id="feature1"
-placeholder="Feature 1">
-
-<input
-type="text"
-id="feature2"
-placeholder="Feature 2">
-
-<input
-type="text"
-id="feature3"
-placeholder="Feature 3">
-
-<input
-type="text"
-id="download2"
-placeholder="Second Download Link">
-
-<input
-type="text"
-id="download3"
-placeholder="Third Download Link">
+<label>
+Credits
+</label>
 
 <textarea
 id="credits"
 placeholder="Credits"></textarea>
 
-<select id="category">
-
-<option>BEDROCK</option>
-
-<option>JAVA</option>
-
-<option>PREMIUM</option>
-
-<option>ARTICLE</option>
-
-<option>PRODUCT</option>
-
-</select>
-
 <button id="publishBtn">
-
 Publish Mod
-
 </button>
 
 <div id="status"></div>
@@ -180,68 +179,61 @@ addDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
-authDomain: "hero-verse-67e33.firebaseapp.com",
-projectId: "hero-verse-67e33",
-storageBucket: "hero-verse-67e33.firebasestorage.app",
-messagingSenderId: "227494840218",
-appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
 };
 
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-document.getElementById("publishBtn")
+document
+.getElementById("publishBtn")
 .addEventListener("click", async()=>{
 
 const title =
 document.getElementById("title").value;
 
+const image1 =
+document.getElementById("image1").value;
+
 const description =
 document.getElementById("description").value;
-
-const image =
-document.getElementById("image").value;
-
-const download =
-document.getElementById("download").value;
-
-const category =
-document.getElementById("category").value;
 
 const image2 =
 document.getElementById("image2").value;
 
+const installation =
+document.getElementById("installation").value;
+
 const image3 =
 document.getElementById("image3").value;
 
-const feature1 =
-document.getElementById("feature1").value;
-
-const feature2 =
-document.getElementById("feature2").value;
-
-const feature3 =
-document.getElementById("feature3").value;
-
-const download2 =
-document.getElementById("download2").value;
-
-const download3 =
-document.getElementById("download3").value;
+const download =
+document.getElementById("download").value;
 
 const credits =
 document.getElementById("credits").value;
 
 if(
 !title ||
+!image1 ||
 !description ||
-!image ||
 !download
 ){
 
-alert("Fill all fields");
+alert("Fill Required Fields");
 
 return;
 
@@ -252,32 +244,39 @@ try{
 await addDoc(
 collection(db,"mods"),
 {
+
 title:title,
+
+image1:image1,
+
 description:description,
-image:image,
-download:download,
-category:category,
-createdAt:new Date().toISOString()
+
 image2:image2,
+
+installation:installation,
+
 image3:image3,
 
-feature1:feature1,
-feature2:feature2,
-feature3:feature3,
+download:download,
 
-download2:download2,
-download3:download3,
+credits:credits,
 
-credits:credits,}
+createdAt:new Date().toISOString()
+
+}
 );
 
 document.getElementById("status").innerHTML =
 "✅ Mod Published Successfully";
 
-document.getElementById("title").value = "";
-document.getElementById("description").value = "";
-document.getElementById("image").value = "";
-document.getElementById("download").value = "";
+document.getElementById("title").value="";
+document.getElementById("image1").value="";
+document.getElementById("description").value="";
+document.getElementById("image2").value="";
+document.getElementById("installation").value="";
+document.getElementById("image3").value="";
+document.getElementById("download").value="";
+document.getElementById("credits").value="";
 
 }
 catch(error){
@@ -291,7 +290,7 @@ console.log(error);
 
 });
 
-</script>
+  </script>
 
 </body>
 </html>
