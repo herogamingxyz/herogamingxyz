@@ -208,7 +208,7 @@ body:formData
 
 const data = await response.json();
 
-return data.data.url;
+return data.data.display_url;
 
   }
 
@@ -231,8 +231,8 @@ document.getElementById("image2File").files[0];
 const installation =
 document.getElementById("installation").value;
 
-const image3 =
-document.getElementById("image3").value;
+const image3File =
+document.getElementById("image3File").files[0];
 
 const download =
 document.getElementById("download").value;
@@ -242,7 +242,6 @@ document.getElementById("credits").value;
 
 if(
 !title ||
-!image1 ||
 !description ||
 !download
 ){
@@ -297,11 +296,11 @@ document.getElementById("status").innerHTML =
 "✅ Mod Published Successfully";
 
 document.getElementById("title").value="";
-document.getElementById("image1").value="";
+document.getElementById("image1File").value="";
 document.getElementById("description").value="";
-document.getElementById("image2").value="";
+document.getElementById("image2File").value="";
 document.getElementById("installation").value="";
-document.getElementById("image3").value="";
+document.getElementById("image3File").value="";
 document.getElementById("download").value="";
 document.getElementById("credits").value="";
 
