@@ -887,7 +887,8 @@ Read More
     <h3>Counter-Strike 2 (CS2)</h3>
     <p>The next evolution of competitive FPS gaming.</p>
 </a>
-    
+<div id="articlesContainer"></div>
+
 </section>
 
 <section class="section">
@@ -1305,6 +1306,38 @@ modsContainer.innerHTML += `
 <h3>${mod.title}</h3>
 
 <p>${mod.description.substring(0,80)}...</p>
+
+</div>
+
+</a>
+
+`;
+
+});
+
+});
+
+const articlesContainer =
+document.getElementById("articlesContainer");
+
+getDocs(collection(db,"articles"))
+.then((snapshot)=>{
+
+snapshot.forEach((docu)=>{
+
+const a = docu.data();
+
+articlesContainer.innerHTML += `
+
+<a href="article.html?id=${docu.id}" class="card">
+
+<img src="${a.coverImage}">
+
+<div class="card-content">
+
+<h3>${a.title}</h3>
+
+<p>${a.shortDescription}</p>
 
 </div>
 
