@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Article</title>
+
+<style>
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial;
+padding:20px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:10px;
+margin:15px 0;
+}
+
+h1,h2{
+color:#00ff99;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img id="coverImage">
+
+<h1 id="title"></h1>
+
+<p id="shortDescription"></p>
+
+<hr>
+
+<h2 id="heading1"></h2>
+<p id="paragraph1"></p>
+
+<img id="image1">
+
+<h2 id="heading2"></h2>
+<p id="paragraph2"></p>
+
+<img id="image2">
+
+<h2 id="heading3"></h2>
+<p id="paragraph3"></p>
+
+<img id="image3">
+
+<h2>Conclusion</h2>
+<p id="conclusion"></p>
+
+<h3>Credits</h3>
+<p id="credits"></p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getFirestore, doc, getDoc } 
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey:"YOUR_KEY",
+authDomain:"hero-verse-67e33.firebaseapp.com",
+projectId:"hero-verse-67e33",
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+messagingSenderId:"227494840218",
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+const docRef = doc(db,"articles",id);
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const a = docSnap.data();
+
+document.getElementById("title").innerText = a.title;
+document.getElementById("shortDescription").innerText = a.shortDescription;
+
+document.getElementById("heading1").innerText = a.heading1;
+document.getElementById("paragraph1").innerText = a.paragraph1;
+document.getElementById("image1").src = a.image1;
+
+document.getElementById("heading2").innerText = a.heading2;
+document.getElementById("paragraph2").innerText = a.paragraph2;
+document.getElementById("image2").src = a.image2;
+
+document.getElementById("heading3").innerText = a.heading3;
+document.getElementById("paragraph3").innerText = a.paragraph3;
+document.getElementById("image3").src = a.image3;
+
+document.getElementById("conclusion").innerText = a.conclusion;
+document.getElementById("credits").innerText = a.credits;
+
+document.getElementById("coverImage").src = a.coverImage;
+
+}
+
+</script>
+
+</body>
+</html>
