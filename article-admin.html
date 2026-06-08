@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hero Verse Article Admin</title><style>
+
+body{
+background:#0f0f0f;
+font-family:Arial,sans-serif;
+color:white;
+margin:0;
+padding:0;
+}
+
+.container{
+max-width:900px;
+margin:40px auto;
+padding:30px;
+background:#1b1b1b;
+border-radius:20px;
+}
+
+h1{
+text-align:center;
+color:#00ff99;
+}
+
+label{
+display:block;
+margin-top:20px;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#2a2a2a;
+color:white;
+box-sizing:border-box;
+}
+
+textarea{
+height:140px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:25px;
+background:#00ff99;
+color:black;
+font-size:18px;
+font-weight:bold;
+border:none;
+border-radius:12px;
+cursor:pointer;
+}
+
+</style></head><body><div class="container"><h1>
+📰 Hero Verse Article Admin
+</h1><label>Article Title</label>
+<input type="text" id="title">
+
+<label>Cover Image</label>
+<input type="file" id="coverImageFile">
+
+<label>Short Description</label>
+
+<textarea id="shortDescription"></textarea><label>Article Style</label>
+
+<select id="style"><option value="news">News</option><option value="tutorial">Tutorial</option><option value="review">Review</option><option value="blog">Blog</option></select><label>Heading 1</label>
+<input type="text" id="heading1">
+
+<label>Paragraph 1</label>
+
+<textarea id="paragraph1"></textarea><label>Image 1</label>
+<input type="file" id="image1File">
+
+<label>Heading 2</label>
+<input type="text" id="heading2">
+
+<label>Paragraph 2</label>
+
+<textarea id="paragraph2"></textarea><label>Image 2</label>
+<input type="file" id="image2File">
+
+<label>Heading 3</label>
+<input type="text" id="heading3">
+
+<label>Paragraph 3</label>
+
+<textarea id="paragraph3"></textarea><label>Image 3</label>
+<input type="file" id="image3File">
+
+<label>Conclusion</label>
+
+<textarea id="conclusion"></textarea><label>Credits</label>
+
+<textarea id="credits"></textarea><label>Category</label>
+
+<select id="category"><option value="minecraft">
+Minecraft
+</option><option value="gaming">
+Gaming
+</option><option value="technology">
+Technology
+</option><option value="guides">
+Guides
+</option><option value="updates">
+Updates
+</option></select><button id="publishBtn">
+🚀 Publish Article
+</button><div id="status">
+  
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"TERA_API_KEY",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+document
+.getElementById("publishBtn")
+.addEventListener("click", async()=>{
+
+const title =
+document.getElementById("title").value;
+
+const shortDescription =
+document.getElementById("shortDescription").value;
+
+const style =
+document.getElementById("style").value;
+
+const category =
+document.getElementById("category").value;
+
+const heading1 =
+document.getElementById("heading1").value;
+
+const paragraph1 =
+document.getElementById("paragraph1").value;
+
+const heading2 =
+document.getElementById("heading2").value;
+
+const paragraph2 =
+document.getElementById("paragraph2").value;
+
+const heading3 =
+document.getElementById("heading3").value;
+
+const paragraph3 =
+document.getElementById("paragraph3").value;
+
+const conclusion =
+document.getElementById("conclusion").value;
+
+const credits =
+document.getElementById("credits").value;
+
+await addDoc(
+collection(db,"articles"),
+{
+
+title,
+shortDescription,
+style,
+category,
+
+heading1,
+paragraph1,
+
+heading2,
+paragraph2,
+
+heading3,
+paragraph3,
+
+conclusion,
+credits,
+
+createdAt:new Date().toISOString()
+
+}
+);
+
+document.getElementById("status").innerHTML =
+"✅ Article Published";
+
+});
+
+</script>
+
+</body>
+</html>
