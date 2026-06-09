@@ -150,6 +150,29 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
+async function uploadToImgBB(file){
+
+const apiKey =
+"4b1fc62b168482ae1cdd10329d4ed235";
+
+const formData = new FormData();
+
+formData.append("image", file);
+
+const response = await fetch(
+`https://api.imgbb.com/1/upload?key=${apiKey}`,
+{
+method:"POST",
+body:formData
+}
+);
+
+const data = await response.json();
+
+return data.data.display_url;
+
+}
+
 document
 .getElementById("publishBtn")
 .addEventListener("click", async()=>{
@@ -190,6 +213,38 @@ document.getElementById("conclusion").value;
 const credits =
 document.getElementById("credits").value;
 
+const coverImageFile =
+document.getElementById("coverImageFile").files[0];
+
+const image1File =
+document.getElementById("image1File").files[0];
+
+const image2File =
+document.getElementById("image2File").files[0];
+
+const image3File =
+document.getElementById("image3File").files[0];
+
+const coverImage =
+coverImageFile
+? await uploadToImgBB(coverImageFile)
+: "";
+
+const image1 =
+image1File
+? await uploadToImgBB(image1File)
+: "";
+
+const image2 =
+image2File
+? await uploadToImgBB(image2File)
+: "";
+
+const image3 =
+image3File
+? await uploadToImgBB(image3File)
+: "";
+
 await addDoc(
 collection(db,"articles"),
 {
@@ -198,6 +253,11 @@ title,
 shortDescription,
 style,
 category,
+
+coverImage,
+image1,
+image2,
+image3,
 
 heading1,
 paragraph1,
