@@ -887,7 +887,9 @@ Read More
     <h3>Counter-Strike 2 (CS2)</h3>
     <p>The next evolution of competitive FPS gaming.</p>
 </a>
+
 <div id="articlesContainer"></div>
+<div class="slider-track">
 
 </section>
 
@@ -1337,7 +1339,27 @@ articlesContainer.innerHTML += `
 
 <h3>${a.title}</h3>
 
-<p>${a.shortDescription}</p>
+articlesContainer.innerHTML += `
+
+<a href="article.html?id=${docu.id}" class="card">
+
+<img src="${a.coverImage || a.image1}">
+
+<div class="card-content">
+
+<h3>${a.title}</h3>
+
+<p>${a.shortDescription.substring(0,80)}...</p>
+
+<span class="btn">
+Read More
+</span>
+
+</div>
+
+</a>
+
+`;
 
 </div>
 
