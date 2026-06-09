@@ -888,8 +888,7 @@ Read More
     <p>The next evolution of competitive FPS gaming.</p>
 </a>
 
-<div id="articlesContainer"></div>
-<div class="slider-track">
+<div id="articlesContainer" class="slider-track"></div>
 
 </section>
 
@@ -899,7 +898,6 @@ Read More
 🔒 Members Only Mods
 </h2>
 
-<div class="slider-track">
 <a href="#" class="card" id="premiumMod">
     
 <img src="premium-mod.jpg">
@@ -1328,16 +1326,6 @@ getDocs(collection(db,"articles"))
 snapshot.forEach((docu)=>{
 
 const a = docu.data();
-
-articlesContainer.innerHTML += `
-
-<a href="article.html?id=${docu.id}" class="card">
-
-<img src="${a.coverImage}">
-
-<div class="card-content">
-
-<h3>${a.title}</h3>
 
 articlesContainer.innerHTML += `
 
