@@ -1484,6 +1484,101 @@ alert("No result found.");
 
 }
 
+const searchInput =
+document.getElementById("searchInput");
+
+const searchResults =
+document.getElementById("searchResults");
+
+let allSearchItems = [];
+
+// MODS
+getDocs(collection(db,"mods"))
+.then((snapshot)=>{
+
+snapshot.forEach((docu)=>{
+
+const mod = docu.data();
+
+allSearchItems.push({
+title: mod.title,
+url: `mod.html?id=${docu.id}`
+});
+
+});
+
+});
+
+// ARTICLES
+getDocs(collection(db,"articles"))
+.then((snapshot)=>{
+
+snapshot.forEach((docu)=>{
+
+const article = docu.data();
+
+allSearchItems.push({
+title: article.title,
+url: `article.html?id=${docu.id}`
+});
+
+});
+
+});
+
+// PRODUCTS
+getDocs(collection(db,"products"))
+.then((snapshot)=>{
+
+snapshot.forEach((docu)=>{
+
+const product = docu.data();
+
+allSearchItems.push({
+title: product.title,
+url: product.affiliateLink
+});
+
+});
+
+});
+
+searchInput.addEventListener("input",()=>{
+
+const query =
+searchInput.value.toLowerCase();
+
+searchResults.innerHTML = "";
+
+if(query.length < 1){
+
+searchResults.innerHTML = "";
+return;
+
+}
+
+allSearchItems.forEach(item=>{
+
+if(item.title.toLowerCase()
+.includes(query)){
+
+searchResults.innerHTML += `
+
+<div class="search-item"
+onclick="window.location.href='${item.url}'">
+
+${item.title}
+
+</div>
+
+`;
+
+}
+
+});
+
+});
+
 </script>
 
 </body>
