@@ -475,6 +475,29 @@ color:white;
 z-index:9999;
 }
 
+#searchResults{
+position:absolute;
+top:80px;
+right:40px;
+width:360px;
+background:#1b1b1b;
+border-radius:12px;
+overflow:hidden;
+z-index:99999;
+box-shadow:0 0 20px rgba(0,255,153,0.3);
+}
+
+.search-item{
+padding:15px;
+border-bottom:1px solid #333;
+cursor:pointer;
+}
+
+.search-item:hover{
+background:#00ff99;
+color:black;
+    }
+
 /* MOBILE */
 
 @media(max-width:900px){
@@ -528,13 +551,15 @@ Hero Verse
 <input
 type="text"
 id="searchInput"
-placeholder="🔍 Search mods, games, products...">
+placeholder="🔍 Search mods, articles, products...">
 
 <button id="searchBtn">
 Search
 </button>
 
 </div>
+
+<div id="searchResults"></div>
 
 <div id="userInfo" style="color:white;margin-left:20px;">
 Loading...
