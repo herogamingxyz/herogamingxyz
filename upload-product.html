@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Upload Product - Hero Verse</title>
+
+<style>
+
+body{
+background:#0b0b0b;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:#111;
+padding:25px;
+border-radius:15px;
+}
+
+h1{
+text-align:center;
+color:#00ff99;
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
+
+input,
+textarea{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:none;
+border-radius:10px;
+background:#222;
+color:white;
+}
+
+textarea{
+height:150px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+border-radius:10px;
+background:#00ff99;
+color:black;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+}
+
+#status{
+margin-top:15px;
+text-align:center;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🛒 Upload Product</h1>
+
+<label>Product Title</label>
+<input type="text" id="title">
+
+<label>Product Image</label>
+<input type="file" id="image">
+
+<label>Product Description</label>
+<textarea id="description"></textarea>
+
+<label>Affiliate Link</label>
+<input type="text" id="affiliateLink">
+
+<button id="publishBtn">
+Publish Product
+</button>
+
+<div id="status"></div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+import {
+getStorage,
+ref,
+uploadBytes,
+getDownloadURL
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-storage.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+authDomain: "hero-verse-67e33.firebaseapp.com",
+projectId: "hero-verse-67e33",
+storageBucket: "hero-verse-67e33.firebasestorage.app",
+messagingSenderId: "227494840218",
+appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const storage = getStorage(app);
+
+document
+.getElementById("publishBtn")
+.addEventListener("click", async()=>{
+
+const title =
+document.getElementById("title").value;
+
+const description =
+document.getElementById("description").value;
+
+const affiliateLink =
+document.getElementById("affiliateLink").value;
+
+const imageFile =
+document.getElementById("image").files[0];
+
+if(
+!title ||
+!description ||
+!affiliateLink ||
+!imageFile
+){
+alert("Fill all fields");
+return;
+}
+
+document.getElementById("status").innerText =
+"Uploading Product...";
+
+try{
+
+const imageRef =
+ref(
+storage,
+"products/" +
+Date.now() +
+"-" +
+imageFile.name
+);
+
+await uploadBytes(
+imageRef,
+imageFile
+);
+
+const imageURL =
+await getDownloadURL(imageRef);
+
+await addDoc(
+collection(db,"products"),
+{
+title,
+description,
+affiliateLink,
+image:imageURL,
+createdAt:serverTimestamp()
+}
+);
+
+document.getElementById("status").innerText =
+"✅ Product Published";
+
+document.getElementById("title").value="";
+document.getElementById("description").value="";
+document.getElementById("affiliateLink").value="";
+document.getElementById("image").value="";
+
+}catch(error){
+
+console.error(error);
+
+document.getElementById("status").innerText =
+"❌ Upload Failed";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
