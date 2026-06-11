@@ -1416,74 +1416,6 @@ Read More
 
 });
 
-</script>
-
-<script>
-
-document.getElementById("searchBtn")
-.addEventListener("click", searchSite);
-
-document.getElementById("searchInput")
-.addEventListener("keypress", function(e){
-
-if(e.key === "Enter"){
-searchSite();
-}
-
-});
-
-function searchSite(){
-
-const query =
-document.getElementById("searchInput")
-.value
-.toLowerCase()
-.trim();
-
-if(!query) return;
-
-const pages = {
-
-"sodium":"sodium.html",
-"iris":"iris-shaders.html",
-"minecraft":"mods.html",
-"mod":"mods.html",
-
-"herobrine":"herobrine-mystery.html",
-"backrooms":"backrooms.html",
-"cs2":"cs2.html",
-"counter strike":"cs2.html",
-
-"product":"products.html",
-"gaming mouse":"products.html",
-"headphone":"products.html",
-
-"article":"articles.html",
-"gta":"gta6-hype.html",
-"elden ring":"elden-ring-nightreign.html",
-
-"community":"community.html",
-"discord":"community.html"
-
-};
-
-for(const keyword in pages){
-
-if(query.includes(keyword)){
-
-window.location.href =
-pages[keyword];
-
-return;
-
-}
-
-}
-
-alert("No result found.");
-
-}
-
 const searchInput =
 document.getElementById("searchInput");
 
@@ -1578,6 +1510,8 @@ ${item.title}
 });
 
 });
+
+</script>
 
 </script>
 
