@@ -94,112 +94,101 @@ Gaming Products
 
 <section class="products">
 
-<!-- PRODUCT 1 -->
-
-<div class="card">
-
-<img src="https://m.media-amazon.com/images/I/7132WEEG0uL._SL1000_.jpg">
-
-<div class="content">
-
-<h2>
-4 Pcs Game Wall Art Decor
-</h2>
-
-<p>
-Best gaming accessories for pro gamers.
-</p>
-
-<a href="https://amzn.to/4dN5wB6" class="btn">
-Buy Now
-</a>
-
-</div>
-
-</div>
-
-<!-- PRODUCT 2 -->
-
-<div class="card">
-
-<img src="https://m.media-amazon.com/images/I/61ImZC1aiKL._SL1483_.jpg">
-
-<div class="content">
-
-<h2>
-Thumbs Finger Sleeve
-</h2>
-
-<p>
-
-Improve your gaming control, movement and aim with smooth mobile gaming finger sleeves.
-
-</p>
-
-<a href="https://amzn.to/4dR9RTX" class="btn">
-Buy Now
-</a>
-
-</div>
-
-</div>
-
-<!-- PRODUCT 3 -->
-
-<div class="card">
-
-<img src="https://m.media-amazon.com/images/I/61xqtRY3pFL._SL1200_.jpg">
-
-<div class="content">
-
-<h2>
-RGB Gaming Mouse
-</h2>
-
-<p>
-
-Stylish RGB gaming mouse with smooth clicks,
-fast response and gamer style RGB lighting.
-
-</p>
-
-<a href="https://amzn.to/4tZEo7K" class="btn">
-Buy Now
-</a>
-
-</div>
-
-</div>
-
-<!-- PRODUCT 4 -->
-
-<div class="card">
-
-<img src="https://m.media-amazon.com/images/I/71GYkqELJsL._SL1500_.jpg">
-
-<div class="content">
-
-<h2>
-Wireless Bluetooth Headphones
-</h2>
-
-<p>
-
-Wireless Bluetooth headphones with deep bass,
-comfortable design and long battery backup.
-Perfect for gaming, music and entertainment.
-
-</p>
-
-<a href="https://amzn.to/4dTbGzq" class="btn">
-Buy Now
-</a>
-
-</div>
-
-</div>
+<section class="products" id="productsContainer">
 
 </section>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const productsContainer =
+document.getElementById("productsContainer");
+
+getDocs(collection(db,"products"))
+.then((snapshot)=>{
+
+snapshot.forEach((docu)=>{
+
+const p = docu.data();
+
+productsContainer.innerHTML += `
+
+<div class="card">
+
+<img src="${p.image}">
+
+<div class="content">
+
+<h2>${p.title}</h2>
+
+<p>${p.description}</p>
+
+<a href="${p.affiliateLink}"
+target="_blank"
+class="btn">
+
+Buy Now
+
+</a>
+
+</div>
+
+</div>
+`;
+
+});
+
+});
+
+</script>
 
 </body>
 </html>
