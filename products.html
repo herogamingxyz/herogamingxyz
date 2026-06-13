@@ -118,8 +118,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/fireba
 import {
 getFirestore,
 collection,
-getDocs
-}
+getDocs,
+doc,
+updateDoc,
+increment
+  }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -164,8 +167,12 @@ productsContainer.innerHTML += `
 
 <p>${p.description}</p>
 
-<a href="${p.affiliateLink}"
-target="_blank"
+<p>
+🔥 ${p.clicks || 0} Clicks
+</p>
+
+<a href="#"
+onclick="productClick('${docu.id}','${p.affiliateLink}')"
 class="btn">
 
 Buy Now
@@ -180,6 +187,19 @@ Buy Now
 });
 
 });
+
+window.productClick = async function(id,link){
+
+const productRef =
+doc(db,"products",id);
+
+await updateDoc(productRef,{
+clicks: increment(1)
+});
+
+window.open(link,"_blank");
+
+}
 
 </script>
 
