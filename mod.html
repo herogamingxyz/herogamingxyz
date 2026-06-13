@@ -89,6 +89,12 @@ Download
 
 <p id="credits"></p>
 
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
 </div>
 
 <script type="module">
@@ -98,7 +104,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/fireba
 import {
 getFirestore,
 doc,
-getDoc
+getDoc,
+updateDoc,
+increment
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -157,6 +165,15 @@ mod.installation;
 
 document.getElementById("credits").innerText =
 mod.credits;
+
+const currentViews = mod.views || 0;
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
 
   }
 
