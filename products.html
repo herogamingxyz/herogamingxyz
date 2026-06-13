@@ -171,13 +171,11 @@ productsContainer.innerHTML += `
 🔥 ${p.clicks || 0} Clicks
 </p>
 
-<a href="#"
+<button
 onclick="productClick('${docu.id}','${p.affiliateLink}')"
 class="btn">
-
 Buy Now
-
-</a>
+</button>
 
 </div>
 
@@ -197,8 +195,10 @@ await updateDoc(productRef,{
 clicks: increment(1)
 });
 
-window.open(link,"_blank");
+window.location.href = link;
 
+};
+  
 }
 
 </script>
