@@ -79,12 +79,25 @@ color:#00ff99;
 <h3>Credits</h3>
 <p id="credits"></p>
 
+<h3>Views</h3>
+
+<p id="views">
+👁 0 Views
+</p>
+
 </div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-import { getFirestore, doc, getDoc } 
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+}
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -128,6 +141,15 @@ document.getElementById("conclusion").innerText = a.conclusion;
 document.getElementById("credits").innerText = a.credits;
 
 document.getElementById("coverImage").src = a.coverImage;
+
+const currentViews = a.views || 0;
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
 
 }
 
