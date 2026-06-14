@@ -46,7 +46,10 @@ from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import {
 getFirestore,
 collection,
-getDocs
+getDocs,
+addDoc,
+deleteDoc,
+doc
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
@@ -123,6 +126,14 @@ ${mod.credits}
 ${mod.status}
 </p>
 
+<button onclick="approveMod('${docu.id}')">
+✅ Approve
+</button>
+
+<button onclick="rejectMod('${docu.id}')">
+❌ Reject
+</button>
+
 </div>
 
 `;
@@ -130,6 +141,68 @@ ${mod.status}
 });
 
 });
+
+window.approveMod = async function(id){
+
+const submissions =
+await getDocs(collection(db,"user_submissions"));
+
+submissions.forEach(async(docu)=>{
+
+if(docu.id === id){
+
+const mod = docu.data();
+
+await addDoc(
+collection(db,"mods"),
+{
+
+title: mod.title,
+
+image1: mod.thumbnail,
+
+description: mod.description,
+
+installation: mod.installation,
+
+download: mod.download,
+
+credits: mod.credits,
+
+image2: "",
+
+image3: "",
+
+createdAt:
+new Date().toISOString()
+
+});
+
+await deleteDoc(
+doc(db,"user_submissions",id)
+);
+
+alert("✅ Mod Approved");
+
+location.reload();
+
+}
+
+});
+
+};
+
+window.rejectMod = async function(id){
+
+await deleteDoc(
+doc(db,"user_submissions",id)
+);
+
+alert("❌ Mod Rejected");
+
+location.reload();
+
+};
 
 </script>
 
