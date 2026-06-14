@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Review Panel</title><style>
+
+body{
+background:#0f0f0f;
+font-family:Arial,sans-serif;
+color:white;
+padding:20px;
+}
+
+h1{
+text-align:center;
+color:#00ff99;
+}
+
+.card{
+background:#1b1b1b;
+padding:20px;
+margin-bottom:25px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,255,153,0.2);
+}
+
+.card img{
+width:100%;
+max-width:400px;
+border-radius:10px;
+margin:15px 0;
+}
+
+.card h2{
+color:#00ff99;
+}
+
+.card p{
+line-height:1.7;
+}
+
+</style></head><body><h1>
+📦 Pending Mod Reviews
+</h1><div id="modsContainer"></div><script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const container =
+document.getElementById("modsContainer");
+
+getDocs(collection(db,"user_submissions"))
+.then((snapshot)=>{
+
+snapshot.forEach((docu)=>{
+
+const mod = docu.data();
+
+container.innerHTML += `
+
+<div class="card">
+
+<h2>${mod.title}</h2>
+
+<img src="${mod.thumbnail}">
+
+<p>
+<b>Description:</b><br>
+${mod.description}
+</p>
+
+<p>
+<b>Features:</b><br>
+${mod.features}
+</p>
+
+<p>
+<b>Installation:</b><br>
+${mod.installation}
+</p>
+
+<p>
+<b>Download Link:</b><br>
+${mod.download}
+</p>
+
+<p>
+<b>Creator:</b><br>
+${mod.creator}
+</p>
+
+<p>
+<b>Credits:</b><br>
+${mod.credits}
+</p>
+
+<p>
+<b>Status:</b>
+${mod.status}
+</p>
+
+</div>
+
+`;
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
