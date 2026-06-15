@@ -281,6 +281,36 @@ transform:translateY(-10px);
 box-shadow:0 0 25px #00ff99;
 }
 
+.upload-card{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+height:100%;
+padding:20px;
+text-align:center;
+}
+
+.upload-logo{
+width:140px;
+height:140px;
+object-fit:contain;
+margin-bottom:15px;
+}
+
+.upload-title{
+font-size:22px;
+font-weight:bold;
+color:#00ff99;
+margin-top:10px;
+}
+
+.upload-desc{
+font-size:14px;
+color:#ccc;
+line-height:1.5;
+}
+
 .card img{
 width:100%;
 height:190px;
@@ -1021,13 +1051,19 @@ Login to unlock upcoming premium mods and special downloads.
 
 <a href="user-upload-mod.html" class="card">
 
-<img src="Upload-Icon-Logo-Transparent-PNG.png" class="upload-logo">
+<div class="upload-card">
 
-<h3>📤 Upload Your Mod</h3>
+<img src="upload.png" class="upload-logo">
 
-<p>
+<div class="upload-title">
+📤 Upload Your Mod
+</div>
+
+<div class="upload-desc">
 Share your Minecraft mod with Hero Verse Community
-</p>
+</div>
+
+</div>
 
 </a>
 
