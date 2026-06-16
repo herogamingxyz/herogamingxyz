@@ -169,6 +169,12 @@ collection,
 addDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
+import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
 const firebaseConfig = {
 
 apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
@@ -188,6 +194,28 @@ appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+return;
+
+}
+
+if(user.email !== "herogamingxyzyt@gmail.com"){
+
+alert("Access Denied");
+
+window.location.href="index.html";
+return;
+
+}
+
+});
 
 async function uploadToImgBB(file){
 
