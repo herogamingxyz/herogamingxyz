@@ -44,6 +44,12 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
 import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
 getFirestore,
 collection,
 getDocs,
@@ -73,8 +79,30 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
+const auth = getAuth(app);
+
 const container =
 document.getElementById("modsContainer");
+
+onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+return;
+
+}
+
+if(user.email !== "herogamingxyzyt@gmail.com"){
+
+alert("Access Denied");
+
+window.location.href="index.html";
+return;
+
+}
+
+});
 
 getDocs(collection(db,"user_submissions"))
 .then((snapshot)=>{
