@@ -1,0 +1,5 @@
+User-agent: *
+
+Allow: /
+
+Sitemap: https://herogamingxyz.github.io/herogamingxyz/sitemap.xml
