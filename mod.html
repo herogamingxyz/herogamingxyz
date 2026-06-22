@@ -79,6 +79,10 @@ margin-top:20px;
 
 <h2>Downloads</h2>
 
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
 <a id="downloadBtn"
 class="download-btn"
 target="_blank">
@@ -167,6 +171,11 @@ document.getElementById("credits").innerText =
 mod.credits;
 
 const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads || 75;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
 
 document.getElementById("views").innerText =
 "👁 " + (currentViews + 1) + " Views";
