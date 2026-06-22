@@ -158,6 +158,19 @@ mod.image1;
 document.getElementById("downloadBtn").href =
 mod.download;
 
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads || 75;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+});
+
 document.getElementById("image2").src =
 mod.image2;
 
