@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Latest Games | Hero Verse</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f0f0f;
+color:white;
+}
+
+.container{
+max-width:1400px;
+margin:auto;
+padding:25px;
+}
+
+.page-title{
+font-size:40px;
+font-weight:bold;
+color:#00ff99;
+margin-bottom:20px;
+}
+
+.search-box{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#1b1b1b;
+color:white;
+font-size:16px;
+margin-bottom:25px;
+outline:none;
+}
+
+.filter-bar{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.filter-btn{
+background:#1b1b1b;
+color:white;
+padding:10px 18px;
+border-radius:10px;
+cursor:pointer;
+transition:.3s;
+}
+
+.filter-btn:hover{
+background:#00ff99;
+color:black;
+}
+
+.games-grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fill,minmax(270px,1fr));
+gap:20px;
+}
+
+.game-card{
+
+background:#181818;
+
+border-radius:18px;
+
+overflow:hidden;
+
+text-decoration:none;
+
+color:white;
+
+transition:.3s;
+
+border:1px solid #222;
+
+}
+
+.game-card:hover{
+
+transform:translateY(-8px);
+
+border:1px solid #00ff99;
+
+box-shadow:0 0 18px rgba(0,255,153,.35);
+
+}
+
+.game-card img{
+
+width:100%;
+
+height:340px;
+
+object-fit:cover;
+
+}
+
+.game-info{
+
+padding:15px;
+
+}
+
+.game-title{
+
+font-size:22px;
+
+font-weight:bold;
+
+margin-bottom:10px;
+
+}
+
+.game-meta{
+
+display:flex;
+
+justify-content:space-between;
+
+font-size:14px;
+
+color:#bbb;
+
+margin-bottom:12px;
+
+}
+
+.badge{
+
+display:inline-block;
+
+padding:5px 12px;
+
+background:#00ff99;
+
+color:black;
+
+font-weight:bold;
+
+border-radius:20px;
+
+font-size:12px;
+
+margin-bottom:10px;
+
+}
+
+.rating{
+
+color:#FFD700;
+
+font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 class="page-title">
+🎮 Latest Games
+</h1>
+
+<input
+type="text"
+id="searchInput"
+class="search-box"
+placeholder="Search Games...">
+
+<div class="filter-bar">
+
+<div class="filter-btn">All</div>
+
+<div class="filter-btn">AAA</div>
+
+<div class="filter-btn">Free</div>
+
+<div class="filter-btn">Indie</div>
+
+<div class="filter-btn">New</div>
+
+</div>
+
+<div id="gamesContainer"
+class="games-grid">
+
+  </div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const gamesContainer =
+document.getElementById("gamesContainer");
+
+const searchInput =
+document.getElementById("searchInput");
+
+let allGames = [];
+
+const snapshot =
+await getDocs(collection(db,"games"));
+
+snapshot.forEach((docu)=>{
+
+const game = docu.data();
+
+allGames.push({
+
+id:docu.id,
+
+...game
+
+});
+
+});
+
+function renderGames(list){
+
+gamesContainer.innerHTML = "";
+
+list.forEach(game=>{
+
+gamesContainer.innerHTML += `
+
+<a href="game.html?id=${game.id}"
+class="game-card">
+
+<img src="${game.image1}">
+
+<div class="game-info">
+
+<div class="badge">
+${game.badge || "GAME"}
+</div>
+
+<div class="game-title">
+${game.title}
+</div>
+
+<div class="game-meta">
+
+<span>
+${game.genre || "Unknown"}
+</span>
+
+<span class="rating">
+⭐ ${game.rating || "4.5"}
+</span>
+
+</div>
+
+<div class="game-meta">
+
+<span>
+${game.developer || "Unknown"}
+</span>
+
+<span>
+${game.size || "-"}
+</span>
+
+</div>
+
+</div>
+
+</a>
+
+`;
+
+});
+
+}
+
+renderGames(allGames);
+
+searchInput.addEventListener("input",()=>{
+
+const value =
+searchInput.value.toLowerCase();
+
+const filtered =
+allGames.filter(game=>
+
+game.title.toLowerCase().includes(value)
+
+);
+
+renderGames(filtered);
+
+});
+
+// Filter Buttons
+
+const filterButtons =
+document.querySelectorAll(".filter-btn");
+
+filterButtons.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+const filter =
+btn.innerText.toLowerCase();
+
+if(filter=="all"){
+
+renderGames(allGames);
+
+return;
+
+}
+
+const filtered =
+allGames.filter(game=>{
+
+const badge =
+(game.badge || "").toLowerCase();
+
+return badge.includes(filter);
+
+});
+
+renderGames(filtered);
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>
