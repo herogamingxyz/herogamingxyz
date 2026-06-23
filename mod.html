@@ -160,7 +160,7 @@ mod.download;
 
 document.getElementById("downloadBtn").addEventListener("click", async () => {
 
-    const currentDownloads = mod.downloads || 75;
+    const currentDownloads = mod.downloads ?? 0;
 
     document.getElementById("downloads").innerText =
     "⬇️ " + (currentDownloads + 1) + " Downloads";
@@ -168,6 +168,8 @@ document.getElementById("downloadBtn").addEventListener("click", async () => {
     await updateDoc(docRef, {
         downloads: increment(1)
     });
+
+    mod.downloads = currentDownloads + 1;
 
 });
 
@@ -185,7 +187,7 @@ mod.credits;
 
 const currentViews = mod.views || 0;
 
-const currentDownloads = mod.downloads || 75;
+const currentDownloads = mod.downloads ?? 0;
 
 document.getElementById("downloads").innerText =
 "⬇️ " + currentDownloads + " Downloads";
