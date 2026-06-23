@@ -113,6 +113,36 @@ type="text"
 id="download"
 placeholder="Steam / Epic Games / Play Store Link">
 
+<label>Developer</label>
+<input type="text" id="developer" placeholder="Rockstar Games">
+
+<label>Release Date</label>
+<input type="text" id="releaseDate" placeholder="26 May 2026">
+
+<label>Platform</label>
+<input type="text" id="platform" placeholder="PC, PS5, Xbox">
+
+<label>Genre</label>
+<input type="text" id="genre" placeholder="Action, Adventure">
+
+<label>Game Size</label>
+<input type="text" id="size" placeholder="120 GB">
+
+<label>Rating</label>
+<input type="text" id="rating" placeholder="9.8/10">
+
+<label>Badge</label>
+<input type="text" id="badge" placeholder="NEW / TRENDING / AAA">
+
+<label>Trailer Link</label>
+<input type="text" id="trailer" placeholder="YouTube Trailer Link">
+
+<label>Minimum Requirements</label>
+<textarea id="minimumRequirements" placeholder="Minimum PC Requirements"></textarea>
+
+<label>Recommended Requirements</label>
+<textarea id="recommendedRequirements" placeholder="Recommended PC Requirements"></textarea>
+
 <label>Credits</label>
 <textarea id="credits" placeholder="Credits"></textarea>
 
@@ -221,6 +251,36 @@ const image3File=document.getElementById("image3File").files[0];
 
 const download=document.getElementById("download").value;
 
+const developer =
+document.getElementById("developer").value;
+
+const releaseDate =
+document.getElementById("releaseDate").value;
+
+const platform =
+document.getElementById("platform").value;
+
+const genre =
+document.getElementById("genre").value;
+
+const size =
+document.getElementById("size").value;
+
+const rating =
+document.getElementById("rating").value;
+
+const badge =
+document.getElementById("badge").value;
+
+const trailer =
+document.getElementById("trailer").value;
+
+const minimumRequirements =
+document.getElementById("minimumRequirements").value;
+
+const recommendedRequirements =
+document.getElementById("recommendedRequirements").value;
+
 const credits=document.getElementById("credits").value;
 
 if(!title||!description||!download){
@@ -267,6 +327,26 @@ image3:image3,
 download:download,
 
 credits:credits,
+
+developer:developer,
+
+releaseDate:releaseDate,
+
+platform:platform,
+
+genre:genre,
+
+size:size,
+
+rating:rating,
+
+badge:badge,
+
+trailer:trailer,
+
+minimumRequirements:minimumRequirements,
+
+recommendedRequirements:recommendedRequirements,
 
 views:0,
 
