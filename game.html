@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hero Verse Game</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f0f0f;
+color:white;
+}
+
+.container{
+max-width:1000px;
+margin:40px auto;
+padding:20px;
+}
+
+.cover{
+width:100%;
+border-radius:20px;
+margin-bottom:25px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin:25px 0;
+}
+
+.gallery img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:15px;
+}
+
+h1{
+color:#00ff99;
+font-size:40px;
+margin-bottom:20px;
+}
+
+.desc{
+font-size:18px;
+line-height:1.8;
+color:#ddd;
+margin-bottom:30px;
+}
+
+.infoBox{
+background:#181818;
+padding:20px;
+border-radius:18px;
+margin-bottom:25px;
+}
+
+.infoBox h2{
+color:#00ff99;
+margin-bottom:15px;
+}
+
+.info{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid #333;
+}
+
+.label{
+font-weight:bold;
+color:#00ff99;
+}
+
+.value{
+color:white;
+}
+
+.buttonArea{
+margin-top:30px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 25px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+font-weight:bold;
+border-radius:12px;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+.counter{
+margin-top:20px;
+font-size:18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img id="coverImage" class="cover">
+
+<h1 id="title">
+Loading...
+</h1>
+
+<p id="description" class="desc"></p>
+
+<div class="gallery">
+
+<img id="image2">
+
+<img id="image3">
+
+<img id="coverImage2">
+
+</div>
+
+<div class="infoBox">
+
+<h2>
+🎮 Game Information
+</h2>
+
+<div class="info">
+<span class="label">Developer</span>
+<span id="developer" class="value"></span>
+</div>
+
+<div class="info">
+<span class="label">Release Date</span>
+<span id="releaseDate" class="value"></span>
+</div>
+
+<div class="info">
+<span class="label">Platform</span>
+<span id="platform" class="value"></span>
+</div>
+
+<div class="info">
+<span class="label">Genre</span>
+<span id="genre" class="value"></span>
+</div>
+
+<div class="info">
+<span class="label">Game Size</span>
+<span id="size" class="value"></span>
+</div>
+
+<div class="info">
+<span class="label">Rating</span>
+<span id="rating" class="value"></span>
+</div>
+
+<div class="info">
+<span class="label">Badge</span>
+<span id="badge" class="value"></span>
+</div>
+
+</div>
+
+<div class="infoBox">
+
+<h2>
+📋 Game Details
+</h2>
+
+<p id="details"></p>
+
+</div>
+
+<div class="buttonArea">
+
+<a id="downloadBtn"
+class="btn"
+target="_blank">
+Official Game
+</a>
+
+<a id="trailerBtn"
+class="btn"
+target="_blank">
+Watch Trailer
+</a>
+
+</div>
+
+<p id="downloads" class="counter">
+⬇️ 0 Downloads
+</p>
+
+<p id="views" class="counter">
+👁️ 0 Views
+</p>
+
+<h2 style="margin-top:35px;color:#00ff99;">
+Credits
+</h2>
+
+<p id="credits">
+  
+</p>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params = new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"games",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const game = docSnap.data();
+
+document.getElementById("title").innerText = game.title;
+
+document.getElementById("description").innerText = game.description;
+
+document.getElementById("coverImage").src = game.image1;
+
+document.getElementById("coverImage2").src = game.image1;
+
+document.getElementById("image2").src = game.image2;
+
+document.getElementById("image3").src = game.image3;
+
+document.getElementById("details").innerText = game.details;
+
+document.getElementById("developer").innerText = game.developer;
+
+document.getElementById("releaseDate").innerText = game.releaseDate;
+
+document.getElementById("platform").innerText = game.platform;
+
+document.getElementById("genre").innerText = game.genre;
+
+document.getElementById("size").innerText = game.size;
+
+document.getElementById("rating").innerText = game.rating;
+
+document.getElementById("badge").innerText = game.badge;
+
+document.getElementById("credits").innerText = game.credits;
+
+document.getElementById("downloadBtn").href = game.download;
+
+document.getElementById("trailerBtn").href = game.trailer;
+
+const currentViews = game.views || 0;
+
+const currentDownloads = game.downloads || 75;
+
+document.getElementById("views").innerText =
+"👁️ " + (currentViews + 1) + " Views";
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+await updateDoc(docRef,{
+views:increment(1)
+});
+
+document.getElementById("downloadBtn").addEventListener("click",async()=>{
+
+document.getElementById("downloads").innerText =
+"⬇️ " + (currentDownloads + 1) + " Downloads";
+
+await updateDoc(docRef,{
+downloads:increment(1)
+});
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>
