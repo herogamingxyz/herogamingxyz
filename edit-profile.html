@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Profile | Hero Verse</title>
+
+<style>
+
+body{
+background:#0b0b0b;
+font-family:Arial,sans-serif;
+color:white;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:40px auto;
+background:#171717;
+padding:30px;
+border-radius:20px;
+}
+
+h1{
+color:#00ff99;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+margin-top:15px;
+margin-bottom:8px;
+}
+
+input,textarea{
+width:100%;
+padding:14px;
+background:#111;
+border:1px solid #333;
+border-radius:10px;
+color:white;
+}
+
+textarea{
+height:120px;
+resize:none;
+}
+
+button{
+margin-top:20px;
+padding:14px 25px;
+border:none;
+border-radius:10px;
+background:#00ff99;
+color:black;
+font-weight:bold;
+cursor:pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>✏️ Edit Profile</h1>
+
+<label>Profile Photo</label>
+<input type="file" id="profileImageFile">
+
+<label>Username</label>
+<input type="text" id="username">
+
+<label>Bio</label>
+<textarea id="bio"></textarea>
+
+<label>Favourite Game</label>
+<input type="text" id="favoriteGame">
+
+<label>Country</label>
+<input type="text" id="country">
+
+<button id="saveBtn">
+💾 Save Changes
+</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+authDomain:"hero-verse-67e33.firebaseapp.com",
+projectId:"hero-verse-67e33",
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+messagingSenderId:"227494840218",
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+let currentUser;
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+return;
+
+}
+
+currentUser = user;
+
+const snap =
+await getDoc(doc(db,"users",user.uid));
+
+if(snap.exists()){
+
+const data = snap.data();
+
+username.value = data.username || "";
+bio.value = data.bio || "";
+favoriteGame.value = data.favoriteGame || "";
+country.value = data.country || "";
+
+}
+
+});
+
+document.getElementById("saveBtn")
+.addEventListener("click", async()=>{
+
+await updateDoc(
+doc(db,"users",currentUser.uid),
+{
+username: username.value,
+bio: bio.value,
+favoriteGame: favoriteGame.value,
+country: country.value
+}
+);
+
+alert("Profile Updated Successfully");
+
+window.location.href="profile.html";
+
+});
+
+</script>
+
+</body>
+</html>
