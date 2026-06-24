@@ -5,65 +5,137 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>My Profile | Hero Verse</title>
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
-
-<script>
-window.dataLayer = window.dataLayer || [];
-
-function gtag(){
-dataLayer.push(arguments);
-}
-
-gtag('js', new Date());
-
-gtag('config', 'G-1VMS2D4KP5');
-</script>
+<title>Hero Verse Profile</title>
 
 <style>
 
 body{
+margin:0;
+font-family:Arial;
 background:#0f0f0f;
 color:white;
-font-family:Arial,sans-serif;
-margin:0;
 }
 
-.profile-box{
-max-width:700px;
-margin:80px auto;
+/* MAIN WRAPPER */
+.profile-wrapper{
+max-width:1000px;
+margin:40px auto;
+display:flex;
+gap:20px;
+padding:20px;
+}
+
+/* LEFT */
+.left{
+width:30%;
 background:#1b1b1b;
-padding:40px;
+padding:25px;
 border-radius:20px;
 text-align:center;
-box-shadow:0 0 20px rgba(0,255,153,0.2);
+box-shadow:0 0 20px rgba(0,255,153,0.15);
 }
 
-.profile-pic{
-width:120px;
-height:120px;
+.left img{
+width:130px;
+height:130px;
 border-radius:50%;
-background:#00ff99;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:50px;
-margin:auto;
-color:black;
-font-weight:bold;
+border:3px solid #00ff99;
+margin-bottom:10px;
 }
 
-h1{
+.left h2{
 color:#00ff99;
+margin:10px 0;
+font-size:22px;
 }
 
-.info{
-margin-top:25px;
-font-size:20px;
-color:#ddd;
-padding:10px;
+.badge{
+display:inline-block;
+padding:6px 14px;
+background:#00ff99;
+color:black;
+border-radius:20px;
+font-weight:bold;
+margin-top:10px;
+}
+
+/* RIGHT */
+.right{
+width:70%;
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+/* CARD */
+.card{
+background:#1b1b1b;
+padding:20px;
+border-radius:18px;
+box-shadow:0 0 15px rgba(0,255,153,0.08);
+}
+
+/* TITLE */
+.title{
+color:#00ff99;
+margin-bottom:15px;
+font-size:18px;
+}
+
+/* STATS */
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.stat-box{
+background:#111;
+padding:15px;
+border-radius:12px;
+text-align:center;
+}
+
+.stat-box h3{
+color:#00ff99;
+margin:0;
+font-size:22px;
+}
+
+/* XP BAR */
+.xp-bar{
+height:10px;
+background:#333;
+border-radius:10px;
+overflow:hidden;
+margin-top:8px;
+}
+
+.xp-fill{
+height:100%;
+width:40%;
+background:#00ff99;
+}
+
+/* INFO */
+.small{
+color:#aaa;
+font-size:14px;
+}
+
+/* BUTTON */
+button{
+margin-top:20px;
+padding:12px 20px;
+background:#00ff99;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.05);
 }
 
 </style>
@@ -72,148 +144,133 @@ padding:10px;
 
 <body>
 
-<div class="profile-box">
+<div class="profile-wrapper">
 
-<div class="profile-pic">
-👤
+<!-- LEFT PANEL -->
+<div class="left">
+
+<img id="profilePic" src="default.png">
+
+<h2 id="username">Loading...</h2>
+
+<p id="email" class="small"></p>
+
+<div class="badge" id="badge">New Gamer</div>
+
 </div>
 
-<h1>Hero Verse Profile</h1>
+<!-- RIGHT PANEL -->
+<div class="right">
 
-<div class="info" id="username">
-Loading Username...
+<div class="card">
+
+<div class="title">🎮 Gaming Stats</div>
+
+<div class="stats">
+
+<div class="stat-box">
+<h3 id="gamesViewed">0</h3>
+<p>Games Viewed</p>
 </div>
 
-<div class="info" id="email">
-Loading Email...
+<div class="stat-box">
+<h3 id="downloads">0</h3>
+<p>Downloads</p>
 </div>
 
-<div class="info" id="badge">
-👑 Loading Badge...
 </div>
 
-<div class="info" id="joinDate">
-📅 Loading Join Date...
 </div>
 
-<div class="info" id="downloads">
-⬇️ Downloads: 0
+<div class="card">
+
+<div class="title">⚡ XP Progress</div>
+
+<p>Level: <span id="level">1</span></p>
+
+<div class="xp-bar">
+<div class="xp-fill" id="xpFill"></div>
 </div>
 
-<div class="info" id="uploads">
-⬆️ Uploads: 0
 </div>
 
-<div class="info" id="status">
-🟢 Loading Status...
+<div class="card">
+
+<div class="title">🕹️ Activity</div>
+
+<p class="small">Last Game: <span id="lastGame">None</span></p>
+
+<p class="small">Last Download: <span id="lastDownload">None</span></p>
+
 </div>
 
-<button id="editUsernameBtn" style="
-padding:12px 20px;
-background:#00ff99;
-color:black;
-border:none;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
-margin-top:20px;
-">
-✏️ Change Username
-</button>
+<button>⚙️ Edit Profile</button>
+
+</div>
 
 </div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-
-import {
-getAuth,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
-import {
-getFirestore,
-doc,
-getDoc,
-updateDoc
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
-authDomain: "hero-verse-67e33.firebaseapp.com",
-projectId: "hero-verse-67e33",
-storageBucket: "hero-verse-67e33.firebasestorage.app",
-messagingSenderId: "227494840218",
-appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+apiKey:"YOUR_KEY",
+authDomain:"hero-verse-67e33.firebaseapp.com",
+projectId:"hero-verse-67e33"
 };
 
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
-
 const db = getFirestore(app);
 
 onAuthStateChanged(auth, async(user)=>{
 
-if(user){
-
-document.getElementById("email").innerHTML =
-"📧 Email: " + user.email;
-
-const docRef = doc(db,"users",user.uid);
-
-const docSnap = await getDoc(docRef);
-
-if(docSnap.exists()){
-
-document.getElementById("username").innerHTML =
-"👤 Username: " + docSnap.data().username;
-
-}
-
-document.getElementById("badge").innerHTML =
-"👑 Badge: " + docSnap.data().badge;
-
-document.getElementById("joinDate").innerHTML =
-"📅 Joined: " + docSnap.data().joinDate;
-
-document.getElementById("downloads").innerHTML =
-"⬇️ Downloads: " + docSnap.data().downloads;
-
-document.getElementById("uploads").innerHTML =
-"⬆️ Uploads: " + docSnap.data().uploads;
-
-document.getElementById("status").innerHTML =
-"🟢 Status: " + docSnap.data().status;
-
-}else{
-
+if(!user){
 window.location.href="login.html";
-
+return;
 }
 
-});
+const ref = doc(db,"users",user.uid);
+const snap = await getDoc(ref);
 
-document.getElementById("editUsernameBtn").addEventListener("click", async()=>{
+if(!snap.exists()) return;
 
-const user = auth.currentUser;
+const u = snap.data();
 
-if(!user) return;
+// LEFT
+document.getElementById("username").innerText = u.username || "User";
+document.getElementById("email").innerText = user.email;
 
-let newName = prompt("Enter New Username");
-
-if(newName){
-
-await updateDoc(doc(db,"users",user.uid),{
-username:newName
-});
-
-alert("✅ Username Updated Successfully");
-
-location.reload();
-
+if(u.photoURL){
+document.getElementById("profilePic").src = u.photoURL;
 }
+
+// STATS
+document.getElementById("gamesViewed").innerText = u.gamesViewed || 0;
+document.getElementById("downloads").innerText = u.downloads || 0;
+
+// XP + LEVEL
+let xp = u.xp || 0;
+let level = Math.floor(xp / 100) + 1;
+
+document.getElementById("level").innerText = level;
+
+document.getElementById("xpFill").style.width = (xp % 100) + "%";
+
+// BADGE
+let badge = "New Gamer";
+
+if(level >= 10) badge = "Pro Gamer";
+if(level >= 25) badge = "Legend Gamer";
+
+document.getElementById("badge").innerText = badge;
+
+// ACTIVITY
+document.getElementById("lastGame").innerText = u.lastGame || "None";
+document.getElementById("lastDownload").innerText = u.lastDownload || "None";
 
 });
 
