@@ -1,141 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Hero Verse Profile</title>
 
+<link rel="icon"
+type="image/png"
+href="hero.gaming.jpg">
+
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
 body{
-margin:0;
-font-family:Arial;
-background:#0f0f0f;
+
+background:#0b0b0b;
+
 color:white;
+
+overflow-x:hidden;
+
 }
 
-/* MAIN WRAPPER */
-.profile-wrapper{
-max-width:1000px;
-margin:40px auto;
+/* Cover */
+
+.profile-cover{
+
+width:100%;
+
+height:280px;
+
+background:
+linear-gradient(135deg,#00ff99,#0099ff);
+
+position:relative;
+
+}
+
+/* Main Container */
+
+.profile-container{
+
+max-width:1300px;
+
+margin:auto;
+
+padding:30px;
+
+}
+
+/* Profile Card */
+
+.profile-card{
+
+background:#171717;
+
+margin-top:-90px;
+
+border-radius:25px;
+
+padding:30px;
+
 display:flex;
-gap:20px;
-padding:20px;
+
+align-items:center;
+
+gap:30px;
+
+box-shadow:
+0 0 30px rgba(0,255,153,.15);
+
 }
 
-/* LEFT */
-.left{
-width:30%;
-background:#1b1b1b;
-padding:25px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 0 20px rgba(0,255,153,0.15);
-}
+/* Avatar */
 
-.left img{
-width:130px;
-height:130px;
+.avatar{
+
+width:170px;
+
+height:170px;
+
 border-radius:50%;
-border:3px solid #00ff99;
-margin-bottom:10px;
-}
 
-.left h2{
-color:#00ff99;
-margin:10px 0;
-font-size:22px;
-}
-
-.badge{
-display:inline-block;
-padding:6px 14px;
-background:#00ff99;
-color:black;
-border-radius:20px;
-font-weight:bold;
-margin-top:10px;
-}
-
-/* RIGHT */
-.right{
-width:70%;
-display:flex;
-flex-direction:column;
-gap:20px;
-}
-
-/* CARD */
-.card{
-background:#1b1b1b;
-padding:20px;
-border-radius:18px;
-box-shadow:0 0 15px rgba(0,255,153,0.08);
-}
-
-/* TITLE */
-.title{
-color:#00ff99;
-margin-bottom:15px;
-font-size:18px;
-}
-
-/* STATS */
-.stats{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-}
-
-.stat-box{
-background:#111;
-padding:15px;
-border-radius:12px;
-text-align:center;
-}
-
-.stat-box h3{
-color:#00ff99;
-margin:0;
-font-size:22px;
-}
-
-/* XP BAR */
-.xp-bar{
-height:10px;
-background:#333;
-border-radius:10px;
 overflow:hidden;
-margin-top:8px;
+
+border:6px solid #00ff99;
+
+background:#111;
+
+flex-shrink:0;
+
 }
 
-.xp-fill{
+.avatar img{
+
+width:100%;
+
 height:100%;
-width:40%;
-background:#00ff99;
+
+object-fit:cover;
+
 }
 
-/* INFO */
-.small{
-color:#aaa;
-font-size:14px;
+/* Name */
+
+.profile-info h1{
+
+font-size:42px;
+
+color:#00ff99;
+
+margin-bottom:10px;
+
 }
 
-/* BUTTON */
-button{
-margin-top:20px;
-padding:12px 20px;
+.profile-info p{
+
+color:#bbb;
+
+font-size:18px;
+
+margin-bottom:8px;
+
+}
+
+.rank{
+
+display:inline-block;
+
+padding:8px 18px;
+
 background:#00ff99;
-border:none;
-border-radius:10px;
+
+color:black;
+
+border-radius:30px;
+
 font-weight:bold;
-cursor:pointer;
+
+margin-top:10px;
+
 }
 
-button:hover{
-transform:scale(1.05);
+.profile-grid{
+
+display:grid;
+
+grid-template-columns:350px 1fr;
+
+gap:30px;
+
+margin-top:35px;
+
+}
+
+.left-panel,
+.right-panel{
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+
+}
+
+.box{
+
+background:#171717;
+
+border-radius:20px;
+
+padding:25px;
+
+box-shadow:0 0 20px rgba(0,255,153,.08);
+
+}
+
+.box h2{
+
+color:#00ff99;
+
+margin-bottom:18px;
+
+font-size:24px;
+
+}
+
+.info-row{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:12px 0;
+
+border-bottom:1px solid #2a2a2a;
+
+}
+
+.info-row:last-child{
+
+border:none;
+
+}
+
+.stats{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:20px;
+
+}
+
+.stat{
+
+background:#111;
+
+padding:22px;
+
+border-radius:18px;
+
+text-align:center;
+
+}
+
+.stat h1{
+
+font-size:34px;
+
+color:#00ff99;
+
+margin-bottom:10px;
+
+}
+
+.stat p{
+
+color:#bbb;
+
+}
+
+.level-bar{
+
+width:100%;
+
+height:16px;
+
+background:#222;
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin-top:18px;
+
+}
+
+.level-fill{
+
+width:15%;
+
+height:100%;
+
+background:linear-gradient(90deg,#00ff99,#00bbff);
+
+}
+
+.action-btn{
+
+width:100%;
+
+padding:15px;
+
+margin-top:15px;
+
+border:none;
+
+border-radius:14px;
+
+background:#00ff99;
+
+color:black;
+
+font-weight:bold;
+
+font-size:17px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.action-btn:hover{
+
+transform:scale(1.03);
+
 }
 
 </style>
@@ -144,67 +318,206 @@ transform:scale(1.05);
 
 <body>
 
-<div class="profile-wrapper">
+<div class="profile-cover"></div>
 
-<!-- LEFT PANEL -->
-<div class="left">
+<div class="profile-container">
 
-<img id="profilePic" src="default.png">
+<div class="profile-card">
 
-<h2 id="username">Loading...</h2>
+<div class="avatar">
 
-<p id="email" class="small"></p>
-
-<div class="badge" id="badge">New Gamer</div>
+<img
+id="profilePhoto"
+src="default-user.png">
 
 </div>
 
-<!-- RIGHT PANEL -->
-<div class="right">
+<div class="profile-info">
 
-<div class="card">
+<h1 id="username">
+Loading...
+</h1>
 
-<div class="title">🎮 Gaming Stats</div>
+<p id="email">
+Loading...
+</p>
+
+<p id="heroId">
+Hero ID
+</p>
+
+<div class="rank" id="badge">
+
+Hero Member
+
+</div>
+
+</div>
+
+</div>
+
+<div class="profile-grid">
+
+<!-- LEFT -->
+
+<div class="left-panel">
+
+<div class="box">
+
+<h2>👤 About</h2>
+
+<div class="info-row">
+<span>Username</span>
+<span id="username2">Loading...</span>
+</div>
+
+<div class="info-row">
+<span>Email</span>
+<span id="email2">Loading...</span>
+</div>
+
+<div class="info-row">
+<span>Joined</span>
+<span id="joinDate">Loading...</span>
+</div>
+
+<div class="info-row">
+<span>Status</span>
+<span id="status">🟢 Online</span>
+</div>
+
+</div>
+
+<div class="box">
+
+<h2>🏆 Hero Level</h2>
+
+<h3 id="levelText">
+Level 1
+</h3>
+
+<div class="level-bar">
+
+<div
+class="level-fill"
+id="levelFill">
+</div>
+
+</div>
+
+<p
+style="margin-top:15px;color:#aaa;"
+id="xpText">
+
+0 / 100 XP
+
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>⚙️ Account</h2>
+
+<button
+class="action-btn"
+id="editProfileBtn">
+
+✏️ Edit Profile
+
+</button>
+
+<button
+class="action-btn"
+id="logoutBtn">
+
+🚪 Logout
+
+</button>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="right-panel">
 
 <div class="stats">
 
-<div class="stat-box">
-<h3 id="gamesViewed">0</h3>
-<p>Games Viewed</p>
-</div>
+<div class="stat">
 
-<div class="stat-box">
-<h3 id="downloads">0</h3>
+<h1 id="downloads">
+0
+</h1>
+
 <p>Downloads</p>
+
+</div>
+
+<div class="stat">
+
+<h1 id="uploads">
+0
+</h1>
+
+<p>Uploads</p>
+
+</div>
+
+<div class="stat">
+
+<h1 id="gamesPlayed">
+0
+</h1>
+
+<p>Games Played</p>
+
+</div>
+
+<div class="stat">
+
+<h1 id="articlesRead">
+0
+</h1>
+
+<p>Articles Read</p>
+
 </div>
 
 </div>
 
-</div>
+<div class="box">
 
-<div class="card">
+<h2>🔥 Achievements</h2>
 
-<div class="title">⚡ XP Progress</div>
+<p>🥉 New Member</p>
 
-<p>Level: <span id="level">1</span></p>
+<p>⬇️ First Download</p>
 
-<div class="xp-bar">
-<div class="xp-fill" id="xpFill"></div>
-</div>
+<p>📤 First Upload</p>
 
-</div>
-
-<div class="card">
-
-<div class="title">🕹️ Activity</div>
-
-<p class="small">Last Game: <span id="lastGame">None</span></p>
-
-<p class="small">Last Download: <span id="lastDownload">None</span></p>
+<p>🎮 Gamer</p>
 
 </div>
 
-<button>⚙️ Edit Profile</button>
+<div class="box">
+
+<h2>📈 Activity</h2>
+
+<p id="lastLogin">
+Last Login : Loading...
+</p>
+
+<p id="favoriteGame">
+Favourite Game : Minecraft
+</p>
+
+<p id="country">
+Country : India
+</p>
+
+</div>
 
 </div>
 
@@ -213,68 +526,131 @@ transform:scale(1.05);
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+import {
+getAuth,
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey:"YOUR_KEY",
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
 authDomain:"hero-verse-67e33.firebaseapp.com",
-projectId:"hero-verse-67e33"
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
 };
 
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
+
 const db = getFirestore(app);
 
 onAuthStateChanged(auth, async(user)=>{
 
 if(!user){
+
 window.location.href="login.html";
+
 return;
+
 }
 
-const ref = doc(db,"users",user.uid);
-const snap = await getDoc(ref);
+document.getElementById("email").innerText=user.email;
 
-if(!snap.exists()) return;
+document.getElementById("email2").innerText=user.email;
 
-const u = snap.data();
+const ref=doc(db,"users",user.uid);
 
-// LEFT
-document.getElementById("username").innerText = u.username || "User";
-document.getElementById("email").innerText = user.email;
+const snap=await getDoc(ref);
 
-if(u.photoURL){
-document.getElementById("profilePic").src = u.photoURL;
+if(snap.exists()){
+
+const data=snap.data();
+
+document.getElementById("username").innerText=data.username;
+
+document.getElementById("username2").innerText=data.username;
+
+document.getElementById("heroId").innerText=
+"Hero ID : "+user.uid.substring(0,8).toUpperCase();
+
+document.getElementById("badge").innerText=
+data.badge || "Hero Member";
+
+document.getElementById("joinDate").innerText=
+data.joinDate || "Unknown";
+
+document.getElementById("downloads").innerText=
+data.downloads || 0;
+
+document.getElementById("uploads").innerText=
+data.uploads || 0;
+
+document.getElementById("gamesPlayed").innerText=
+data.gamesPlayed || 0;
+
+document.getElementById("articlesRead").innerText=
+data.articlesRead || 0;
+
+document.getElementById("favoriteGame").innerText=
+"Favourite Game : " +
+(data.favoriteGame || "Minecraft");
+
+document.getElementById("country").innerText=
+"Country : " +
+(data.country || "India");
+
+document.getElementById("lastLogin").innerText=
+"Last Login : Today";
+
+let xp=(data.downloads||0)+(data.uploads||0)*5;
+
+let level=Math.floor(xp/100)+1;
+
+let percent=xp%100;
+
+document.getElementById("levelText").innerText=
+"Level "+level;
+
+document.getElementById("xpText").innerText=
+percent+" / 100 XP";
+
+document.getElementById("levelFill").style.width=
+percent+"%";
+
 }
 
-// STATS
-document.getElementById("gamesViewed").innerText = u.gamesViewed || 0;
-document.getElementById("downloads").innerText = u.downloads || 0;
+});
 
-// XP + LEVEL
-let xp = u.xp || 0;
-let level = Math.floor(xp / 100) + 1;
+document.getElementById("logoutBtn")
+.addEventListener("click",()=>{
 
-document.getElementById("level").innerText = level;
+signOut(auth).then(()=>{
 
-document.getElementById("xpFill").style.width = (xp % 100) + "%";
+window.location.href="index.html";
 
-// BADGE
-let badge = "New Gamer";
-
-if(level >= 10) badge = "Pro Gamer";
-if(level >= 25) badge = "Legend Gamer";
-
-document.getElementById("badge").innerText = badge;
-
-// ACTIVITY
-document.getElementById("lastGame").innerText = u.lastGame || "None";
-document.getElementById("lastDownload").innerText = u.lastDownload || "None";
+});
 
 });
 
 </script>
 
 </body>
+
 </html>
