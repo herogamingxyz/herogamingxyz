@@ -417,13 +417,18 @@ line-height:1.6;
 }
 
 .upload-card{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100%;
 padding:20px;
 text-align:center;
 }
 
 .upload-logo{
-width:180px;
-height:180px;
+width:120px;
+height:120px;
 object-fit:contain;
 margin-top:15px;
 }
@@ -871,14 +876,17 @@ font-size:16px;
 }
 
 .slider-track{
-gap:15px;
+gap:10px;
+padding:0 5px;
 }
 
-.card{
-min-width:48%;
-max-width:48%;
-height:420px;
-}
+.card,
+.upload-card-parent{
+flex:0 0 calc(50% - 8px);
+min-width:calc(50% - 8px);
+max-width:calc(50% - 8px);
+height:400px;
+    }
 
 .upload-card-parent{
 min-width:48%;
