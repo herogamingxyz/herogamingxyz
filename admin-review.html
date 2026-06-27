@@ -189,6 +189,10 @@ collection(db,"mods"),
 
 creatorUID: mod.creatorUID,
 creatorEmail: mod.creatorEmail,
+creator: mod.creator,
+
+creatorUID: mod.creatorUID,
+creatorEmail: mod.creatorEmail,
 
 title: mod.title,
 
@@ -215,6 +219,16 @@ const userRef = doc(db, "users", mod.creatorUID);
 
 await updateDoc(userRef, {
   uploads: increment(1)
+});
+
+const userRef = doc(db,"users",mod.creatorUID);
+
+await updateDoc(userRef,{
+
+uploads: increment(1),
+
+isCreator: true
+
 });
 
 await deleteDoc(
