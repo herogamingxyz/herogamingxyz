@@ -130,13 +130,6 @@ id="download"
 placeholder="Google Drive, MediaFire, Dropbox, Modrinth etc">
 
 <label>
-Creator Name
-</label><input
-type="text"
-id="creator"
-placeholder="Your Name">
-
-<label>
 Credits
 </label><textarea
 id="credits"
@@ -152,8 +145,17 @@ from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import {
 getFirestore,
 collection,
-addDoc
+addDoc,
+doc,
+getDoc
 }
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+import {
+getAuth
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -175,6 +177,8 @@ appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+
+const auth = getAuth(app);
 
 async function uploadToImgBB(file){
 
@@ -221,8 +225,12 @@ document.getElementById("installation").value;
 const download =
 document.getElementById("download").value;
 
-const creator =
-document.getElementById("creator").value;
+const user = auth.currentUser;
+
+if(!user){
+alert("Please Login First");
+return;
+}
 
 const credits =
 document.getElementById("credits").value;
@@ -241,6 +249,12 @@ return;
 }
 
 try{
+
+const userDoc = await getDoc(doc(db,"users",user.uid));
+
+const userData = userDoc.data();
+
+const creator = userData.username;
 
 document.getElementById("status").innerHTML =
 "⏳ Uploading...";
@@ -266,8 +280,9 @@ installation:installation,
 
 download:download,
 
-creator:creator,
-
+creatorUid:user.uid,
+creatorName:creator,
+  
 credits:credits,
 
 status:"pending",
