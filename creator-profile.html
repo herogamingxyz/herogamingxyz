@@ -150,6 +150,9 @@ where,
 getDocs
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
+const urlParams = new URLSearchParams(window.location.search);
+const uid = urlParams.get("uid");
+
 const firebaseConfig = {
 
 apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
