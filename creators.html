@@ -284,5 +284,150 @@ placeholder="Search Creator...">
 
 </div>
 
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+authDomain:"hero-verse-67e33.firebaseapp.com",
+projectId:"hero-verse-67e33",
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+messagingSenderId:"227494840218",
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const creatorGrid = document.getElementById("creatorGrid");
+
+let creators = [];
+
+async function loadCreators(){
+
+const snapshot = await getDocs(collection(db,"users"));
+
+snapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+if(data.isCreator){
+
+creators.push({
+id:doc.id,
+...data
+});
+
+}
+
+});
+
+renderCreators(creators);
+
+}
+
+function renderCreators(list){
+
+creatorGrid.innerHTML="";
+
+list.forEach((creator)=>{
+
+creatorGrid.innerHTML += `
+
+<div class="creator-card">
+
+${creator.uploads>=20?
+'<div class="badge">⭐ Official Creator</div>'
+:''}
+
+<img
+class="creator-photo"
+src="${creator.photoURL || 'https://i.ibb.co/4pDNDk1/avatar.png'}">
+
+<h2 class="creator-name">
+
+${creator.username}
+
+</h2>
+
+<p class="creator-country">
+
+🌍 ${creator.country || "Unknown"}
+
+</p>
+
+<p class="creator-bio">
+
+${creator.bio || "No bio yet"}
+
+</p>
+
+<div class="creator-stats">
+
+<div class="stat">
+
+<h2>${creator.uploads || 0}</h2>
+
+<p>Uploads</p>
+
+</div>
+
+<div class="stat">
+
+<h2>Creator</h2>
+
+<p>Hero Verse</p>
+
+</div>
+
+</div>
+
+<a
+class="profile-btn"
+href="creator-profile.html?id=${creator.id}">
+
+View Profile
+
+</a>
+
+</div>
+
+`;
+
+});
+
+}
+
+document
+.getElementById("searchInput")
+.addEventListener("input",(e)=>{
+
+const keyword =
+e.target.value.toLowerCase();
+
+const filtered =
+creators.filter(c=>
+
+c.username.toLowerCase().includes(keyword)
+
+);
+
+renderCreators(filtered);
+
+});
+
+loadCreators();
+
+</script>
+
 </body>
   </html>
