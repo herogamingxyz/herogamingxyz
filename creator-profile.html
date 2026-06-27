@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Creator Profile | Hero Verse</title>
+
+<style>
+
+body{
+margin:0;
+padding:0;
+font-family:Arial;
+background:#0b0b0b;
+color:white;
+}
+
+.container{
+max-width:1000px;
+margin:40px auto;
+padding:20px;
+}
+
+.profile{
+background:#151515;
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 20px rgba(0,255,153,0.15);
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.profile img{
+width:140px;
+height:140px;
+border-radius:50%;
+border:3px solid #00ff99;
+object-fit:cover;
+}
+
+.info h1{
+color:#00ff99;
+margin:0;
+}
+
+.info p{
+color:#ccc;
+line-height:1.6;
+}
+
+.stats{
+margin-top:20px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.box{
+background:#111;
+padding:15px;
+border-radius:12px;
+text-align:center;
+min-width:120px;
+}
+
+.box h2{
+color:#00ff99;
+margin:0;
+}
+
+.mods{
+margin-top:40px;
+}
+
+.mod-card{
+background:#151515;
+padding:15px;
+margin-bottom:15px;
+border-radius:15px;
+}
+
+.mod-card h3{
+color:#00ff99;
+}
+
+.mod-card img{
+width:100%;
+max-width:300px;
+border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="profile">
+
+<img id="photo">
+
+<div class="info">
+
+<h1 id="name">Loading...</h1>
+
+<p id="bio"></p>
+
+<p id="country"></p>
+
+<p id="join"></p>
+
+</div>
+
+</div>
+
+<div class="stats">
+
+<div class="box">
+<h2 id="uploads">0</h2>
+<p>Uploads</p>
+</div>
+
+</div>
+
+<div class="mods">
+
+<h2 style="color:#00ff99;">🔥 Uploaded Mods</h2>
+
+<div id="modsList"></div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+collection,
+query,
+where,
+getDocs
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+authDomain:"hero-verse-67e33.firebaseapp.com",
+projectId:"hero-verse-67e33",
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+messagingSenderId:"227494840218",
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+async function loadProfile(){
+
+const userRef = doc(db,"users",id);
+const userSnap = await getDoc(userRef);
+
+if(userSnap.exists()){
+
+const data = userSnap.data();
+
+document.getElementById("name").innerText = data.username || "Creator";
+document.getElementById("bio").innerText = data.bio || "";
+document.getElementById("country").innerText = "🌍 " + (data.country || "India");
+document.getElementById("join").innerText = "📅 Joined: " + (data.creatorSince || "Unknown");
+document.getElementById("uploads").innerText = data.uploads || 0;
+
+if(data.photoURL){
+document.getElementById("photo").src = data.photoURL;
+}
+
+}
+
+// mods load
+const q = query(collection(db,"mods"), where("creatorId","==",id));
+const modsSnap = await getDocs(q);
+
+const list = document.getElementById("modsList");
+
+modsSnap.forEach((m)=>{
+
+const mod = m.data();
+
+list.innerHTML += `
+
+<div class="mod-card">
+
+<h3>${mod.title}</h3>
+
+<img src="${mod.image1}">
+
+<p>${mod.description}</p>
+
+<a href="${mod.download}" target="_blank"
+style="display:inline-block;margin-top:10px;
+padding:10px 15px;background:#00ff99;
+color:black;text-decoration:none;border-radius:10px;">
+Download
+</a>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadProfile();
+
+</script>
+
+</body>
+  </html>
