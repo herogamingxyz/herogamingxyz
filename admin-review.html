@@ -1,239 +1,112 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Review Panel</title><style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Review Panel</title>
+<style>
+body{background:#0f0f0f;color:#fff;font-family:Arial;padding:20px}
+h1{text-align:center;color:#00ff99}
+.card{background:#1b1b1b;padding:20px;border-radius:14px;margin:20px 0}
+img{max-width:350px;width:100%;border-radius:10px}
+button{padding:10px 18px;margin:8px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+.approve{background:#00ff99}.reject{background:#ff4444;color:#fff}
+</style>
+</head>
+<body>
+<h1>Pending Mod Reviews</h1>
+<div id="modsContainer"></div>
 
-body{
-background:#0f0f0f;
-font-family:Arial,sans-serif;
-color:white;
-padding:20px;
-}
-
-h1{
-text-align:center;
-color:#00ff99;
-}
-
-.card{
-background:#1b1b1b;
-padding:20px;
-margin-bottom:25px;
-border-radius:15px;
-box-shadow:0 0 15px rgba(0,255,153,0.2);
-}
-
-.card img{
-width:100%;
-max-width:400px;
-border-radius:10px;
-margin:15px 0;
-}
-
-.card h2{
-color:#00ff99;
-}
-
-.card p{
-line-height:1.7;
-}
-
-</style></head><body><h1>
-📦 Pending Mod Reviews
-</h1><div id="modsContainer"></div><script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getAuth,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 import {
-getAuth,
-onAuthStateChanged
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+getFirestore,collection,getDocs,addDoc,deleteDoc,doc,updateDoc,increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-import {
-getFirestore,
-collection,
-getDocs,
-addDoc,
-deleteDoc,
-doc,
-updateDoc,
-increment
-  }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-const firebaseConfig = {
-
+const firebaseConfig={
 apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
-
 authDomain:"hero-verse-67e33.firebaseapp.com",
-
 projectId:"hero-verse-67e33",
-
 storageBucket:"hero-verse-67e33.firebasestorage.app",
-
 messagingSenderId:"227494840218",
-
 appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
-
 };
 
-const app = initializeApp(firebaseConfig);
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const auth=getAuth(app);
+const container=document.getElementById("modsContainer");
 
-const db = getFirestore(app);
+onAuthStateChanged(auth,async(user)=>{
+ if(!user){location.href="login.html";return;}
+ if(user.email!=="herogamingxyzyt@gmail.com"){
+   alert("Access Denied");
+   location.href="index.html";
+   return;
+ }
+ loadMods();
+});
 
-const auth = getAuth(app);
-
-const container =
-document.getElementById("modsContainer");
-
-onAuthStateChanged(auth, async(user)=>{
-
-if(!user){
-window.location.href="login.html";
-return;
+async function loadMods(){
+ container.innerHTML="";
+ const snap=await getDocs(collection(db,"user_submissions"));
+ snap.forEach(d=>{
+   const m=d.data();
+   container.innerHTML+=`
+   <div class="card">
+   <h2>${m.title}</h2>
+   <img src="${m.thumbnail||""}">
+   <p><b>Creator:</b> ${m.creatorName||"Unknown"}</p>
+   <p><b>Description:</b><br>${m.description||""}</p>
+   <p><b>Download:</b> ${m.download||""}</p>
+   <button class="approve" onclick="approveMod('${d.id}')">Approve</button>
+   <button class="reject" onclick="rejectMod('${d.id}')">Reject</button>
+   </div>`;
+ });
 }
 
-if(user.email !== "herogamingxyzyt@gmail.com"){
-alert("Access Denied");
-window.location.href="index.html";
-return;
+window.approveMod=async(id)=>{
+ const snap=await getDocs(collection(db,"user_submissions"));
+ for(const ds of snap.docs){
+   if(ds.id!==id) continue;
+   const m=ds.data();
+
+   await addDoc(collection(db,"mods"),{
+     creatorId:m.uid,
+     creatorUid:m.creatorUid,
+     creatorName:m.creatorName,
+     creatorEmail:m.email,
+     title:m.title,
+     image1:m.thumbnail,
+     description:m.description,
+     features:m.features,
+     installation:m.installation,
+     download:m.download,
+     credits:m.credits,
+     image2:"",
+     image3:"",
+     createdAt:new Date().toISOString()
+   });
+
+   await updateDoc(doc(db,"users",m.creatorUid),{
+      uploads:increment(1),
+      isCreator:true,
+      creatorSince:new Date().toISOString()
+   });
+
+   await deleteDoc(doc(db,"user_submissions",id));
+   alert("Approved");
+   loadMods();
+   break;
+ }
 }
 
-container.innerHTML = "";
-
-const snapshot = await getDocs(collection(db,"user_submissions"));
-
-snapshot.forEach((docu)=>{
-
-const mod = docu.data();
-
-container.innerHTML += `
-
-<div class="card">
-
-<h2>${mod.title}</h2>
-
-<img src="${mod.thumbnail}">
-
-<p><b>Description:</b><br>${mod.description}</p>
-
-<p><b>Features:</b><br>${mod.features}</p>
-
-<p><b>Installation:</b><br>${mod.installation}</p>
-
-<p><b>Download Link:</b><br>${mod.download}</p>
-
-<p><b>Creator:</b><br>${mod.creatorName || mod.creator}</p>
-
-<p><b>Creator UID:</b><br>${mod.creatorUid}</p>
-
-<p><b>Credits:</b><br>${mod.credits}</p>
-
-<p><b>Status:</b> ${mod.status}</p>
-
-<button onclick="approveMod('${docu.id}')">
-✅ Approve
-</button>
-
-<button onclick="rejectMod('${docu.id}')">
-❌ Reject
-</button>
-
-</div>
-
-`;
-
-});
-
-});
-
-window.approveMod = async function(id){
-
-const submissions =
-await getDocs(collection(db,"user_submissions"));
-
-submissions.forEach(async(docu)=>{
-
-if(docu.id === id){
-
-const mod = docu.data();
-
-await addDoc(
-collection(db,"mods"),
-{
-
-creatorId: docu.data().uid,
-creatorName: mod.creator,
-
-creatorUID: mod.creatorUID,
-creatorEmail: mod.creatorEmail,
-creator: mod.creator,
-
-creatorUID: mod.creatorUID,
-creatorEmail: mod.creatorEmail,
-
-title: mod.title,
-
-image1: mod.thumbnail,
-
-description: mod.description,
-
-installation: mod.installation,
-
-download: mod.download,
-
-credits: mod.credits,
-
-image2: "",
-
-image3: "",
-
-createdAt:
-new Date().toISOString()
-
-});
-
-const userRef = doc(db, "users", mod.creatorUID);
-
-await updateDoc(userRef, {
-  uploads: increment(1)
-});
-
-const userRef = doc(db,"users",mod.creatorUID);
-
-await updateDoc(userRef,{
-uploads: increment(1),
-isCreator: true,
-creatorSince: new Date().toISOString()
-});
-
-await deleteDoc(
-doc(db,"user_submissions",id)
-);
-
-alert("✅ Mod Approved");
-
-location.reload();
-
+window.rejectMod=async(id)=>{
+ await deleteDoc(doc(db,"user_submissions",id));
+ alert("Rejected");
+ loadMods();
 }
-
-});
-
-};
-
-window.rejectMod = async function(id){
-
-await deleteDoc(
-doc(db,"user_submissions",id)
-);
-
-alert("❌ Mod Rejected");
-
-location.reload();
-
-};
-
 </script>
-
 </body>
 </html>
