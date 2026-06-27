@@ -201,27 +201,17 @@ return data.data.display_url;
 
   }
 
-document
-.getElementById("submitBtn")
-.addEventListener("click", async()=>{
+document.getElementById("submitBtn").addEventListener("click", async () => {
 
-const title =
-document.getElementById("title").value;
+try {
 
-const thumbnailFile =
-document.getElementById("thumbnailFile").files[0];
-
-const description =
-document.getElementById("description").value;
-
-const features =
-document.getElementById("features").value;
-
-const installation =
-document.getElementById("installation").value;
-
-const download =
-document.getElementById("download").value;
+const title = document.getElementById("title").value;
+const thumbnailFile = document.getElementById("thumbnailFile").files[0];
+const description = document.getElementById("description").value;
+const features = document.getElementById("features").value;
+const installation = document.getElementById("installation").value;
+const download = document.getElementById("download").value;
+const credits = document.getElementById("credits").value;
 
 const user = auth.currentUser;
 
@@ -230,52 +220,38 @@ alert("Please Login First");
 return;
 }
 
-const credits =
-document.getElementById("credits").value;
-
-if(
-!title ||
-!description ||
-!download
-){
-
-alert("Please Fill Required Fields");
-
+if(!title || !description || !download){
+alert("Fill required fields");
 return;
-
 }
 
-try{
+document.getElementById("status").innerText = "Uploading...";
 
 const userDoc = await getDoc(doc(db,"users",user.uid));
-
 const userData = userDoc.data();
 
-const creator = userData.username;
+const creator = userData?.username || "Unknown";
 
-document.getElementById("status").innerHTML =
-"⏳ Uploading...";
+let thumbnail = "";
 
-const thumbnail =
-thumbnailFile
-? await uploadToImgBB(thumbnailFile)
-: "";
+if(thumbnailFile){
+thumbnail = await uploadToImgBB(thumbnailFile);
+}
 
 await addDoc(collection(db,"user_submissions"),{
 
-title: title,
-thumbnail: thumbnail,
-description: description,
-features: features,
-installation: installation,
-download: download,
+title,
+thumbnail,
+description,
+features,
+installation,
+download,
 
 creatorUid: user.uid,
 creatorName: creator,
 
-credits: credits,
+credits,
 status: "pending",
-
 createdAt: new Date().toISOString(),
 
 uid: user.uid,
@@ -283,26 +259,12 @@ email: user.email
 
 });
 
-document.getElementById("status").innerHTML =
-"✅ Mod Submitted Successfully";
+document.getElementById("status").innerText = "Done ✅";
 
-document.getElementById("title").value="";
-document.getElementById("thumbnailFile").value="";
-document.getElementById("description").value="";
-document.getElementById("features").value="";
-document.getElementById("installation").value="";
-document.getElementById("download").value="";
-document.getElementById("creator").value="";
-document.getElementById("credits").value="";
-
-}
-catch(error){
-
-console.log(error);
-
-document.getElementById("status").innerHTML =
-"❌ Error Submitting Mod";
-
+} catch(err){
+console.log(err);
+document.getElementById("status").innerText = "Error ❌";
+alert("Error aaya console check karo (ya main fix kar dunga)");
 }
 
 });
