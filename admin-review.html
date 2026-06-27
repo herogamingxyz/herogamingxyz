@@ -86,28 +86,22 @@ const auth = getAuth(app);
 const container =
 document.getElementById("modsContainer");
 
-onAuthStateChanged(auth,(user)=>{
+onAuthStateChanged(auth, async(user)=>{
 
 if(!user){
-
 window.location.href="login.html";
 return;
-
 }
 
 if(user.email !== "herogamingxyzyt@gmail.com"){
-
 alert("Access Denied");
-
 window.location.href="index.html";
 return;
-
 }
 
-});
+container.innerHTML = "";
 
-getDocs(collection(db,"user_submissions"))
-.then((snapshot)=>{
+const snapshot = await getDocs(collection(db,"user_submissions"));
 
 snapshot.forEach((docu)=>{
 
@@ -121,44 +115,21 @@ container.innerHTML += `
 
 <img src="${mod.thumbnail}">
 
-<p>
-<b>Description:</b><br>
-${mod.description}
-</p>
+<p><b>Description:</b><br>${mod.description}</p>
 
-<p>
-<b>Features:</b><br>
-${mod.features}
-</p>
+<p><b>Features:</b><br>${mod.features}</p>
 
-<p>
-<b>Installation:</b><br>
-${mod.installation}
-</p>
+<p><b>Installation:</b><br>${mod.installation}</p>
 
-<p>
-<b>Download Link:</b><br>
-${mod.download}
-</p>
+<p><b>Download Link:</b><br>${mod.download}</p>
 
-<p>
-<b>Creator:</b><br>
-${mod.creator}
-</p>
+<p><b>Creator:</b><br>${mod.creatorName || mod.creator}</p>
 
-<p>
-<b>Uploaded By UID:</b> 
-${mod.uid}</p>
+<p><b>Creator UID:</b><br>${mod.creatorUid}</p>
 
-<p>
-<b>Credits:</b><br>
-${mod.credits}
-</p>
+<p><b>Credits:</b><br>${mod.credits}</p>
 
-<p>
-<b>Status:</b>
-${mod.status}
-</p>
+<p><b>Status:</b> ${mod.status}</p>
 
 <button onclick="approveMod('${docu.id}')">
 ✅ Approve
