@@ -187,6 +187,9 @@ await addDoc(
 collection(db,"mods"),
 {
 
+creatorId: docu.data().uid,
+creatorName: mod.creator,
+
 creatorUID: mod.creatorUID,
 creatorEmail: mod.creatorEmail,
 creator: mod.creator,
