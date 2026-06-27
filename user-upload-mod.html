@@ -152,11 +152,9 @@ getDoc
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 import {
-getAuth
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+getAuth,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
 const firebaseConfig = {
 
@@ -238,8 +236,7 @@ document.getElementById("credits").value;
 if(
 !title ||
 !description ||
-!download ||
-!creator
+!download
 ){
 
 alert("Please Fill Required Fields");
@@ -264,36 +261,27 @@ thumbnailFile
 ? await uploadToImgBB(thumbnailFile)
 : "";
 
-await addDoc(
-collection(db,"user_submissions"),
-{
+await addDoc(collection(db,"user_submissions"),{
 
-title:title,
+title: title,
+thumbnail: thumbnail,
+description: description,
+features: features,
+installation: installation,
+download: download,
 
-thumbnail:thumbnail,
+creatorUid: user.uid,
+creatorName: creator,
 
-description:description,
+credits: credits,
+status: "pending",
 
-features:features,
+createdAt: new Date().toISOString(),
 
-installation:installation,
+uid: user.uid,
+email: user.email
 
-download:download,
-
-creatorUid:user.uid,
-creatorName:creator,
-  
-credits:credits,
-
-status:"pending",
-
-createdAt:new Date().toISOString()
-
-uid: auth.currentUser.uid,
-email: auth.currentUser.email,
-
-}
-);
+});
 
 document.getElementById("status").innerHTML =
 "✅ Mod Submitted Successfully";
