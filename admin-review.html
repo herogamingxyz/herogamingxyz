@@ -224,11 +224,9 @@ await updateDoc(userRef, {
 const userRef = doc(db,"users",mod.creatorUID);
 
 await updateDoc(userRef,{
-
 uploads: increment(1),
-
-isCreator: true
-
+isCreator: true,
+creatorSince: new Date().toISOString()
 });
 
 await deleteDoc(
