@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hero Verse Creators</title>
+
+<link rel="icon" href="hero.gaming.jpg">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0b0b0b;
+color:white;
+}
+
+/* HEADER */
+
+.header{
+background:#111;
+padding:20px;
+text-align:center;
+border-bottom:2px solid #00ff99;
+}
+
+.header h1{
+font-size:42px;
+color:#00ff99;
+}
+
+.header p{
+margin-top:10px;
+color:#ccc;
+}
+
+/* SEARCH */
+
+.search-box{
+max-width:600px;
+margin:30px auto;
+padding:0 20px;
+}
+
+.search-box input{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#1a1a1a;
+color:white;
+font-size:16px;
+outline:none;
+}
+
+/* GRID */
+
+.creator-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+padding:30px;
+}
+
+/* CARD */
+
+.creator-card{
+
+background:#171717;
+border-radius:20px;
+padding:25px;
+text-align:center;
+position:relative;
+
+transition:.3s;
+
+}
+
+.creator-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 0 20px #00ff99;
+
+}
+
+.creator-photo{
+
+width:120px;
+height:120px;
+
+border-radius:50%;
+
+border:4px solid #00ff99;
+
+object-fit:cover;
+
+margin:auto;
+
+display:block;
+
+}
+
+.creator-name{
+
+font-size:28px;
+
+margin-top:18px;
+
+color:#00ff99;
+
+}
+
+.creator-country{
+
+margin-top:8px;
+
+color:#bbb;
+
+}
+
+.creator-bio{
+
+margin-top:18px;
+
+line-height:1.6;
+
+color:#ccc;
+
+min-height:70px;
+
+}
+
+.creator-stats{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:25px;
+
+background:#111;
+
+padding:15px;
+
+border-radius:12px;
+
+}
+
+.stat{
+
+text-align:center;
+
+flex:1;
+
+}
+
+.stat h2{
+
+color:#00ff99;
+
+}
+
+.stat p{
+
+font-size:13px;
+
+color:#aaa;
+
+margin-top:5px;
+
+}
+
+.profile-btn{
+
+display:block;
+
+margin-top:25px;
+
+padding:14px;
+
+background:#00ff99;
+
+color:black;
+
+text-decoration:none;
+
+font-weight:bold;
+
+border-radius:12px;
+
+transition:.3s;
+
+}
+
+.profile-btn:hover{
+
+transform:scale(1.05);
+
+}
+
+.badge{
+
+position:absolute;
+
+top:15px;
+
+right:15px;
+
+background:#00ff99;
+
+color:black;
+
+padding:7px 14px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:bold;
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.creator-grid{
+
+grid-template-columns:1fr;
+
+padding:20px;
+
+}
+
+.header h1{
+
+font-size:32px;
+
+}
+
+.creator-name{
+
+font-size:24px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>Hero Verse Creators</h1>
+
+<p>Meet the best Minecraft Mod Creators from our Community</p>
+
+</div>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search Creator...">
+
+</div>
+
+<div class="creator-grid" id="creatorGrid">
+
+<!-- Firebase se cards yaha aayenge -->
+
+</div>
+
+</body>
+  </html>
