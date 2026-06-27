@@ -55,8 +55,10 @@ collection,
 getDocs,
 addDoc,
 deleteDoc,
-doc
-}
+doc,
+updateDoc,
+increment
+  }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -185,6 +187,9 @@ await addDoc(
 collection(db,"mods"),
 {
 
+creatorUID: mod.creatorUID,
+creatorEmail: mod.creatorEmail,
+
 title: mod.title,
 
 image1: mod.thumbnail,
@@ -204,6 +209,12 @@ image3: "",
 createdAt:
 new Date().toISOString()
 
+});
+
+const userRef = doc(db, "users", mod.creatorUID);
+
+await updateDoc(userRef, {
+  uploads: increment(1)
 });
 
 await deleteDoc(
