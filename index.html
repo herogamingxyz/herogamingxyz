@@ -4,2222 +4,2401 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Hero Verse</title>
 
 <link rel="icon" type="image/png" href="hero.gaming.jpg">
-
 <meta name="description" content="Hero Verse - Download Minecraft Mods, Gaming Articles, Gaming Products, Tutorials and the latest Gaming News.">
-
 <meta name="keywords" content="Minecraft Mods, Hero Verse, Minecraft Addons, Gaming Articles, Gaming Products, Herobrine Mod, Bedrock Mods">
-
 <meta name="author" content="Hero Gaming XYZ">
-
 <meta name="robots" content="index, follow">
-
 <link rel="canonical" href="https://herogamingxyz.github.io/herogamingxyz/">
 
 <meta property="og:title" content="Hero Verse">
-
 <meta property="og:description" content="Minecraft Mods, Gaming Articles and Products">
-
 <meta property="og:image" content="https://herogamingxyz.github.io/herogamingxyz/hero.gaming.jpg">
-
 <meta property="og:url" content="https://herogamingxyz.github.io/herogamingxyz/">
-
 <meta property="og:type" content="website">
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
-
 <script>
 window.dataLayer = window.dataLayer || [];
-
-function gtag(){
-dataLayer.push(arguments);
-}
-
+function gtag(){ dataLayer.push(arguments); }
 gtag('js', new Date());
-
 gtag('config', 'G-1VMS2D4KP5');
 </script>
 
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-scroll-behavior:smooth;
-}
-
-body{
-background:#0a0a0a;
-color:white;
-overflow-x:hidden;
+/* =============================================
+   RESET & BASE
+============================================= */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg:        #090909;
+  --surface:   #111111;
+  --card:      #141414;
+  --card-alt:  #0f0f0f;
+  --border:    rgba(255,255,255,0.06);
+  --accent:    #00ff99;
+  --accent2:   #00c8ff;
+  --accent-dim: rgba(0,255,153,0.12);
+  --accent2-dim: rgba(0,200,255,0.12);
+  --text:      #f0f0f0;
+  --muted:     #888;
+  --danger:    #ff4444;
+  --premium:   #ffd700;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --transition: 0.28s cubic-bezier(.4,0,.2,1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', Arial, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; }
+
+img { display: block; }
+
+/* =============================================
+   SCROLLBAR
+============================================= */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 20px; }
+
+/* =============================================
+   HEADER
+============================================= */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: rgba(9,9,9,0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo */
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.header-logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 12px rgba(0,255,153,0.4);
+  object-fit: cover;
+}
+
+.header-logo span {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-shadow: 0 0 16px rgba(0,255,153,0.5);
+}
+
+/* Search */
+.header-search {
+  flex: 1;
+  max-width: 520px;
+  position: relative;
+}
+
+.header-search input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 10px 48px 10px 18px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: var(--transition);
+}
+
+.header-search input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,255,153,0.1);
+}
+
+.header-search input::placeholder { color: var(--muted); }
+
+.header-search-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 16px;
+  pointer-events: none;
+}
+
+/* Search Results */
+#searchResults {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background: #1a1a1a;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  z-index: 99999;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+
+.search-item {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.search-item:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+/* Header Right */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+#userInfo { display: flex; align-items: center; }
+
+#userInfo a {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-login, .btn-signup {
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-login {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.btn-login:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-signup {
+  background: var(--accent);
+  color: #000;
+}
+
+.btn-signup:hover {
+  box-shadow: 0 0 16px rgba(0,255,153,0.4);
+  transform: translateY(-1px);
+}
+
+#logoutBtn {
+  padding: 8px 16px;
+  background: rgba(255,68,68,0.15);
+  border: 1px solid rgba(255,68,68,0.3);
+  color: var(--danger);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: var(--transition);
+}
+
+#logoutBtn:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* =============================================
+   NAV BAR
+============================================= */
+.navbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  position: sticky;
+  top: 68px;
+  z-index: 998;
+  height: 48px;
+}
+
+.navbar::-webkit-scrollbar { height: 0; }
+
+.navbar a {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* Hamburger (mobile) */
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* =============================================
+   HERO SLIDER (Full-width Banner)
+============================================= */
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  background: #000;
+}
+
+.slides { width: 100%; height: 100%; }
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.slide.active { opacity: 1; z-index: 2; }
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.82) 40%, rgba(0,0,0,0.1) 100%);
+}
+
+.slide-content {
+  position: absolute;
+  bottom: 60px;
+  left: 60px;
+  max-width: 500px;
+  z-index: 10;
+}
+
+.slide-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: #000;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 30px;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.slide-content h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+}
+
+.slide-content h2 span { color: var(--accent); }
+
+.slide-content p {
+  font-size: 15px;
+  color: #ccc;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.slide-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.slide-btn-primary,
+.slide-btn-secondary {
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  font-family: 'Inter', sans-serif;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.slide-btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #000;
+}
+
+.slide-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,255,153,0.4);
+}
+
+.slide-btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: var(--text);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+}
+
+.slide-btn-secondary:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* Slider arrows */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+  user-select: none;
+}
+
+.slider-arrow:hover {
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 0 16px rgba(0,255,153,0.4);
+}
+
+.prev-arrow { left: 20px; }
+.next-arrow { right: 20px; }
+
+/* Dots */
+.dots {
+  position: absolute;
+  bottom: 20px;
+  left: 60px;
+  display: flex;
+  gap: 8px;
+  z-index: 20;
+}
+
+.dot {
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.dot.active {
+  background: var(--accent);
+  width: 40px;
+}
+
+/* =============================================
+   CATEGORY STRIP
+============================================= */
+.categories-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+}
+
+.categories-strip::-webkit-scrollbar { height: 0; }
+
+.cat-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cat-btn .cat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: rgba(255,255,255,0.04);
+  transition: var(--transition);
+}
+
+.cat-btn:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.cat-btn:hover .cat-icon {
+  background: var(--accent-dim);
+}
+
+/* =============================================
+   SECTION WRAPPER
+============================================= */
+.section {
+  padding: 48px 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.section-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title .title-icon { font-size: 22px; }
+
+.view-all {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition);
+}
+
+.view-all:hover { gap: 8px; }
+
+/* =============================================
+   CARDS SLIDER (horizontal scroll)
+============================================= */
+.cards-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+}
+
+.cards-slider::-webkit-scrollbar { height: 5px; }
+.cards-slider::-webkit-scrollbar-thumb { background: rgba(0,255,153,0.3); border-radius: 20px; }
+
+/* =============================================
+   MOD CARD
+============================================= */
+.mod-card {
+  min-width: 220px;
+  max-width: 220px;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  transition: var(--transition);
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.mod-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,255,153,0.3);
+  box-shadow: 0 12px 40px rgba(0,255,153,0.12);
+}
+
+.mod-card-thumb {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.mod-card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--accent);
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mod-card-badge.new { background: var(--accent2); color: #000; }
+.mod-card-badge.premium { background: var(--premium); color: #000; }
+
+.mod-card-body {
+  padding: 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mod-card-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.mod-card-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.mod-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.mod-card-rating {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.mod-card-downloads {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.mod-cat-tag {
+  display: inline-block;
+  background: rgba(0,255,153,0.1);
+  color: var(--accent);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.mod-card-btn {
+  display: block;
+  margin: 0 14px 14px;
+  padding: 9px 0;
+  background: var(--accent);
+  color: #000;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.mod-card-btn:hover {
+  box-shadow: 0 0 16px rgba(0,255,153,0.4);
+  background: #00e589;
+}
+
+/* =============================================
+   ARTICLE CARD
+============================================= */
+.article-card {
+  min-width: 260px;
+  max-width: 260px;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  transition: var(--transition);
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,200,255,0.3);
+  box-shadow: 0 12px 40px rgba(0,200,255,0.1);
+}
+
+.article-card-thumb {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.article-card-body {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.article-card-date {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.article-card-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.article-card-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.article-card-readmore {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent2);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: auto;
+  transition: var(--transition);
+}
+
+.article-card:hover .article-card-readmore { gap: 8px; }
+
+/* =============================================
+   FEATURED HIGHLIGHT (Slider + Sidebars)
+============================================= */
+.center-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 20px;
+  align-items: start;
+  padding: 0 24px 48px;
+}
+
+.side-box {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  border: 1px solid var(--border);
+}
+
+.side-box h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.side-box p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.side-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: var(--accent);
+  color: #000;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.side-btn:hover {
+  box-shadow: 0 0 16px rgba(0,255,153,0.4);
+  transform: translateY(-2px);
+}
+
+.review-box { margin-top: 20px; }
+
+.review {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  padding: 14px;
+  border-radius: var(--radius-md);
+  margin-top: 10px;
+  font-size: 13px;
+  color: #ccc;
+  line-height: 1.5;
+}
+
+.review:hover {
+  border-color: rgba(0,255,153,0.2);
+}
+
+/* Glassmorphism hero slider inside center grid */
+.center-hero-slider {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 0 30px rgba(0,255,153,0.08);
+  aspect-ratio: 16/9;
+}
+
+/* =============================================
+   PREMIUM BANNER
+============================================= */
+.premium-banner {
+  margin: 0 24px 48px;
+  background: linear-gradient(135deg, #0d1a0d 0%, #0a1020 50%, #0d1a1a 100%);
+  border: 1px solid rgba(0,255,153,0.2);
+  border-radius: var(--radius-lg);
+  padding: 36px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.premium-banner::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(0,255,153,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.premium-badge-icon {
+  font-size: 64px;
+  flex-shrink: 0;
+}
+
+.premium-text h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.premium-text h2 span { color: var(--accent); }
+
+.premium-text p {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+.premium-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #000;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 700;
+  transition: var(--transition);
+  text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.premium-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0,255,153,0.35);
+}
+
+/* =============================================
+   STATS SECTION
+============================================= */
+.stats-section {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+
+.stat-item {}
+
+.stat-num {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* =============================================
+   MEMBERS ONLY SECTION
+============================================= */
+.members-section {
+  padding: 0 24px 48px;
+}
+
+.members-card {
+  background: linear-gradient(135deg, #0d0d0d, #111);
+  border: 1px solid rgba(255,215,0,0.2);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  text-decoration: none;
+  color: var(--text);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.members-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.members-card:hover {
+  border-color: rgba(255,215,0,0.4);
+  box-shadow: 0 8px 32px rgba(255,215,0,0.08);
+}
+
+.members-lock {
+  font-size: 48px;
+  flex-shrink: 0;
+}
+
+.members-info { flex: 1; }
+
+.members-info h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--premium);
+  margin-bottom: 6px;
+}
+
+.members-info p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.members-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--premium), #ffa500);
+  color: #000;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 700;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.members-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255,215,0,0.3);
+}
+
+/* =============================================
+   COMMUNITY SECTION
+============================================= */
+.community-section {
+  padding: 0 24px 48px;
+}
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.community-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text);
+  transition: var(--transition);
+}
+
+.community-card:nth-child(1):hover { border-color: rgba(88,101,242,0.5); box-shadow: 0 8px 32px rgba(88,101,242,0.12); }
+.community-card:nth-child(2):hover { border-color: rgba(255,0,0,0.4); box-shadow: 0 8px 32px rgba(255,0,0,0.1); }
+.community-card:nth-child(3):hover { border-color: rgba(193,53,132,0.4); box-shadow: 0 8px 32px rgba(193,53,132,0.1); }
+
+.community-icon {
+  font-size: 48px;
+}
+
+.community-card h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.community-card p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.community-join-btn {
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  transition: var(--transition);
+  margin-top: auto;
+}
+
+.discord-btn { background: #5865F2; color: #fff; }
+.youtube-btn { background: #FF0000; color: #fff; }
+.insta-btn { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
+
+.community-join-btn:hover { transform: scale(1.05); box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
+
+/* =============================================
+   DISCORD WIDGET AREA
+============================================= */
+.discord-section {
+  margin: 0 24px 48px;
+  background: var(--card);
+  border: 1px solid rgba(88,101,242,0.2);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.discord-section h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #5865F2;
+  margin-bottom: 8px;
+}
+
+.discord-section p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* =============================================
+   FOOTER
+============================================= */
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 56px 24px 32px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.footer-brand {}
+
+.footer-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.footer-brand-logo img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+}
+
+.footer-brand-logo span {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.footer-brand p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 280px;
+  margin-bottom: 20px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-social-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.footer-col h4 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  transition: var(--transition);
+}
+
+.footer-col a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.copyright {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-bottom-links a {
+  font-size: 12px;
+  color: var(--muted);
+  transition: var(--transition);
+}
+
+.footer-bottom-links a:hover { color: var(--accent); }
+
+/* =============================================
+   FLOATING ELEMENTS
+============================================= */
+.discord-float {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  width: 52px;
+  height: 52px;
+  background: #5865F2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  text-decoration: none;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(88,101,242,0.4);
+  transition: var(--transition);
+}
+
+.discord-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(88,101,242,0.6);
+}
+
+.popup {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--accent);
+  color: #000;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 9999;
+  box-shadow: 0 4px 24px rgba(0,255,153,0.4);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* =============================================
+   SCROLL ANIMATIONS
+============================================= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================================
+   MOBILE NAV (bottom)
+============================================= */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  background: rgba(14,14,14,0.97);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  padding: 8px 0;
+  flex-direction: row;
+}
+
+.mobile-nav a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: var(--transition);
+  padding: 4px 0;
+}
+
+.mobile-nav a:hover,
+.mobile-nav a.active { color: var(--accent); }
+
+.mobile-nav-icon { font-size: 22px; }
+
+.mobile-nav .upload-nav {
+  background: var(--accent);
+  color: #000;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-top: -18px;
+  box-shadow: 0 0 16px rgba(0,255,153,0.4);
+  text-decoration: none;
+}
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media (max-width: 1100px) {
+  .center-grid {
+    grid-template-columns: 1fr;
+  }
+  .center-hero-slider {
+    aspect-ratio: 16/9;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  /* Header */
+  .header { padding: 0 16px; height: 60px; gap: 12px; }
+  .header-logo span { display: none; }
+  .header-search { max-width: none; flex: 1; }
+  .header-search input { font-size: 13px; padding: 9px 40px 9px 14px; }
+  .btn-signup span { display: none; }
+
+  /* Hero */
+  .hero-slider { height: 300px; }
+  .slide-content { left: 20px; bottom: 50px; max-width: 80%; }
+  .slide-content h2 { font-size: 26px; }
+  .slide-content p { display: none; }
+  .dots { left: 20px; bottom: 14px; }
+  .slider-arrow { width: 36px; height: 36px; font-size: 16px; }
+
+  /* Categories */
+  .cat-btn { padding: 12px 14px; font-size: 11px; }
+  .cat-btn .cat-icon { width: 34px; height: 34px; font-size: 18px; }
+
+  /* Sections */
+  .section { padding: 32px 16px; }
+  .center-grid { padding: 0 16px 32px; }
+  .premium-banner { flex-direction: column; text-align: center; padding: 28px 20px; margin: 0 16px 32px; }
+  .premium-badge-icon { font-size: 48px; }
+  .premium-text h2 { font-size: 24px; }
+
+  /* Stats */
+  .stats-section { grid-template-columns: 1fr 1fr; gap: 12px; padding: 28px 16px; }
+  .stat-num { font-size: 32px; }
+
+  /* Community */
+  .community-section { padding: 0 16px 32px; }
+  .community-grid { grid-template-columns: 1fr; }
+
+  /* Discord section */
+  .discord-section { margin: 0 16px 32px; grid-template-columns: 1fr; }
+  .discord-section iframe { width: 100% !important; }
+
+  /* Cards */
+  .mod-card { min-width: 180px; max-width: 180px; }
+  .article-card { min-width: 220px; max-width: 220px; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+  .members-section { padding: 0 16px 32px; }
+
+  /* Mobile nav */
+  .mobile-nav { display: flex; }
+  .footer { padding-bottom: 100px; }
+  .discord-float { bottom: 80px; right: 16px; }
+}
+
+@media (max-width: 500px) {
+  .hero-slider { height: 240px; }
+  .slide-content { max-width: 75%; }
+  .slide-content h2 { font-size: 20px; }
+  .slide-tag { font-size: 9px; }
+  .slide-btn-primary { padding: 9px 16px; font-size: 12px; }
+  .slide-btn-secondary { display: none; }
+  .stats-section { grid-template-columns: 1fr 1fr; }
 }
 
-/* HEADER */
-
-.top-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 40px;
-background:#0d0d0d;
-border-bottom:2px solid #111;
-position:sticky;
-top:0;
-z-index:9999;
-flex-wrap:wrap;
-}
-
-.logo-box{
-display:flex;
-align-items:center;
-gap:14px;
-}
-
-.site-logo{
-width:58px;
-height:58px;
-border-radius:50%;
-object-fit:cover;
-border:2px solid #00ff99;
-box-shadow:0 0 15px #00ff99;
-}
-
-.logo-text{
-font-size:32px;
-font-weight:bold;
-color:#00ff99;
-text-shadow:
-0 0 10px #00ff99,
-0 0 25px #00ff99;
-}
-
-.search-box{
-display:flex;
-align-items:center;
-gap:15px;
-}
-
-.search-box input{
-width:360px;
-max-width:90vw;
-padding:15px 22px;
-border:none;
-outline:none;
-border-radius:50px;
-background:#1b1b1b;
-color:white;
-font-size:16px;
-box-shadow:0 0 15px rgba(0,255,153,0.15);
-}
-
-.search-box button{
-padding:14px 24px;
-border:none;
-border-radius:50px;
-background:linear-gradient(90deg,#00ff99,#00ccff);
-color:black;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
-}
-
-.search-box button:hover{
-transform:scale(1.06);
-box-shadow:0 0 20px #00ff99;
-}
-
-/* NAVBAR */
-
-nav{
-background:#111;
-padding:18px;
-text-align:center;
-position:sticky;
-top:95px;
-z-index:999;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-margin:16px;
-font-size:18px;
-transition:0.3s;
-}
-
-nav a:hover{
-color:#00ff99;
-}
-
-/* HERO */
-
-.hero{
-min-height:420px;
-height:50vh;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:#000;
-}
-
-.hero-content h1{
-font-size:75px;
-text-shadow:
-0 0 10px #00ff99,
-0 0 30px #00ff99;
-}
-
-.hero-content p{
-margin-top:20px;
-font-size:22px;
-max-width:850px;
-line-height:1.7;
-color:#ddd;
-}
-
-.hero-btn{
-display:inline-block;
-margin-top:30px;
-padding:16px 35px;
-background:#00ff99;
-color:black;
-font-weight:bold;
-border-radius:14px;
-text-decoration:none;
-transition:0.3s;
-}
-
-.hero-btn:hover{
-transform:scale(1.08);
-box-shadow:0 0 20px #00ff99;
-}
-
-/* QUOTE */
-
-.quote-box{
-padding:35px;
-text-align:center;
-}
-
-.quote-box h2{
-font-size:35px;
-color:#00ff99;
-text-shadow:0 0 15px #00ff99;
-animation:glowText 2s infinite alternate;
-}
-
-@keyframes glowText{
-
-from{
-opacity:0.7;
-}
-
-to{
-opacity:1;
-transform:scale(1.03);
-}
-
-}
-
-/* SECTION */
-
-.section{
-padding:60px 40px;
-}
-
-.section-title{
-font-size:42px;
-margin-bottom:35px;
-color:#00ff99;
-}
-
-/* SLIDER */
-
-.slider-track{
-display:flex;
-gap:25px;
-overflow-x:auto;
-padding-bottom:10px;
-scroll-behavior:smooth;
-}
-
-.slider-track::-webkit-scrollbar{
-height:8px;
-}
-
-.slider-track::-webkit-scrollbar-thumb{
-background:#00ff99;
-border-radius:20px;
-}
-
-/* CARD */
-
-.card{
-min-width:270px;
-max-width:270px;
-height:420px;
-background:#141414;
-border-radius:22px;
-overflow:hidden;
-text-decoration:none;
-color:white;
-transition:0.3s;
-position:relative;
-flex-shrink:0;
-box-shadow:0 0 15px rgba(0,0,0,0.4);
-
-display:flex;
-flex-direction:column;
-    }
-
-.card img{
-width:100%;
-height:180px;
-object-fit:cover;
-display:block;
-}
-
-.card-content{
-padding:20px;
-flex:1;
-display:flex;
-flex-direction:column;
-}
-
-.card-content p{
-flex:1;
-overflow:hidden;
-    }
-
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 25px #00ff99;
-}
-
-.upload-logo{
-
-width:140px !important;
-
-height:140px !important;
-
-object-fit:contain !important;
-
-display:block;
-
-margin:20px auto !important;
-
-background:none !important;
-
-box-shadow:none !important;
-
-}
-
-.upload-card{
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-height:100%;
-
-}
-
-.upload-logo{
-width:140px;
-height:140px;
-object-fit:contain;
-background:none !important;
-border:none !important;
-box-shadow:none !important;
-}
-
-.upload-card-parent{
-min-width:270px;
-max-width:270px;
-height:420px;
-background:transparent !important;
-box-shadow:none !important;
-border:none !important;
-}
-
-.upload-card{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-height:100%;
-padding:20px;
-text-align:center;
-}
-
-.upload-logo{
-width:140px;
-height:140px;
-object-fit:contain;
-margin-bottom:15px;
-}
-
-.upload-title{
-font-size:22px;
-font-weight:bold;
-color:#00ff99;
-margin-top:10px;
-}
-
-.upload-desc{
-font-size:14px;
-color:#ccc;
-line-height:1.5;
-}
-
-.card img{
-width:100%;
-height:190px;
-object-fit:cover;
-display:block;
-}
-
-.upload-logo{
-width:180px;
-height:180px;
-object-fit:contain;
-background:none;
-border:none;
-box-shadow:none;
-}
-.upload-logo{
-mix-blend-mode:screen;
-}
-
-.card-content{
-padding:20px;
-}
-
-.card-content h3{
-color:#00ff99;
-margin-bottom:12px;
-}
-
-.card-content p{
-color:#ccc;
-line-height:1.6;
-}
-
-.upload-card{
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-height:100%;
-padding:20px;
-text-align:center;
-}
-
-.upload-logo{
-width:180px;
-height:180px;
-object-fit:contain;
-margin-top:15px;
-}
-
-.upload-card h3{
-color:#00ff99;
-margin-top:15px;
-}
-
-.upload-card p{
-color:#ccc;
-}
-
-.btn{
-display:inline-block;
-margin-top:15px;
-padding:12px 22px;
-background:#00ff99;
-color:black;
-text-decoration:none;
-border-radius:10px;
-font-weight:bold;
-transition:0.3s;
-}
-
-.btn:hover{
-transform:scale(1.06);
-box-shadow:0 0 15px #00ff99;
-}
-
-.badge{
-position:absolute;
-background:#00ff99;
-color:black;
-padding:8px 15px;
-font-size:14px;
-font-weight:bold;
-border-radius:0 0 12px 0;
-z-index:10;
-}
-
-/* CENTER GRID */
-
-.center-grid{
-display:grid;
-grid-template-columns:320px 1fr 320px;
-gap:25px;
-align-items:start;
-}
-
-.side-box,
-.latest-box{
-background:#141414;
-border-radius:22px;
-padding:30px;
-}
-
-.side-box h2,
-.latest-box h2{
-margin-bottom:20px;
-color:#00ff99;
-}
-
-.side-btn{
-display:inline-block;
-margin-top:20px;
-padding:14px 24px;
-background:#00ff99;
-color:black;
-border-radius:12px;
-text-decoration:none;
-font-weight:bold;
-transition:0.3s;
-}
-
-.side-btn:hover{
-transform:scale(1.06);
-}
-
-.update-card{
-background:#0d0d0d;
-padding:25px;
-border-radius:18px;
-margin-top:15px;
-}
-
-.update-card h3{
-margin-bottom:15px;
-}
-
-.update-card p{
-color:#ccc;
-line-height:1.7;
-}
-
-/* REVIEW */
-
-.review-box{
-margin-top:25px;
-}
-
-.review{
-background:#0d0d0d;
-padding:18px;
-border-radius:15px;
-margin-top:15px;
-color:#ccc;
-}
-
-.review-box{
-height:100%;
-}
-
-/* FOOTER */
-
-.footer{
-background:#050505;
-padding:60px 40px;
-margin-top:60px;
-border-top:1px solid #111;
-}
-
-.footer-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:40px;
-max-width:1300px;
-margin:auto;
-}
-
-.footer h3{
-margin-bottom:20px;
-font-size:24px;
-color:white;
-}
-
-.footer a{
-display:block;
-color:#999;
-margin-bottom:14px;
-text-decoration:none;
-transition:0.3s;
-}
-
-.footer a:hover{
-color:#00ff99;
-transform:translateX(5px);
-}
-
-.copyright{
-text-align:center;
-margin-top:40px;
-color:#666;
-}
-
-/* POPUP */
-
-.popup{
-position:fixed;
-bottom:25px;
-right:25px;
-background:#00ff99;
-color:black;
-padding:18px 25px;
-border-radius:14px;
-font-weight:bold;
-z-index:9999;
-box-shadow:0 0 25px #00ff99;
-}
-
-/* DISCORD FLOAT */
-
-.discord-float{
-position:fixed;
-right:20px;
-bottom:110px;
-width:65px;
-height:65px;
-background:#5865F2;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:32px;
-text-decoration:none;
-color:white;
-z-index:9999;
-}
-
-#searchResults{
-position:absolute;
-top:80px;
-right:40px;
-width:360px;
-background:#1b1b1b;
-border-radius:12px;
-overflow:hidden;
-z-index:99999;
-box-shadow:0 0 20px rgba(0,255,153,0.3);
-}
-
-.search-item{
-padding:15px;
-border-bottom:1px solid #333;
-cursor:pointer;
-}
-
-.search-item:hover{
-background:#00ff99;
-color:black;
-    }
-
-/* HERO HIGHLIGHTS */
-
-.hero-slider{
-position:relative;
-width:100%;
-aspect-ratio:16/9;
-border-radius:22px;
-overflow:hidden;
-background:#111;
-box-shadow:0 0 20px rgba(0,255,153,.2);
-    }
-.slides{
-height:100%;
-position:relative;
-}
-
-.slide{
-position:absolute;
-width:100%;
-height:100%;
-opacity:0;
-transition:.6s;
-}
-
-.slide.active{
-opacity:1;
-z-index:2;
-}
-
-.slide img{
-width:100%;
-height:100%;
-object-fit:cover;
-object-position:center;
-display:block;
-    }
-
-.slide-content{
-position:absolute;
-left:35px;
-bottom:35px;
-max-width:420px;
-}
-
-.tag{
-display:inline-block;
-background:#00ff99;
-color:#000;
-padding:8px 16px;
-border-radius:30px;
-font-size:13px;
-font-weight:bold;
-margin-bottom:15px;
-}
-
-.slide-content h2{
-font-size:34px;
-margin-bottom:12px;
-text-shadow:0 0 10px #000;
-}
-
-.slide-content p{
-font-size:16px;
-color:#eee;
-line-height:1.6;
-margin-bottom:20px;
-}
-
-.slide-btn{
-display:inline-block;
-padding:13px 24px;
-background:#00ff99;
-color:#000;
-text-decoration:none;
-font-weight:bold;
-border-radius:12px;
-transition:.3s;
-}
-
-.slide-btn:hover{
-transform:scale(1.05);
-}
-
-.dots{
-position:absolute;
-bottom:18px;
-right:20px;
-display:flex;
-gap:8px;
-z-index:10;
-}
-
-.dot{
-width:10px;
-height:10px;
-border-radius:50%;
-background:#666;
-}
-
-.dot.active{
-background:#00ff99;
-    }
-
-/* HERO SLIDER ARROWS */
-
-.slider-arrow{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-width:50px;
-height:50px;
-border-radius:50%;
-background:rgba(0,0,0,.55);
-backdrop-filter:blur(6px);
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:28px;
-font-weight:bold;
-cursor:pointer;
-z-index:20;
-transition:.3s;
-user-select:none;
-}
-
-.slider-arrow:hover{
-background:#00ff99;
-color:#000;
-transform:translateY(-50%) scale(1.08);
-box-shadow:0 0 18px #00ff99;
-}
-
-.prev-arrow{
-left:15px;
-}
-
-.next-arrow{
-right:15px;
-}
-
-/* Mobile */
-
-@media(max-width:900px){
-
-.hero-slider{
-height:230px;
-}
-
-.slide-content{
-left:15px;
-right:15px;
-bottom:15px;
-max-width:55%;
-}
-
-.slide-content h2{
-font-size:16px;
-line-height:1.2;
-margin-bottom:8px;
-}
-
-.slide-content p{
-font-size:11px;
-line-height:1.3;
-margin-bottom:10px;
-}
-
-.tag{
-font-size:10px;
-padding:5px 10px;
-margin-bottom:8px;
-}
-
-.slide-btn{
-padding:8px 14px;
-font-size:12px;
-}
-
-.slider-arrow{
-width:40px;
-height:40px;
-font-size:22px;
-}
-
-    }
-    
-/* MOBILE */
-    
-@media(max-width:900px){
-
-.hero-content h1{
-font-size:50px;
-}
-
-.center-grid{
-grid-template-columns:1fr;
-}
-
-.top-header{
-justify-content:center;
-gap:15px;
-padding:15px;
-}
-
-.logo-text{
-font-size:24px;
-}
-
-.search-box{
-display:flex;
-width:100%;
-gap:10px;
-}
-
-.search-box input{
-width:100%;
-}
-
-.search-box button{
-padding:12px 18px;
-flex-shrink:0;
-}
-
-nav{
-top:145px;
-}
-
-nav a{
-display:inline-block;
-margin:8px;
-font-size:16px;
-}
-
-.slider-track{
-gap:18px;
-padding-bottom:15px;
-}
-
-.card,
-.upload-card-parent{
-min-width:100%;
-max-width:100%;
-height:480px;
-flex-shrink:0;
-}
-
-.card img{
-width:100%;
-height:240px;
-object-fit:cover;
-display:block;
-}
-
-.card-content{
-padding:18px;
-display:flex;
-flex-direction:column;
-flex:1;
-}
-
-.card-content h3{
-font-size:24px;
-line-height:1.3;
-color:#00ff99;
-margin-bottom:12px;
-
-display:-webkit-box;
--webkit-line-clamp:2;
--webkit-box-orient:vertical;
-overflow:hidden;
-}
-
-.card-content p{
-font-size:16px;
-line-height:1.6;
-color:#ccc;
-margin-bottom:15px;
-
-display:-webkit-box;
--webkit-line-clamp:4;
--webkit-box-orient:vertical;
-overflow:hidden;
-
-flex:1;
-}
-
-.card-content .btn{
-margin-top:auto;
-width:100%;
-text-align:center;
-padding:14px 0;
-font-size:16px;
-font-weight:bold;
-}
-
-.upload-card{
-padding:20px;
-text-align:center;
-}
-
-.upload-logo{
-width:170px;
-height:170px;
-}
-
-}
-    
 </style>
-
 </head>
-
 <body>
 
-<!-- HEADER -->
+<!-- ===== HEADER ===== -->
+<header class="header">
 
-<header class="top-header">
+  <a href="#" class="header-logo">
+    <img src="hero.gaming.jpg" alt="Hero Verse">
+    <span>HERO VERSE</span>
+  </a>
 
-<div class="logo-box">
+  <div class="header-search">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search mods, articles, creators...">
+    <span class="header-search-icon">🔍</span>
+    <div id="searchResults"></div>
+  </div>
 
-<img src="hero.gaming.jpg" class="site-logo">
-
-<div class="logo-text">
-Hero Verse
-</div>
-
-</div>
-
-<div class="search-box">
-
-<input
-type="text"
-id="searchInput"
-placeholder="🔍 Search mods, articles, products...">
-
-<button id="searchBtn">
-Search
-</button>
-
-</div>
-
-<div id="searchResults"></div>
-
-<div id="userInfo" style="color:white;margin-left:20px;">
-Loading...
-</div>
-
-<button id="logoutBtn"
-style="
-margin-left:10px;
-padding:10px 15px;
-border:none;
-border-radius:10px;
-background:#ff4444;
-color:white;
-cursor:pointer;
-">
-Logout
-</button>
+  <div class="header-right">
+    <div id="userInfo">Loading...</div>
+    <button id="logoutBtn" style="display:none;">Logout</button>
+  </div>
 
 </header>
 
-<!-- NAVBAR -->
-
-<nav>
-
-<a href="#">Home</a>
-
-<a href="herobrine-mod.html">Mods</a>
-
-<a href="backrooms.html">Articles</a>
-
-<a href="products.html">Products</a>
-
-<a href="community.html">Community</a>
-
-<a href="creators.html">Creators</a>
-
-<a href="profile.html">Downloads</a>
-
-<a href="help-center.html">Help Center</a>
-
-<a href="about.html">About</a>
-
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <a href="#" class="active">Home</a>
+  <a href="herobrine-mod.html">Mods</a>
+  <a href="backrooms.html">Articles</a>
+  <a href="products.html">Products</a>
+  <a href="games.html">Games</a>
+  <a href="community.html">Community</a>
+  <a href="creators.html">Creators</a>
+  <a href="profile.html">Downloads</a>
+  <a href="help-center.html">Help</a>
+  <a href="about.html">About</a>
 </nav>
 
-<!-- HERO -->
+<!-- ===== HERO SLIDER (Main Banner) ===== -->
+<section class="hero-slider">
 
-<section class="hero">
+  <div class="slides">
 
-<div class="hero-content">
+    <!-- Slide 1 -->
+    <div class="slide active">
+      <img src="banner1.jpg" alt="Featured Mod">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <span class="slide-tag">🔥 Featured</span>
+        <h2>Best Mods For<br><span>Minecraft</span></h2>
+        <p>Enhance your gameplay with epic mods, shaders and addons.</p>
+        <div class="slide-btns">
+          <a href="sodium.html" class="slide-btn-primary">Explore Mods →</a>
+          <a href="games.html" class="slide-btn-secondary">Latest Games</a>
+        </div>
+      </div>
+    </div>
 
-<h1>
-Hero Verse 
-</h1>
+    <!-- Slide 2 -->
+    <div class="slide">
+      <img src="049001.jpg" alt="Creator of the Month">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <span class="slide-tag">👑 Creator</span>
+        <h2>Creator Of<br><span>The Month</span></h2>
+        <p>Meet the most talented Hero Verse creator this month.</p>
+        <div class="slide-btns">
+          <a href="creators.html" class="slide-btn-primary">Meet Creators →</a>
+        </div>
+      </div>
+    </div>
 
-<p>
-Explore Minecraft mods, gaming products,
-Gaming news, gaming articles and tutorials...
-</p>
+    <!-- Slide 3 -->
+    <div class="slide">
+      <img src="banner3.jpg" alt="Latest Games">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <span class="slide-tag">🎮 Games</span>
+        <h2>Latest<br><span>Games 2026</span></h2>
+        <p>Discover the newest PC, Console and Mobile games.</p>
+        <div class="slide-btns">
+          <a href="games.html" class="slide-btn-primary">Browse Games →</a>
+          <a href="gta6-hype.html" class="slide-btn-secondary">GTA 6 Info</a>
+        </div>
+      </div>
+    </div>
 
-<a href="mod.html" class="hero-btn">
-Explore Mods
-</a>
+    <!-- Slide 4 -->
+    <div class="slide">
+      <img src="banner4.jpg" alt="Gaming News">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <span class="slide-tag">📰 News</span>
+        <h2>Gaming News<br><span>& Updates</span></h2>
+        <p>Stay updated with the latest gaming world news and releases.</p>
+        <div class="slide-btns">
+          <a href="backrooms.html" class="slide-btn-primary">Read News →</a>
+        </div>
+      </div>
+    </div>
 
-</div>
+    <!-- Slide 5 -->
+    <div class="slide">
+      <img src="banner5.jpg" alt="Join Community">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <span class="slide-tag">💎 Community</span>
+        <h2>Join<br><span>Hero Verse</span></h2>
+        <p>Upload mods, join Discord and grow with 10K+ gamers.</p>
+        <div class="slide-btns">
+          <a href="user-upload-mod.html" class="slide-btn-primary">Upload Mod →</a>
+          <a href="https://discord.gg/eXZ227G5" class="slide-btn-secondary">Discord</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Arrows -->
+  <div class="slider-arrow prev-arrow">❮</div>
+  <div class="slider-arrow next-arrow">❯</div>
+
+  <!-- Dots -->
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
 
 </section>
 
-<!-- QUOTE -->
+<!-- ===== CATEGORY STRIP ===== -->
+<div class="categories-strip">
+  <a href="sodium.html" class="cat-btn">
+    <span class="cat-icon">🟩</span>
+    Minecraft
+  </a>
+  <a href="games.html" class="cat-btn">
+    <span class="cat-icon">🖥️</span>
+    PC Games
+  </a>
+  <a href="games.html" class="cat-btn">
+    <span class="cat-icon">📱</span>
+    Android
+  </a>
+  <a href="backrooms.html" class="cat-btn">
+    <span class="cat-icon">📰</span>
+    Gaming News
+  </a>
+  <a href="products.html" class="cat-btn">
+    <span class="cat-icon">🛒</span>
+    Products
+  </a>
+  <a href="help-center.html" class="cat-btn">
+    <span class="cat-icon">🎓</span>
+    Tutorials
+  </a>
+  <a href="creators.html" class="cat-btn">
+    <span class="cat-icon">👑</span>
+    Creators
+  </a>
+</div>
 
-<section class="quote-box">
+<!-- ===== TRENDING MODS ===== -->
+<section class="section fade-in">
 
-<h2 id="quote">
-🎮 Gamers Never Quit
-</h2>
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="title-icon">🔥</span>
+      Trending Mods
+    </h2>
+    <a href="sodium.html" class="view-all">View All →</a>
+  </div>
+
+  <div class="cards-slider" id="modsContainer">
+
+    <!-- Static cards (Firebase will also inject dynamic ones) -->
+    <a href="sodium.html" class="mod-card">
+      <img src="sodium1.jpg" alt="Sodium FPS Boost" class="mod-card-thumb">
+      <span class="mod-card-badge">🔥 Trending</span>
+      <div class="mod-card-body">
+        <div class="mod-card-title">Sodium FPS Boost</div>
+        <div class="mod-card-desc">Boost FPS and improve Minecraft performance with the best optimization mod.</div>
+        <div class="mod-card-meta">
+          <span class="mod-card-rating">⭐ 4.8</span>
+          <span class="mod-card-downloads">⬇ 12.5K</span>
+        </div>
+        <span class="mod-cat-tag">Optimization</span>
+      </div>
+      <span class="mod-card-btn">Download</span>
+    </a>
+
+    <a href="herobrine-mod.html" class="mod-card">
+      <img src="herobrine-mod1.jpg" alt="Herobrine Mod" class="mod-card-thumb">
+      <span class="mod-card-badge new">👻 New</span>
+      <div class="mod-card-body">
+        <div class="mod-card-title">Herobrine Mod</div>
+        <div class="mod-card-desc">Add the legendary Herobrine to Minecraft PE and experience creepy horror adventures.</div>
+        <div class="mod-card-meta">
+          <span class="mod-card-rating">⭐ 4.9</span>
+          <span class="mod-card-downloads">⬇ 8.7K</span>
+        </div>
+        <span class="mod-cat-tag">Adventure</span>
+      </div>
+      <span class="mod-card-btn">Download</span>
+    </a>
+
+    <a href="dragon-mounts-addon.html" class="mod-card">
+      <img src="dragon1.jpg" alt="Dragon Mounts" class="mod-card-thumb">
+      <span class="mod-card-badge new">🐉 New</span>
+      <div class="mod-card-body">
+        <div class="mod-card-title">Dragon Mounts Addon</div>
+        <div class="mod-card-desc">Ride powerful dragons, hatch dragon eggs and fly across your Minecraft world.</div>
+        <div class="mod-card-meta">
+          <span class="mod-card-rating">⭐ 4.7</span>
+          <span class="mod-card-downloads">⬇ 6.3K</span>
+        </div>
+        <span class="mod-cat-tag">Addons</span>
+      </div>
+      <span class="mod-card-btn">Download</span>
+    </a>
+
+    <a href="iris-shaders.html" class="mod-card">
+      <img src="iris.html1.jpg" alt="Iris Shaders" class="mod-card-thumb">
+      <div class="mod-card-body">
+        <div class="mod-card-title">Iris Shaders</div>
+        <div class="mod-card-desc">Beautiful shaders with realistic lighting and smooth gameplay visuals.</div>
+        <div class="mod-card-meta">
+          <span class="mod-card-rating">⭐ 4.8</span>
+          <span class="mod-card-downloads">⬇ 9.1K</span>
+        </div>
+        <span class="mod-cat-tag">Shaders</span>
+      </div>
+      <span class="mod-card-btn">Download</span>
+    </a>
+
+    <a href="mutant-creatures-mcpe.html" class="mod-card">
+      <img src="mutant1.jpg" alt="Mutant Creatures" class="mod-card-thumb">
+      <div class="mod-card-body">
+        <div class="mod-card-title">Mutant Creatures MCPE</div>
+        <div class="mod-card-desc">Fight giant mutant mobs and dangerous bosses in Minecraft Bedrock Edition.</div>
+        <div class="mod-card-meta">
+          <span class="mod-card-rating">⭐ 4.6</span>
+          <span class="mod-card-downloads">⬇ 5.4K</span>
+        </div>
+        <span class="mod-cat-tag">Mobs</span>
+      </div>
+      <span class="mod-card-btn">Download</span>
+    </a>
+
+    <a href="essential-mod.html" class="mod-card">
+      <img src="essential1.jpg" alt="Essential Mod" class="mod-card-thumb">
+      <span class="mod-card-badge new">⭐ New</span>
+      <div class="mod-card-body">
+        <div class="mod-card-title">Essential Mod</div>
+        <div class="mod-card-desc">Play with friends, customize cosmetics, screenshots and much more.</div>
+        <div class="mod-card-meta">
+          <span class="mod-card-rating">⭐ 4.8</span>
+          <span class="mod-card-downloads">⬇ 7.2K</span>
+        </div>
+        <span class="mod-cat-tag">Social</span>
+      </div>
+      <span class="mod-card-btn">Download</span>
+    </a>
+
+    <a href="actions-and-stuff.html" class="mod-card">
+      <img src="actions1.jpg" alt="Actions & Stuff" class="mod-card-thumb">
+      <span class="mod-card-badge">🔥 New</span>
+      <div class="mod-card-body">
+        <div class="mod-card-title">Actions & Stuff</div>
+        <div class="mod-card-desc">Best Minecraft Bedrock animation and visual enhancement packs available.</div>
+        <div class="mod-card-meta">
+          <span class="mod-card-rating">⭐ 4.7</span>
+          <span class="mod-card-downloads">⬇ 4.8K</span>
+        </div>
+        <span class="mod-cat-tag">Animation</span>
+      </div>
+      <span class="mod-card-btn">Download</span>
+    </a>
+
+  </div>
 
 </section>
 
-<!-- MODS -->
-
-<section class="section">
-
-<h2 class="section-title">
-🔥 Trending Mods
-</h2>
-
-<div class="slider-track">
-
-<div class="slider-track" id="modsContainer">
-
-<a href="sodium.html" class="card">
-
-<img src="sodium1.jpg">
-
-<div class="badge">
-🔥 TRENDING
+<!-- ===== STATS ===== -->
+<div class="stats-section fade-in">
+  <div class="stat-item">
+    <div class="stat-num" data-target="50000">0</div>
+    <div class="stat-label">Total Downloads</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="10000">0</div>
+    <div class="stat-label">Active Users</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="120">0</div>
+    <div class="stat-label">Articles</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="80">0</div>
+    <div class="stat-label">Mods & Addons</div>
+  </div>
 </div>
 
-<div class="card-content">
+<!-- ===== GAMING ARTICLES ===== -->
+<section class="section fade-in">
 
-<h3>Sodium FPS Boost</h3>
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="title-icon">📰</span>
+      Latest Articles
+    </h2>
+    <a href="backrooms.html" class="view-all">View All →</a>
+  </div>
 
-<p>
-Boost FPS and improve Minecraft performance smoothly.
-</p>
+  <div class="cards-slider" id="articlesContainer">
 
-</div>
+    <a href="gta6-hype.html" class="article-card">
+      <img src="Gta6.jpg" alt="GTA 6" class="article-card-thumb">
+      <div class="article-card-body">
+        <div class="article-card-date">📅 2 Jun 2026</div>
+        <div class="article-card-title">GTA 6 — Release Date, Gameplay & More</div>
+        <div class="article-card-desc">Everything about Rockstar's biggest upcoming game and what to expect.</div>
+        <span class="article-card-readmore">Read More →</span>
+      </div>
+    </a>
 
-</a>
+    <a href="elden-ring-nightreign.html" class="article-card">
+      <img src="Game.jpg" alt="Elden Ring" class="article-card-thumb">
+      <div class="article-card-body">
+        <div class="article-card-date">📅 1 Jun 2026</div>
+        <div class="article-card-title">Elden Ring: Nightreign — Everything We Know</div>
+        <div class="article-card-desc">Explore the dark fantasy world and all the latest Nightreign updates.</div>
+        <span class="article-card-readmore">Read More →</span>
+      </div>
+    </a>
 
-<a href="iris-shaders.html" class="card">
+    <a href="herobrine-mystery.html" class="article-card">
+      <img src="herobrine1.jpg" alt="Herobrine Mystery" class="article-card-thumb">
+      <div class="article-card-body">
+        <div class="article-card-date">📅 31 May 2026</div>
+        <div class="article-card-title">Minecraft 1.21 Update — Full Details</div>
+        <div class="article-card-desc">Herobrine: Minecraft's most famous legend explained in full detail.</div>
+        <span class="article-card-readmore">Read More →</span>
+      </div>
+    </a>
 
-<img src="iris.html1.jpg">
+    <a href="goat-simulator-3.html" class="article-card">
+      <img src="goat.html.jpg" alt="Goat Simulator 3" class="article-card-thumb">
+      <div class="article-card-body">
+        <div class="article-card-date">📅 30 May 2026</div>
+        <div class="article-card-title">Best Gaming Setup 2026</div>
+        <div class="article-card-desc">The funniest and craziest open world game ever made returns.</div>
+        <span class="article-card-readmore">Read More →</span>
+      </div>
+    </a>
 
-<div class="card-content">
+    <a href="cs2.html" class="article-card">
+      <img src="cs2.jpg" alt="CS2" class="article-card-thumb">
+      <div class="article-card-body">
+        <div class="article-card-date">📅 28 May 2026</div>
+        <div class="article-card-title">Counter-Strike 2 (CS2)</div>
+        <div class="article-card-desc">The next evolution of competitive FPS gaming — full breakdown.</div>
+        <span class="article-card-readmore">Read More →</span>
+      </div>
+    </a>
 
-<h3>Iris Shaders</h3>
+    <a href="backrooms.html" class="article-card">
+      <img src="backrooms1.jpg" alt="Backrooms" class="article-card-thumb">
+      <div class="article-card-body">
+        <div class="article-card-date">📅 25 May 2026</div>
+        <div class="article-card-title">Backrooms Mystery</div>
+        <div class="article-card-desc">Explore the creepiest internet horror phenomenon ever documented.</div>
+        <span class="article-card-readmore">Read More →</span>
+      </div>
+    </a>
 
-<p>
-Beautiful shaders with realistic lighting and smooth gameplay.
-</p>
-
-</div>
-
-</a>
-
-<a href="mutant-creatures-mcpe.html" class="card">
-
-<img src="mutant1.jpg">
-
-<div class="card-content">
-
-<h3>Mutant Creatures MCPE</h3>
-
-<p>
-Fight giant mutant mobs and dangerous bosses.
-</p>
-
-</div>
-
-</a>
-
-<a href="sodium.html" class="card">
-
-<img src="Mod.jpg">
-
-<div class="card-content">
-
-<h3>Best Minecraft Mods</h3>
-
-<p>
-Explore survival, PvP and adventure enhancing mods.
-</p>
-
-</div>
-
-</a>
-
-<a href="herobrine-mod.html" class="card">
-
-<img src="herobrine-mod1.jpg">
-
-<div class="badge">
-👻 NEW
-</div>
-
-<div class="card-content">
-
-<h3>Herobrine Mod</h3>
-
-<p>
-Add the legendary Herobrine to Minecraft PE and experience creepy adventures.
-</p>
-
-</div>
-
-</a>
-
-<a href="essential-mod.html" class="card">
-
-<img src="essential1.jpg">
-
-<div class="badge">
-⭐ NEW
-</div>
-
-<div class="card-content">
-
-<h3>Essential Mod</h3>
-
-<p>
-Play with friends, cosmetics, screenshots and much more.
-</p>
-
-</div>
-
-</a>
-
-<a href="actions-and-stuff.html" class="card">
-
-<img src="actions1.jpg">
-
-<div class="badge">
-🔥 NEW
-</div>
-
-<div class="card-content">
-
-<h3>Actions & Stuff</h3>
-
-<p>
-One of the best Minecraft Bedrock animation and visual enhancement packs.
-</p>
-
-</div>
-
-</a>
-
-<a href="dragon-mounts-addon.html" class="card">
-
-<img src="dragon1.jpg">
-
-<div class="badge">
-🐉 BEDROCK
-</div>
-
-<div class="card-content">
-
-<h3>Dragon Mounts Addon</h3>
-
-<p>
-Ride powerful dragons, hatch dragon eggs and fly across your Minecraft world.
-</p>
-
-</div>
-
-</a>
-
-</div>
+  </div>
 
 </section>
 
-<!-- ARTICLES -->
+<!-- ===== PREMIUM BANNER ===== -->
+<div class="premium-banner fade-in">
+  <span class="premium-badge-icon">👑</span>
+  <div class="premium-text">
+    <h2>Hero Verse <span>Premium</span></h2>
+    <p>Unlock exclusive mods, premium articles, early access content and special benefits for members only.</p>
+  </div>
+  <a href="login.html?redirect=premium-mod.html" id="premiumMod" class="premium-cta">
+    Go Premium →
+  </a>
+</div>
 
-<section class="section">
+<!-- ===== CENTER: PRODUCTS + SLIDER + REVIEWS ===== -->
+<div class="center-grid fade-in">
 
-<h2 class="section-title">
-📰 Gaming Articles
-</h2>
+  <!-- Left: Products -->
+  <div class="side-box">
+    <h2>🛒 Products</h2>
+    <p>Gaming accessories and peripherals for mobile and PC gamers — keyboards, headsets, controllers and more.</p>
+    <a href="products.html" class="side-btn">View Products →</a>
 
-<div class="slider-track">
+    <div class="review-box">
+      <h2 style="margin-top:20px;font-size:16px;color:var(--accent);">⭐ Community Reviews</h2>
+      <div class="review">🔥 "Best gaming website for Minecraft mods. Easy to use!"</div>
+      <div class="review">⚡ "Very smooth and professional UI. Love the articles."</div>
+      <div class="review">👾 "Found rare mods here I couldn't find anywhere else."</div>
+    </div>
+  </div>
 
-<a href="gta6-hype.html" class="card">
+  <!-- Center: Featured Slider -->
+  <div class="center-hero-slider">
+    <div class="slides">
 
-<img src="Gta6.jpg">
+      <div class="slide active">
+        <img src="banner1.jpg" alt="Featured Mod of the Week">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-tag">🔥 Featured</span>
+          <h2>Featured Mod Of The Week</h2>
+          <p>Discover the hottest Minecraft mods with one click.</p>
+          <div class="slide-btns">
+            <a href="mod.html" class="slide-btn-primary">Explore Now</a>
+          </div>
+        </div>
+      </div>
 
-<div class="card-content">
+      <div class="slide">
+        <img src="049001.jpg" alt="Creator of the Month">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-tag">👑 Creator</span>
+          <h2>Creator Of The Month</h2>
+          <p>Meet the most talented Hero Verse creator.</p>
+          <div class="slide-btns">
+            <a href="creators.html" class="slide-btn-primary">Meet Creators</a>
+          </div>
+        </div>
+      </div>
 
-<h3>GTA 6 Hype</h3>
+      <div class="slide">
+        <img src="banner3.jpg" alt="Latest Games">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-tag">🎮 Games</span>
+          <h2>Latest Games</h2>
+          <p>Discover new PC, Console and Mobile games.</p>
+          <div class="slide-btns">
+            <a href="games.html" class="slide-btn-primary">Browse Games</a>
+          </div>
+        </div>
+      </div>
 
-<p>
-Everything about Rockstar's biggest upcoming game.
-</p>
+      <div class="slide">
+        <img src="banner4.jpg" alt="Gaming News">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-tag">📰 News</span>
+          <h2>Gaming News</h2>
+          <p>Stay updated with the latest gaming world.</p>
+          <div class="slide-btns">
+            <a href="backrooms.html" class="slide-btn-primary">Read News</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <img src="banner5.jpg" alt="Join Hero Verse">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-tag">💎 Community</span>
+          <h2>Join Hero Verse</h2>
+          <p>Upload mods, join Discord and grow with us.</p>
+          <div class="slide-btns">
+            <a href="user-upload-mod.html" class="slide-btn-primary">Join Now</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="slider-arrow prev-arrow">❮</div>
+    <div class="slider-arrow next-arrow">❯</div>
+    <div class="dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+
+  <!-- Right: Discord / Community -->
+  <div class="side-box">
+    <h2>🎮 Hero Gaming</h2>
+    <iframe
+      src="https://discord.com/widget?id=1267870102108377128&theme=dark"
+      width="100%"
+      height="280"
+      allowtransparency="true"
+      frameborder="0"
+      style="border-radius:12px;">
+    </iframe>
+    <br>
+    <a href="https://discord.gg/eXZ227G5" class="side-btn" style="margin-top:12px;background:#5865F2;">💬 Join Discord</a>
+  </div>
 
 </div>
 
-</a>
-
-<a href="elden-ring-nightreign.html" class="card">
-
-<img src="Game.jpg">
-
-<div class="card-content">
-
-<h3>Elden Ring</h3>
-
-<p>
-Explore the dark fantasy world and latest updates.
-</p>
-
+<!-- ===== MEMBERS ONLY ===== -->
+<div class="members-section fade-in">
+  <div class="section-header" style="margin-bottom:16px;">
+    <h2 class="section-title"><span class="title-icon">🔒</span> Members Only</h2>
+  </div>
+  <a href="login.html?redirect=premium-mod.html" class="members-card" id="premiumModCard">
+    <span class="members-lock">🔒</span>
+    <div class="members-info">
+      <h3>Premium Mods & Exclusive Content</h3>
+      <p>Login to unlock upcoming premium mods, exclusive articles, and special downloads reserved for Hero Verse members.</p>
+    </div>
+    <span class="members-btn">Unlock Access →</span>
+  </a>
 </div>
 
-</a>
+<!-- ===== COMMUNITY SECTION ===== -->
+<section class="community-section fade-in">
 
-<a href="goat-simulator-3.html" class="card">
+  <div class="section-header">
+    <h2 class="section-title"><span class="title-icon">🌐</span> Join Our Community</h2>
+  </div>
 
-<img src="goat.html.jpg">
+  <div class="community-grid">
 
-<div class="card-content">
+    <a href="https://discord.gg/eXZ227G5" class="community-card" target="_blank" rel="noopener">
+      <span class="community-icon">💬</span>
+      <h3>Discord</h3>
+      <p>Chat, share mods, get help and be part of the Hero Verse family with 5,000+ members.</p>
+      <span class="community-join-btn discord-btn">Join Server</span>
+    </a>
 
-<h3>Goat Simulator 3</h3>
+    <a href="https://youtube.com/@herogamingxyz?si=aRTZqSUwuIjctIzI" class="community-card" target="_blank" rel="noopener">
+      <span class="community-icon">▶️</span>
+      <h3>YouTube</h3>
+      <p>Watch mod reviews, gaming tutorials, tips and the latest gaming news on our channel.</p>
+      <span class="community-join-btn youtube-btn">Subscribe</span>
+    </a>
 
-<p>
-The funniest and craziest open world game ever.
-</p>
+    <a href="https://www.instagram.com/hero_gamingxyz/" class="community-card" target="_blank" rel="noopener">
+      <span class="community-icon">📸</span>
+      <h3>Instagram</h3>
+      <p>Follow for daily gaming reels, mod showcases and Hero Verse community highlights.</p>
+      <span class="community-join-btn insta-btn">Follow</span>
+    </a>
 
-<span class="btn">
-Read More
-</span>
-
-</div>
-
-</a>
-
-<a href="roblox-guide.html" class="card">
-
-<img src="roblox1.jpg">
-
-<div class="card-content">
-
-<h3>Roblox Article</h3>
-
-<p>
-Explore Roblox adventures and multiplayer fun.
-</p>
-
-<span class="btn">
-Read More
-</span>
-
-</div>
-
-</a>
-
-<a href="gta5-chaos-mod.html" class="card">
-
-<img src="chaos1.jpg">
-
-<div class="card-content">
-
-<h3>GTA 5 Chaos Mod</h3>
-
-<p>
-One of the funniest GTA 5 mods ever created.
-</p>
-
-</div>
-
-</a>
-
-<a href="herobrine-mystery.html" class="card">
-
-<img src="herobrine1.jpg">
-
-<div class="card-content">
-
-<h3>Herobrine Mystery</h3>
-
-<p>
-Minecraft's most famous legend and mystery.
-</p>
-
-<span class="btn">Read More</span>
-
-</div>
-
-</a>
-<a href="backrooms.html" class="card">
-
-<img src="backrooms1.jpg">
-
-<div class="card-content">
-
-<h3>Backrooms Mystery</h3>
-
-<p>
-Explore the creepiest internet horror phenomenon.
-</p>
-
-<span class="btn">
-Read More
-</span>
-
-</div>
-
-</a>
-<a href="cs2.html" class="card">
-
-<img src="cs2.jpg">
-
-<div class="card-content">
-
-<h3>Counter-Strike 2 (CS2)</h3>
-
-<p>The next evolution of competitive FPS gaming.</p>
-
-</div>
-
-</a>
-
-<div id="articlesContainer" style="display:contents;"></div>
-
-</div>
+  </div>
 
 </section>
 
-<section class="section">
-
-<h2 class="section-title">
-🔒 Members Only Mods
-</h2>
-
-<div class="slider-track">
-
-<a href="#" class="card" id="premiumMod">
-    
-<img src="premium-mod.jpg">
-
-<div class="badge">
-🔒 PREMIUM
-</div>
-
-<div class="card-content">
-
-<h3>Premium Mod</h3>
-
-<p>
-Members will get access to exclusive mods, articles and downloads.
-</p>
-
-<h3>Exclusive Mods</h3>
-
-<p>
-Login to unlock upcoming premium mods and special downloads.
-</p>
-
-</div>
-
-</a>
-
-<a href="user-upload-mod.html" class="card upload-card-parent">
-
-<div class="upload-card">
-
-<img src="Upload-Icon-Logo-Transparent-PNG.png" class="upload-logo">
-
-<div class="upload-title">
-📤 Upload Your Mod
-</div>
-
-<div class="upload-desc">
-Share your Minecraft mod with Hero Verse Community
-</div>
-
-</div>
-
-</a>
-
-<a href="games.html" class="card">
-
-<div class="badge">
-🎮 NEW
-</div>
-
-<img src="game-controller.png">
-
-<div class="card-content">
-
-<h3>Latest Games</h3>
-
-<p>
-Explore the newest PC, Mobile & Console Games with full details.
-</p>
-
-<h3>AAA • Indie • Free</h3>
-
-<p>
-Discover Steam, Epic Games, Xbox, PlayStation and more.
-</p>
-
-</div>
-
-</a>
-
-</div>
-
-</section>
-
-<!-- CENTER GRID -->
-
-<section class="center-grid">
-
-<div class="side-box">
-
-<h2>
-🛒 Products
-</h2>
-
-<p>
-Gaming accessories and products for mobile & PC gamers.
-</p>
-
-<a href="products.html" class="side-btn">
-View Products
-</a>
-
-</div>
-
-<div class="hero-slider">
-
-<div class="slides">
-
-<div class="slide active">
-
-<img src="banner1.jpg">
-
-<div class="slide-content">
-
-<span class="tag">🔥 FEATURED</span>
-
-<h2>Featured Mod Of The Week</h2>
-
-<p>
-Discover the hottest Minecraft mods with one click.
-</p>
-
-<a href="mod.html" class="slide-btn">
-Explore Now
-</a>
-
-</div>
-
-</div>
-
-<div class="slide">
-
-<img src="049001.jpg">
-
-<div class="slide-content">
-
-<span class="tag">👑 CREATOR</span>
-
-<h2>Creator Of The Month</h2>
-
-<p>
-Meet the most talented Hero Verse creator.
-</p>
-
-<a href="creators.html" class="slide-btn">
-Meet Creators
-</a>
-</div>
-
-</div>
-
-<div class="slide">
-
-<img src="banner3.jpg">
-
-<div class="slide-content">
-
-<span class="tag">🎮 GAMES</span>
-
-<h2>Latest Games</h2>
-
-<p>
-Discover new PC, Console and Mobile games.
-</p>
-
-<a href="games.html" class="slide-btn">
-Browse Games
-</a>
-
-</div>
-
-</div>
-
-<div class="slide">
-
-<img src="banner4.jpg">
-
-<div class="slide-content">
-
-<span class="tag">📰 NEWS</span>
-
-<h2>Gaming News</h2>
-
-<p>
-Stay updated with the latest gaming world.
-</p>
-
-<a href="articles.html" class="slide-btn">
-Read News
-</a>
-
-</div>
-
-</div>
-
-<div class="slide">
-
-<img src="banner5.jpg">
-
-<div class="slide-content">
-
-<span class="tag">💎 COMMUNITY</span>
-
-<h2>Join Hero Verse</h2>
-
-<p>
-Upload mods, join Discord and grow with us.
-</p>
-
-<a href="user-upload-mod.html" class="slide-btn">
-Join Now
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="slider-arrow prev-arrow">&#10094;</div>
-
-<div class="slider-arrow next-arrow">&#10095;</div>
-
-<div class="dots">
-
-<span class="dot active"></span>
-
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-</div>
-
-</div>
-
-<div class="review-box">
-
-<h2 style="margin-top:25px;color:#00ff99;">
-⭐ Reviews
-</h2>
-
-<div class="review">
-🔥 “Best gaming website for mods.”
-</div>
-
-<div class="review">
-⚡ “Very smooth and professional UI.”
-</div>
-
-</div>
-
-</div>
-
-<div class="side-box">
-
-<h2>
-🎮 Hero Gaming
-</h2>
-
-<iframe
-src="https://discord.com/widget?id=1267870102108377128&theme=dark"
-width="100%"
-height="320"
-allowtransparency="true"
-frameborder="0">
-</iframe>
-
-<br><br>
-
-<a href="https://discord.gg/eXZ227G5" class="side-btn">
-Join Discord Server
-</a>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
 
-<div class="footer-grid">
+  <div class="footer-grid">
 
-<div>
+    <!-- Brand -->
+    <div class="footer-brand">
+      <div class="footer-brand-logo">
+        <img src="hero.gaming.jpg" alt="Hero Verse">
+        <span>HERO VERSE</span>
+      </div>
+      <p>The ultimate destination for Minecraft mods, gaming articles, products and the latest gaming news.</p>
+      <div class="footer-socials">
+        <a href="https://discord.gg/eXZ227G5" class="footer-social-btn" title="Discord">💬</a>
+        <a href="https://youtube.com/@herogamingxyz" class="footer-social-btn" title="YouTube">▶️</a>
+        <a href="https://www.instagram.com/hero_gamingxyz/" class="footer-social-btn" title="Instagram">📸</a>
+      </div>
+    </div>
 
-<h3>Create</h3>
+    <!-- Create -->
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="products.html">Gaming Products</a>
+      <a href="sodium.html">Minecraft Mods</a>
+      <a href="iris-shaders.html">Shaders</a>
+      <a href="gta6-hype.html">Gaming News</a>
+      <a href="games.html">Latest Games</a>
+    </div>
 
-<a href="products.html">Gaming Products</a>
+    <!-- Games -->
+    <div class="footer-col">
+      <h4>Games</h4>
+      <a href="#">Minecraft</a>
+      <a href="#">Roblox</a>
+      <a href="#">Valorant</a>
+      <a href="#">Free Fire</a>
+      <a href="#">GTA 6</a>
+    </div>
 
-<a href="sodium.html">Minecraft Mods</a>
+    <!-- Support -->
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="help-center.html">Help Center</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
 
-<a href="iris-shaders.html">Shaders</a>
+  </div>
 
-<a href="gta6-hype.html">Gaming News</a>
-
-</div>
-
-<div>
-
-<h3>Games</h3>
-
-<a href="#">Minecraft</a>
-
-<a href="#">Roblox</a>
-
-<a href="#">Valorant</a>
-
-<a href="#">Free Fire</a>
-
-</div>
-
-<div>
-
-<h3>Community</h3>
-
-<a href="https://discord.gg/eXZ227G5">
-Discord
-</a>
-
-<a href="https://www.instagram.com/hero_gamingxyz/?__pwa=1#">
-Instagram
-</a>
-
-<a href="https://youtube.com/@herogamingxyz?si=aRTZqSUwuIjctIzI">
-YouTube
-</a>
-
-</div>
-
-<div>
-
-<h3>Support</h3>
-
-<a href="help-center.html">Help Center</a>
-
-<a href="privacy-policy.html">Privacy Policy</a>
-
-<a href="about.html">About Us</a>
-
-<a href="contact.html">Contact</a>
-
-<a href="login.html">Login</a>
-
-</div>
-
-</div>
-
-<p class="copyright">
-© 2026 Hero Verse | Powered By herogamingxyz 
-</p>
+  <div class="footer-bottom">
+    <p class="copyright">© 2026 Hero Verse | Powered by herogamingxyz</p>
+    <div class="footer-bottom-links">
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="help-center.html">Help</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
 
 </footer>
 
-<!-- POPUP -->
+<!-- ===== POPUP ===== -->
+<div class="popup" id="popup">🔥 New Gaming Mods Added!</div>
 
-<div class="popup" id="popup">
-🔥 New Gaming Mods Added!
-</div>
+<!-- ===== FLOATING DISCORD ===== -->
+<a href="https://discord.gg/eXZ227G5" class="discord-float" title="Join Discord">💬</a>
 
-<!-- FLOAT DISCORD -->
+<!-- ===== MOBILE BOTTOM NAV ===== -->
+<nav class="mobile-nav">
+  <a href="#" class="active">
+    <span class="mobile-nav-icon">🏠</span>
+    Home
+  </a>
+  <a href="sodium.html">
+    <span class="mobile-nav-icon">🧩</span>
+    Mods
+  </a>
+  <a href="user-upload-mod.html" class="upload-nav">➕</a>
+  <a href="profile.html">
+    <span class="mobile-nav-icon">👤</span>
+    Profile
+  </a>
+  <a href="help-center.html">
+    <span class="mobile-nav-icon">⋯</span>
+    More
+  </a>
+</nav>
 
-<a href="https://discord.gg/eXZ227G5" class="discord-float">
-💬
-</a>
-
+<!-- ===== SCRIPTS ===== -->
 <script>
 
+/* ---- Random Quote (kept) ---- */
 const quotes = [
-
-"🎮 Eat. Sleep. Game. Repeat.",
-"🔥 Legends Never Rage Quit.",
-"⚡ Gamers Don’t Die, They Respawn.",
-"👑 Victory Loves Preparation.",
-"💀 One More Game...",
-"🚀 Gaming Is My Escape.",
-"🎯 Skill Beats Luck."
-
+  "🎮 Eat. Sleep. Game. Repeat.",
+  "🔥 Legends Never Rage Quit.",
+  "⚡ Gamers Don't Die, They Respawn.",
+  "👑 Victory Loves Preparation.",
+  "💀 One More Game...",
+  "🚀 Gaming Is My Escape.",
+  "🎯 Skill Beats Luck."
 ];
 
-const randomQuote =
-quotes[Math.floor(Math.random()*quotes.length)];
+/* ---- Auto-hide popup ---- */
+setTimeout(() => {
+  const p = document.getElementById("popup");
+  if(p){ p.style.display = "none"; }
+}, 5000);
 
-document.getElementById("quote").innerText =
-randomQuote;
+/* ---- Universal Slider Factory ---- */
+function initSlider(sliderEl) {
+  const slides = sliderEl.querySelectorAll('.slide');
+  const dots = sliderEl.querySelectorAll('.dot');
+  if (!slides.length) return;
 
-const sliders =
-document.querySelectorAll('.slider-track');
+  let current = 0;
+  let timer;
 
-sliders.forEach(slider => {
+  function showSlide(idx) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[idx].classList.add('active');
+    if (dots[idx]) dots[idx].classList.add('active');
+  }
 
-setInterval(() => {
+  function next() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
 
-slider.scrollBy({
-left:300,
-behavior:'smooth'
-});
+  function prev() {
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+  }
 
-if(
-slider.scrollLeft + slider.clientWidth
->= slider.scrollWidth - 10
-){
+  /* Dots */
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => { current = i; showSlide(i); });
+  });
 
-slider.scrollTo({
-left:0,
-behavior:'smooth'
-});
+  /* Arrows */
+  const prevBtn = sliderEl.querySelector('.prev-arrow');
+  const nextBtn = sliderEl.querySelector('.next-arrow');
+  if (prevBtn) prevBtn.addEventListener('click', prev);
+  if (nextBtn) nextBtn.addEventListener('click', next);
 
+  /* Auto play */
+  function startAuto() { timer = setInterval(next, 5000); }
+  function stopAuto()  { clearInterval(timer); }
+
+  sliderEl.addEventListener('mouseenter', stopAuto);
+  sliderEl.addEventListener('mouseleave', startAuto);
+
+  /* Touch / Swipe */
+  let startX = 0;
+  sliderEl.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  sliderEl.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (dx < -50) next();
+    if (dx > 50)  prev();
+  });
+
+  startAuto();
 }
 
-},3000);
+/* Initialize both sliders */
+document.querySelectorAll('.hero-slider, .center-hero-slider').forEach(initSlider);
 
+/* ---- Scroll fade-in ---- */
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+fadeEls.forEach(el => observer.observe(el));
+
+/* ---- Animated Counters ---- */
+function animateCounter(el, target) {
+  let count = 0;
+  const step = Math.ceil(target / 60);
+  const timer = setInterval(() => {
+    count += step;
+    if (count >= target) { count = target; clearInterval(timer); }
+    el.textContent = count.toLocaleString();
+  }, 25);
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.stat-num').forEach(el => {
+        animateCounter(el, parseInt(el.dataset.target));
+      });
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) statsObserver.observe(statsSection);
+
+/* ---- Horizontal slider drag (mouse) ---- */
+document.querySelectorAll('.cards-slider').forEach(slider => {
+  let isDown = false, startX, scrollLeft;
+  slider.addEventListener('mousedown', e => {
+    isDown = true;
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+    slider.style.cursor = 'grabbing';
+  });
+  slider.addEventListener('mouseleave', () => { isDown = false; slider.style.cursor = ''; });
+  slider.addEventListener('mouseup', () => { isDown = false; slider.style.cursor = ''; });
+  slider.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    slider.scrollLeft = scrollLeft - (x - startX) * 1.4;
+  });
 });
-
-setTimeout(()=>{
-
-document.getElementById("popup").style.display="none";
-
-},5000);
 
 </script>
 
+<!-- ===== FIREBASE ===== -->
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-
 import {
-getAuth,
-onAuthStateChanged,
-signOut
+  getAuth,
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
 import {
-getFirestore,
-doc,
-getDoc,
-collection,
-getDocs
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
-authDomain: "hero-verse-67e33.firebaseapp.com",
-projectId: "hero-verse-67e33",
-storageBucket: "hero-verse-67e33.firebasestorage.app",
-messagingSenderId: "227494840218",
-appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+  apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+  authDomain: "hero-verse-67e33.firebaseapp.com",
+  projectId: "hero-verse-67e33",
+  storageBucket: "hero-verse-67e33.firebasestorage.app",
+  messagingSenderId: "227494840218",
+  appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
 };
 
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
-
 const db = getFirestore(app);
 
-onAuthStateChanged(auth, async(user)=>{
+/* ---- Auth State ---- */
+onAuthStateChanged(auth, async (user) => {
 
-if(user){
+  if (user) {
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
 
-const docRef = doc(db,"users",user.uid);
+    if (docSnap.exists()) {
+      document.getElementById("userInfo").innerHTML = `
+        <a href="profile.html" style="color:var(--text);font-weight:600;font-size:14px;display:flex;align-items:center;gap:6px;text-decoration:none;">
+          👤 ${docSnap.data().username}
+        </a>`;
+    }
 
-const docSnap = await getDoc(docRef);
+    document.getElementById("logoutBtn").style.display = "inline-block";
 
-if(docSnap.exists()){
+  } else {
+    document.getElementById("userInfo").innerHTML = `
+      <a href="login.html" class="btn-login">Login</a>
+      <a href="signup.html" class="btn-signup">Sign Up</a>
+    `;
+    document.getElementById("logoutBtn").style.display = "none";
+  }
 
-document.getElementById("userInfo").innerHTML =
-`<a href="profile.html"
-style="
-color:white;
-text-decoration:none;
-font-weight:bold;
-">
-👤 ${docSnap.data().username}
-</a>`;
+});
 
+/* ---- Logout ---- */
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  signOut(auth).then(() => location.reload());
+});
+
+/* ---- Premium Mod Cards (auth check) ---- */
+function addPremiumCheck(el) {
+  if (!el) return;
+  el.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (auth.currentUser) {
+      window.location.href = "premium-mod.html";
+    } else {
+      window.location.href = "login.html?redirect=premium-mod.html";
+    }
+  });
 }
+addPremiumCheck(document.getElementById("premiumMod"));
+addPremiumCheck(document.getElementById("premiumModCard"));
 
-document.getElementById("logoutBtn").style.display =
-"inline-block";
-
-}else{
-
-document.getElementById("userInfo").innerHTML =
-`
-<a href="login.html"
-style="
-padding:10px 15px;
-border:none;
-border-radius:10px;
-background:#ff4444;
-color:white;
-cursor:pointer;
-text-decoration:none;
-font-weight:bold;
-display:inline-block;
-margin-right:10px;
-">
-Login
-</a>
-
-<a href="signup.html"
-style="
-padding:10px 15px;
-border:none;
-border-radius:10px;
-background:#ff4444;
-color:white;
-cursor:pointer;
-text-decoration:none;
-font-weight:bold;
-display:inline-block;
-">
-Sign Up
-</a>
-`;
-
-document.getElementById("logoutBtn").style.display =
-"none";
-
-}
-
+/* ---- Dynamic Mods from Firestore ---- */
+const modsContainer = document.getElementById("modsContainer");
+getDocs(collection(db, "mods")).then((querySnapshot) => {
+  querySnapshot.forEach((docu) => {
+    const mod = docu.data();
+    modsContainer.innerHTML += `
+      <a href="mod.html?id=${docu.id}" class="mod-card">
+        <img src="${mod.image1}" alt="${mod.title}" class="mod-card-thumb">
+        <span class="mod-card-badge">${mod.category || 'Addon'}</span>
+        <div class="mod-card-body">
+          <div class="mod-card-title">${mod.title}</div>
+          <div class="mod-card-desc">${mod.description ? mod.description.substring(0, 80) + '...' : ''}</div>
+          <span class="mod-cat-tag">${mod.category || 'Mod'}</span>
+        </div>
+        <span class="mod-card-btn">Download</span>
+      </a>
+    `;
+  });
 });
 
-document.getElementById("logoutBtn")
-.addEventListener("click",()=>{
-
-signOut(auth).then(()=>{
-
-location.reload();
-
+/* ---- Dynamic Articles from Firestore ---- */
+const articlesContainer = document.getElementById("articlesContainer");
+getDocs(collection(db, "articles")).then((snapshot) => {
+  snapshot.forEach((docu) => {
+    const a = docu.data();
+    articlesContainer.innerHTML += `
+      <a href="article.html?id=${docu.id}" class="article-card">
+        <img src="${a.coverImage || a.image1}" alt="${a.title}" class="article-card-thumb">
+        <div class="article-card-body">
+          <div class="article-card-date">📅 ${a.date || ''}</div>
+          <div class="article-card-title">${a.title}</div>
+          <div class="article-card-desc">${a.shortDescription ? a.shortDescription.substring(0, 80) + '...' : ''}</div>
+          <span class="article-card-readmore">Read More →</span>
+        </div>
+      </a>
+    `;
+  });
 });
 
-});
-
-document.getElementById("premiumMod").addEventListener("click",(e)=>{
-
-e.preventDefault();
-
-if(auth.currentUser){
-
-window.location.href = "premium-mod.html";
-
-}else{
-
-window.location.href =
-"login.html?redirect=premium-mod.html";
-
-}
-
-});
-const modsContainer =
-document.getElementById("modsContainer");
-
-getDocs(collection(db,"mods"))
-.then((querySnapshot)=>{
-
-querySnapshot.forEach((docu)=>{
-
-const mod = docu.data();
-
-modsContainer.innerHTML += `
-
-<a href="mod.html?id=${docu.id}" class="card">
-
-<img src="${mod.image1}">
-
-<div class="badge">
-🔥 ${mod.category || "Addon"}
-</div>
-
-<div class="card-content">
-
-<h3>${mod.title}</h3>
-
-<p>${mod.description.substring(0,80)}...</p>
-
-</div>
-
-</a>
-
-`;
-
-});
-
-});
-
-const articlesContainer =
-document.getElementById("articlesContainer");
-
-getDocs(collection(db,"articles"))
-.then((snapshot)=>{
-
-snapshot.forEach((docu)=>{
-
-const a = docu.data();
-
-articlesContainer.innerHTML += `
-
-<a href="article.html?id=${docu.id}" class="card">
-
-<img src="${a.coverImage || a.image1}">
-
-<div class="card-content">
-
-<h3>${a.title}</h3>
-
-<p>${a.shortDescription.substring(0,80)}...</p>
-
-<span class="btn">
-Read More
-</span>
-
-</div>
-
-</a>
-
-`;
-
-});
-
-});
-
-const searchInput =
-document.getElementById("searchInput");
-
-const searchResults =
-document.getElementById("searchResults");
-
+/* ---- Search System ---- */
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
 let allSearchItems = [];
 
-// MODS
-getDocs(collection(db,"mods"))
-.then((snapshot)=>{
-
-snapshot.forEach((docu)=>{
-
-const mod = docu.data();
-
-allSearchItems.push({
-title: mod.title,
-url: `mod.html?id=${docu.id}`
+// Collect from Firestore for search
+[
+  { col: "mods",     url: (id) => `mod.html?id=${id}` },
+  { col: "articles", url: (id) => `article.html?id=${id}` },
+  { col: "products", url: (_, d) => d.affiliateLink }
+].forEach(({ col, url }) => {
+  getDocs(collection(db, col)).then((snap) => {
+    snap.forEach((docu) => {
+      const data = docu.data();
+      allSearchItems.push({
+        title: data.title,
+        url: url(docu.id, data)
+      });
+    });
+  });
 });
 
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  searchResults.innerHTML = "";
+  if (query.length < 1) return;
+
+  const matches = allSearchItems.filter(item =>
+    item.title && item.title.toLowerCase().includes(query)
+  ).slice(0, 8);
+
+  matches.forEach(item => {
+    searchResults.innerHTML += `
+      <div class="search-item" onclick="window.location.href='${item.url}'">
+        ${item.title}
+      </div>`;
+  });
 });
 
-});
-
-// ARTICLES
-getDocs(collection(db,"articles"))
-.then((snapshot)=>{
-
-snapshot.forEach((docu)=>{
-
-const article = docu.data();
-
-allSearchItems.push({
-title: article.title,
-url: `article.html?id=${docu.id}`
-});
-
-});
-
-});
-
-// PRODUCTS
-getDocs(collection(db,"products"))
-.then((snapshot)=>{
-
-snapshot.forEach((docu)=>{
-
-const product = docu.data();
-
-allSearchItems.push({
-title: product.title,
-url: product.affiliateLink
-});
-
-});
-
-});
-
-searchInput.addEventListener("input",()=>{
-
-const query =
-searchInput.value.toLowerCase();
-
-searchResults.innerHTML = "";
-
-if(query.length < 1){
-
-searchResults.innerHTML = "";
-return;
-
-}
-
-allSearchItems.forEach(item=>{
-
-if(item.title.toLowerCase()
-.includes(query)){
-
-searchResults.innerHTML += `
-
-<div class="search-item"
-onclick="window.location.href='${item.url}'">
-
-${item.title}
-
-</div>
-
-`;
-
-}
-
-});
-
-});
-
-// ===== HERO HIGHLIGHTS SLIDER =====
-
-const slides = document.querySelectorAll(".slide");
-const dots = document.querySelectorAll(".dot");
-
-let currentSlide = 0;
-
-function showSlide(index){
-
-slides.forEach(slide=>{
-slide.classList.remove("active");
-});
-
-dots.forEach(dot=>{
-dot.classList.remove("active");
-});
-
-slides[index].classList.add("active");
-dots[index].classList.add("active");
-
-}
-
-// Dot click support
-
-dots.forEach((dot,index)=>{
-
-dot.addEventListener("click",()=>{
-
-currentSlide = index;
-
-showSlide(currentSlide);
-
-});
-
-});
-
-// ===== HERO SLIDER ARROWS =====
-
-const prevBtn = document.querySelector(".prev-arrow");
-const nextBtn = document.querySelector(".next-arrow");
-
-function nextSlide(){
-
-currentSlide++;
-
-if(currentSlide >= slides.length){
-currentSlide = 0;
-}
-
-showSlide(currentSlide);
-
-}
-
-function prevSlide(){
-
-currentSlide--;
-
-if(currentSlide < 0){
-currentSlide = slides.length - 1;
-}
-
-showSlide(currentSlide);
-
-}
-
-nextBtn.addEventListener("click",()=>{
-
-nextSlide();
-
-});
-
-prevBtn.addEventListener("click",()=>{
-
-prevSlide();
-
-});
-
-// Pause auto slide on hover
-
-const heroSlider = document.querySelector(".hero-slider");
-
-let autoSlide = setInterval(nextSlide,5000);
-
-heroSlider.addEventListener("mouseenter",()=>{
-
-clearInterval(autoSlide);
-
-});
-
-heroSlider.addEventListener("mouseleave",()=>{
-
-autoSlide = setInterval(nextSlide,5000);
-
-});
-
-// Mobile Swipe
-
-let startX = 0;
-
-heroSlider.addEventListener("touchstart",(e)=>{
-
-startX = e.touches[0].clientX;
-
-});
-
-heroSlider.addEventListener("touchend",(e)=>{
-
-let endX = e.changedTouches[0].clientX;
-
-if(startX - endX > 50){
-
-nextSlide();
-
-}
-
-if(endX - startX > 50){
-
-prevSlide();
-
-}
-
+// Close search on outside click
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".header-search")) {
+    searchResults.innerHTML = "";
+  }
 });
 
 </script>
 
 </body>
-  </html>
+</html>
