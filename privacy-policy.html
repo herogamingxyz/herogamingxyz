@@ -1,89 +1,680 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | Hero Verse</title>
+<link rel="icon" type="image/png" href="hero.gaming.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-<script>
-window.dataLayer = window.dataLayer || [];
-
-function gtag(){
-dataLayer.push(arguments);
+:root {
+  --bg:#090909; --surface:#111; --card:#141414;
+  --border:rgba(255,255,255,0.07); --accent:#00ff99;
+  --accent2:#00c8ff; --accent-dim:rgba(0,255,153,0.1);
+  --text:#f0f0f0; --muted:#888;
+  --radius-sm:10px; --radius-md:16px; --radius-lg:22px;
+  --transition:0.25s ease;
 }
 
-gtag('js', new Date());
+body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; line-height:1.7; }
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-thumb { background:var(--accent); border-radius:20px; }
 
-gtag('config', 'G-1VMS2D4KP5');
-</script>
+/* ── HEADER ── */
+.header {
+  position:sticky; top:0; z-index:999;
+  background:rgba(9,9,9,0.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 28px; height:62px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.header-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.header-logo img { width:36px; height:36px; border-radius:50%; border:2px solid var(--accent); object-fit:cover; }
+.header-logo span { font-family:'Rajdhani',sans-serif; font-size:20px; font-weight:700; color:var(--accent); letter-spacing:1px; }
+.back-btn { display:flex; align-items:center; gap:6px; color:var(--accent); font-size:13px; font-weight:600; text-decoration:none; padding:8px 16px; border:1px solid rgba(0,255,153,0.25); border-radius:var(--radius-sm); transition:var(--transition); }
+.back-btn:hover { background:var(--accent-dim); }
 
-  <style>
+/* ── HERO BANNER ── */
+.hero-banner {
+  background:linear-gradient(135deg,#0a1a0a,#090d17,#0a1a14);
+  border-bottom:1px solid var(--border);
+  padding:64px 28px 48px;
+  text-align:center;
+  position:relative; overflow:hidden;
+}
+.hero-banner::before {
+  content:'';
+  position:absolute; top:-120px; left:50%; transform:translateX(-50%);
+  width:500px; height:500px;
+  background:radial-gradient(circle, rgba(0,255,153,0.07) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-icon { font-size:56px; margin-bottom:16px; display:block; }
+.hero-banner h1 { font-family:'Rajdhani',sans-serif; font-size:42px; font-weight:700; margin-bottom:12px; }
+.hero-banner h1 span { color:var(--accent); }
+.hero-banner p { color:var(--muted); font-size:15px; max-width:540px; margin:0 auto 24px; }
+.meta-row { display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; }
+.meta-chip { display:inline-flex; align-items:center; gap:6px; background:var(--card); border:1px solid var(--border); padding:7px 14px; border-radius:30px; font-size:12px; color:var(--muted); }
+.meta-chip span { color:var(--accent); font-weight:600; }
 
-    body{
-      background:#0f0f0f;
-      color:white;
-      font-family:Arial;
-      padding:30px;
-      line-height:1.8;
-    }
+/* ── LAYOUT ── */
+.page-wrap {
+  max-width:1100px; margin:0 auto;
+  padding:48px 24px 80px;
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:32px;
+  align-items:start;
+}
 
-    h1{
-      color:#00ff99;
-      margin-bottom:20px;
-    }
+/* ── SIDEBAR TOC ── */
+.toc {
+  position:sticky; top:82px;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:24px;
+}
+.toc h3 { font-family:'Rajdhani',sans-serif; font-size:16px; font-weight:700; color:var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:6px; }
+.toc-list { list-style:none; display:flex; flex-direction:column; gap:4px; }
+.toc-list a {
+  display:flex; align-items:center; gap:8px;
+  color:var(--muted); font-size:13px; padding:8px 10px;
+  border-radius:var(--radius-sm); text-decoration:none;
+  transition:var(--transition); border-left:2px solid transparent;
+}
+.toc-list a:hover, .toc-list a.active { color:var(--accent); background:var(--accent-dim); border-left-color:var(--accent); }
+.toc-list a .num { font-size:10px; color:var(--accent); font-weight:700; opacity:0.7; width:16px; }
 
-    p{
-      color:#ccc;
-      margin-bottom:15px;
-    }
+.toc-footer { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); }
+.toc-footer p { font-size:11px; color:var(--muted); line-height:1.6; }
+.toc-footer a { color:var(--accent); text-decoration:none; }
 
-    a{
-      color:#00ff99;
-    }
+/* ── MAIN CONTENT ── */
+.policy-content { display:flex; flex-direction:column; gap:20px; }
 
-  </style>
+/* Summary cards row */
+.summary-row { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:8px; }
+.summary-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px; text-align:center; transition:var(--transition); }
+.summary-card:hover { border-color:rgba(0,255,153,0.25); transform:translateY(-3px); }
+.summary-card .s-icon { font-size:28px; margin-bottom:8px; }
+.summary-card h4 { font-family:'Rajdhani',sans-serif; font-size:14px; font-weight:700; color:var(--accent); margin-bottom:4px; }
+.summary-card p { font-size:11px; color:var(--muted); line-height:1.5; }
 
+/* Policy section card */
+.policy-section {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:28px;
+  transition:var(--transition);
+  scroll-margin-top:90px;
+}
+.policy-section:hover { border-color:rgba(0,255,153,0.12); }
+
+.section-header { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.section-num {
+  width:34px; height:34px; border-radius:50%;
+  background:var(--accent-dim); border:1px solid rgba(0,255,153,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Rajdhani',sans-serif; font-size:14px; font-weight:700; color:var(--accent);
+  flex-shrink:0;
+}
+.section-icon { font-size:22px; flex-shrink:0; }
+.section-title-text { font-family:'Rajdhani',sans-serif; font-size:20px; font-weight:700; }
+
+.policy-section p { color:#ccc; font-size:14px; margin-bottom:12px; }
+.policy-section p:last-child { margin-bottom:0; }
+
+/* Info list */
+.info-list { list-style:none; display:flex; flex-direction:column; gap:8px; margin:12px 0; }
+.info-list li {
+  display:flex; align-items:flex-start; gap:10px;
+  background:rgba(255,255,255,0.03); border:1px solid var(--border);
+  border-radius:var(--radius-sm); padding:12px 14px; font-size:13px; color:#ccc;
+}
+.info-list li .li-icon { font-size:15px; flex-shrink:0; margin-top:1px; }
+
+/* Data table */
+.data-table { width:100%; border-collapse:collapse; margin:14px 0; font-size:13px; }
+.data-table th { background:rgba(0,255,153,0.08); color:var(--accent); padding:10px 14px; text-align:left; font-weight:600; border-bottom:1px solid var(--border); }
+.data-table td { padding:10px 14px; border-bottom:1px solid rgba(255,255,255,0.04); color:#ccc; vertical-align:top; }
+.data-table tr:last-child td { border-bottom:none; }
+.data-table tr:hover td { background:rgba(255,255,255,0.02); }
+
+/* Highlight box */
+.highlight-box {
+  background:rgba(0,255,153,0.06); border:1px solid rgba(0,255,153,0.18);
+  border-left:3px solid var(--accent); border-radius:var(--radius-sm);
+  padding:14px 16px; font-size:13px; color:#ccc; margin:12px 0;
+  display:flex; gap:10px; align-items:flex-start;
+}
+.highlight-box .hb-icon { font-size:18px; flex-shrink:0; }
+
+.warning-box {
+  background:rgba(255,170,0,0.06); border:1px solid rgba(255,170,0,0.2);
+  border-left:3px solid #ffaa00; border-radius:var(--radius-sm);
+  padding:14px 16px; font-size:13px; color:#ccc; margin:12px 0;
+  display:flex; gap:10px; align-items:flex-start;
+}
+.warning-box .hb-icon { font-size:18px; flex-shrink:0; color:#ffaa00; }
+
+/* Rights grid */
+.rights-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin:12px 0; }
+.right-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:var(--radius-md); padding:14px; transition:var(--transition); }
+.right-card:hover { border-color:rgba(0,255,153,0.2); }
+.right-card h5 { font-size:13px; font-weight:600; color:var(--accent); margin-bottom:4px; display:flex; align-items:center; gap:6px; }
+.right-card p { font-size:12px; color:var(--muted); line-height:1.5; }
+
+/* Contact section */
+.contact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:14px; }
+.contact-card { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; text-align:center; transition:var(--transition); text-decoration:none; color:var(--text); }
+.contact-card:hover { border-color:rgba(0,255,153,0.25); background:var(--accent-dim); }
+.contact-card .c-icon { font-size:24px; margin-bottom:8px; }
+.contact-card h5 { font-size:13px; font-weight:600; margin-bottom:4px; }
+.contact-card p { font-size:11px; color:var(--muted); }
+
+/* Accept banner */
+.accept-banner {
+  background:linear-gradient(135deg,#0d1a0d,#0a1020);
+  border:1px solid rgba(0,255,153,0.18); border-radius:var(--radius-lg);
+  padding:28px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+}
+.accept-text h3 { font-family:'Rajdhani',sans-serif; font-size:20px; font-weight:700; margin-bottom:6px; }
+.accept-text h3 span { color:var(--accent); }
+.accept-text p { font-size:13px; color:var(--muted); }
+.accept-btn { padding:13px 26px; background:linear-gradient(135deg,var(--accent),#00e589); color:#000; border-radius:var(--radius-sm); font-size:14px; font-weight:700; cursor:pointer; border:none; font-family:'Inter',sans-serif; transition:var(--transition); white-space:nowrap; flex-shrink:0; }
+.accept-btn:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(0,255,153,0.35); }
+
+/* Print button */
+.print-btn { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; background:rgba(255,255,255,0.05); border:1px solid var(--border); color:var(--muted); border-radius:var(--radius-sm); font-size:12px; cursor:pointer; font-family:'Inter',sans-serif; transition:var(--transition); }
+.print-btn:hover { border-color:var(--accent); color:var(--accent); }
+
+/* ── FOOTER ── */
+.footer { background:var(--surface); border-top:1px solid var(--border); padding:32px 28px; text-align:center; }
+.footer-links { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:12px; }
+.footer-links a { color:var(--muted); font-size:13px; text-decoration:none; transition:var(--transition); }
+.footer-links a:hover { color:var(--accent); }
+.footer p { color:var(--muted); font-size:12px; }
+
+/* Toast */
+.toast { position:fixed; bottom:24px; right:24px; background:var(--accent); color:#000; padding:12px 20px; border-radius:var(--radius-md); font-weight:700; font-size:13px; z-index:9999; transform:translateY(20px); opacity:0; transition:all 0.3s ease; box-shadow:0 6px 24px rgba(0,255,153,0.35); }
+.toast.show { transform:translateY(0); opacity:1; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  .page-wrap { grid-template-columns:1fr; }
+  .toc { position:static; }
+  .summary-row { grid-template-columns:1fr 1fr; }
+  .rights-grid { grid-template-columns:1fr; }
+}
+@media(max-width:600px) {
+  .hero-banner h1 { font-size:28px; }
+  .hero-icon { font-size:40px; }
+  .summary-row { grid-template-columns:1fr; }
+  .contact-grid { grid-template-columns:1fr; }
+  .accept-banner { flex-direction:column; text-align:center; }
+  .page-wrap { padding:28px 16px 60px; }
+  .policy-section { padding:20px; }
+}
+</style>
 </head>
 <body>
 
-<h1>Privacy Policy</h1>
+<!-- HEADER -->
+<header class="header">
+  <a href="index.html" class="header-logo">
+    <img src="hero.gaming.jpg" alt="Hero Verse">
+    <span>HERO VERSE</span>
+  </a>
+  <a href="index.html" class="back-btn">← Back to Home</a>
+</header>
 
-<p>
-Welcome to Gaming Hub. Your privacy is important to us.
-</p>
+<!-- HERO BANNER -->
+<div class="hero-banner">
+  <span class="hero-icon">🔐</span>
+  <h1>Privacy <span>Policy</span></h1>
+  <p>We take your privacy seriously. This policy explains exactly how Hero Verse collects, uses, and protects your data.</p>
+  <div class="meta-row">
+    <span class="meta-chip">📅 Last Updated: <span>June 2026</span></span>
+    <span class="meta-chip">📄 Version: <span>3.0</span></span>
+    <span class="meta-chip">🌍 Applies to: <span>All Users Worldwide</span></span>
+    <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+  </div>
+</div>
 
-<p>
-We may collect basic information like browser type,
-device information and website usage statistics to improve user experience.
-</p>
+<!-- PAGE WRAP -->
+<div class="page-wrap">
 
-<p>
-Our website may use cookies to provide better services and content.
-</p>
+  <!-- SIDEBAR TOC -->
+  <aside class="toc">
+    <h3>📋 Contents</h3>
+    <ul class="toc-list" id="tocList">
+      <li><a href="#s1"><span class="num">01</span> Overview</a></li>
+      <li><a href="#s2"><span class="num">02</span> Data We Collect</a></li>
+      <li><a href="#s3"><span class="num">03</span> How We Use Data</a></li>
+      <li><a href="#s4"><span class="num">04</span> Cookies & Tracking</a></li>
+      <li><a href="#s5"><span class="num">05</span> Data Sharing</a></li>
+      <li><a href="#s6"><span class="num">06</span> Data Security</a></li>
+      <li><a href="#s7"><span class="num">07</span> Your Rights</a></li>
+      <li><a href="#s8"><span class="num">08</span> Children's Privacy</a></li>
+      <li><a href="#s9"><span class="num">09</span> Third-Party Links</a></li>
+      <li><a href="#s10"><span class="num">10</span> Firebase & Google</a></li>
+      <li><a href="#s11"><span class="num">11</span> Policy Changes</a></li>
+      <li><a href="#s12"><span class="num">12</span> Contact Us</a></li>
+    </ul>
+    <div class="toc-footer">
+      <p>Questions? Email us at<br><a href="mailto:herogamingxyz@gmail.com">herogamingxyz@gmail.com</a></p>
+    </div>
+  </aside>
 
-<p>
-Third-party services such as Google AdSense may use cookies
-to show personalized advertisements in the future.
-</p>
+  <!-- MAIN CONTENT -->
+  <main class="policy-content">
 
-<p>
-We do not sell or share your personal information with anyone.
-</p>
+    <!-- Quick Summary Cards -->
+    <div class="summary-row">
+      <div class="summary-card">
+        <div class="s-icon">🔒</div>
+        <h4>We Don't Sell Data</h4>
+        <p>Your personal data is never sold to advertisers or third parties.</p>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon">🎮</div>
+        <h4>Gaming Focused</h4>
+        <p>Data collected only to improve your Hero Verse gaming experience.</p>
+      </div>
+      <div class="summary-card">
+        <div class="s-icon">👤</div>
+        <h4>You're in Control</h4>
+        <p>Request deletion, export, or changes to your data anytime.</p>
+      </div>
+    </div>
 
-<p>
-By using this website, you agree to our privacy policy.
-</p>
+    <!-- S1: Overview -->
+    <div class="policy-section" id="s1">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <span class="section-icon">🏠</span>
+        <h2 class="section-title-text">Overview</h2>
+      </div>
+      <p>Welcome to Hero Verse ("we", "our", "us"), operated by <strong>herogamingxyz</strong>. Hero Verse is a gaming platform offering Minecraft mods, gaming articles, news, products, and community features.</p>
+      <p>This Privacy Policy applies to all users of:</p>
+      <ul class="info-list">
+        <li><span class="li-icon">🌐</span> The Hero Verse website (herogamingxyz.github.io)</li>
+        <li><span class="li-icon">📱</span> Any Hero Verse mobile-compatible web experience</li>
+        <li><span class="li-icon">🔧</span> All features including mod downloads, articles, accounts, and community tools</li>
+      </ul>
+      <p>By using Hero Verse, you agree to the collection and use of information as described in this policy. If you do not agree, please discontinue use of the platform.</p>
+      <div class="highlight-box">
+        <span class="hb-icon">✅</span>
+        <span>This policy is written in plain language so every gamer can understand it — not just lawyers. We believe in full transparency.</span>
+      </div>
+    </div>
 
-<p>
-If you have any questions, contact us anytime.
-</p>
+    <!-- S2: Data We Collect -->
+    <div class="policy-section" id="s2">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <span class="section-icon">📊</span>
+        <h2 class="section-title-text">Data We Collect</h2>
+      </div>
+      <p>We collect different types of data depending on how you interact with Hero Verse:</p>
 
-<br>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>What We Collect</th>
+            <th>When</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>👤 Account Info</td>
+            <td>Username, email address, join date, profile photo</td>
+            <td>On signup / profile edit</td>
+          </tr>
+          <tr>
+            <td>🔒 Auth Data</td>
+            <td>Encrypted password hash (via Firebase Auth)</td>
+            <td>On account creation</td>
+          </tr>
+          <tr>
+            <td>🎮 Activity Data</td>
+            <td>Mods downloaded, articles viewed, uploads made</td>
+            <td>During platform use</td>
+          </tr>
+          <tr>
+            <td>📍 Device Info</td>
+            <td>Browser type, OS, screen size, IP address (anonymized)</td>
+            <td>Automatically on visit</td>
+          </tr>
+          <tr>
+            <td>📈 Analytics</td>
+            <td>Page visits, session duration, click patterns (via Google Analytics)</td>
+            <td>On every page load</td>
+          </tr>
+          <tr>
+            <td>💬 User Content</td>
+            <td>Mod files you upload, bio text, community posts</td>
+            <td>When you create content</td>
+          </tr>
+        </tbody>
+      </table>
 
-<a href="index.html">⬅ Back To Home</a>
+      <div class="warning-box">
+        <span class="hb-icon">⚠️</span>
+        <span>We never collect credit card numbers, government IDs, or sensitive financial information directly on Hero Verse.</span>
+      </div>
+    </div>
+
+    <!-- S3: How We Use Data -->
+    <div class="policy-section" id="s3">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <span class="section-icon">⚙️</span>
+        <h2 class="section-title-text">How We Use Your Data</h2>
+      </div>
+      <p>Your data is used solely to provide and improve the Hero Verse experience. Here's exactly what we do with it:</p>
+      <ul class="info-list">
+        <li><span class="li-icon">🔑</span> <strong>Authentication:</strong> To verify your identity when you log in and keep your account secure.</li>
+        <li><span class="li-icon">🎮</span> <strong>Platform Features:</strong> To show your profile, track mod uploads, display download counts, and enable creator tools.</li>
+        <li><span class="li-icon">📧</span> <strong>Communications:</strong> To send important account notifications (password resets, security alerts). We do not send unsolicited marketing emails.</li>
+        <li><span class="li-icon">📊</span> <strong>Analytics:</strong> To understand which mods, articles, and features are most popular — helping us make Hero Verse better.</li>
+        <li><span class="li-icon">🛡️</span> <strong>Security:</strong> To detect and prevent spam, abuse, unauthorized access, and fraudulent activity.</li>
+        <li><span class="li-icon">⚖️</span> <strong>Legal Compliance:</strong> To comply with applicable laws and respond to lawful requests from authorities if required.</li>
+      </ul>
+      <div class="highlight-box">
+        <span class="hb-icon">💡</span>
+        <span>We use Google Analytics with anonymized IPs. This means we can see traffic patterns but cannot identify individual users from analytics data.</span>
+      </div>
+    </div>
+
+    <!-- S4: Cookies -->
+    <div class="policy-section" id="s4">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <span class="section-icon">🍪</span>
+        <h2 class="section-title-text">Cookies & Tracking</h2>
+      </div>
+      <p>Hero Verse uses cookies and similar technologies to keep you logged in and improve site performance.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>Cookie Type</th><th>Purpose</th><th>Duration</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🔑 Essential</td>
+            <td>Firebase session token — keeps you logged in</td>
+            <td>Session / 30 days</td>
+          </tr>
+          <tr>
+            <td>📊 Analytics</td>
+            <td>Google Analytics — tracks page views and usage</td>
+            <td>2 years</td>
+          </tr>
+          <tr>
+            <td>⚙️ Preference</td>
+            <td>Stores your UI preferences (theme, language)</td>
+            <td>1 year</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>You can control cookies through your browser settings. Disabling essential cookies may prevent login functionality from working correctly.</p>
+      <div class="highlight-box">
+        <span class="hb-icon">🚫</span>
+        <span>Hero Verse does NOT use advertising cookies or sell your browsing data to ad networks. Our platform is entirely ad-free and tracker-free beyond analytics.</span>
+      </div>
+    </div>
+
+    <!-- S5: Data Sharing -->
+    <div class="policy-section" id="s5">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <span class="section-icon">🤝</span>
+        <h2 class="section-title-text">Data Sharing & Third Parties</h2>
+      </div>
+      <p>We do not sell, rent, or trade your personal information. We only share data in the following limited circumstances:</p>
+      <ul class="info-list">
+        <li><span class="li-icon">🔥</span> <strong>Firebase (Google):</strong> Our backend for authentication and database. Firebase processes your account data under Google's strict privacy standards.</li>
+        <li><span class="li-icon">📊</span> <strong>Google Analytics:</strong> Anonymized usage statistics to understand platform traffic. No personally identifiable information is sent.</li>
+        <li><span class="li-icon">⚖️</span> <strong>Legal Requirements:</strong> We may disclose information if required by law, court order, or to protect our users' safety.</li>
+        <li><span class="li-icon">🔄</span> <strong>Business Transfer:</strong> If Hero Verse is acquired or merged, user data may transfer as part of that transaction with advance notice to users.</li>
+      </ul>
+      <div class="warning-box">
+        <span class="hb-icon">⚠️</span>
+        <span>Third-party links (Discord, YouTube, Amazon affiliate products) have their own privacy policies. Hero Verse is not responsible for external sites' data practices.</span>
+      </div>
+    </div>
+
+    <!-- S6: Security -->
+    <div class="policy-section" id="s6">
+      <div class="section-header">
+        <div class="section-num">06</div>
+        <span class="section-icon">🛡️</span>
+        <h2 class="section-title-text">Data Security</h2>
+      </div>
+      <p>We implement industry-standard security measures to protect your data:</p>
+      <ul class="info-list">
+        <li><span class="li-icon">🔐</span> All passwords are hashed and encrypted via Firebase Authentication — we never store plain-text passwords.</li>
+        <li><span class="li-icon">🌐</span> All data transmission uses HTTPS/TLS encryption.</li>
+        <li><span class="li-icon">🏛️</span> Firebase Firestore security rules restrict unauthorized access to user data.</li>
+        <li><span class="li-icon">👁️</span> Regular security reviews are conducted to identify and patch vulnerabilities.</li>
+        <li><span class="li-icon">🚨</span> In the unlikely event of a data breach, affected users will be notified within 72 hours.</li>
+      </ul>
+      <div class="highlight-box">
+        <span class="hb-icon">🔒</span>
+        <span>While we do our best to protect your data, no internet system is 100% secure. We encourage using a strong, unique password and enabling secure authentication where possible.</span>
+      </div>
+    </div>
+
+    <!-- S7: Your Rights -->
+    <div class="policy-section" id="s7">
+      <div class="section-header">
+        <div class="section-num">07</div>
+        <span class="section-icon">⚖️</span>
+        <h2 class="section-title-text">Your Rights</h2>
+      </div>
+      <p>You have full rights over your personal data on Hero Verse. Here's what you can do:</p>
+      <div class="rights-grid">
+        <div class="right-card">
+          <h5>👁️ Right to Access</h5>
+          <p>Request a copy of all personal data we hold about you at any time.</p>
+        </div>
+        <div class="right-card">
+          <h5>✏️ Right to Correct</h5>
+          <p>Update or correct inaccurate information via your profile settings.</p>
+        </div>
+        <div class="right-card">
+          <h5>🗑️ Right to Delete</h5>
+          <p>Request permanent deletion of your account and all associated data.</p>
+        </div>
+        <div class="right-card">
+          <h5>📦 Right to Export</h5>
+          <p>Request an export of your data in a readable format (JSON/CSV).</p>
+        </div>
+        <div class="right-card">
+          <h5>🚫 Right to Object</h5>
+          <p>Opt out of analytics tracking by disabling cookies in your browser.</p>
+        </div>
+        <div class="right-card">
+          <h5>🔒 Right to Restrict</h5>
+          <p>Request that we limit processing of your data in certain circumstances.</p>
+        </div>
+      </div>
+      <p style="margin-top:14px;">To exercise any of these rights, contact us at <a href="mailto:herogamingxyz@gmail.com" style="color:var(--accent);">herogamingxyz@gmail.com</a>. We respond within 7 business days.</p>
+    </div>
+
+    <!-- S8: Children -->
+    <div class="policy-section" id="s8">
+      <div class="section-header">
+        <div class="section-num">08</div>
+        <span class="section-icon">👶</span>
+        <h2 class="section-title-text">Children's Privacy</h2>
+      </div>
+      <p>Hero Verse is a gaming platform intended for users of all ages including younger gamers. We take children's privacy very seriously.</p>
+      <ul class="info-list">
+        <li><span class="li-icon">🔞</span> Users under 13 should have parental or guardian consent before creating an account.</li>
+        <li><span class="li-icon">🚫</span> We do not knowingly collect personal data from children under 13 without parental consent.</li>
+        <li><span class="li-icon">📧</span> If you believe a child has provided personal data without consent, contact us immediately at <strong>herogamingxyz@gmail.com</strong> for prompt removal.</li>
+        <li><span class="li-icon">👨‍👩‍👧</span> Parents can request access to, correction of, or deletion of their child's account data at any time.</li>
+      </ul>
+    </div>
+
+    <!-- S9: Third Party Links -->
+    <div class="policy-section" id="s9">
+      <div class="section-header">
+        <div class="section-num">09</div>
+        <span class="section-icon">🔗</span>
+        <h2 class="section-title-text">Third-Party Links</h2>
+      </div>
+      <p>Hero Verse contains links to external websites and services including:</p>
+      <ul class="info-list">
+        <li><span class="li-icon">💬</span> <strong>Discord</strong> — Community server links. Discord's own Privacy Policy applies.</li>
+        <li><span class="li-icon">▶️</span> <strong>YouTube</strong> — Embedded gaming content. Google's Privacy Policy applies.</li>
+        <li><span class="li-icon">🛒</span> <strong>Affiliate Product Links</strong> — Amazon or other stores. Their respective privacy policies apply.</li>
+        <li><span class="li-icon">📸</span> <strong>Instagram</strong> — Social media links. Meta's Privacy Policy applies.</li>
+      </ul>
+      <p>Hero Verse is not responsible for the privacy practices of any external site. We encourage users to read the privacy policy of any site they visit.</p>
+    </div>
+
+    <!-- S10: Firebase -->
+    <div class="policy-section" id="s10">
+      <div class="section-header">
+        <div class="section-num">10</div>
+        <span class="section-icon">🔥</span>
+        <h2 class="section-title-text">Firebase & Google Services</h2>
+      </div>
+      <p>Hero Verse is built on Google Firebase, which powers our authentication, database, and storage systems. The following Firebase services are used:</p>
+      <ul class="info-list">
+        <li><span class="li-icon">🔑</span> <strong>Firebase Authentication:</strong> Manages login, signup, and session security.</li>
+        <li><span class="li-icon">🗄️</span> <strong>Cloud Firestore:</strong> Stores user profiles, mod data, and article content.</li>
+        <li><span class="li-icon">📊</span> <strong>Google Analytics:</strong> Tracks anonymized usage and traffic patterns.</li>
+      </ul>
+      <p>Firebase data is stored on Google's secure cloud servers. Google's data processing terms apply. For more info, visit <a href="https://firebase.google.com/support/privacy" target="_blank" style="color:var(--accent);">firebase.google.com/support/privacy</a>.</p>
+      <div class="highlight-box">
+        <span class="hb-icon">ℹ️</span>
+        <span>Firebase servers are GDPR compliant and SOC 2 certified, meeting international data security standards.</span>
+      </div>
+    </div>
+
+    <!-- S11: Policy Changes -->
+    <div class="policy-section" id="s11">
+      <div class="section-header">
+        <div class="section-num">11</div>
+        <span class="section-icon">🔄</span>
+        <h2 class="section-title-text">Changes to This Policy</h2>
+      </div>
+      <p>We may update this Privacy Policy from time to time to reflect changes in our platform or applicable laws. When we make significant changes:</p>
+      <ul class="info-list">
+        <li><span class="li-icon">📢</span> A notice will be posted on the Hero Verse homepage for at least 30 days.</li>
+        <li><span class="li-icon">📅</span> The "Last Updated" date at the top of this page will be revised.</li>
+        <li><span class="li-icon">📧</span> For major changes, registered users may receive an email notification.</li>
+      </ul>
+      <p>Continued use of Hero Verse after changes are posted constitutes your acceptance of the revised policy. We encourage you to review this page periodically.</p>
+    </div>
+
+    <!-- S12: Contact -->
+    <div class="policy-section" id="s12">
+      <div class="section-header">
+        <div class="section-num">12</div>
+        <span class="section-icon">📬</span>
+        <h2 class="section-title-text">Contact Us</h2>
+      </div>
+      <p>Have a question about your privacy or this policy? Our team is happy to help:</p>
+      <div class="contact-grid">
+        <a href="mailto:herogamingxyz@gmail.com" class="contact-card">
+          <div class="c-icon">📧</div>
+          <h5>Email</h5>
+          <p>herogamingxyz@gmail.com</p>
+        </a>
+        <a href="https://discord.gg/eXZ227G5" class="contact-card" target="_blank">
+          <div class="c-icon">💬</div>
+          <h5>Discord</h5>
+          <p>Join our server & open a ticket</p>
+        </a>
+        <a href="https://www.instagram.com/hero_gamingxyz/" class="contact-card" target="_blank">
+          <div class="c-icon">📸</div>
+          <h5>Instagram</h5>
+          <p>@hero_gamingxyz</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Accept Banner -->
+    <div class="accept-banner">
+      <div class="accept-text">
+        <h3>You've Read the <span>Full Policy</span> 🎉</h3>
+        <p>By using Hero Verse, you acknowledge that you've read and understood this Privacy Policy. Thank you for being part of our community!</p>
+      </div>
+      <button class="accept-btn" onclick="acceptPolicy()">✅ I Understand</button>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="help-center.html">Help Center</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p>© 2026 Hero Verse | herogamingxyz | All Rights Reserved</p>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* ---- Toast ---- */
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 3000);
+}
+
+/* ---- Accept policy ---- */
+function acceptPolicy() {
+  localStorage.setItem("hv_privacy_accepted", "true");
+  showToast("✅ Privacy Policy Accepted!");
+}
+
+/* ---- Active TOC on scroll ---- */
+const sections = document.querySelectorAll(".policy-section");
+const tocLinks = document.querySelectorAll(".toc-list a");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute("id");
+      tocLinks.forEach(a => {
+        a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+      });
+    }
+  });
+}, { threshold: 0.3, rootMargin: "-80px 0px -60% 0px" });
+
+sections.forEach(s => observer.observe(s));
+
+/* ---- Smooth scroll ---- */
+tocLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute("href"));
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+</script>
 
 </body>
 </html>
