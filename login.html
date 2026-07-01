@@ -3,270 +3,810 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HeroVerse Login</title>
+<title>Login | Hero Verse</title>
+<link rel="icon" type="image/png" href="hero.gaming.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
-
 <script>
 window.dataLayer = window.dataLayer || [];
-
-function gtag(){
-dataLayer.push(arguments);
-}
-
+function gtag(){ dataLayer.push(arguments); }
 gtag('js', new Date());
-
 gtag('config', 'G-1VMS2D4KP5');
 </script>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+
+/* =============================================
+   RESET & BASE
+============================================= */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#050505,#0a0a0a,#001f3f);
-overflow:hidden;
+:root {
+  --bg:         #090909;
+  --card:       rgba(20,20,20,0.92);
+  --field:      #111;
+  --border:     rgba(255,255,255,0.08);
+  --accent:     #00ff99;
+  --accent-dim: rgba(0,255,153,0.12);
+  --text:       #f0f0f0;
+  --muted:      #999;
+  --danger:     #ff4444;
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --transition: 0.25s ease;
 }
 
-.particle{
-position:absolute;
-width:2px;
-height:2px;
-background:#00ffff;
-border-radius:50%;
-opacity:0.3;
-pointer-events:none;
-}
-.particle{
-position:fixed;
-pointer-events:none;
-z-index:-1;
+body {
+  min-height: 100vh;
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
 }
 
-@keyframes float{
-0%{
-transform:translateY(100vh);
-opacity:0;
-}
-10%{
-opacity:1;
-}
-100%{
-transform:translateY(-100px);
-opacity:0;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 20px; }
+
+/* =============================================
+   BACKGROUND BANNER
+============================================= */
+.bg-banner {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  background:
+    linear-gradient(180deg, rgba(9,9,9,0.4) 0%, rgba(9,9,9,0.85) 75%, var(--bg) 100%),
+    url('hero.gaming.jpg') center/cover no-repeat;
+  background-color: #0d1410;
 }
 
-.password-wrapper{
-position:relative;
+/* Floating particles (kept from original) */
+.particle {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatUp linear infinite;
 }
 
-.eye-btn{
-position:absolute;
-right:15px;
-top:50%;
-transform:translateY(-50%);
-background:none;
-border:none;
-color:#00ffff;
-cursor:pointer;
-font-size:18px;
+@keyframes floatUp {
+  0%   { transform: translateY(100vh); opacity: 0; }
+  10%  { opacity: 0.4; }
+  100% { transform: translateY(-100px); opacity: 0; }
 }
 
-.login-box{
-width:400px;
-max-width:90%;
-background:rgba(20,20,20,0.95);
-padding:40px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 0 30px rgba(0,255,255,0.2);
-animation:fadeIn 1s ease;
+/* Top bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  position: relative;
+  z-index: 2;
 }
 
-.logo{
-font-size:42px;
-font-weight:bold;
-color:#00ffff;
-margin-bottom:10px;
-text-shadow:0 0 15px #00ffff;
+.top-bar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.subtitle{
-color:#aaa;
-margin-bottom:30px;
+.top-bar-logo img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 10px rgba(0,255,153,0.4);
+  object-fit: cover;
 }
 
-.input-box{
-width:100%;
-padding:15px;
-margin:10px 0;
-border:none;
-outline:none;
-border-radius:12px;
-background:#111;
-color:white;
-font-size:16px;
+.top-bar-logo-text span:first-child {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.5px;
 }
 
-.input-box:focus{
-box-shadow:0 0 15px #00ffff;
+.top-bar-logo-text span.accent { color: var(--accent); }
+
+.top-bar-logo-text small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: -2px;
 }
 
-.login-btn{
-width:100%;
-padding:15px;
-margin-top:20px;
-border:none;
-border-radius:12px;
-background:#00ffff;
-color:black;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
+.back-home {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  transition: var(--transition);
+  position: relative;
+  z-index: 2;
 }
 
-.login-btn:hover{
-transform:scale(1.05);
-box-shadow:0 0 20px #00ffff;
+.back-home:hover { gap: 9px; }
+
+/* Hero text */
+.bg-hero-text {
+  position: relative;
+  z-index: 2;
+  padding: 30px 24px 0;
+  max-width: 640px;
 }
 
-.links{
-margin-top:20px;
+.bg-hero-text h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
-.links a{
-color:#00ffff;
-text-decoration:none;
-font-size:14px;
+.bg-hero-text p {
+  color: #ccc;
+  font-size: 14px;
 }
 
-.links a:hover{
-text-decoration:underline;
+/* =============================================
+   LOGIN CARD
+============================================= */
+.login-wrap {
+  position: relative;
+  z-index: 3;
+  max-width: 480px;
+  margin: -70px auto 50px;
+  padding: 0 16px;
 }
 
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(30px);
+.login-box {
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,255,153,0.06);
+  animation: fadeInUp 0.5s ease;
 }
-to{
-opacity:1;
-transform:translateY(0);
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+
+/* Tabs */
+.auth-tabs {
+  display: flex;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-md);
+  padding: 5px;
+  margin-bottom: 26px;
 }
+
+.auth-tab {
+  flex: 1;
+  text-align: center;
+  padding: 11px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.auth-tab.active {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* Welcome text */
+.welcome-text {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.welcome-text h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.welcome-text p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Fields */
+.field-group {
+  margin-bottom: 16px;
+}
+
+.field-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ccc;
+  margin-bottom: 7px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.input-box {
+  width: 100%;
+  padding: 13px 14px 13px 38px;
+  border: 1px solid var(--border);
+  outline: none;
+  border-radius: var(--radius-sm);
+  background: var(--field);
+  color: var(--text);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  transition: var(--transition);
+}
+
+.input-box::placeholder { color: #666; }
+
+.input-box:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,255,153,0.1);
+}
+
+.toggle-pass {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 14px;
+  background: none;
+  border: none;
+  user-select: none;
+}
+
+.toggle-pass:hover { color: var(--accent); }
+
+/* Forgot password row */
+.forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.forgot-row a {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgot-row a:hover { text-decoration: underline; }
+
+/* Remember me */
+.remember-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 20px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.remember-row input {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+/* Login button */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--accent), #00e589);
+  color: #000;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,255,153,0.35);
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0,0,0,0.3);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.spinner.show { display: inline-block; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Social buttons */
+.social-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Inter', sans-serif;
+}
+
+.social-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  transform: translateY(-2px);
+}
+
+/* Signup redirect */
+.signup-link {
+  text-align: center;
+  padding: 14px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.signup-link a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-link a:hover { text-decoration: underline; }
+
+/* =============================================
+   FEATURE STRIP
+============================================= */
+.feature-strip {
+  max-width: 480px;
+  margin: 0 auto 40px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.feature-item {
+  background: rgba(20,20,20,0.85);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 10px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.feature-item:hover {
+  border-color: rgba(0,255,153,0.25);
+  transform: translateY(-3px);
+}
+
+.feature-icon { font-size: 22px; margin-bottom: 8px; }
+
+.feature-item h4 {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.feature-item p {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* =============================================
+   TOAST
+============================================= */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--accent);
+  color: #000;
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 13px;
+  z-index: 9999;
+  box-shadow: 0 8px 30px rgba(0,255,153,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+
+.toast.error {
+  background: var(--danger);
+  box-shadow: 0 8px 30px rgba(255,68,68,0.4);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media (max-width: 500px) {
+  .bg-hero-text h1   { font-size: 24px; }
+  .login-wrap        { margin-top: -50px; }
+  .login-box         { padding: 20px; }
+  .feature-strip     { grid-template-columns: repeat(2, 1fr); }
+  .social-btn .label { display: none; }
+}
+
 </style>
 </head>
-
 <body>
 
-<div class="login-box">
-
-<div class="logo">HeroVerse</div>
-
-<div class="subtitle">
-Powered by herogamingxyz
-</div>
-
-<input type="email" placeholder="Email" class="input-box" id="email">
-
-<div class="password-wrapper">
-<input type="password" id="password" placeholder="Password" class="input-box">
-<button class="eye-btn" onclick="togglePassword()">👁</button>
-</div>
-
-<button class="login-btn" id="loginBtn">
-LOGIN
-</button>
-
-<div class="links">
-<a href="#">Forgot Password?</a>
-<br><br>
-<a href="signup.html">Create Account</a>
-</div>
-
-</div>
-
+<!-- ===== FLOATING PARTICLES (original kept) ===== -->
 <script>
-
-function togglePassword(){
-const password=document.getElementById("password");
-
-if(password.type==="password"){
-password.type="text";
-}else{
-password.type="password";
-}
-}
-
-for(let i=0;i<25;i++){
-const particle=document.createElement("div");
-particle.classList.add("particle");
-
-particle.style.left=Math.random()*100+"vw";
-particle.style.animationDelay=Math.random()*15+"s";
-
-document.body.appendChild(particle);
+for (let i = 0; i < 20; i++) {
+  const p = document.createElement("div");
+  p.className = "particle";
+  p.style.left = Math.random() * 100 + "vw";
+  p.style.animationDuration = (8 + Math.random() * 12) + "s";
+  p.style.animationDelay = Math.random() * 15 + "s";
+  document.body.appendChild(p);
 }
 </script>
+
+<!-- ===== BACKGROUND BANNER ===== -->
+<div class="bg-banner">
+
+  <div class="top-bar">
+    <div class="top-bar-logo">
+      <img src="hero.gaming.jpg" alt="Hero Verse">
+      <div class="top-bar-logo-text">
+        <span>HERO <span class="accent">VERSE</span></span>
+        <small>The Ultimate Gaming Hub</small>
+      </div>
+    </div>
+    <a href="index.html" class="back-home">← Back to Home</a>
+  </div>
+
+  <div class="bg-hero-text">
+    <h1>Welcome Back!</h1>
+    <p>Login to your Hero Verse account and continue exploring</p>
+  </div>
+
+</div>
+
+<!-- ===== LOGIN CARD ===== -->
+<div class="login-wrap">
+  <div class="login-box">
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <a href="login.html" class="auth-tab active">↩ Login</a>
+      <a href="signup.html" class="auth-tab">+👤 Sign Up</a>
+    </div>
+
+    <!-- Welcome -->
+    <div class="welcome-text">
+      <h2>Login to Hero Verse 🎮</h2>
+      <p>Powered by herogamingxyz</p>
+    </div>
+
+    <!-- Email -->
+    <div class="field-group">
+      <label for="email">Email</label>
+      <div class="input-wrap">
+        <span class="input-icon">📧</span>
+        <input type="email" placeholder="Enter your email" class="input-box" id="email" required>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="field-group">
+      <label for="password">Password</label>
+      <div class="input-wrap">
+        <span class="input-icon">🔒</span>
+        <input type="password" placeholder="Enter your password" class="input-box" id="password" required>
+        <button class="toggle-pass" id="eyeBtn" type="button">👁</button>
+      </div>
+      <div class="forgot-row">
+        <a href="forgot-password.html">Forgot Password?</a>
+      </div>
+    </div>
+
+    <!-- Remember me -->
+    <label class="remember-row">
+      <input type="checkbox" id="rememberMe">
+      Remember me
+    </label>
+
+    <!-- Login button -->
+    <button class="login-btn" id="loginBtn">
+      <span class="spinner" id="loginSpinner"></span>
+      <span id="loginBtnText">↩ Login</span>
+    </button>
+
+    <!-- Divider -->
+    <div class="divider">or continue with</div>
+
+    <!-- Social -->
+    <div class="social-row">
+      <button class="social-btn" id="googleBtn">🔴 <span class="label">Google</span></button>
+      <button class="social-btn" id="discordBtn">💬 <span class="label">Discord</span></button>
+      <button class="social-btn" id="facebookBtn">🔵 <span class="label">Facebook</span></button>
+    </div>
+
+    <!-- Signup redirect -->
+    <div class="signup-link">
+      Don't have an account? <a href="signup.html">Create Account</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== FEATURE STRIP ===== -->
+<div class="feature-strip">
+  <div class="feature-item">
+    <div class="feature-icon">🎁</div>
+    <h4>Free Access</h4>
+    <p>Join free and start downloading</p>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">📦</div>
+    <h4>Huge Collection</h4>
+    <p>500+ mods, articles & more</p>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">👥</div>
+    <h4>Community</h4>
+    <p>Join 10K+ gaming community</p>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">🏅</div>
+    <h4>Premium</h4>
+    <p>Unlock exclusive content</p>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== FIREBASE ===== -->
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import {
-getAuth,
-signInWithEmailAndPassword
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
-authDomain: "hero-verse-67e33.firebaseapp.com",
-projectId: "hero-verse-67e33",
-storageBucket: "hero-verse-67e33.firebasestorage.app",
-messagingSenderId: "227494840218",
-appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+  apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+  authDomain: "hero-verse-67e33.firebaseapp.com",
+  projectId: "hero-verse-67e33",
+  storageBucket: "hero-verse-67e33.firebasestorage.app",
+  messagingSenderId: "227494840218",
+  appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+
+/* ---- Toast helper ---- */
+function showToast(msg, isError = false) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.toggle("error", isError);
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 3500);
+}
+
+/* ---- Password toggle ---- */
+document.getElementById("eyeBtn").addEventListener("click", () => {
+  const input = document.getElementById("password");
+  const btn = document.getElementById("eyeBtn");
+  if (input.type === "password") {
+    input.type = "text";
+    btn.textContent = "🙈";
+  } else {
+    input.type = "password";
+    btn.textContent = "👁";
+  }
+});
+
+/* ---- Login button ---- */
+const loginBtn     = document.getElementById("loginBtn");
+const loginSpinner = document.getElementById("loginSpinner");
+const loginBtnText = document.getElementById("loginBtnText");
 
 document.getElementById("loginBtn").addEventListener("click", () => {
 
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
+  const email    = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-signInWithEmailAndPassword(auth,email,password)
-.then((userCredential)=>{
+  if (!email || !password) {
+    showToast("Please enter email and password", true);
+    return;
+  }
 
-alert("Login Successful!");
+  // Loading state
+  loginBtn.disabled = true;
+  loginSpinner.classList.add("show");
+  loginBtnText.textContent = "Logging in...";
 
-const params =
-new URLSearchParams(window.location.search);
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      showToast("✅ Login Successful! Redirecting...");
 
-const redirectPage =
-params.get("redirect") || "index.html";
+      // Redirect after login (original logic preserved)
+      const params = new URLSearchParams(window.location.search);
+      const redirectPage = params.get("redirect") || "index.html";
 
-window.location.href = redirectPage;
+      setTimeout(() => {
+        window.location.href = redirectPage;
+      }, 1000);
+    })
+    .catch((error) => {
+      // Friendly error messages
+      let msg = "Login failed. Please try again.";
+      if (error.code === "auth/user-not-found")    msg = "No account found with this email.";
+      if (error.code === "auth/wrong-password")    msg = "Wrong password. Try again.";
+      if (error.code === "auth/invalid-email")     msg = "Invalid email address.";
+      if (error.code === "auth/too-many-requests") msg = "Too many attempts. Try later.";
 
-})
-.catch((error)=>{
-
-alert(error.message);
-
+      showToast(msg, true);
+      loginBtn.disabled = false;
+      loginSpinner.classList.remove("show");
+      loginBtnText.textContent = "↩ Login";
+    });
 });
 
+/* ---- Enter key support ---- */
+document.getElementById("password").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") loginBtn.click();
+});
+
+/* ---- Social login helper ---- */
+async function socialLogin(provider) {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    // Auto-create Firestore doc if first time
+    const userRef = doc(db, "users", user.uid);
+    const existing = await getDoc(userRef);
+    if (!existing.exists()) {
+      await setDoc(userRef, {
+        username: user.displayName || "Hero User",
+        email: user.email || "",
+        joinDate: new Date().toISOString()
+      });
+    }
+
+    showToast("✅ Login Successful!");
+
+    const params = new URLSearchParams(window.location.search);
+    const redirectPage = params.get("redirect") || "index.html";
+    setTimeout(() => { window.location.href = redirectPage; }, 1000);
+
+  } catch (error) {
+    showToast(error.message, true);
+  }
+}
+
+document.getElementById("googleBtn").addEventListener("click", () => {
+  socialLogin(new GoogleAuthProvider());
+});
+
+document.getElementById("facebookBtn").addEventListener("click", () => {
+  socialLogin(new FacebookAuthProvider());
+});
+
+document.getElementById("discordBtn").addEventListener("click", () => {
+  showToast("Discord login coming soon!", true);
 });
 
 </script>
 
 </body>
-  </html>
+</html>
