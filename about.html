@@ -3,269 +3,774 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Hero Gaming</title>
+<title>About Us | Hero Verse</title>
+<link rel="icon" type="image/png" href="hero.gaming.jpg">
+<meta name="description" content="Learn about Hero Verse — the ultimate gaming platform for Minecraft mods, gaming news, articles and community.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
-
 <script>
 window.dataLayer = window.dataLayer || [];
-
-function gtag(){
-dataLayer.push(arguments);
-}
-
+function gtag(){ dataLayer.push(arguments); }
 gtag('js', new Date());
-
 gtag('config', 'G-1VMS2D4KP5');
 </script>
 
 <style>
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
+/* =============================================
+   RESET & VARIABLES
+============================================= */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg:         #090909;
+  --surface:    #111;
+  --card:       #141414;
+  --border:     rgba(255,255,255,0.07);
+  --accent:     #00ff99;
+  --accent2:    #00c8ff;
+  --accent-dim: rgba(0,255,153,0.1);
+  --text:       #f0f0f0;
+  --muted:      #888;
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --transition: 0.28s cubic-bezier(.4,0,.2,1);
 }
 
-body{
-  background:#0f0f0f;
-  color:white;
-}
+body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; line-height:1.7; overflow-x:hidden; }
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-thumb { background:var(--accent); border-radius:20px; }
 
-header{
-  background:linear-gradient(90deg,#00ff99,#00bfff);
-  padding:40px;
+/* =============================================
+   HEADER
+============================================= */
+.header {
+  position:sticky; top:0; z-index:999;
+  background:rgba(9,9,9,0.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 28px; height:62px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.header-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.header-logo img { width:36px; height:36px; border-radius:50%; border:2px solid var(--accent); object-fit:cover; box-shadow:0 0 10px rgba(0,255,153,0.3); }
+.header-logo span { font-family:'Rajdhani',sans-serif; font-size:20px; font-weight:700; color:var(--accent); letter-spacing:1px; }
+.back-btn { display:flex; align-items:center; gap:6px; color:var(--accent); font-size:13px; font-weight:600; text-decoration:none; padding:8px 16px; border:1px solid rgba(0,255,153,0.25); border-radius:var(--radius-sm); transition:var(--transition); }
+.back-btn:hover { background:var(--accent-dim); gap:10px; }
+
+/* =============================================
+   HERO SECTION
+============================================= */
+.hero {
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg,#060e06,#08090f,#060e0e);
+  padding:80px 28px 60px;
   text-align:center;
+  border-bottom:1px solid var(--border);
 }
 
-header h1{
-  font-size:50px;
-  color:black;
+.hero::before {
+  content:'';
+  position:absolute; top:-150px; left:50%; transform:translateX(-50%);
+  width:600px; height:600px;
+  background:radial-gradient(circle, rgba(0,255,153,0.07) 0%, transparent 65%);
+  pointer-events:none;
 }
 
-header p{
-  color:#111;
-  margin-top:10px;
-  font-size:18px;
+.hero::after {
+  content:'';
+  position:absolute; bottom:-80px; right:-80px;
+  width:300px; height:300px;
+  background:radial-gradient(circle, rgba(0,200,255,0.05) 0%, transparent 70%);
+  pointer-events:none;
 }
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:50px 20px;
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--accent-dim); border:1px solid rgba(0,255,153,0.2);
+  color:var(--accent); font-size:12px; font-weight:700;
+  padding:6px 16px; border-radius:30px;
+  letter-spacing:0.5px; text-transform:uppercase;
+  margin-bottom:24px;
 }
 
-.box{
-  background:#1b1b1b;
-  padding:35px;
-  border-radius:20px;
-  margin-bottom:30px;
-  box-shadow:0 0 15px rgba(0,0,0,0.5);
-  transition:0.3s;
+.hero h1 {
+  font-family:'Rajdhani',sans-serif;
+  font-size:54px; font-weight:700; line-height:1.1;
+  margin-bottom:16px;
+  position:relative; z-index:1;
 }
 
-.box:hover{
-  transform:translateY(-5px);
+.hero h1 span { color:var(--accent); }
+
+.hero-sub {
+  color:#bbb; font-size:17px; max-width:560px;
+  margin:0 auto 36px; line-height:1.7;
+  position:relative; z-index:1;
 }
 
-.box h2{
-  color:#00ff99;
-  margin-bottom:20px;
-  font-size:32px;
-}
+.hero-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; position:relative; z-index:1; }
 
-.box p{
-  color:#ccc;
-  line-height:1.9;
-  font-size:18px;
+.btn-primary {
+  padding:13px 28px; background:linear-gradient(135deg,var(--accent),#00e589);
+  color:#000; border:none; border-radius:var(--radius-sm);
+  font-size:14px; font-weight:700; font-family:'Inter',sans-serif;
+  cursor:pointer; transition:var(--transition); text-decoration:none;
+  display:inline-flex; align-items:center; gap:7px;
 }
+.btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(0,255,153,0.35); }
 
-.skills{
-  display:flex;
-  flex-wrap:wrap;
-  gap:15px;
-  margin-top:25px;
+.btn-secondary {
+  padding:13px 28px; background:transparent;
+  color:var(--text); border:1px solid var(--border);
+  border-radius:var(--radius-sm); font-size:14px; font-weight:600;
+  font-family:'Inter',sans-serif; cursor:pointer; transition:var(--transition);
+  text-decoration:none; display:inline-flex; align-items:center; gap:7px;
 }
+.btn-secondary:hover { border-color:var(--accent); color:var(--accent); }
 
-.skill{
-  background:#00ff99;
-  color:black;
-  padding:12px 20px;
-  border-radius:30px;
-  font-weight:bold;
-  transition:0.3s;
+/* Scroll indicator */
+.scroll-indicator {
+  margin-top:40px; display:flex; flex-direction:column;
+  align-items:center; gap:6px; color:var(--muted); font-size:11px;
+  position:relative; z-index:1; animation:bounce 2s infinite;
 }
+@keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
 
-.skill:hover{
-  transform:scale(1.08);
-  background:#00cc77;
-}
-
-.stats{
+/* =============================================
+   STATS BAR
+============================================= */
+.stats-bar {
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:28px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(4,1fr);
   gap:20px;
-  margin-top:30px;
-}
-
-.stat-box{
-  background:#222;
-  padding:25px;
-  border-radius:15px;
   text-align:center;
 }
 
-.stat-box h3{
-  color:#00ff99;
-  font-size:35px;
-  margin-bottom:10px;
+.stat-item {}
+.stat-num {
+  font-family:'Rajdhani',sans-serif; font-size:36px; font-weight:700;
+  color:var(--accent); margin-bottom:4px; line-height:1;
+}
+.stat-label { font-size:12px; color:var(--muted); font-weight:500; }
+
+/* =============================================
+   MAIN CONTAINER
+============================================= */
+.container { max-width:1100px; margin:0 auto; padding:64px 24px 80px; }
+
+/* Section title */
+.sec-title {
+  font-family:'Rajdhani',sans-serif; font-size:30px; font-weight:700;
+  display:flex; align-items:center; gap:10px; margin-bottom:28px;
+}
+.sec-title span { color:var(--accent); }
+
+/* =============================================
+   WHO WE ARE — Split layout
+============================================= */
+.who-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:28px; margin-bottom:56px;
+  align-items:center;
 }
 
-.stat-box p{
-  color:#bbb;
+.who-text {}
+.who-text p { color:#ccc; font-size:15px; margin-bottom:16px; line-height:1.8; }
+
+.who-img-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); overflow:hidden;
+  position:relative; aspect-ratio:4/3;
+}
+.who-img-card img { width:100%; height:100%; object-fit:cover; }
+.who-img-card .img-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.7) 100%);
+}
+.who-img-card .img-label {
+  position:absolute; bottom:16px; left:16px;
+  font-family:'Rajdhani',sans-serif; font-size:18px; font-weight:700;
+  color:var(--accent); text-shadow:0 0 12px rgba(0,255,153,0.4);
 }
 
-footer{
-  background:#111;
-  text-align:center;
-  padding:25px;
-  color:#777;
-  margin-top:40px;
+/* =============================================
+   MISSION CARD
+============================================= */
+.mission-card {
+  background:linear-gradient(135deg,#0a1a0a,#0b0f1a,#0a1a14);
+  border:1px solid rgba(0,255,153,0.15);
+  border-radius:var(--radius-lg); padding:40px;
+  display:grid; grid-template-columns:auto 1fr;
+  gap:28px; align-items:center;
+  margin-bottom:56px; position:relative; overflow:hidden;
+}
+.mission-card::before {
+  content:'';
+  position:absolute; top:-60px; right:-60px;
+  width:220px; height:220px;
+  background:radial-gradient(circle, rgba(0,255,153,0.07) 0%, transparent 70%);
+  pointer-events:none;
+}
+.mission-icon-wrap {
+  width:80px; height:80px; border-radius:50%;
+  background:var(--accent-dim); border:2px solid rgba(0,255,153,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:36px; flex-shrink:0;
+}
+.mission-card h2 { font-family:'Rajdhani',sans-serif; font-size:26px; font-weight:700; color:var(--accent); margin-bottom:12px; }
+.mission-card p { color:#ccc; font-size:15px; line-height:1.8; margin-bottom:10px; }
+.mission-card p:last-child { margin-bottom:0; }
+
+/* =============================================
+   WHAT WE OFFER — Skills grid
+============================================= */
+.offer-section { margin-bottom:56px; }
+
+.offer-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
 }
 
-@media(max-width:768px){
+.offer-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-md); padding:22px 18px;
+  text-align:center; transition:var(--transition); cursor:default;
+}
+.offer-card:hover {
+  transform:translateY(-5px);
+  border-color:rgba(0,255,153,0.25);
+  box-shadow:0 12px 32px rgba(0,255,153,0.08);
+}
+.offer-icon { font-size:30px; margin-bottom:10px; }
+.offer-card h4 { font-family:'Rajdhani',sans-serif; font-size:15px; font-weight:700; color:var(--accent); margin-bottom:6px; }
+.offer-card p { font-size:12px; color:var(--muted); line-height:1.5; }
 
-  header h1{
-    font-size:35px;
-  }
+/* =============================================
+   TIMELINE — Our Journey
+============================================= */
+.timeline-section { margin-bottom:56px; }
 
-  .box{
-    padding:25px;
-  }
-
-  .box h2{
-    font-size:26px;
-  }
-
-  .box p{
-    font-size:16px;
-  }
-
+.timeline { position:relative; padding-left:32px; }
+.timeline::before {
+  content:''; position:absolute; left:10px; top:0; bottom:0;
+  width:2px; background:linear-gradient(180deg, var(--accent), var(--accent2), transparent);
 }
 
+.timeline-item { position:relative; margin-bottom:32px; }
+.timeline-dot {
+  position:absolute; left:-28px; top:4px;
+  width:16px; height:16px; border-radius:50%;
+  background:var(--accent); border:3px solid var(--bg);
+  box-shadow:0 0 10px rgba(0,255,153,0.5);
+}
+.timeline-content {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-md); padding:18px 20px;
+  transition:var(--transition);
+}
+.timeline-content:hover { border-color:rgba(0,255,153,0.2); transform:translateX(4px); }
+.timeline-date {
+  font-size:11px; color:var(--accent); font-weight:700;
+  text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px;
+}
+.timeline-content h4 { font-family:'Rajdhani',sans-serif; font-size:17px; font-weight:700; margin-bottom:6px; }
+.timeline-content p { font-size:13px; color:var(--muted); line-height:1.5; }
+
+/* =============================================
+   VALUES SECTION
+============================================= */
+.values-section { margin-bottom:56px; }
+.values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+
+.value-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:28px 22px;
+  transition:var(--transition);
+}
+.value-card:hover { border-color:rgba(0,255,153,0.2); transform:translateY(-4px); }
+.value-icon {
+  width:50px; height:50px; border-radius:var(--radius-md);
+  background:var(--accent-dim); border:1px solid rgba(0,255,153,0.15);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; margin-bottom:14px;
+}
+.value-card h4 { font-family:'Rajdhani',sans-serif; font-size:18px; font-weight:700; color:var(--accent); margin-bottom:8px; }
+.value-card p { font-size:13px; color:var(--muted); line-height:1.6; }
+
+/* =============================================
+   TEAM SECTION
+============================================= */
+.team-section { margin-bottom:56px; }
+.team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+
+.team-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:28px;
+  text-align:center; transition:var(--transition);
+}
+.team-card:hover { border-color:rgba(0,255,153,0.25); transform:translateY(-5px); box-shadow:0 12px 40px rgba(0,255,153,0.08); }
+.team-avatar {
+  width:80px; height:80px; border-radius:50%;
+  border:3px solid var(--accent); margin:0 auto 14px;
+  background:var(--surface); display:flex; align-items:center;
+  justify-content:center; font-size:36px;
+  box-shadow:0 0 20px rgba(0,255,153,0.2);
+  overflow:hidden;
+}
+.team-avatar img { width:100%; height:100%; object-fit:cover; }
+.team-card h4 { font-family:'Rajdhani',sans-serif; font-size:18px; font-weight:700; margin-bottom:4px; }
+.team-role { font-size:12px; color:var(--accent); font-weight:600; margin-bottom:10px; }
+.team-bio { font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:14px; }
+.team-links { display:flex; justify-content:center; gap:8px; }
+.team-link {
+  width:30px; height:30px; border-radius:50%;
+  background:rgba(255,255,255,0.05); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; text-decoration:none; transition:var(--transition);
+}
+.team-link:hover { background:var(--accent-dim); border-color:var(--accent); }
+
+/* =============================================
+   COMMUNITY CTA
+============================================= */
+.community-section { margin-bottom:56px; }
+.community-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+
+.community-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:28px 20px;
+  text-align:center; text-decoration:none; color:var(--text);
+  transition:var(--transition); display:flex; flex-direction:column;
+  align-items:center; gap:10px;
+}
+.community-card:nth-child(1):hover { border-color:rgba(88,101,242,0.5); box-shadow:0 8px 28px rgba(88,101,242,0.1); }
+.community-card:nth-child(2):hover { border-color:rgba(255,0,0,0.4); box-shadow:0 8px 28px rgba(255,0,0,0.08); }
+.community-card:nth-child(3):hover { border-color:rgba(193,53,132,0.4); box-shadow:0 8px 28px rgba(193,53,132,0.08); }
+.community-card:hover { transform:translateY(-5px); }
+.comm-icon { font-size:40px; }
+.community-card h4 { font-family:'Rajdhani',sans-serif; font-size:18px; font-weight:700; }
+.community-card p { font-size:12px; color:var(--muted); line-height:1.5; }
+.comm-btn { padding:9px 20px; border-radius:var(--radius-sm); font-size:12px; font-weight:700; margin-top:auto; transition:var(--transition); }
+.disc-btn { background:#5865F2; color:#fff; }
+.yt-btn   { background:#FF0000; color:#fff; }
+.ig-btn   { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:#fff; }
+.comm-btn:hover { transform:scale(1.05); box-shadow:0 4px 16px rgba(0,0,0,0.4); }
+
+/* =============================================
+   FINAL CTA BANNER
+============================================= */
+.cta-banner {
+  background:linear-gradient(135deg,#0b1a0b,#09101a,#0b1a14);
+  border:1px solid rgba(0,255,153,0.18);
+  border-radius:var(--radius-lg);
+  padding:48px; text-align:center; position:relative; overflow:hidden;
+  margin-bottom:0;
+}
+.cta-banner::before {
+  content:'';
+  position:absolute; top:-100px; left:50%; transform:translateX(-50%);
+  width:400px; height:400px;
+  background:radial-gradient(circle, rgba(0,255,153,0.07) 0%, transparent 70%);
+  pointer-events:none;
+}
+.cta-banner h2 { font-family:'Rajdhani',sans-serif; font-size:36px; font-weight:700; margin-bottom:12px; position:relative; z-index:1; }
+.cta-banner h2 span { color:var(--accent); }
+.cta-banner p { color:#bbb; font-size:15px; max-width:480px; margin:0 auto 28px; line-height:1.7; position:relative; z-index:1; }
+.cta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; position:relative; z-index:1; }
+
+/* =============================================
+   FOOTER
+============================================= */
+.footer { background:var(--surface); border-top:1px solid var(--border); padding:36px 28px; margin-top:0; }
+.footer-inner { max-width:1100px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:16px; }
+.footer-links { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; }
+.footer-links a { color:var(--muted); font-size:13px; text-decoration:none; transition:var(--transition); }
+.footer-links a:hover { color:var(--accent); }
+.footer-copy { color:var(--muted); font-size:12px; }
+
+/* =============================================
+   FADE-IN ANIMATION
+============================================= */
+.fade-in { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media(max-width:900px) {
+  .who-grid { grid-template-columns:1fr; }
+  .offer-grid { grid-template-columns:repeat(2,1fr); }
+  .values-grid { grid-template-columns:repeat(2,1fr); }
+  .team-grid { grid-template-columns:1fr 1fr; }
+  .stats-bar { grid-template-columns:repeat(2,1fr); }
+  .mission-card { grid-template-columns:1fr; text-align:center; }
+}
+
+@media(max-width:600px) {
+  .hero h1 { font-size:34px; }
+  .hero-sub { font-size:14px; }
+  .offer-grid { grid-template-columns:1fr 1fr; }
+  .values-grid { grid-template-columns:1fr; }
+  .team-grid { grid-template-columns:1fr; }
+  .community-grid { grid-template-columns:1fr; }
+  .stats-bar { grid-template-columns:1fr 1fr; padding:20px; }
+  .container { padding:40px 16px 60px; }
+  .cta-banner { padding:32px 20px; }
+  .cta-banner h2 { font-size:26px; }
+}
 </style>
-
 </head>
 <body>
 
-<header>
-
-  <h1>About Hero Gaming</h1>
-
-  <p>
-    Gaming Website For Minecraft Players & Gamers Around The World
-  </p>
-
+<!-- HEADER -->
+<header class="header">
+  <a href="index.html" class="header-logo">
+    <img src="hero.gaming.jpg" alt="Hero Verse">
+    <span>HERO VERSE</span>
+  </a>
+  <a href="index.html" class="back-btn">← Back to Home</a>
 </header>
 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🎮 About Hero Verse</div>
+  <h1>The Ultimate<br><span>Gaming Hub</span></h1>
+  <p class="hero-sub">Hero Verse is a premium gaming platform built for Minecraft players and gamers worldwide — mods, articles, news and a thriving community, all in one place.</p>
+  <div class="hero-actions">
+    <a href="sodium.html" class="btn-primary">🧩 Explore Mods</a>
+    <a href="https://discord.gg/eXZ227G5" class="btn-secondary" target="_blank">💬 Join Discord</a>
+  </div>
+  <div class="scroll-indicator">↓ Scroll to explore</div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num" data-target="50000">0</div>
+    <div class="stat-label">Total Downloads</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="10000">0</div>
+    <div class="stat-label">Active Gamers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="120">0</div>
+    <div class="stat-label">Articles Published</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="80">0</div>
+    <div class="stat-label">Mods & Addons</div>
+  </div>
+</div>
+
+<!-- MAIN CONTAINER -->
 <div class="container">
 
-  <div class="box">
-
-    <h2>Who We Are</h2>
-
-    <p>
-      Hero Gaming is a modern gaming website focused on Minecraft,
-      gaming tutorials, mods, texture packs, shaders, FPS boost guides,
-      gaming news and useful content for gamers.
-    </p>
-
-    <p style="margin-top:20px;">
-      Our goal is to create a clean, fast and useful platform where
-      gamers can explore high-quality gaming content, discover new
-      updates and improve their gaming experience.
-    </p>
-
-  </div>
-
-  <div class="box">
-
-    <h2>What You Will Find Here</h2>
-
-    <p>
-      Hero Gaming provides useful and easy-to-understand gaming content
-      for both beginner and advanced players.
-    </p>
-
-    <div class="skills">
-
-      <div class="skill">Minecraft Mods</div>
-      <div class="skill">Texture Packs</div>
-      <div class="skill">Shaders</div>
-      <div class="skill">FPS Boost Tips</div>
-      <div class="skill">Gaming News</div>
-      <div class="skill">Tutorials</div>
-      <div class="skill">Guides</div>
-      <div class="skill">Gaming Tools</div>
-
+  <!-- WHO WE ARE -->
+  <section class="who-section fade-in">
+    <div class="sec-title">👾 Who <span>We Are</span></div>
+    <div class="who-grid">
+      <div class="who-text">
+        <p>Hero Verse (formerly Hero Gaming) is a modern gaming platform founded by <strong style="color:var(--accent);">Hero Gaming XYZ</strong> — passionate gamers who wanted to build the ultimate destination for the gaming community.</p>
+        <p>We started with a simple goal: create a clean, fast and useful place where gamers can find high-quality Minecraft mods, gaming tutorials, news and resources — all for free.</p>
+        <p>Today, Hero Verse has grown into a full gaming platform with thousands of users, 80+ mods, 120+ articles and a vibrant Discord community — and we're just getting started.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;">
+          <span style="background:var(--accent-dim);border:1px solid rgba(0,255,153,0.2);color:var(--accent);padding:6px 14px;border-radius:30px;font-size:12px;font-weight:700;">🟢 Est. 2024</span>
+          <span style="background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);color:#00c8ff;padding:6px 14px;border-radius:30px;font-size:12px;font-weight:700;">🌍 Worldwide</span>
+          <span style="background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.2);color:#ffd700;padding:6px 14px;border-radius:30px;font-size:12px;font-weight:700;">👑 100% Free</span>
+        </div>
+      </div>
+      <div class="who-img-card">
+        <img src="hero.gaming.jpg" alt="Hero Verse Gaming Platform">
+        <div class="img-overlay"></div>
+        <div class="img-label">Hero Verse 🎮</div>
+      </div>
     </div>
+  </section>
 
-  </div>
-
-  <div class="box">
-
-    <h2>Our Mission</h2>
-
-    <p>
-      Hero Gaming aims to build a trusted gaming platform that helps
-      players find useful gaming resources, tutorials and updates in
-      one place.
-    </p>
-
-    <p style="margin-top:20px;">
-      We focus on quality content, simple design and a better user
-      experience for gaming lovers across different devices.
-    </p>
-
-  </div>
-
-  <div class="box">
-
-    <h2>Website Highlights</h2>
-
-    <div class="stats">
-
-      <div class="stat-box">
-        <h3>100%</h3>
-        <p>Gaming Focused</p>
+  <!-- MISSION -->
+  <section class="fade-in">
+    <div class="mission-card">
+      <div class="mission-icon-wrap">🚀</div>
+      <div>
+        <h2>Our Mission</h2>
+        <p>Hero Verse aims to build the most trusted, accessible and feature-rich gaming platform for players of all levels — from beginners discovering their first Minecraft mod, to hardcore gamers hunting for the latest gaming news.</p>
+        <p>We believe gaming content should be free, high-quality and easy to find. No paywalls for basic content. No spam. Just pure gaming goodness.</p>
       </div>
-
-      <div class="stat-box">
-        <h3>Fast</h3>
-        <p>Simple & Clean UI</p>
-      </div>
-
-      <div class="stat-box">
-        <h3>Free</h3>
-        <p>Gaming Resources</p>
-      </div>
-
-      <div class="stat-box">
-        <h3>24/7</h3>
-        <p>Accessible Website</p>
-      </div>
-
     </div>
+  </section>
 
-  </div>
+  <!-- WHAT WE OFFER -->
+  <section class="offer-section fade-in">
+    <div class="sec-title">🧩 What We <span>Offer</span></div>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <div class="offer-icon">🟩</div>
+        <h4>Minecraft Mods</h4>
+        <p>Curated mods, addons and texture packs for Bedrock & Java editions.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">✨</div>
+        <h4>Shaders</h4>
+        <p>Best shader packs for ultra-realistic Minecraft visuals and lighting.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">⚡</div>
+        <h4>FPS Boost Tips</h4>
+        <p>Performance guides to maximize FPS on any PC or mobile device.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">📰</div>
+        <h4>Gaming News</h4>
+        <p>Latest updates, releases and gaming world news — updated regularly.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">🎓</div>
+        <h4>Tutorials</h4>
+        <p>Step-by-step guides for gamers at every skill level, beginner to pro.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">🛒</div>
+        <h4>Gaming Products</h4>
+        <p>Top gaming peripherals and accessories reviewed and recommended.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">👑</div>
+        <h4>Premium Content</h4>
+        <p>Exclusive mods and early access articles for Hero Verse Premium members.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">🌐</div>
+        <h4>Community</h4>
+        <p>Active Discord server, creator profiles and user mod upload system.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR JOURNEY TIMELINE -->
+  <section class="timeline-section fade-in">
+    <div class="sec-title">📅 Our <span>Journey</span></div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">🌱 2024 — The Beginning</div>
+          <h4>Hero Gaming is Born</h4>
+          <p>Started as a small Minecraft mod blog with a handful of articles and a passion for gaming content.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">🚀 Early 2025 — Growth</div>
+          <h4>First 1,000 Users</h4>
+          <p>Reached 1,000 active users, launched the Discord community and expanded to gaming news and product reviews.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">⭐ Mid 2025 — Upgrade</div>
+          <h4>Hero Verse Platform Launch</h4>
+          <p>Major rebrand to Hero Verse. Launched user accounts, Firebase backend, mod upload system and creator profiles.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">👑 2026 — Premium Era</div>
+          <h4>Premium & Community Features</h4>
+          <p>Launched Hero Verse Premium, advanced profile system, achievements, and reached 10,000+ active gamers worldwide.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--accent2);box-shadow:0 0 10px rgba(0,200,255,0.5);"></div>
+        <div class="timeline-content" style="border-color:rgba(0,200,255,0.2);">
+          <div class="timeline-date" style="color:var(--accent2);">🔮 Future — What's Next</div>
+          <h4>Mobile App & More</h4>
+          <p>Working on a Hero Verse mobile app, multiplayer community features and an expanded mod creation toolkit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR VALUES -->
+  <section class="values-section fade-in">
+    <div class="sec-title">💎 Our <span>Values</span></div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🔓</div>
+        <h4>Free & Open</h4>
+        <p>Core gaming content on Hero Verse will always be free. We believe every gamer deserves access regardless of budget.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">✅</div>
+        <h4>Quality First</h4>
+        <p>Every mod, article and resource is reviewed before publishing. We prioritize quality over quantity, always.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🛡️</div>
+        <h4>Safe & Trusted</h4>
+        <p>All downloads are scanned and verified. We take user safety seriously — no malware, no sketchy links.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">👥</div>
+        <h4>Community Driven</h4>
+        <p>Our users shape Hero Verse. Creator uploads, community feedback and Discord suggestions guide our roadmap.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">⚡</div>
+        <h4>Always Improving</h4>
+        <p>We continuously update the platform with new features, better UI and fresher content every week.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🌍</div>
+        <h4>Global Community</h4>
+        <p>Hero Verse welcomes gamers from every country and background. Gaming has no borders.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section fade-in">
+    <div class="sec-title">🧑‍💻 Meet the <span>Team</span></div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="hero.gaming.jpg" alt="Hero Gaming XYZ">
+        </div>
+        <h4>Hero Gaming XYZ</h4>
+        <div class="team-role">🧠 Founder & Lead Developer</div>
+        <p class="team-bio">The mastermind behind Hero Verse. Handles platform development, mod curation and overall vision.</p>
+        <div class="team-links">
+          <a href="https://youtube.com/@herogamingxyz" class="team-link" target="_blank">▶️</a>
+          <a href="https://www.instagram.com/hero_gamingxyz/" class="team-link" target="_blank">📸</a>
+          <a href="https://discord.gg/eXZ227G5" class="team-link" target="_blank">💬</a>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">🎨</div>
+        <h4>Design Team</h4>
+        <div class="team-role">🎨 UI/UX Design</div>
+        <p class="team-bio">Responsible for the premium Hero Verse look — dark gaming UI, card designs and mobile experience.</p>
+        <div class="team-links">
+          <a href="#" class="team-link">🌐</a>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">📰</div>
+        <h4>Content Team</h4>
+        <div class="team-role">✍️ Writers & Researchers</div>
+        <p class="team-bio">Creates all gaming articles, mod reviews, news coverage and tutorial guides on Hero Verse.</p>
+        <div class="team-links">
+          <a href="#" class="team-link">🌐</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section class="community-section fade-in">
+    <div class="sec-title">🌐 Join Our <span>Community</span></div>
+    <div class="community-grid">
+      <a href="https://discord.gg/eXZ227G5" class="community-card" target="_blank">
+        <span class="comm-icon">💬</span>
+        <h4>Discord</h4>
+        <p>Chat, share mods, get instant help and connect with 5,000+ Hero Verse gamers.</p>
+        <span class="comm-btn disc-btn">Join Server</span>
+      </a>
+      <a href="https://youtube.com/@herogamingxyz" class="community-card" target="_blank">
+        <span class="comm-icon">▶️</span>
+        <h4>YouTube</h4>
+        <p>Watch mod showcases, gaming tutorials and Hero Verse platform updates.</p>
+        <span class="comm-btn yt-btn">Subscribe</span>
+      </a>
+      <a href="https://www.instagram.com/hero_gamingxyz/" class="community-card" target="_blank">
+        <span class="comm-icon">📸</span>
+        <h4>Instagram</h4>
+        <p>Daily gaming reels, mod highlights and behind-the-scenes content.</p>
+        <span class="comm-btn ig-btn">Follow</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-banner fade-in">
+    <h2>Ready to Join<br><span>Hero Verse?</span></h2>
+    <p>Create your free account today and get access to 80+ mods, 120+ articles, community features and exclusive premium content.</p>
+    <div class="cta-btns">
+      <a href="signup.html" class="btn-primary">🚀 Create Free Account</a>
+      <a href="sodium.html" class="btn-secondary">🧩 Browse Mods</a>
+    </div>
+  </section>
 
 </div>
 
-<footer>
-  © 2026 herogamingxyz | All Rights Reserved
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="sodium.html">Mods</a>
+      <a href="backrooms.html">Articles</a>
+      <a href="products.html">Products</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="help-center.html">Help</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Hero Verse | herogamingxyz | All Rights Reserved</p>
+  </div>
 </footer>
 
+<script>
+
+/* ---- Animated counters ---- */
+function animateCounter(el, target) {
+  let count = 0;
+  const step = Math.max(1, Math.ceil(target / 60));
+  const timer = setInterval(() => {
+    count += step;
+    if (count >= target) { count = target; clearInterval(timer); }
+    el.textContent = count.toLocaleString();
+  }, 20);
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.stat-num').forEach(el => {
+        animateCounter(el, parseInt(el.dataset.target));
+      });
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.4 });
+
+const statsBar = document.querySelector('.stats-bar');
+if (statsBar) statsObserver.observe(statsBar);
+
+/* ---- Fade-in on scroll ---- */
+const fadeEls = document.querySelectorAll('.fade-in');
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+fadeEls.forEach(el => fadeObserver.observe(el));
+
+</script>
+
 </body>
-  </html>
+</html>
