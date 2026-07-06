@@ -3,324 +3,907 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Help Center | Hero Gaming</title>
+<title>Help Center | Hero Verse</title>
+<link rel="icon" type="image/png" href="hero.gaming.jpg">
+<meta name="description" content="Hero Verse Help Center — Get help with Minecraft mods, shaders, FPS boost, account issues and more.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
-
 <script>
 window.dataLayer = window.dataLayer || [];
-
-function gtag(){
-dataLayer.push(arguments);
-}
-
+function gtag(){ dataLayer.push(arguments); }
 gtag('js', new Date());
-
 gtag('config', 'G-1VMS2D4KP5');
 </script>
 
 <style>
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
+/* =============================================
+   RESET & VARIABLES
+============================================= */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg:#090909; --surface:#111; --card:#141414; --card2:#181818;
+  --border:rgba(255,255,255,0.07); --accent:#00ff99;
+  --accent2:#00c8ff; --accent-dim:rgba(0,255,153,0.1);
+  --text:#f0f0f0; --muted:#888;
+  --danger:#ff4444;
+  --radius-sm:10px; --radius-md:16px; --radius-lg:22px;
+  --transition:0.28s cubic-bezier(.4,0,.2,1);
 }
 
-body{
-  background:#0f0f0f;
-  color:white;
-  line-height:1.8;
+body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; line-height:1.7; overflow-x:hidden; }
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-thumb { background:var(--accent); border-radius:20px; }
+a { text-decoration:none; color:inherit; }
+
+/* =============================================
+   HEADER
+============================================= */
+.header {
+  position:sticky; top:0; z-index:999;
+  background:rgba(9,9,9,0.94); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 28px; height:62px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.header-logo { display:flex; align-items:center; gap:10px; }
+.header-logo img { width:36px; height:36px; border-radius:50%; border:2px solid var(--accent); object-fit:cover; box-shadow:0 0 10px rgba(0,255,153,0.3); }
+.header-logo span { font-family:'Rajdhani',sans-serif; font-size:20px; font-weight:700; color:var(--accent); letter-spacing:1px; }
+.back-btn { display:flex; align-items:center; gap:6px; color:var(--accent); font-size:13px; font-weight:600; padding:8px 16px; border:1px solid rgba(0,255,153,0.25); border-radius:var(--radius-sm); transition:var(--transition); }
+.back-btn:hover { background:var(--accent-dim); gap:10px; }
+
+/* =============================================
+   HERO
+============================================= */
+.hero {
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg,#060e06,#08090f,#060e0e);
+  padding:72px 28px 56px; text-align:center;
+  border-bottom:1px solid var(--border);
+}
+.hero::before {
+  content:''; position:absolute; top:-140px; left:50%; transform:translateX(-50%);
+  width:550px; height:550px;
+  background:radial-gradient(circle, rgba(0,255,153,0.07) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-badge { display:inline-flex; align-items:center; gap:8px; background:var(--accent-dim); border:1px solid rgba(0,255,153,0.2); color:var(--accent); font-size:12px; font-weight:700; padding:6px 16px; border-radius:30px; letter-spacing:0.5px; text-transform:uppercase; margin-bottom:20px; }
+.hero h1 { font-family:'Rajdhani',sans-serif; font-size:50px; font-weight:700; line-height:1.1; margin-bottom:14px; position:relative; z-index:1; }
+.hero h1 span { color:var(--accent); }
+.hero p { color:#bbb; font-size:16px; max-width:520px; margin:0 auto 32px; position:relative; z-index:1; }
+
+/* Hero search */
+.hero-search {
+  position:relative; max-width:520px; margin:0 auto 28px; z-index:1;
+}
+.hero-search input {
+  width:100%; padding:16px 56px 16px 22px;
+  background:rgba(255,255,255,0.06); border:1px solid var(--border);
+  border-radius:50px; color:var(--text); font-size:15px;
+  font-family:'Inter',sans-serif; outline:none; transition:var(--transition);
+}
+.hero-search input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(0,255,153,0.1); }
+.hero-search input::placeholder { color:var(--muted); }
+.hero-search-icon { position:absolute; right:20px; top:50%; transform:translateY(-50%); font-size:18px; color:var(--muted); pointer-events:none; }
+
+/* Quick topic chips */
+.topic-chips { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; position:relative; z-index:1; }
+.topic-chip { padding:7px 16px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:30px; font-size:12px; font-weight:600; color:var(--muted); cursor:pointer; transition:var(--transition); }
+.topic-chip:hover, .topic-chip.active { background:var(--accent-dim); border-color:rgba(0,255,153,0.3); color:var(--accent); }
+
+/* =============================================
+   PAGE LAYOUT
+============================================= */
+.page-wrap {
+  max-width:1100px; margin:0 auto;
+  padding:48px 24px 80px;
+  display:grid; grid-template-columns:1fr 320px; gap:28px;
+  align-items:start;
 }
 
-header{
-  background:linear-gradient(90deg,#00ff99,#00bfff);
-  padding:35px;
-  text-align:center;
+/* =============================================
+   SECTION TITLE
+============================================= */
+.sec-title { font-family:'Rajdhani',sans-serif; font-size:24px; font-weight:700; display:flex; align-items:center; gap:8px; margin-bottom:20px; }
+.sec-title span { color:var(--accent); }
+
+/* =============================================
+   GUIDE CARDS (Steps)
+============================================= */
+.guide-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:26px;
+  margin-bottom:16px; transition:var(--transition);
+}
+.guide-card:hover { border-color:rgba(0,255,153,0.18); box-shadow:0 8px 28px rgba(0,0,0,0.3); }
+
+.guide-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+.guide-icon { width:44px; height:44px; border-radius:var(--radius-md); background:var(--accent-dim); border:1px solid rgba(0,255,153,0.15); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.guide-header h3 { font-family:'Rajdhani',sans-serif; font-size:19px; font-weight:700; }
+
+.steps-list { display:flex; flex-direction:column; gap:8px; }
+.step-item {
+  display:flex; align-items:flex-start; gap:12px;
+  background:rgba(255,255,255,0.03); border:1px solid var(--border);
+  border-radius:var(--radius-sm); padding:11px 14px;
+  font-size:13px; color:#ccc; transition:var(--transition);
+}
+.step-item:hover { border-color:rgba(0,255,153,0.15); background:rgba(0,255,153,0.04); }
+.step-num { width:22px; height:22px; border-radius:50%; background:var(--accent); color:#000; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+
+/* =============================================
+   FAQ ACCORDION
+============================================= */
+.faq-section { margin-bottom:0; }
+
+.faq-item {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-md); margin-bottom:8px; overflow:hidden;
+  transition:var(--transition);
+}
+.faq-item:hover { border-color:rgba(0,255,153,0.15); }
+.faq-item.open { border-color:rgba(0,255,153,0.25); }
+
+.faq-q {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 20px; cursor:pointer; gap:12px;
+  user-select:none;
+}
+.faq-q-text { font-size:14px; font-weight:600; flex:1; }
+.faq-arrow { font-size:18px; color:var(--accent); transition:transform 0.3s ease; flex-shrink:0; }
+.faq-item.open .faq-arrow { transform:rotate(180deg); }
+
+.faq-a {
+  max-height:0; overflow:hidden;
+  transition:max-height 0.4s ease, padding 0.3s ease;
+}
+.faq-a-inner {
+  padding:0 20px 16px; font-size:13px; color:#bbb; line-height:1.7;
+  border-top:1px solid var(--border);
 }
 
-header h1{
-  font-size:50px;
-  color:black;
+/* =============================================
+   COMMENT SECTION
+============================================= */
+.comment-section {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:28px; margin-top:28px;
 }
 
-header p{
-  color:#111;
-  margin-top:10px;
-  font-size:18px;
+.comment-form { margin-bottom:24px; }
+.comment-form textarea {
+  width:100%; background:var(--card2); border:1px solid var(--border);
+  border-radius:var(--radius-md); padding:14px; color:var(--text);
+  font-size:13px; font-family:'Inter',sans-serif; resize:vertical;
+  min-height:90px; outline:none; transition:var(--transition);
+  line-height:1.6;
 }
+.comment-form textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(0,255,153,0.1); }
+.comment-form textarea::placeholder { color:var(--muted); }
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:50px 20px;
+.comment-form-footer { display:flex; align-items:center; justify-content:space-between; margin-top:10px; gap:10px; flex-wrap:wrap; }
+.comment-chars { font-size:11px; color:var(--muted); }
+
+.comment-submit {
+  padding:10px 22px; background:var(--accent); color:#000;
+  border:none; border-radius:var(--radius-sm); font-size:13px;
+  font-weight:700; font-family:'Inter',sans-serif; cursor:pointer;
+  transition:var(--transition); display:flex; align-items:center; gap:6px;
 }
+.comment-submit:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,255,153,0.3); }
+.comment-submit:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
 
-.help-box{
-  background:#1b1b1b;
-  padding:35px;
-  border-radius:20px;
-  margin-bottom:35px;
-  transition:0.3s;
-  box-shadow:0 0 15px rgba(0,0,0,0.4);
+.login-prompt {
+  background:rgba(0,255,153,0.06); border:1px solid rgba(0,255,153,0.15);
+  border-radius:var(--radius-md); padding:16px; text-align:center;
+  font-size:13px; color:var(--muted); margin-bottom:20px;
 }
+.login-prompt a { color:var(--accent); font-weight:600; }
 
-.help-box:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 20px rgba(0,255,153,0.3);
+.comments-list { display:flex; flex-direction:column; gap:12px; }
+
+.comment-card {
+  background:var(--card2); border:1px solid var(--border);
+  border-radius:var(--radius-md); padding:16px;
+  animation:slideIn 0.3s ease;
 }
+@keyframes slideIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
 
-.help-box h2{
-  color:#00ff99;
-  margin-bottom:20px;
-  font-size:32px;
+.comment-meta { display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+.comment-avatar {
+  width:32px; height:32px; border-radius:50%;
+  background:var(--accent-dim); border:2px solid rgba(0,255,153,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; flex-shrink:0; font-weight:700; color:var(--accent);
+  overflow:hidden;
 }
-
-.help-box p{
-  color:#ccc;
-  margin-bottom:15px;
-  font-size:18px;
+.comment-avatar img { width:100%; height:100%; object-fit:cover; }
+.comment-author { font-size:13px; font-weight:700; color:var(--accent); }
+.comment-time { font-size:11px; color:var(--muted); margin-left:auto; }
+.comment-body { font-size:13px; color:#ccc; line-height:1.6; }
+.comment-actions { display:flex; gap:12px; margin-top:10px; }
+.comment-like-btn {
+  display:flex; align-items:center; gap:4px;
+  font-size:12px; color:var(--muted); cursor:pointer;
+  background:none; border:none; font-family:'Inter',sans-serif;
+  transition:var(--transition); padding:0;
 }
+.comment-like-btn:hover, .comment-like-btn.liked { color:var(--accent); }
 
-.help-box li{
-  color:#ccc;
-  margin-bottom:12px;
-  margin-left:20px;
-  font-size:18px;
+.comment-empty { text-align:center; padding:28px; color:var(--muted); font-size:13px; }
+.comment-empty-icon { font-size:32px; margin-bottom:8px; opacity:0.5; }
+
+.comments-loading { text-align:center; padding:20px; color:var(--muted); font-size:13px; }
+
+/* =============================================
+   SIDEBAR
+============================================= */
+.sidebar { display:flex; flex-direction:column; gap:16px; position:sticky; top:82px; }
+
+.sidebar-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:22px;
 }
+.sidebar-title { font-family:'Rajdhani',sans-serif; font-size:16px; font-weight:700; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:6px; }
 
-.contact-links a{
-  display:block;
-  color:#00ff99;
-  text-decoration:none;
-  margin-top:12px;
-  font-size:18px;
+/* Quick links */
+.quick-links { display:flex; flex-direction:column; gap:6px; }
+.quick-link {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px; border-radius:var(--radius-sm);
+  background:rgba(255,255,255,0.03); border:1px solid var(--border);
+  font-size:13px; color:#ccc; transition:var(--transition);
 }
+.quick-link:hover { border-color:rgba(0,255,153,0.2); color:var(--accent); background:var(--accent-dim); transform:translateX(4px); }
+.quick-link-icon { font-size:16px; }
 
-.contact-links a:hover{
-  color:#00cc77;
+/* Status card */
+.status-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.status-row:last-child { border-bottom:none; }
+.status-label { color:var(--muted); }
+.status-value { font-weight:600; display:flex; align-items:center; gap:5px; }
+.status-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 6px rgba(0,255,153,0.5); }
+.status-dot.warn { background:#ffaa00; box-shadow:0 0 6px rgba(255,170,0,0.5); }
+
+/* Contact card */
+.contact-btns { display:flex; flex-direction:column; gap:8px; }
+.contact-btn {
+  display:flex; align-items:center; gap:10px;
+  padding:11px 14px; border-radius:var(--radius-sm);
+  font-size:13px; font-weight:600; transition:var(--transition);
+  border:1px solid var(--border);
 }
+.contact-btn:hover { transform:translateY(-2px); }
+.contact-btn.discord { background:rgba(88,101,242,0.12); color:#5865F2; border-color:rgba(88,101,242,0.25); }
+.contact-btn.discord:hover { background:#5865F2; color:#fff; }
+.contact-btn.youtube { background:rgba(255,0,0,0.08); color:#FF0000; border-color:rgba(255,0,0,0.2); }
+.contact-btn.youtube:hover { background:#FF0000; color:#fff; }
+.contact-btn.email { background:rgba(0,255,153,0.08); color:var(--accent); border-color:rgba(0,255,153,0.2); }
+.contact-btn.email:hover { background:var(--accent); color:#000; }
+.contact-btn.insta { background:rgba(193,53,132,0.08); color:#c13584; border-color:rgba(193,53,132,0.2); }
+.contact-btn.insta:hover { background:linear-gradient(135deg,#f09433,#dc2743,#bc1888); color:#fff; }
 
-footer{
-  background:#111;
-  text-align:center;
-  padding:30px;
-  margin-top:60px;
-  color:#777;
+/* =============================================
+   TOAST
+============================================= */
+.toast { position:fixed; bottom:24px; right:24px; background:var(--accent); color:#000; padding:12px 20px; border-radius:var(--radius-md); font-weight:700; font-size:13px; z-index:9999; transform:translateY(20px); opacity:0; transition:all 0.3s ease; box-shadow:0 6px 24px rgba(0,255,153,0.35); }
+.toast.error { background:var(--danger); color:#fff; box-shadow:0 6px 24px rgba(255,68,68,0.35); }
+.toast.show { transform:translateY(0); opacity:1; }
+
+/* =============================================
+   FADE-IN
+============================================= */
+.fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.5s ease, transform 0.5s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* =============================================
+   FOOTER
+============================================= */
+.footer { background:var(--surface); border-top:1px solid var(--border); padding:32px 28px; text-align:center; }
+.footer-links { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:12px; }
+.footer-links a { color:var(--muted); font-size:13px; transition:var(--transition); }
+.footer-links a:hover { color:var(--accent); }
+.footer-copy { color:var(--muted); font-size:12px; }
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media(max-width:900px) {
+  .page-wrap { grid-template-columns:1fr; }
+  .sidebar { position:static; }
 }
-
-@media(max-width:768px){
-
-header h1{
-  font-size:35px;
+@media(max-width:600px) {
+  .hero h1 { font-size:32px; }
+  .page-wrap { padding:28px 16px 60px; }
+  .guide-card, .comment-section { padding:18px; }
+  .sidebar-card { padding:16px; }
 }
-
-.help-box h2{
-  font-size:26px;
-}
-
-.help-box p,
-.help-box li{
-  font-size:16px;
-}
-
-}
-
 </style>
-
 </head>
-
 <body>
 
-<header>
-
-<h1>Help Center</h1>
-
-<p>
-Get help with Minecraft mods, shaders, FPS boost & gaming issues
-</p>
-
+<!-- HEADER -->
+<header class="header">
+  <a href="index.html" class="header-logo">
+    <img src="hero.gaming.jpg" alt="Hero Verse">
+    <span>HERO VERSE</span>
+  </a>
+  <a href="index.html" class="back-btn">← Home</a>
 </header>
 
-<section class="container">
-
-<div class="help-box">
-
-<h2>How To Download Mods</h2>
-
-<p>
-
-Follow these simple steps to install Minecraft mods safely on your PC.
-
-</p>
-
-<ul>
-
-<li>✔ Download Fabric or Forge Loader</li>
-
-<li>✔ Download your favorite mod</li>
-
-<li>✔ Open Minecraft mods folder</li>
-
-<li>✔ Move mod file into the folder</li>
-
-<li>✔ Launch Minecraft using the correct profile</li>
-
-<li>✔ Enjoy your new mod features</li>
-
-</ul>
-
-</div>
-
-<div class="help-box">
-
-<h2>How To Install Shaders</h2>
-
-<p>
-
-Shaders improve Minecraft graphics and lighting effects.
-You can use Iris Shaders or OptiFine for shader support.
-
-</p>
-
-<ul>
-
-<li>✔ Install Iris Shaders or OptiFine</li>
-
-<li>✔ Download a shader pack</li>
-
-<li>✔ Open shaderpacks folder</li>
-
-<li>✔ Move shader zip file into folder</li>
-
-<li>✔ Enable shaders from video settings</li>
-
-<li>✔ Restart game if needed</li>
-
-</ul>
-
-</div>
-
-<div class="help-box">
-
-<h2>FPS Boost Tips</h2>
-
-<p>
-
-Low FPS can ruin gameplay experience.
-These tips can help improve Minecraft performance.
-
-</p>
-
-<ul>
-
-<li>✔ Use Sodium Mod</li>
-
-<li>✔ Lower render distance</li>
-
-<li>✔ Disable fancy graphics</li>
-
-<li>✔ Use lightweight shaders</li>
-
-<li>✔ Close background apps</li>
-
-<li>✔ Allocate proper RAM to Minecraft</li>
-
-</ul>
-
-</div>
-
-<div class="help-box">
-
-<h2>Common Problems</h2>
-
-<p>
-
-Here are some common Minecraft issues and quick fixes.
-
-</p>
-
-<ul>
-
-<li>✔ Minecraft crashing after installing mods</li>
-
-<li>✔ Shader pack not showing</li>
-
-<li>✔ Black screen issue</li>
-
-<li>✔ Low FPS or lag spikes</li>
-
-<li>✔ Java errors while launching</li>
-
-<li>✔ Mod compatibility problems</li>
-
-</ul>
-
-</div>
-
-<div class="help-box">
-
-<h2>Frequently Asked Questions</h2>
-
-<ul>
-
-<li>❓ Are mods safe to use?</li>
-
-<li>❓ Which Minecraft version should I use?</li>
-
-<li>❓ What is better: Forge or Fabric?</li>
-
-<li>❓ Why are shaders lagging?</li>
-
-<li>❓ How much RAM should Minecraft use?</li>
-
-<li>❓ Can low-end PCs run shaders?</li>
-
-</ul>
-
-</div>
-
-<div class="help-box">
-
-<h2>Contact Support</h2>
-
-<p>
-
-Need more help? Contact Hero Gaming using the links below.
-
-</p>
-
-<div class="contact-links">
-
-<a href="https://youtube.com/@herogamingxyz?si=aRTZqSUwuIjctIzI">
-YouTube Channel
-</a>
-
-<a href="https://www.instagram.com/hero_gamingxyz/?__pwa=1#">
-Instagram
-</a>
-
-<a href="https://discord.gg/eXZ227G5">
-Discord Server
-</a>
-
-<a href="mailto:herogamingxyzyt@gmail.com">
-herogamingxyzyt@gmail.com
-</a>
-
-</div>
-
-</div>
-
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🆘 Help Center</div>
+  <h1>How Can We <span>Help You?</span></h1>
+  <p>Find answers about Minecraft mods, shaders, FPS boost, account issues and Hero Verse features.</p>
+
+  <div class="hero-search">
+    <input type="text" id="helpSearch" placeholder="Search help topics... e.g. 'how to install mods'">
+    <span class="hero-search-icon">🔍</span>
+  </div>
+
+  <div class="topic-chips">
+    <span class="topic-chip active" data-filter="all">All Topics</span>
+    <span class="topic-chip" data-filter="mods">Mods</span>
+    <span class="topic-chip" data-filter="shaders">Shaders</span>
+    <span class="topic-chip" data-filter="fps">FPS Boost</span>
+    <span class="topic-chip" data-filter="account">Account</span>
+    <span class="topic-chip" data-filter="faq">FAQ</span>
+  </div>
 </section>
 
-<footer>
+<!-- PAGE LAYOUT -->
+<div class="page-wrap">
 
-© 2026 herogamingxyz | All Rights Reserved
+  <!-- LEFT: MAIN CONTENT -->
+  <div class="main-content">
 
+    <!-- HOW TO DOWNLOAD MODS -->
+    <div class="guide-card fade-in" data-category="mods">
+      <div class="guide-header">
+        <div class="guide-icon">🧩</div>
+        <h3>How To Download & Install Mods</h3>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Follow these steps to safely install Minecraft mods on your PC or mobile.</p>
+      <div class="steps-list">
+        <div class="step-item"><span class="step-num">1</span> Download Fabric or Forge Loader from their official website.</div>
+        <div class="step-item"><span class="step-num">2</span> Find and download your favorite mod from Hero Verse.</div>
+        <div class="step-item"><span class="step-num">3</span> Open your Minecraft mods folder (AppData → .minecraft → mods).</div>
+        <div class="step-item"><span class="step-num">4</span> Move the downloaded .jar mod file into the mods folder.</div>
+        <div class="step-item"><span class="step-num">5</span> Launch Minecraft using the correct Fabric or Forge profile.</div>
+        <div class="step-item"><span class="step-num">6</span> Check the in-game Mods menu to confirm it loaded correctly.</div>
+      </div>
+    </div>
+
+    <!-- HOW TO INSTALL SHADERS -->
+    <div class="guide-card fade-in" data-category="shaders">
+      <div class="guide-header">
+        <div class="guide-icon">✨</div>
+        <h3>How To Install Shaders</h3>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Shaders dramatically improve Minecraft's graphics. Use Iris Shaders or OptiFine.</p>
+      <div class="steps-list">
+        <div class="step-item"><span class="step-num">1</span> Install Iris Shaders (recommended) or OptiFine for shader support.</div>
+        <div class="step-item"><span class="step-num">2</span> Download a shader pack from Hero Verse or a trusted source.</div>
+        <div class="step-item"><span class="step-num">3</span> Open the shaderpacks folder (Options → Video Settings → Shaders → Open Folder).</div>
+        <div class="step-item"><span class="step-num">4</span> Move the shader .zip file directly into the shaderpacks folder.</div>
+        <div class="step-item"><span class="step-num">5</span> Enable the shader from Video Settings → Shaders menu.</div>
+        <div class="step-item"><span class="step-num">6</span> Restart the game if shaders don't load immediately.</div>
+      </div>
+    </div>
+
+    <!-- FPS BOOST -->
+    <div class="guide-card fade-in" data-category="fps">
+      <div class="guide-header">
+        <div class="guide-icon">⚡</div>
+        <h3>FPS Boost Tips</h3>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Low FPS ruins gameplay. These tips can dramatically improve Minecraft performance.</p>
+      <div class="steps-list">
+        <div class="step-item"><span class="step-num">1</span> Install Sodium Mod — the best Minecraft performance optimization mod.</div>
+        <div class="step-item"><span class="step-num">2</span> Lower render distance to 8–12 chunks for better performance.</div>
+        <div class="step-item"><span class="step-num">3</span> Disable Fancy Graphics, clouds and particles in Video Settings.</div>
+        <div class="step-item"><span class="step-num">4</span> Use lightweight shaders like Complementary Unbound on low-end PCs.</div>
+        <div class="step-item"><span class="step-num">5</span> Close background apps — Chrome, Discord (use overlay), recording software.</div>
+        <div class="step-item"><span class="step-num">6</span> Allocate 4–6GB RAM to Minecraft via launcher Java settings.</div>
+      </div>
+    </div>
+
+    <!-- COMMON PROBLEMS -->
+    <div class="guide-card fade-in" data-category="mods">
+      <div class="guide-header">
+        <div class="guide-icon">🔧</div>
+        <h3>Common Problems & Quick Fixes</h3>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Quick solutions for the most common Minecraft issues.</p>
+      <div class="steps-list">
+        <div class="step-item"><span class="step-num">🔴</span> <strong>Game crashing after installing mods:</strong> Check mod version matches Minecraft version.</div>
+        <div class="step-item"><span class="step-num">🟡</span> <strong>Shader pack not showing:</strong> Make sure you have Iris or OptiFine installed first.</div>
+        <div class="step-item"><span class="step-num">🔴</span> <strong>Black screen on launch:</strong> Delete options.txt file from .minecraft folder and restart.</div>
+        <div class="step-item"><span class="step-num">🟡</span> <strong>Low FPS or lag spikes:</strong> Reduce render distance and install Sodium mod.</div>
+        <div class="step-item"><span class="step-num">🔴</span> <strong>Java errors while launching:</strong> Update or reinstall Java (Java 17+ recommended).</div>
+        <div class="step-item"><span class="step-num">🟡</span> <strong>Mod compatibility problems:</strong> Check if all mods require same loader (Fabric vs Forge).</div>
+      </div>
+    </div>
+
+    <!-- ACCOUNT HELP -->
+    <div class="guide-card fade-in" data-category="account">
+      <div class="guide-header">
+        <div class="guide-icon">👤</div>
+        <h3>Account & Hero Verse Issues</h3>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Having trouble with your Hero Verse account? Here are the fixes.</p>
+      <div class="steps-list">
+        <div class="step-item"><span class="step-num">1</span> <strong>Can't login:</strong> Use the "Forgot Password" option on the login page.</div>
+        <div class="step-item"><span class="step-num">2</span> <strong>Account not created:</strong> Check your spam folder for verification email.</div>
+        <div class="step-item"><span class="step-num">3</span> <strong>Profile not updating:</strong> Clear browser cache and try again.</div>
+        <div class="step-item"><span class="step-num">4</span> <strong>Can't upload mod:</strong> Make sure you're logged in and file is under 10MB.</div>
+        <div class="step-item"><span class="step-num">5</span> <strong>Premium not unlocking:</strong> Contact us on Discord with your account email.</div>
+        <div class="step-item"><span class="step-num">6</span> <strong>Delete account:</strong> Email herogamingxyz@gmail.com with subject "Delete Account".</div>
+      </div>
+    </div>
+
+    <!-- FAQ ACCORDION -->
+    <div class="faq-section fade-in" data-category="faq">
+      <div class="sec-title">❓ Frequently Asked <span>Questions</span></div>
+
+      <div class="faq-item" data-q="Are mods from Hero Verse safe to use?">
+        <div class="faq-q">
+          <span class="faq-q-text">Are mods from Hero Verse safe to use?</span>
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Yes! All mods on Hero Verse are reviewed before publishing. We only list mods from trusted sources and provide direct links to official download pages. We never host files with malware or suspicious content.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-q="Which Minecraft version should I use?">
+        <div class="faq-q">
+          <span class="faq-q-text">Which Minecraft version should I use for mods?</span>
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">We recommend Minecraft 1.20.x or 1.21.x for the best mod compatibility. Always check the mod's required version before downloading. Each mod page on Hero Verse lists the compatible version clearly.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-q="What is better: Forge or Fabric?">
+        <div class="faq-q">
+          <span class="faq-q-text">What is better: Forge or Fabric?</span>
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Fabric is faster, more lightweight and better for performance mods like Sodium. Forge has a bigger mod library with larger, more complex mods. For FPS and optimization mods, use Fabric. For big modpacks and RPG mods, use Forge.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-q="Why are shaders lagging?">
+        <div class="faq-q">
+          <span class="faq-q-text">Why are my shaders lagging or causing low FPS?</span>
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Shaders are GPU-intensive. If you're lagging, try: (1) Use a lite shader pack like Complementary Reimagined Potato, (2) Lower shader settings, (3) Reduce render distance to 8 chunks, (4) Install Sodium + Iris together for best performance with shaders.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-q="How much RAM should Minecraft use?">
+        <div class="faq-q">
+          <span class="faq-q-text">How much RAM should I allocate to Minecraft?</span>
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">For vanilla Minecraft: 2–3GB. With mods: 4–6GB. For large modpacks: 6–8GB. Don't over-allocate RAM — giving Minecraft too much RAM can actually cause more lag due to Java garbage collection. 4–6GB is the sweet spot for most players.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-q="Can low-end PCs run shaders?">
+        <div class="faq-q">
+          <span class="faq-q-text">Can low-end PCs run shaders?</span>
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Yes! Low-end PCs can run lite shaders using Iris + Sodium. Recommended shader packs for low-end: Complementary Unbound (Potato Mode), Sildur's Vibrant Shaders Lite, or BSL Shaders on low settings. Pair with Sodium mod for best results.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-q="Is Hero Verse free?">
+        <div class="faq-q">
+          <span class="faq-q-text">Is Hero Verse free to use?</span>
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Yes! Hero Verse is completely free for all basic features including browsing mods, reading articles, creating an account and joining the community. Hero Verse Premium unlocks exclusive mods and early access content.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-q="How do I upload my own mod?">
+        <div class="faq-q">
+          <span class="faq-q-text">How do I upload my own mod to Hero Verse?</span>
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Create a Hero Verse account, go to your Profile and click "Upload Mod". Fill in the mod details, add screenshots and submit for review. Our team reviews submissions within 24–48 hours. Approved mods go live on the platform with your creator credit.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COMMENT SECTION -->
+    <div class="comment-section fade-in">
+      <div class="sec-title">💬 Community <span>Questions</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Still have a question? Ask the Hero Verse community below — our team and other gamers will help you out!</p>
+
+      <!-- Login prompt or form — toggled by JS -->
+      <div id="loginPrompt" class="login-prompt" style="display:none;">
+        🔒 <a href="login.html">Login</a> or <a href="signup.html">Sign Up</a> to ask a question or leave a comment.
+      </div>
+
+      <div id="commentFormWrap" class="comment-form" style="display:none;">
+        <textarea id="commentInput" placeholder="Ask a question or share a tip with the community..." maxlength="500"></textarea>
+        <div class="comment-form-footer">
+          <span class="comment-chars"><span id="charCount">0</span>/500</span>
+          <button class="comment-submit" id="submitComment">💬 Post Comment</button>
+        </div>
+      </div>
+
+      <div class="comments-list" id="commentsList">
+        <div class="comments-loading">⏳ Loading community questions...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Quick Links -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">⚡ Quick Jump</div>
+      <div class="quick-links">
+        <a href="#" class="quick-link" onclick="scrollTo('mods')"><span class="quick-link-icon">🧩</span> Installing Mods</a>
+        <a href="#" class="quick-link" onclick="scrollTo('shaders')"><span class="quick-link-icon">✨</span> Installing Shaders</a>
+        <a href="#" class="quick-link" onclick="scrollTo('fps')"><span class="quick-link-icon">⚡</span> FPS Boost Tips</a>
+        <a href="#" class="quick-link" onclick="scrollTo('faq')"><span class="quick-link-icon">❓</span> FAQ</a>
+        <a href="#" class="quick-link" onclick="scrollTo('account')"><span class="quick-link-icon">👤</span> Account Help</a>
+        <a href="#" class="quick-link" onclick="document.querySelector('.comment-section').scrollIntoView({behavior:'smooth'})"><span class="quick-link-icon">💬</span> Ask Community</a>
+      </div>
+    </div>
+
+    <!-- Platform Status -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">🟢 Platform Status</div>
+      <div class="status-row">
+        <span class="status-label">Website</span>
+        <span class="status-value"><span class="status-dot"></span> Online</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Mod Downloads</span>
+        <span class="status-value"><span class="status-dot"></span> Active</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">User Accounts</span>
+        <span class="status-value"><span class="status-dot"></span> Active</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Discord</span>
+        <span class="status-value"><span class="status-dot"></span> Online</span>
+      </div>
+    </div>
+
+    <!-- Contact Support -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">📬 Contact Support</div>
+      <div class="contact-btns">
+        <a href="https://discord.gg/eXZ227G5" class="contact-btn discord" target="_blank">💬 Discord Server</a>
+        <a href="https://youtube.com/@herogamingxyz" class="contact-btn youtube" target="_blank">▶️ YouTube Channel</a>
+        <a href="mailto:herogamingxyz@gmail.com" class="contact-btn email">📧 Send Email</a>
+        <a href="https://www.instagram.com/hero_gamingxyz/" class="contact-btn insta" target="_blank">📸 Instagram</a>
+      </div>
+    </div>
+
+    <!-- Useful Links -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">🔗 Useful Links</div>
+      <div class="quick-links">
+        <a href="sodium.html" class="quick-link"><span class="quick-link-icon">🟩</span> Minecraft Mods</a>
+        <a href="iris-shaders.html" class="quick-link"><span class="quick-link-icon">✨</span> Shaders</a>
+        <a href="privacy-policy.html" class="quick-link"><span class="quick-link-icon">🔐</span> Privacy Policy</a>
+        <a href="about.html" class="quick-link"><span class="quick-link-icon">ℹ️</span> About Us</a>
+        <a href="signup.html" class="quick-link"><span class="quick-link-icon">👤</span> Create Account</a>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="sodium.html">Mods</a>
+    <a href="backrooms.html">Articles</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="about.html">About</a>
+    <a href="mailto:herogamingxyz@gmail.com">Contact</a>
+  </div>
+  <p class="footer-copy">© 2026 Hero Verse | herogamingxyz | All Rights Reserved</p>
 </footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* ---- Toast ---- */
+function showToast(msg, isError = false) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.toggle("error", isError);
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 3000);
+}
+
+/* ---- FAQ Accordion ---- */
+document.querySelectorAll(".faq-q").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector(".faq-a");
+    const isOpen = item.classList.contains("open");
+
+    // Close all
+    document.querySelectorAll(".faq-item").forEach(el => {
+      el.classList.remove("open");
+      el.querySelector(".faq-a").style.maxHeight = "0";
+    });
+
+    // Open clicked if it was closed
+    if (!isOpen) {
+      item.classList.add("open");
+      answer.style.maxHeight = answer.scrollHeight + "px";
+    }
+  });
+});
+
+/* ---- Topic filter chips ---- */
+document.querySelectorAll(".topic-chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    document.querySelectorAll(".topic-chip").forEach(c => c.classList.remove("active"));
+    chip.classList.add("active");
+
+    const filter = chip.dataset.filter;
+    const allCards = document.querySelectorAll(".guide-card, .faq-section");
+
+    allCards.forEach(card => {
+      const cat = card.dataset.category;
+      if (filter === "all" || cat === filter) {
+        card.style.display = "";
+        card.style.opacity = "1";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+});
+
+/* ---- Live search ---- */
+document.getElementById("helpSearch").addEventListener("input", function() {
+  const q = this.value.toLowerCase().trim();
+  if (!q) {
+    document.querySelectorAll(".guide-card, .faq-item").forEach(el => el.style.display = "");
+    return;
+  }
+
+  document.querySelectorAll(".guide-card").forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(q) ? "" : "none";
+  });
+
+  document.querySelectorAll(".faq-item").forEach(item => {
+    const text = item.innerText.toLowerCase();
+    item.style.display = text.includes(q) ? "" : "none";
+  });
+});
+
+/* ---- Quick Jump scroll ---- */
+function scrollTo(category) {
+  const el = document.querySelector(`[data-category="${category}"]`);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/* ---- Fade-in observer ---- */
+const fadeEls = document.querySelectorAll(".fade-in");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+fadeEls.forEach(el => observer.observe(el));
+
+/* ---- Char counter ---- */
+const commentInput = document.getElementById("commentInput");
+const charCount = document.getElementById("charCount");
+if (commentInput) {
+  commentInput.addEventListener("input", () => {
+    charCount.textContent = commentInput.value.length;
+  });
+}
+
+</script>
+
+<!-- =============================================
+   FIREBASE — Comments System
+============================================= -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import {
+  getAuth, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import {
+  getFirestore, collection, addDoc, getDocs,
+  doc, getDoc, orderBy, query, limit,
+  updateDoc, increment, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+  authDomain: "hero-verse-67e33.firebaseapp.com",
+  projectId: "hero-verse-67e33",
+  storageBucket: "hero-verse-67e33.firebasestorage.app",
+  messagingSenderId: "227494840218",
+  appId: "1:227494840218:web:c0d0f311a6e75737eadc23"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db  = getFirestore(app);
+
+const COLLECTION = "helpComments";
+
+/* ---- Format time ---- */
+function timeAgo(ts) {
+  if (!ts) return "Just now";
+  const diff = Math.floor((Date.now() - ts.toMillis()) / 1000);
+  if (diff < 60) return "Just now";
+  if (diff < 3600) return Math.floor(diff / 60) + "m ago";
+  if (diff < 86400) return Math.floor(diff / 3600) + "h ago";
+  return Math.floor(diff / 86400) + "d ago";
+}
+
+/* ---- Render comment ---- */
+function renderComment(docu, currentUid) {
+  const d = docu.data();
+  const liked = (d.likedBy || []).includes(currentUid);
+
+  const card = document.createElement("div");
+  card.className = "comment-card";
+  card.innerHTML = `
+    <div class="comment-meta">
+      <div class="comment-avatar">${d.username ? d.username[0].toUpperCase() : "?"}</div>
+      <span class="comment-author">${d.username || "Anonymous"}</span>
+      <span class="comment-time">${timeAgo(d.createdAt)}</span>
+    </div>
+    <div class="comment-body">${d.text}</div>
+    <div class="comment-actions">
+      <button class="comment-like-btn ${liked ? "liked" : ""}" data-id="${docu.id}">
+        ${liked ? "❤️" : "🤍"} <span class="like-count">${d.likes || 0}</span>
+      </button>
+    </div>
+  `;
+
+  // Like button handler
+  card.querySelector(".comment-like-btn").addEventListener("click", async (e) => {
+    if (!currentUid) { showToast("Login to like comments", true); return; }
+    const btn = e.currentTarget;
+    const ref = doc(db, COLLECTION, docu.id);
+    const snap = await getDoc(ref);
+    const likedBy = snap.data().likedBy || [];
+
+    if (likedBy.includes(currentUid)) {
+      showToast("Already liked!", true); return;
+    }
+
+    await updateDoc(ref, {
+      likes: increment(1),
+      likedBy: [...likedBy, currentUid]
+    });
+
+    btn.classList.add("liked");
+    btn.innerHTML = `❤️ <span class="like-count">${(snap.data().likes || 0) + 1}</span>`;
+  });
+
+  return card;
+}
+
+/* ---- Load comments ---- */
+async function loadComments(currentUid) {
+  const list = document.getElementById("commentsList");
+  try {
+    const q = query(collection(db, COLLECTION), orderBy("createdAt", "desc"), limit(30));
+    const snap = await getDocs(q);
+
+    list.innerHTML = "";
+
+    if (snap.empty) {
+      list.innerHTML = `
+        <div class="comment-empty">
+          <div class="comment-empty-icon">💬</div>
+          <p>No questions yet. Be the first to ask!</p>
+        </div>`;
+      return;
+    }
+
+    snap.forEach(docu => list.appendChild(renderComment(docu, currentUid)));
+  } catch (err) {
+    list.innerHTML = `<div class="comment-empty"><p>Could not load comments.</p></div>`;
+  }
+}
+
+/* ---- Auth state ---- */
+let currentUser = null;
+
+onAuthStateChanged(auth, async (user) => {
+  currentUser = user;
+
+  if (user) {
+    document.getElementById("loginPrompt").style.display = "none";
+    document.getElementById("commentFormWrap").style.display = "block";
+  } else {
+    document.getElementById("loginPrompt").style.display = "block";
+    document.getElementById("commentFormWrap").style.display = "none";
+  }
+
+  await loadComments(user ? user.uid : null);
+});
+
+/* ---- Submit comment ---- */
+document.getElementById("submitComment").addEventListener("click", async () => {
+  if (!currentUser) { showToast("Please login first", true); return; }
+
+  const input = document.getElementById("commentInput");
+  const text = input.value.trim();
+  if (!text) { showToast("Please write something first", true); return; }
+  if (text.length < 5) { showToast("Comment is too short", true); return; }
+
+  const btn = document.getElementById("submitComment");
+  btn.disabled = true;
+  btn.textContent = "⏳ Posting...";
+
+  try {
+    // Get username from Firestore
+    const userSnap = await getDoc(doc(db, "users", currentUser.uid));
+    const username = userSnap.exists() ? userSnap.data().username : "Hero User";
+
+    await addDoc(collection(db, COLLECTION), {
+      text,
+      username,
+      uid: currentUser.uid,
+      likes: 0,
+      likedBy: [],
+      createdAt: serverTimestamp()
+    });
+
+    input.value = "";
+    document.getElementById("charCount").textContent = "0";
+    showToast("✅ Comment posted!");
+    await loadComments(currentUser.uid);
+
+  } catch (err) {
+    showToast("Failed to post comment", true);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "💬 Post Comment";
+  }
+});
+
+</script>
 
 </body>
 </html>
