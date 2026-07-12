@@ -644,9 +644,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/fireba
 import {
   getAuth,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   GoogleAuthProvider,
   FacebookAuthProvider,
-  OAuthProvider,
   signInWithPopup
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 import {
@@ -767,19 +767,28 @@ signupForm.addEventListener("submit", (e) => {
     .then(async (userCredential) => {
       const user = userCredential.user;
 
+      // Firestore mein save karo
       await setDoc(doc(db, "users", user.uid), {
         username: username,
         email: email,
-        joinDate: new Date().toISOString()
+        joinDate: new Date().toISOString(),
+        emailVerified: false
       });
 
-      showToast("✅ Account Created Successfully!");
+      // Verification email bhejo
+      await sendEmailVerification(user);
+
+      showToast("✅ Account bana! Email check karo aur verify karo.");
       setTimeout(() => {
-        window.location.href = "login.html";
-      }, 1200);
+        window.location.href = "verify-email.html";
+      }, 2000);
     })
     .catch((error) => {
-      showToast(error.message, true);
+      let msg = "Signup failed. Try again.";
+      if (error.code === "auth/email-already-in-use") msg = "Ye email already registered hai!";
+      if (error.code === "auth/weak-password")        msg = "Password zyada strong chahiye (6+ chars)";
+      if (error.code === "auth/invalid-email")        msg = "Valid email daalo!";
+      showToast(msg, true);
       signupBtn.disabled = false;
       signupSpinner.classList.remove("show");
       signupBtnText.textContent = "+👤 Create Account";
