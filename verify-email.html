@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify Email | Hero Verse</title>
+<link rel="icon" type="image/png" href="hero.gaming.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#090909;--card:rgba(20,20,20,0.95);--border:rgba(255,255,255,0.08);--accent:#00ff99;--text:#f0f0f0;--muted:#888;--danger:#ff4444;--radius-sm:10px;--radius-md:16px;--radius-lg:24px;}
+body{min-height:100vh;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;align-items:center;justify-content:center;padding:20px;overflow:hidden;}
+body::before{content:'';position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,255,153,0.05) 0%,transparent 70%);pointer-events:none;}
+
+.verify-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 32px;max-width:460px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.5);animation:fadeUp 0.5s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+.logo{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:28px;}
+.logo img{width:32px;height:32px;border-radius:50%;border:2px solid var(--accent);object-fit:cover;}
+.logo span{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:var(--accent);}
+
+.email-icon{font-size:72px;margin-bottom:20px;display:block;animation:bounce 2s ease infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+h1{font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;margin-bottom:10px;}
+h1 span{color:var(--accent);}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:24px;}
+.subtitle strong{color:var(--text);}
+
+.email-box{background:rgba(0,255,153,0.06);border:1px solid rgba(0,255,153,0.15);border-radius:var(--radius-sm);padding:12px 16px;font-size:14px;color:var(--accent);font-weight:600;margin-bottom:24px;word-break:break-all;}
+
+.steps{text-align:left;margin-bottom:28px;}
+.step{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.step:last-child{border-bottom:none;}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#000;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step p{font-size:13px;color:#ccc;line-height:1.5;margin:0;}
+
+.btn-primary{width:100%;padding:14px;border:none;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),#00e589);color:#000;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:0.25s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,255,153,0.35);}
+.btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+
+.btn-secondary{width:100%;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:transparent;color:var(--muted);font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:0.25s ease;margin-bottom:12px;}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+.btn-secondary:disabled{opacity:0.4;cursor:not-allowed;}
+
+.resend-timer{font-size:12px;color:var(--muted);margin-bottom:16px;}
+.resend-timer span{color:var(--accent);font-weight:700;}
+
+.divider{display:flex;align-items:center;gap:10px;margin:16px 0;color:var(--muted);font-size:12px;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.logout-link{font-size:13px;color:var(--muted);cursor:pointer;transition:0.25s ease;}
+.logout-link:hover{color:var(--danger);}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--accent);color:#000;padding:12px 24px;border-radius:var(--radius-md);font-weight:700;font-size:13px;z-index:9999;opacity:0;pointer-events:none;transition:all 0.3s ease;white-space:nowrap;}
+.toast.error{background:var(--danger);color:#fff;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="verify-card">
+
+  <div class="logo">
+    <img src="hero.gaming.jpg" alt="Hero Verse">
+    <span>HERO VERSE</span>
+  </div>
+
+  <span class="email-icon">📧</span>
+
+  <h1>Verify Your <span>Email</span></h1>
+  <p class="subtitle">A <strong>verification link</strong> has been sent to your email address. Please click the link to activate your account.</p>
+
+  <div class="email-box" id="emailDisplay">Loading...</div>
+
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">1</span>
+      <p>Open your <strong>Email Inbox</strong></p>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <p>Find the email with subject <strong>"Verify your email"</strong> — also check your Spam folder</p>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <p>Click the <strong>"Verify Email Address"</strong> link inside the email</p>
+    </div>
+    <div class="step">
+      <span class="step-num">4</span>
+      <p>Come back here and click <strong>"I Have Verified"</strong> below</p>
+    </div>
+  </div>
+
+  <button class="btn-primary" id="checkBtn" onclick="checkVerified()">
+    ✅ I Have Verified My Email
+  </button>
+
+  <div class="resend-timer" id="resendTimer">
+    Didn't receive the email? You can resend in <span id="timerText">60s</span>
+  </div>
+
+  <button class="btn-secondary" id="resendBtn" disabled onclick="resendEmail()">
+    🔁 Resend Verification Email
+  </button>
+
+  <div class="divider">or</div>
+
+  <span class="logout-link" onclick="doLogout()">🚪 Logout and go back</span>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import{getAuth,onAuthStateChanged,sendEmailVerification,signOut,reload}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import{getFirestore,doc,updateDoc}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig={apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",authDomain:"hero-verse-67e33.firebaseapp.com",projectId:"hero-verse-67e33",storageBucket:"hero-verse-67e33.firebasestorage.app",messagingSenderId:"227494840218",appId:"1:227494840218:web:c0d0f311a6e75737eadc23"};
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+function showToast(msg,isError=false){
+  const t=document.getElementById("toast");
+  t.textContent=msg;t.classList.toggle("error",isError);
+  t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3500);
+}
+
+let timerInterval;
+function startResendTimer(){
+  let seconds=60;
+  const resendBtn=document.getElementById("resendBtn");
+  const timerText=document.getElementById("timerText");
+  const timerDiv=document.getElementById("resendTimer");
+  resendBtn.disabled=true;timerDiv.style.display="block";
+  timerInterval=setInterval(()=>{
+    seconds--;timerText.textContent=seconds+"s";
+    if(seconds<=0){clearInterval(timerInterval);resendBtn.disabled=false;timerDiv.style.display="none";}
+  },1000);
+}
+
+let currentUser=null;
+onAuthStateChanged(auth,(user)=>{
+  if(!user){window.location.href="signup.html";return;}
+  if(user.emailVerified){window.location.href="index.html";return;}
+  currentUser=user;
+  document.getElementById("emailDisplay").textContent=user.email;
+  startResendTimer();
+});
+
+window.checkVerified=async function(){
+  if(!currentUser)return;
+  const btn=document.getElementById("checkBtn");
+  btn.disabled=true;btn.innerHTML="⏳ Checking...";
+  try{
+    await reload(currentUser);
+    if(currentUser.emailVerified){
+      await updateDoc(doc(db,"users",currentUser.uid),{emailVerified:true});
+      showToast("🎉 Email verified! Redirecting...");
+      setTimeout(()=>{window.location.href="index.html";},1500);
+    }else{
+      showToast("❌ Not verified yet. Please click the link in your email!",true);
+      btn.disabled=false;btn.innerHTML="✅ I Have Verified My Email";
+    }
+  }catch(err){
+    showToast("Error checking verification. Please try again.",true);
+    btn.disabled=false;btn.innerHTML="✅ I Have Verified My Email";
+  }
+};
+
+window.resendEmail=async function(){
+  if(!currentUser)return;
+  try{
+    await sendEmailVerification(currentUser);
+    showToast("✅ Verification email sent again!");
+    startResendTimer();
+  }catch(err){showToast("Failed to send email. Please try again later.",true);}
+};
+
+window.doLogout=function(){
+  signOut(auth).then(()=>{window.location.href="login.html";});
+};
+</script>
+</body>
+</html>
