@@ -1,0 +1,209 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="{{image1}}">
+
+<h1>{{title}}</h1>
+
+<p>{{description}}</p>
+
+<img src="{{image2}}">
+
+<h2>Installation Guide</h2>
+
+<p>{{installation}}</p>
+
+<img src="{{image3}}">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="{{download}}"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>{{credits}}</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

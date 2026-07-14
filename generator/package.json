@@ -1,0 +1,16 @@
+{
+  "name": "heroverse-generator",
+  "version": "1.0.0",
+  "description": "HeroVerse Static HTML Generator",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "firebase": "^12.0.0",
+    "firebase-admin": "^14.1.0",
+    "fs-extra": "^11.3.0",
+    "slugify": "^1.6.6"
+  }
+}
