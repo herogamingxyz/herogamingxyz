@@ -1,0 +1,257 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="Core.jpg">
+
+<h1>Core Craft Villages Update</h1>
+
+<p>Core Craft is a powerful Minecraft Bedrock Edition addon that expands the vanilla survival experience with new villagers, advanced structures, unique mobs, improved combat systems and exciting RPG-style features. The addon is designed to make Minecraft feel more alive while keeping the original gameplay balanced and enjoyable.
+
+With Core Craft installed, players can discover upgraded villages, encounter new villager professions, fight stronger illagers and explore a world filled with new adventures. Villages become more realistic and interactive, creating a much better survival experience compared to standard Minecraft.
+
+The addon also introduces improved iron golems, village defenders and several new gameplay mechanics that help make exploration, trading and combat more interesting. Every village feels unique and offers new opportunities for players who enjoy survival, roleplay and adventure-based gameplay.
+
+Core Craft is perfect for players who want more content without completely changing the vanilla Minecraft feeling. The addon blends naturally into the game and provides a fresh experience for both new and experienced Minecraft players.
+
+Whether you enjoy building, exploring, fighting mobs or developing your own village, Core Craft adds countless new possibilities that make your Minecraft world feel bigger, more immersive and more exciting than ever before.</p>
+
+<img src="Core2.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>📥 Installation Guide
+
+Follow these simple steps to install Core Craft Addon in Minecraft Bedrock Edition:
+
+1. Download the Core Craft Addon files from the download links provided below.
+
+2. Locate the downloaded addon file on your device.
+
+3. Tap the file to automatically import it into Minecraft Bedrock Edition.
+
+4. Wait until Minecraft finishes importing the Resource Pack and Behavior Pack.
+
+5. Open Minecraft and create a new world or edit an existing world.
+
+6. Go to the Resource Packs section and activate the Core Craft Resource Pack.
+
+7. Go to the Behavior Packs section and activate the Core Craft Behavior Pack.
+
+8. Open the Experiments menu and enable all required Experimental Features.
+
+9. Save the world settings and enter your world.
+
+10. Explore villages, discover new mobs, interact with upgraded villagers and enjoy the enhanced survival experience provided by Core Craft.
+
+Note: For the best experience, use the latest version of Minecraft Bedrock Edition supported by the addon.</p>
+
+<img src="Core3.jpg">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://link-target.net/5995621/msmsrlnZqmqj"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>👑 Credits
+
+Addon Name: Core Craft - A Vanilla Expansion
+
+Original Creator: Core Craft Team
+
+Source: CurseForge
+
+Official Addon Page: CurseForge - Core Craft
+
+All rights to the addon, models, textures, scripts and assets belong to their respective creators.
+
+Hero Verse does not claim ownership of this addon. This page is provided for informational purposes, installation guidance and addon discovery.
+
+Special thanks to the Core Craft Team for creating and maintaining this amazing Minecraft Bedrock Edition addon.
+
+© 2026 herogamingxyz</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/GQXGWNsS/1000098075.jpg">
+
+<h1>JurassiCraft Reborn Mod for Minecraft Java Edition</h1>
+
+<p>JurassiCraft Reborn is one of the most impressive dinosaur mods ever created for Minecraft Java Edition. Inspired by the Jurassic Park and Jurassic World franchises, this mod transforms the Minecraft world into a prehistoric adventure filled with realistic dinosaurs, ancient plants, fossils, and exciting exploration. Whether you're building your own dinosaur park or surviving alongside giant prehistoric creatures, this mod delivers an unforgettable experience for every Minecraft player.
+
+The mod introduces more than thirty beautifully designed dinosaurs, each with unique models, animations, sounds, and behaviors. Players can discover fossils hidden underground, extract dinosaur DNA, and hatch dinosaur eggs inside specialized incubators. Watching a small dinosaur grow into a massive prehistoric predator is one of the most exciting parts of the gameplay.
+
+Every dinosaur behaves differently depending on its species. Some are peaceful herbivores that can be observed safely, while others are dangerous carnivores capable of attacking players and other creatures. Proper care, feeding, and secure enclosures are essential if you want your dinosaur park to survive.
+
+JurassiCraft Reborn also adds prehistoric plants, decorative blocks, laboratory equipment, and park-building items that help players create realistic dinosaur attractions. The combination of advanced animations, detailed textures, and immersive sound effects makes every encounter feel alive.
+
+The mod works perfectly for both survival gameplay and creative building projects. Many YouTubers use JurassiCraft to build massive Jurassic parks, create roleplay adventures, and produce exciting dinosaur-themed content. Whether you're a fan of dinosaurs, adventure, or Minecraft itself, JurassiCraft Reborn is one of the best dinosaur mods available for Minecraft Java Edition.</p>
+
+<img src="https://i.ibb.co/Q7NQmBXG/1000098074.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>1. Download the latest version of JurassiCraft Reborn.
+
+2. Install Minecraft Forge.
+
+3. Download and install LLibrary if required by your version.
+
+4. Place the downloaded mod file into the "mods" folder.
+
+5. Launch Minecraft using the Forge profile.
+
+6. Create a new world.
+
+7. Search for fossils, extract DNA, hatch dinosaur eggs, and build your own Jurassic Park.</p>
+
+<img src="https://i.ibb.co/SwY4bqJ8/1000098073.jpg">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://www.curseforge.com/minecraft/mc-mods/jurassicraft-reborn"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Article By: Hero Verse Team
+
+Original Mod: JurassiCraft Reborn
+
+Official Download:
+https://www.curseforge.com/minecraft/mc-mods/jurassicraft-reborn</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

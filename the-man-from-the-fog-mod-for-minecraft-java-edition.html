@@ -1,0 +1,240 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/9kQSZsJR/1000097718.webp">
+
+<h1>The Man From The Fog Mod for Minecraft Java Edition</h1>
+
+<p>The Man From The Fog is one of the most terrifying horror mods ever created for Minecraft Java Edition. Inspired by the mysterious creature known as "The Man From The Fog," this mod introduces a relentless monster that stalks players throughout their survival journey. Unlike ordinary Minecraft mobs, this terrifying entity is intelligent, unpredictable, and designed to create constant fear instead of simple combat.
+
+As soon as the mod is installed, the peaceful atmosphere of Minecraft changes completely. During the night or while exploring dark forests and caves, players may begin hearing strange footsteps, unsettling ambient noises, and distant breathing sounds. These audio effects make every exploration feel dangerous, even before the creature appears.
+
+The Man From The Fog doesn't always attack immediately. It often watches players from a distance, disappearing whenever someone gets too close. This psychological horror design keeps players constantly looking over their shoulders, never knowing when the next encounter will happen. Every survival world becomes unpredictable, making even simple mining trips feel incredibly intense.
+
+The mod features detailed animations, high-quality sound effects, and smooth AI behavior. The creature can chase players at incredible speed, forcing them to think quickly and find shelter before it's too late. Unlike zombies or skeletons, defeating this monster is not easy, making survival much more challenging.
+
+Many horror content creators use this mod because of its realistic jump scares and cinematic gameplay moments. Every encounter is different, meaning no two adventures are ever exactly the same. The random behavior keeps players engaged and ensures every session feels fresh.
+
+The Man From The Fog also works well alongside many popular Minecraft shader packs, creating darker nights, realistic shadows, and an even more terrifying atmosphere. Combining this mod with realistic resource packs makes the horror experience even more immersive.
+
+The developer regularly updates the mod with bug fixes, AI improvements, and new features to improve gameplay. Because of these updates, the mod remains one of the highest-rated horror experiences available for Minecraft Java Edition.
+
+If you enjoy suspense, survival, exploration, and terrifying creatures that hunt you without warning, The Man From The Fog is an excellent choice. It transforms ordinary Minecraft into a horror survival adventure that will keep you nervous from the first night until the very end.</p>
+
+<img src="https://i.ibb.co/VWmzKw4z/1000097719.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>1. Download the latest version of The Man From The Fog.
+
+2. Install Minecraft Forge or NeoForge.
+
+3. Install Geckolib if required.
+
+4. Move the downloaded mod file into the "mods" folder.
+
+5. Launch Minecraft using the correct mod loader.
+
+6. Create or open a survival world.
+
+7. Explore carefully and survive the terrifying Man From The Fog.</p>
+
+<img src="https://i.ibb.co/HpPY48KR/1000097717.jpg">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://modrinth.com/mod/the-man-from-the-fog"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Original Creator: WillowDev
+
+Project: The Man From The Fog
+
+Official Download:
+https://modrinth.com/mod/the-man-from-the-fog</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

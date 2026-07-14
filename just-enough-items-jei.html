@@ -1,0 +1,235 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/9HRg92rk/1000095122.webp">
+
+<h1>Just Enough Items (JEI)</h1>
+
+<p>Just Enough Items (JEI) is one of the most essential Minecraft utility mods available for both beginners and advanced players. This powerful mod provides an easy-to-use in-game item and recipe viewing system, allowing players to quickly search for blocks, tools, weapons, resources, and crafting recipes without leaving their world. Whether you are playing vanilla Minecraft or a heavily modded modpack, JEI makes crafting and item management significantly easier and more efficient.
+
+JEI is trusted by millions of Minecraft players worldwide because it eliminates the frustration of remembering complex crafting recipes. With a simple and intuitive interface, players can instantly view how to craft items, discover item uses, and explore recipes from hundreds of supported mods. The mod is lightweight, highly optimized, and compatible with most popular Minecraft versions and mod loaders.
+
+If you frequently play survival, adventure, technology, magic, or large modpacks, JEI becomes an indispensable tool that saves time and improves your overall gameplay experience. It is widely considered one of the first mods every Minecraft player should install.</p>
+
+<img src="https://i.ibb.co/wFnH7mk4/1000095123.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>1. Download and install the correct version of Minecraft Forge, Fabric, or NeoForge for your Minecraft version.
+
+2. Download the latest compatible version of Just Enough Items (JEI).
+
+3. Open your Minecraft directory and locate the "mods" folder. If the folder does not exist, create a new folder named "mods".
+
+4. Move the downloaded JEI file into the mods folder.
+
+5. Launch Minecraft using the correct mod loader profile.
+
+6. Open any world and press the inventory key. The JEI interface will automatically appear on the right side of your screen.
+
+7. Use the search bar to quickly find items, recipes, crafting methods, and modded content.
+
+JEI is now successfully installed and ready to enhance your Minecraft experience.</p>
+
+<img src="https://i.ibb.co/KY4d9Bx/1000095124.png">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://link-hub.net/5995621/azJYWIsu1Yy8"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Credits to the original developer "mezz" and all contributors involved in the development of Just Enough Items (JEI).
+
+This mod is the intellectual property of its respective creators. Hero Verse does not claim ownership of this mod and only shares information for educational and community purposes.
+
+Please support the official developers by visiting the official project page and downloading the mod from authorized sources whenever possible.
+
+Official Project: Just Enough Items (JEI)
+Developer: mezz
+Platform: CurseForge</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

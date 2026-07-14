@@ -1,0 +1,239 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/B2YTfGrz/1000094468.jpg">
+
+<h1>Better on Bedrock Addon</h1>
+
+<p>Better on Bedrock Addon is one of the most impressive Minecraft Bedrock Edition addons created for players who want a richer and more immersive survival experience. This addon expands the vanilla game by introducing new structures, improved world generation, additional wildlife, enhanced exploration features and countless gameplay improvements while still preserving the original Minecraft feeling.
+
+With Better on Bedrock installed, players can discover unique locations scattered throughout the world, encounter new challenges during exploration and enjoy a more detailed environment filled with surprises. The addon improves many aspects of survival mode, making every journey feel more rewarding and exciting. Whether you are exploring distant lands, gathering resources or building your dream base, the world feels much more alive and dynamic.
+
+One of the biggest highlights of this addon is its ability to enhance the game without making it feel completely different from vanilla Minecraft. The new features blend naturally into the existing gameplay, allowing both new and experienced players to enjoy fresh content without needing to learn complicated mechanics. Villages, landscapes, structures and various world elements receive improvements that create a more engaging survival adventure.
+
+The addon also introduces new points of interest that encourage players to explore further than ever before. Hidden locations, unique landmarks and improved terrain generation make every world feel more diverse and interesting. Exploration becomes a major part of the experience, rewarding curious players with exciting discoveries across the map.
+
+Better on Bedrock is designed to work smoothly on modern Minecraft Bedrock Edition versions and is suitable for both solo survival worlds and multiplayer adventures with friends. Its balanced approach to gameplay makes it a perfect choice for players who want additional content while keeping the classic Minecraft atmosphere intact.
+
+If you are looking for an addon that expands Minecraft's world, improves exploration and provides a fresh survival experience without sacrificing the charm of vanilla gameplay, Better on Bedrock is an excellent addition to your Minecraft adventure.</p>
+
+<img src="https://i.ibb.co/wNmfG91K/1000094466.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>1. Download the Better on Bedrock Addon files.
+
+2. Open the downloaded file and import it into Minecraft Bedrock Edition.
+
+3. Activate both Resource Pack and Behavior Pack in your world settings.
+
+4. Enable Holiday Creator Features and other experimental settings if required.
+
+5. Create or load a world and enjoy the addon.</p>
+
+<img src="https://i.ibb.co/Sw9JDnnh/1000094467.jpg">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://link-hub.net/5995621/cQ9TxmUj56lX"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Credits
+
+Addon Name: Better on Bedrock
+
+Original Creator: Better on Bedrock Team
+
+Source: MCPEDL
+
+All rights belong to the original creators and developers.
+
+Hero Verse only provides addon information, installation guidance and discovery content.
+
+© 2026 herogamingxyz</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

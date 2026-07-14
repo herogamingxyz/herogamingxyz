@@ -1,0 +1,238 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/WpBdXnTz/1000097723.png">
+
+<h1>Weeping Angels Mod for Minecraft Java Edition</h1>
+
+<p>The Weeping Angels Mod is one of the most unique horror mods available for Minecraft Java Edition. Inspired by the legendary creatures from Doctor Who, this mod introduces terrifying stone statues that remain completely still whenever you look directly at them. However, the moment you turn away or blink, they begin moving toward you at incredible speed. This simple yet brilliant gameplay mechanic creates constant suspense and transforms ordinary Minecraft exploration into an unforgettable horror experience.
+
+Unlike traditional horror mods that rely on loud jump scares, the Weeping Angels Mod focuses on psychological fear. Every abandoned structure, dark cave, forest, and nighttime journey becomes dangerous because you never know when an Angel is silently approaching from behind. Players must constantly stay alert, carefully watch their surroundings, and think strategically before exploring unknown areas.
+
+One of the biggest highlights of this mod is its intelligent behavior. The Weeping Angels freeze instantly whenever they are being observed, perfectly recreating their famous ability from Doctor Who. As soon as the player looks away, they continue their pursuit. This creates thrilling gameplay where every movement matters and even a single mistake can have serious consequences.
+
+The mod also includes configurable teleportation mechanics, allowing players or modpack creators to customize how the Angels behave. Depending on your settings, encounters can become even more intense, making every survival adventure feel unique and unpredictable. Since many options are fully configurable, players can adjust the difficulty to match their preferred horror experience.
+
+Visually, the Weeping Angels are beautifully designed with detailed models and smooth animations. Combined with Minecraft's ambient sounds, caves, forests, and abandoned locations become significantly more immersive. Many players also enjoy pairing this mod with shader packs to create darker nights, realistic lighting, and an even scarier atmosphere.
+
+The mod supports multiple popular mod loaders and continues receiving updates that improve compatibility, stability, and gameplay. Its lightweight design allows it to run smoothly without heavily impacting game performance, making it suitable for both single-player survival worlds and multiplayer servers.
+
+Many YouTubers and streamers enjoy using the Weeping Angels Mod because it creates unforgettable gameplay moments. Unexpected encounters often lead to hilarious reactions, terrifying escapes, and exciting survival challenges that viewers love watching. Since the Angels behave dynamically, every playthrough feels different from the last.
+
+If you're searching for a horror mod that combines suspense, strategy, and unique AI mechanics instead of relying on constant combat, the Weeping Angels Mod is an excellent choice. Whether you're exploring deep caves, abandoned structures, or simply surviving your first night, the fear of hearing something behind you while knowing you must never look away makes this one of the best horror experiences available for Minecraft Java Edition. The mod is actively maintained and available on the official CurseForge page. 01</p>
+
+<img src="">
+
+<h2>Installation Guide</h2>
+
+<p>1. Download the latest version of the Weeping Angels Mod from the official CurseForge page.
+
+2. Install the required mod loader (Forge, Fabric, or NeoForge) based on the version you downloaded.
+
+3. Move the downloaded mod (.jar) file into your Minecraft "mods" folder.
+
+4. Launch Minecraft using the correct mod loader profile.
+
+5. Create a new world or open an existing survival world.
+
+6. Adjust the mod settings if you want to customize teleportation and other gameplay options.
+
+7. Start exploring and remember one important rule... Don't Blink!</p>
+
+<img src="">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://www.curseforge.com/minecraft/mc-mods/weeping-angels-mod"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Original Project: Weeping Angels Mod
+
+Official Download:
+https://www.curseforge.com/minecraft/mc-mods/weeping-angels-mod</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

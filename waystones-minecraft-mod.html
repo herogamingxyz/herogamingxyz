@@ -1,0 +1,217 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/h1dZNvyd/1000095340.jpg">
+
+<h1>Waystones Minecraft Mod</h1>
+
+<p>Waystones is a highly popular Minecraft utility mod designed to simplify exploration and long-distance travel. Instead of spending hours walking back and forth between bases, villages, and important locations, players can activate magical Waystones that allow instant teleportation throughout their world.
+Whether you are playing a survival world, exploring massive modpacks, or managing multiplayer servers, Waystones dramatically improves navigation while keeping gameplay balanced. Players can craft Waystones, discover naturally generated ones in villages, and unlock a network of teleportation points that can be accessed from anywhere.
+The mod integrates seamlessly with vanilla Minecraft and many popular modpacks. It is lightweight, easy to configure, and supports multiple Minecraft versions. Because of its simple design and practical features, Waystones has become one of the most downloaded utility mods in the Minecraft community.
+For players who enjoy exploration, building, or adventure, Waystones removes unnecessary travel time and allows them to focus on what makes Minecraft fun. It is considered an essential quality-of-life mod for both beginners and experienced players.</p>
+
+<img src="https://i.ibb.co/vx6nhnwC/1000095342.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>Install Forge, NeoForge, or Fabric (depending on the version you choose).
+Download the latest Waystones mod file.
+Install any required dependency if mentioned on the official download page.
+Move the downloaded file into the Minecraft mods folder.
+Launch Minecraft using the correct mod loader.
+Activate your first Waystone and start teleporting across your world.</p>
+
+<img src="https://i.ibb.co/nsxD42cp/1000095341.jpg">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://link-center.net/5995621/0mpZgy5ViBen"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Waystones is developed by BlayTheNinth. All rights belong to the original developer. Hero Verse shares this page for informational purposes only. Please support the creator by downloading the mod from its official page.</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

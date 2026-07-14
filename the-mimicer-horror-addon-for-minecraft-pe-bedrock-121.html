@@ -1,0 +1,225 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/9HjBs27C/images.jpg">
+
+<h1>The Mimicer Horror Addon for Minecraft PE (Bedrock 1.21+)</h1>
+
+<p>The Mimicer Horror Addon is one of the creepiest horror experiences available for Minecraft Pocket Edition. Instead of adding simple monsters, this addon introduces a mysterious creature known as The Mimicer, a terrifying entity capable of stalking players and creating intense survival moments. Every exploration becomes unpredictable because the creature can appear when you least expect it, making caves, forests, abandoned structures, and nighttime adventures significantly more dangerous.
+
+Unlike ordinary horror addons, The Mimicer focuses on atmosphere, suspense, and psychological fear rather than constant attacks. Players never know where the creature is hiding, which creates an immersive horror experience. The addon includes detailed animations, custom sounds, unique behavior patterns, and challenging encounters that transform Minecraft into a true survival horror game.
+
+Whether you're playing alone or with friends, this addon delivers unforgettable moments perfect for horror fans, YouTube challenge videos, and multiplayer adventures.</p>
+
+<img src="https://i.ibb.co/Qvv8rYNk/images-1.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>Installing The Mimicer Addon is quick and easy. Download the addon package from the official source using the link below. Open the downloaded .mcaddon or .mcpack file with Minecraft Bedrock Edition, and the game will automatically import the addon.
+
+After the import is complete, create a new world or edit an existing one. Enable Holiday Creator Features, Beta APIs, and any other experimental settings required by the addon. Then activate both the Behavior Pack and Resource Pack before entering the world.
+
+Once everything is enabled, start your game and explore carefully. The Mimicer can appear in different situations, making every adventure feel tense and unpredictable.</p>
+
+<img src="https://i.ibb.co/nsFdstxt/images-2.jpg">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://mcpedl.com/the-mimicer-addon-2-3/"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Addon Creator: Original Addon Developer
+
+Download Source: Official MCPEDL page
+
+Game: Minecraft Bedrock Edition (Pocket Edition)
+
+Category: Horror Addon
+
+All rights belong to the original addon creator. This page is created to help players discover and install the addon while giving full credit to the original author.</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

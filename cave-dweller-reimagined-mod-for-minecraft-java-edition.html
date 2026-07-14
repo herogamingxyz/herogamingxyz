@@ -1,0 +1,239 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/QxH8ydW/1000097714.jpg">
+
+<h1>Cave Dweller Reimagined Mod for Minecraft Java Edition</h1>
+
+<p>Cave Dweller Reimagined is one of the most terrifying horror mods available for Minecraft Java Edition. This mod completely changes the underground experience by introducing a mysterious creature that silently stalks players while they explore caves. Unlike ordinary hostile mobs, the Cave Dweller doesn't attack immediately. Instead, it creates fear by hiding in the darkness, making strange noises, and appearing only for a brief moment before disappearing again.
+
+The deeper you explore, the more dangerous your adventure becomes. Every cave feels alive with suspense as you never know when the Cave Dweller will appear. You may hear footsteps echoing through the tunnels, distant breathing sounds, or notice movement in the darkness. These effects make mining much more intense than in normal Minecraft.
+
+One of the best features of Cave Dweller Reimagined is its advanced AI. Instead of rushing toward the player like regular monsters, the creature carefully watches from a distance, waiting for the perfect moment to strike. Sometimes it follows you for several minutes before attacking, creating constant tension throughout your journey.
+
+The mod features realistic animations, terrifying sound effects, detailed textures, and smooth gameplay. Every encounter feels unique because the Cave Dweller behaves differently depending on the situation. Some encounters are short while others become long and intense survival chases through dark cave systems.
+
+This horror mod is designed for players who enjoy suspense instead of simple jump scares. Rather than filling the world with hundreds of monsters, it focuses on creating a psychological horror experience that keeps players nervous every time they enter a cave. Even experienced Minecraft players often hesitate before exploring underground after installing this mod.
+
+Cave Dweller Reimagined works well alongside many other Minecraft mods and can also be combined with shaders to create an even darker and more realistic atmosphere. Improved lighting, realistic shadows, and environmental sounds make every cave exploration unforgettable.
+
+Many YouTubers and streamers use this mod because every gameplay session produces exciting reactions and entertaining horror moments. Since the creature appears randomly, no two adventures are exactly the same, making the experience fresh every time you play.
+
+The mod receives regular updates that improve compatibility, add new behaviors, fix bugs, and make the Cave Dweller even smarter. The developer continues to improve the overall horror experience based on community feedback.
+
+If you're looking for a Minecraft horror mod that focuses on suspense, fear, exploration, and realistic AI instead of endless combat, Cave Dweller Reimagined is one of the best choices available. Whether you're playing alone or with friends, this mod transforms ordinary cave exploration into a terrifying survival adventure you'll never forget.</p>
+
+<img src="https://i.ibb.co/dJB3c2CJ/1000097715.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>1. Download the latest version of Cave Dweller Reimagined.
+
+2. Install Minecraft Forge or NeoForge (depending on the mod version).
+
+3. Download and install Geckolib if it is listed as a required dependency.
+
+4. Place the mod file inside your Minecraft "mods" folder.
+
+5. Launch Minecraft using the correct Forge or NeoForge profile.
+
+6. Create or load your survival world.
+
+7. Explore caves and prepare yourself for the terrifying Cave Dweller.</p>
+
+<img src="https://i.ibb.co/PZnBQJ9G/1000097716.jpg">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://modrinth.com/mod/cave-dweller-reimagined"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Original Creator: ASMC
+Project: Cave Dweller Reimagined
+Official Download: https://modrinth.com/mod/cave-dweller-reimagined</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

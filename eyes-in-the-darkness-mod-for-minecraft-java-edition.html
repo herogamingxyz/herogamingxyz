@@ -1,0 +1,240 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/tMwbDrPK/1000097721.jpg">
+
+<h1>Eyes in the Darkness Mod for Minecraft Java Edition</h1>
+
+<p>Eyes in the Darkness is a unique horror mod for Minecraft Java Edition that transforms ordinary darkness into your greatest enemy. Instead of adding dozens of monsters, this mod creates fear using mysterious glowing eyes that silently watch players from dark places. The mod is simple, lightweight, and incredibly effective at making every cave, abandoned structure, and nighttime adventure feel terrifying.
+
+Whenever you enter an area with very low light, you may suddenly notice glowing eyes staring directly at you. These eyes don't always attack immediately. Sometimes they disappear as soon as you look at them, while other times they remain hidden in the darkness, making you wonder if something dangerous is waiting nearby. This psychological horror design creates constant suspense throughout your survival adventure.
+
+Unlike traditional horror mods filled with loud jump scares, Eyes in the Darkness focuses on atmosphere. Exploring caves becomes much more dangerous because every shadow could hide something unknown. Players are encouraged to carry torches, lanterns, and other light sources at all times since darkness is no longer safe.
+
+The mod includes high-quality visual effects, realistic glowing eyes, immersive ambient sounds, and optimized performance. It works smoothly on most Minecraft Java setups and can easily be combined with shaders to create even darker environments and more realistic lighting.
+
+Many players enjoy combining this mod with survival challenge packs because it makes resource gathering much more intense. Mining deep underground, exploring abandoned mineshafts, or searching ancient cities becomes a true horror experience where every decision matters.
+
+Content creators also love this mod because unexpected encounters create exciting gameplay videos and genuine reactions. Since the glowing eyes appear randomly, every playthrough feels different and unpredictable.
+
+The developer regularly improves the mod by fixing bugs, increasing compatibility with newer Minecraft versions, and refining the overall horror atmosphere. Frequent updates ensure players always receive the best possible experience.
+
+If you're looking for a horror mod that relies on mystery, suspense, and immersive atmosphere instead of endless combat, Eyes in the Darkness is an excellent choice. It transforms Minecraft's darkness into something players will truly fear while keeping the original survival gameplay intact.</p>
+
+<img src="https://i.ibb.co/hF9q86fF/1000097720.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>1. Download the latest version of Eyes in the Darkness.
+
+2. Install the required Minecraft mod loader.
+
+3. Place the downloaded mod inside the "mods" folder.
+
+4. Launch Minecraft Java Edition.
+
+5. Create or load a survival world.
+
+6. Explore caves and dark areas carefully.
+
+7. Always carry torches because darkness is no longer safe.</p>
+
+<img src="https://i.ibb.co/YBCkFH6d/1000097722.jpg">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://modrinth.com/mod/eyes-in-the-darkness"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Original Creator: Fusion Studios
+
+Project: Eyes in the Darkness
+
+Official Download:
+https://modrinth.com/mod/eyes-in-the-darkness</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

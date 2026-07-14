@@ -1,0 +1,225 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/zwMXjQb/1000094618.jpg">
+
+<h1>Morph Mod for Minecraft PE</h1>
+
+<p>Morph Mod for Minecraft Pocket Edition is one of the most exciting and fun gameplay addons ever created for Minecraft Bedrock Edition. This mod allows players to transform into almost any mob present in the Minecraft world, including zombies, skeletons, creepers, Endermen, animals, and even hostile bosses depending on the version. What makes this mod unique is that each transformation not only changes your appearance but also gives you special abilities related to that mob.
+For example, if you turn into a Creeper, you can explode; if you become an Enderman, you can teleport; and if you transform into a Zombie, you gain extra durability and survival strength. This creates a completely new way to experience Minecraft, especially in survival and multiplayer gameplay. Players can use this mod for trolling friends, creating roleplay scenarios, or simply enjoying a new creative survival experience.
+Morph Mod is especially popular among MCPE players because it brings PC-like mod features into mobile Minecraft, making gameplay more dynamic and fun. It works best on Bedrock Edition with experimental settings enabled.</p>
+
+<img src="https://i.ibb.co/jPT1nHCD/1000094619.webp">
+
+<h2>Installation Guide</h2>
+
+<p>Download the Morph Mod file from the link below
+1. Open Minecraft PE (Bedrock    Edition)
+
+2.Import the downloaded .mcaddon or .mcpack file
+
+3.Go to World Settings → Activate “Experimental Gameplay”
+Apply the Behavior Pack & Resource Pack
+
+4.Start the world and enjoy morph abilities</p>
+
+<img src="https://i.ibb.co/TqWYFp7d/1000094621.webp">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://link-hub.net/5995621/BDkccYZ83M9f"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Mod Source: MCPE-Planet
+
+Game Version: Minecraft Bedrock / Pocket Edition
+
+Category: Gameplay / Transformation Mod
+
+Content Type: Fan-made addon</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

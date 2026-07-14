@@ -1,0 +1,241 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/sp88BQVN/1000097823.jpg">
+
+<h1>The Graveyard Mod for Minecraft Java Edition</h1>
+
+<p>The Graveyard Mod is one of the best horror and adventure mods available for Minecraft Java Edition. Instead of only adding stronger monsters, this mod completely transforms the world by introducing haunted graveyards, abandoned churches, cursed ruins, and terrifying undead creatures. Every structure is carefully designed to create a mysterious atmosphere that makes exploration both exciting and dangerous.
+
+As you travel through your Minecraft world, you may discover forgotten cemeteries hidden deep inside forests or abandoned landscapes. These locations are filled with dangerous enemies that protect valuable treasure. Entering a graveyard without proper weapons and armor is extremely risky because powerful undead creatures can quickly overwhelm unprepared players.
+
+The mod introduces many unique monsters including powerful skeleton warriors, cursed zombies, restless spirits, and other horrifying creatures. Each enemy has its own attack style, making every battle different from ordinary Minecraft combat. Players must learn enemy behavior and use smart strategies to survive these terrifying encounters.
+
+One of the biggest strengths of The Graveyard Mod is its incredible world generation. Every haunted structure feels naturally placed within the Minecraft world, making exploration much more rewarding. Hidden loot chests, secret underground rooms, and dangerous boss encounters encourage players to explore every corner of these mysterious locations.
+
+The atmosphere created by the mod is one of its greatest features. Dark architecture, eerie decorations, creepy sounds, abandoned buildings, and detailed environmental design make every graveyard feel alive with mystery. Combined with shader packs, the experience becomes even more immersive and cinematic.
+
+The Graveyard Mod is optimized for smooth gameplay and works well with many other popular adventure and horror mods. It also receives regular updates from its developer, ensuring compatibility with newer Minecraft versions while continuously improving gameplay.
+
+Content creators enjoy using this mod because every exploration becomes an exciting adventure full of suspense and unexpected battles. Whether playing alone or with friends, every visit to a haunted graveyard creates memorable survival moments.
+
+If you're looking for a horror mod that combines exploration, combat, world generation, and creepy environments, The Graveyard Mod is an excellent choice. It expands Minecraft with beautiful yet terrifying locations that reward brave players willing to face the dangers hidden beneath ancient graveyards.</p>
+
+<img src="https://i.ibb.co/d0LGPxqB/1000097821.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>1. Download the latest version of The Graveyard Mod.
+
+2. Install Minecraft Forge for your game version.
+
+3. Install Geckolib if the selected version requires it.
+
+4. Place the downloaded .jar file inside the "mods" folder.
+
+5. Launch Minecraft using the Forge profile.
+
+6. Create a new survival world or load an existing one.
+
+7. Explore the world to discover haunted graveyards, cursed structures, and terrifying undead creatures.</p>
+
+<img src="https://i.ibb.co/bMfhB3mQ/1000097822.jpg">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://www.curseforge.com/minecraft/mc-mods/the-graveyard-forge"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Original Creator: The Graveyard Development Team
+
+Official Project:
+The Graveyard (Forge)
+
+Official Download:
+https://www.curseforge.com/minecraft/mc-mods/the-graveyard-forge</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

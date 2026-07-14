@@ -1,0 +1,235 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/ymb7vczP/1000094934.jpg">
+
+<h1>Terralith 2.5 - Massive Biomes & World Generation Overhaul</h1>
+
+<p>Terralith is one of the most advanced Minecraft world generation datapacks ever created. It completely transforms the Overworld by adding over 100 unique biomes, breathtaking mountain ranges, deep valleys, giant caves, volcanic regions, crystal landscapes, tropical islands, and realistic terrain formations without adding any new blocks.
+
+Unlike many world generation mods, Terralith uses only vanilla Minecraft blocks, making it highly compatible with most modpacks and servers. Every world generated with Terralith feels fresh, immersive, and far more realistic than standard Minecraft terrain.
+
+Players can discover hidden valleys, towering cliffs, dense forests, colorful landscapes, massive cave systems, and countless exploration opportunities. Whether you enjoy survival gameplay, building mega bases, adventure maps, or cinematic content creation, Terralith provides a completely new experience while preserving Minecraft's original style.
+
+The mod is optimized for performance and works exceptionally well alongside popular mods such as Distant Horizons, Sodium, Iris, and many other optimization or visual enhancement mods. For players seeking a next-generation Minecraft world, Terralith is one of the best choices available today.</p>
+
+<img src="https://i.ibb.co/JRzSrQ53/1000094938.jpg">
+
+<h2>Installation Guide</h2>
+
+<p>1. Download the latest version of Terralith from the official source.
+
+2. Install Fabric Loader or Forge depending on the version you are using.
+
+3. Place the Terralith file into your Minecraft "mods" folder.
+
+4. Launch Minecraft and verify that Terralith appears in the installed mods list.
+
+5. Create a completely new world to experience the custom terrain generation.
+
+6. For the best experience, combine Terralith with Distant Horizons, Sodium, Iris Shaders, and other visual enhancement mods.
+
+7. Explore the newly generated world and discover more than 100 custom biomes, realistic mountain ranges, giant cave systems, and unique landscapes.
+
+Important:
+Existing worlds may not fully benefit from Terralith's terrain generation. A new world is highly recommended for the best results.</p>
+
+<img src="https://i.ibb.co/8gsCDfTX/1000094936.jpg">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://link-hub.net/5995621/B0z5dksdbz4M"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Terralith is developed and maintained by Stardust Labs.
+
+Official Mod Page:
+https://modrinth.com/datapack/terralith
+
+All credit for the mod, assets, updates, and development belongs to Stardust Labs. Hero Verse only provides information and redirects users to the official download source.</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>

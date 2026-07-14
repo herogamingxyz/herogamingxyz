@@ -1,0 +1,265 @@
+ss<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hero Verse Mod</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-1VMS2D4KP5');
+</script>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:Arial,sans-serif;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+h1{
+color:#00ff99;
+}
+
+.download-btn{
+display:inline-block;
+padding:12px 20px;
+background:#00ff99;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://i.ibb.co/Nnt2WzXv/1000095935.jpg">
+
+<h1>Minecraft Comes Alive Reborn (MCA Reborn) Mod 1.21.1</h1>
+
+<p>Minecraft Comes Alive Reborn (MCA Reborn) is one of the most immersive village overhaul mods ever created for Minecraft. This mod completely transforms ordinary villagers into intelligent, interactive characters with unique personalities, relationships, emotions, and daily routines.
+Instead of trading with simple NPCs, players can build friendships, gain trust, form families, and become a part of a living community. Every villager feels unique, making villages more realistic and engaging than ever before.
+The mod introduces advanced AI behaviors, expanded dialogue systems, customizable interactions, and numerous quality-of-life improvements that enhance the overall Minecraft experience. Villagers can perform jobs, socialize with others, react to player actions, and participate in village life naturally.
+Whether you're building a medieval kingdom, roleplaying in survival mode, or simply looking for a more immersive Minecraft world, MCA Reborn provides endless possibilities and turns every village into a living, breathing community.
+Features
+✔ Advanced Villager AI
+✔ Unique Personalities and Traits
+✔ Friendship and Relationship System
+✔ Marriage and Family Mechanics
+✔ Dynamic Village Life
+✔ Improved Interactions and Dialogues
+✔ Better Roleplaying Experience
+✔ Multiplayer Support
+✔ Regular Updates and Community Support
+✔ Compatible with Many Popular Modpacks
+MCA Reborn is a must-have mod for players who want to make their Minecraft world feel truly alive.</p>
+
+<img src="https://i.ibb.co/svZRTN0q/1000095936.png">
+
+<h2>Installation Guide</h2>
+
+<p>Requirements
+
+.Minecraft Java Edition
+
+.Forge or NeoForge Loader
+
+.Compatible Minecraft Version
+ Steps
+
+.Download and install Forge or NeoForge for your Minecraft version.
+
+.Download the MCA Reborn mod file from the official source.
+
+Open Minecraft's installation directory.
+Locate the "mods" folder.
+
+Copy the downloaded .jar file into the mods folder.
+
+Launch Minecraft using the Forge or NeoForge profile.
+
+Create a new world or load an existing one.
+
+Visit any village and begin interacting with villagers.
+
+Enjoy the enhanced social and village gameplay experience.
+
+Troubleshooting
+
+Ensure the mod version matches your Minecraft version.
+
+Update Forge or NeoForge if the game crashes.
+
+Remove conflicting villager-related mods if issues occur.
+
+Allocate additional RAM when using large modpacks.</p>
+
+<img src="https://i.ibb.co/GQJjq6M3/1000095938.png">
+
+<h2>Downloads</h2>
+
+<p id="downloads">
+⬇️ 0 Downloads
+</p>
+
+<a
+href="https://link-center.net/5995621/VRgPk7T92gTl"
+class="download-btn"
+target="_blank">
+Download
+</a>
+
+<h2>Credits</h2>
+
+<p>Mod Name: Minecraft Comes Alive Reborn
+Original Developers: MCA Reborn Development Team
+Official Download Source: CurseForge
+All Rights Reserved To The Original Creators.
+Hero Verse does not own or modify this mod. We only provide information, installation guidance, and the official download source. Full credit goes to the original developers and contributors for creating and maintaining this amazing Minecraft mod.
+Please support the original creators by downloading the mod from their official page and following their updates.
+Hero Verse Disclaimer
+Hero Verse is a gaming and mod information platform. We do not host, modify, or redistribute any files. All download links redirect users to the original creators and official sources. If you are the owner of this content and would like changes made, please contact us.</p>
+
+<h2>Views</h2>
+
+<p id="views">
+👁 0 Views
+</p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+
+authDomain:"hero-verse-67e33.firebaseapp.com",
+
+projectId:"hero-verse-67e33",
+
+storageBucket:"hero-verse-67e33.firebasestorage.app",
+
+messagingSenderId:"227494840218",
+
+appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const docRef = doc(db,"mods",id);
+
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const mod = docSnap.data();
+
+document.getElementById("title").innerText =
+mod.title;
+
+document.getElementById("description").innerText =
+mod.description;
+
+document.getElementById("coverImage").src =
+mod.image1;
+
+document.getElementById("downloadBtn").href =
+mod.download;
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    const currentDownloads = mod.downloads ?? 0;
+
+    document.getElementById("downloads").innerText =
+    "⬇️ " + (currentDownloads + 1) + " Downloads";
+
+    await updateDoc(docRef, {
+        downloads: increment(1)
+    });
+
+    mod.downloads = currentDownloads + 1;
+
+});
+
+document.getElementById("image2").src =
+mod.image2;
+
+document.getElementById("image3").src =
+mod.image3;
+
+document.getElementById("feature1").innerText =
+mod.installation;
+
+document.getElementById("credits").innerText =
+mod.credits;
+
+const currentViews = mod.views || 0;
+
+const currentDownloads = mod.downloads ?? 0;
+
+document.getElementById("downloads").innerText =
+"⬇️ " + currentDownloads + " Downloads";
+
+document.getElementById("views").innerText =
+"👁 " + (currentViews + 1) + " Views";
+
+await updateDoc(docRef,{
+views: increment(1)
+});
+
+  }
+
+</script>
+
+</body>
+</html>
