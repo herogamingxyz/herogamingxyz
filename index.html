@@ -2315,11 +2315,19 @@ addPremiumCheck(document.getElementById("premiumModCard"));
 
 /* ---- Dynamic Mods from Firestore ---- */
 const modsContainer = document.getElementById("modsContainer");
+function createSlug(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
 getDocs(collection(db, "mods")).then((querySnapshot) => {
   querySnapshot.forEach((docu) => {
     const mod = docu.data();
-    modsContainer.innerHTML += `
-      <a href="mod.html?id=${docu.id}" class="mod-card">
+   modsContainer.innerHTML += `
+      <a href="${createSlug(mod.title)}.html" class="mod-card">
         <img src="${mod.image1}" alt="${mod.title}" class="mod-card-thumb">
         <span class="mod-card-badge">${mod.category || 'Addon'}</span>
         <div class="mod-card-body">
@@ -2329,7 +2337,7 @@ getDocs(collection(db, "mods")).then((querySnapshot) => {
         </div>
         <span class="mod-card-btn">Download</span>
       </a>
-    `;
+`;
   });
 });
 
@@ -2359,7 +2367,7 @@ let allSearchItems = [];
 
 // Collect from Firestore for search
 [
-  { col: "mods",     url: (id) => `mod.html?id=${id}` },
+ { col: "mods", url: (_, d) => `${createSlug(d.title)}.html` },
   { col: "articles", url: (id) => `article.html?id=${id}` },
   { col: "products", url: (_, d) => d.affiliateLink }
 ].forEach(({ col, url }) => {
