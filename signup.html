@@ -452,8 +452,8 @@ window.sendOTP = async function() {
   generatedOTP = generateOTP();
 
   try {
-    // Send OTP via EmailJS
-    await emailjs.send("service_ry30rm1", "template_etdwrul", {
+    // Send OTP via EmailJS (window.emailjs to access global scope)
+    await window.emailjs.send("service_ry30rm1", "template_etdwrul", {
       to_name:  username,
       email:    email,
       otp_code: generatedOTP
@@ -488,7 +488,7 @@ window.resendOTP = async function() {
   document.getElementById("resendBtn").disabled = true;
 
   try {
-    await emailjs.send("service_ry30rm1", "template_etdwrul", {
+    await window.emailjs.send("service_ry30rm1", "template_etdwrul", {
       to_name:  username,
       email:    email,
       otp_code: generatedOTP
