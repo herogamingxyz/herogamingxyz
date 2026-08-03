@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Videos | Hero Verse</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f0f0f;
+color:white;
+}
+
+.container{
+max-width:1400px;
+margin:auto;
+padding:25px;
+}
+
+.page-title{
+font-size:40px;
+font-weight:bold;
+color:#00ff99;
+margin-bottom:20px;
+}
+
+.search-box{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#1b1b1b;
+color:white;
+font-size:16px;
+margin-bottom:25px;
+outline:none;
+}
+
+.filter-bar{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.filter-btn{
+background:#1b1b1b;
+color:white;
+padding:10px 18px;
+border-radius:10px;
+cursor:pointer;
+transition:.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+background:#00ff99;
+color:black;
+}
+
+.videos-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+gap:20px;
+}
+
+.video-card{
+background:#181818;
+border-radius:18px;
+overflow:hidden;
+cursor:pointer;
+border:1px solid #222;
+transition:.3s;
+}
+
+.video-card:hover{
+transform:translateY(-8px);
+border:1px solid #00ff99;
+box-shadow:0 0 18px rgba(0,255,153,.35);
+}
+
+.thumb-wrap{
+position:relative;
+width:100%;
+height:170px;
+}
+
+.thumb-wrap img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.play-icon{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:56px;
+height:56px;
+background:rgba(0,0,0,0.6);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+color:#00ff99;
+border:2px solid #00ff99;
+}
+
+.video-info{
+padding:15px;
+}
+
+.video-title{
+font-size:16px;
+font-weight:bold;
+margin-bottom:8px;
+line-height:1.4;
+}
+
+.video-meta{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:13px;
+color:#bbb;
+}
+
+.badge{
+padding:4px 10px;
+background:#00ff99;
+color:black;
+font-weight:bold;
+border-radius:20px;
+font-size:11px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 class="page-title">▶️ Videos</h1>
+
+<input type="text" id="searchInput" class="search-box" placeholder="Search Videos...">
+
+<div class="filter-bar">
+  <div class="filter-btn active" data-filter="all">All</div>
+  <div class="filter-btn" data-filter="mod">Mod Tutorials</div>
+  <div class="filter-btn" data-filter="game">Game Trailers</div>
+  <div class="filter-btn" data-filter="product">Product Reviews</div>
+</div>
+
+<div id="videosContainer" class="videos-grid"></div>
+
+</div>
+
+<script>
+
+/* =========================================================
+   YAHAN NAYE VIDEOS ADD KARO
+   - id: koi bhi unique naam
+   - title: video ka title jo dikhega
+   - category: "mod" / "game" / "product" (filter ke liye)
+   - youtubeId: YouTube URL mein v= ke baad wala code
+     e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ  -> "dQw4w9WgXcQ"
+   Video kisi bhi channel ka ho sakta hai, bas ID sahi hona chahiye.
+========================================================= */
+const videos = [
+  {
+    id: "v1",
+    title: "How To Install Minecraft Mods (Bedrock) - Full Tutorial",
+    category: "mod",
+    youtubeId: "dQw4w9WgXcQ"
+  },
+  {
+    id: "v2",
+    title: "GTA 6 Official Trailer Breakdown",
+    category: "game",
+    youtubeId: "dQw4w9WgXcQ"
+  },
+  {
+    id: "v3",
+    title: "Best Gaming Headset 2026 - Full Review",
+    category: "product",
+    youtubeId: "dQw4w9WgXcQ"
+  }
+];
+
+const videosContainer = document.getElementById("videosContainer");
+const searchInput = document.getElementById("searchInput");
+const filterButtons = document.querySelectorAll(".filter-btn");
+
+let currentFilter = "all";
+
+function renderVideos(list){
+  videosContainer.innerHTML = "";
+
+  if(list.length === 0){
+    videosContainer.innerHTML = "<p style='color:#bbb'>Koi video nahi mili.</p>";
+    return;
+  }
+
+  list.forEach(video => {
+    const card = document.createElement("div");
+    card.className = "video-card";
+    card.innerHTML = `
+      <div class="thumb-wrap">
+        <img src="https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg" alt="${video.title}">
+        <div class="play-icon">▶</div>
+      </div>
+      <div class="video-info">
+        <div class="video-title">${video.title}</div>
+        <div class="video-meta">
+          <span class="badge">${video.category.toUpperCase()}</span>
+        </div>
+      </div>
+    `;
+    card.addEventListener("click", () => {
+      window.open(`https://www.youtube.com/watch?v=${video.youtubeId}`, "_blank");
+    });
+    videosContainer.appendChild(card);
+  });
+}
+
+function applyFilters(){
+  const query = searchInput.value.toLowerCase().trim();
+
+  let filtered = videos.filter(v =>
+    currentFilter === "all" || v.category === currentFilter
+  );
+
+  if(query.length > 0){
+    filtered = filtered.filter(v => v.title.toLowerCase().includes(query));
+  }
+
+  renderVideos(filtered);
+}
+
+filterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    filterButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentFilter = btn.dataset.filter;
+    applyFilters();
+  });
+});
+
+searchInput.addEventListener("input", applyFilters);
+
+renderVideos(videos);
+
+</script>
+
+</body>
+</html>
