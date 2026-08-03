@@ -1,204 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming Products | Hero Verse</title>
+<link rel="icon" type="image/png" href="hero.gaming.jpg">
+<meta name="description" content="Best gaming products, peripherals and accessories — keyboards, headsets, controllers and more on Hero Verse.">
 
-<title>Gaming Products</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1VMS2D4KP5"></script>
-
-<script>
-window.dataLayer = window.dataLayer || [];
-
-function gtag(){
-dataLayer.push(arguments);
-}
-
-gtag('js', new Date());
-
-gtag('config', 'G-1VMS2D4KP5');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1VMS2D4KP5');</script>
 
 <style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 
-body{
-background:#0f0f0f;
-color:white;
-font-family:Arial;
-margin:0;
+:root{
+  --bg:#090909; --surface:#111; --card:#141414;
+  --border:rgba(255,255,255,0.07); --accent:#00ff99;
+  --accent2:#00c8ff; --accent-dim:rgba(0,255,153,0.1);
+  --text:#f0f0f0; --muted:#888;
+  --radius-sm:10px; --radius-md:16px; --radius-lg:22px;
+  --transition:0.28s cubic-bezier(.4,0,.2,1);
 }
 
-h1{
-text-align:center;
-color:#00ff99;
-margin-top:40px;
-font-size:50px;
-}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.6;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:20px;}
+a{text-decoration:none;color:inherit;}
 
-.products{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:25px;
-padding:40px;
-}
+/* ── HEADER ── */
+.header{position:sticky;top:0;z-index:999;background:rgba(9,9,9,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:62px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.header-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.header-logo img{width:36px;height:36px;border-radius:50%;border:2px solid var(--accent);object-fit:cover;box-shadow:0 0 10px rgba(0,255,153,0.3);}
+.header-logo span{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--accent);letter-spacing:1px;}
+.back-btn{display:flex;align-items:center;gap:6px;color:var(--accent);font-size:13px;font-weight:600;padding:8px 16px;border:1px solid rgba(0,255,153,0.25);border-radius:var(--radius-sm);transition:var(--transition);}
+.back-btn:hover{background:var(--accent-dim);gap:10px;}
 
-.card{
-background:#1b1b1b;
-width:300px;
-border-radius:15px;
-overflow:hidden;
-transition:0.3s;
-box-shadow:0 0 15px rgba(0,0,0,0.4);
-}
+/* ── HERO ── */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#060e06,#08090f,#060e0e);padding:64px 28px 52px;text-align:center;border-bottom:1px solid var(--border);}
+.hero::before{content:'';position:absolute;top:-140px;left:50%;transform:translateX(-50%);width:550px;height:550px;background:radial-gradient(circle,rgba(0,255,153,0.07) 0%,transparent 65%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-dim);border:1px solid rgba(0,255,153,0.2);color:var(--accent);font-size:12px;font-weight:700;padding:6px 16px;border-radius:30px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:20px;}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:48px;font-weight:700;line-height:1.1;margin-bottom:14px;position:relative;z-index:1;}
+.hero h1 span{color:var(--accent);}
+.hero p{color:#bbb;font-size:16px;max-width:500px;margin:0 auto 32px;position:relative;z-index:1;}
 
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 20px #00ff99;
-}
+/* Search + Filter */
+.search-filter{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.search-wrap{position:relative;width:340px;}
+.search-wrap input{width:100%;padding:13px 48px 13px 18px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:50px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:var(--transition);}
+.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,255,153,0.1);}
+.search-wrap input::placeholder{color:var(--muted);}
+.search-icon{position:absolute;right:18px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;}
 
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
+.filter-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px;position:relative;z-index:1;}
+.chip{padding:7px 16px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:30px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:var(--transition);}
+.chip:hover,.chip.active{background:var(--accent-dim);border-color:rgba(0,255,153,0.3);color:var(--accent);}
 
-.content{
-padding:20px;
-}
+/* ── STATS BAR ── */
+.stats-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 28px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;color:var(--accent);}
+.stat-label{font-size:12px;color:var(--muted);}
 
-.content h2{
-color:#00ff99;
-margin-bottom:15px;
-}
+/* ── MAIN ── */
+.main{max-width:1200px;margin:0 auto;padding:48px 24px 80px;}
 
-.content p{
-color:#ccc;
-line-height:1.7;
-}
+/* Sort bar */
+.sort-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px;}
+.sort-bar h2{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.sort-bar h2 span{color:var(--accent);}
+.sort-select{background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:var(--radius-sm);font-size:13px;font-family:'Inter',sans-serif;outline:none;cursor:pointer;}
+.sort-select:focus{border-color:var(--accent);}
 
-.btn{
-display:inline-block;
-margin-top:15px;
-padding:12px 25px;
-background:#00ff99;
-color:black;
-text-decoration:none;
-border-radius:10px;
-font-weight:bold;
-transition:0.3s;
-}
+/* ── PRODUCTS GRID ── */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
 
-.btn:hover{
-transform:scale(1.08);
-box-shadow:0 0 20px #00ff99;
-}
+/* ── PRODUCT CARD ── */
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;transition:var(--transition);position:relative;}
+.product-card:hover{transform:translateY(-6px);border-color:rgba(0,255,153,0.25);box-shadow:0 12px 40px rgba(0,255,153,0.1);}
 
+.card-badge{position:absolute;top:12px;left:12px;z-index:2;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
+.badge-hot{background:#ff4444;color:#fff;}
+.badge-new{background:var(--accent2);color:#000;}
+.badge-sale{background:var(--accent);color:#000;}
+.badge-top{background:#ffd700;color:#000;}
+
+.card-img-wrap{position:relative;height:200px;overflow:hidden;background:#0f0f0f;}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;}
+.product-card:hover .card-img-wrap img{transform:scale(1.05);}
+
+.card-body{padding:18px;flex:1;display:flex;flex-direction:column;gap:8px;}
+.card-title{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:var(--text);line-height:1.3;}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.5;flex:1;}
+
+.card-meta{display:flex;align-items:center;justify-content:space-between;margin-top:4px;}
+.card-clicks{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px;}
+.card-clicks span{color:var(--accent);font-weight:600;}
+
+.card-rating{display:flex;align-items:center;gap:3px;font-size:12px;color:#ffd700;}
+
+.buy-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:4px 18px 18px;padding:12px;background:linear-gradient(135deg,var(--accent),#00e589);color:#000;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);font-family:'Inter',sans-serif;text-decoration:none;}
+.buy-btn:hover{box-shadow:0 6px 24px rgba(0,255,153,0.4);transform:translateY(-2px);}
+
+/* ── SKELETON LOADING ── */
+.skeleton-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;}
+.skeleton{background:linear-gradient(90deg,#1a1a1a 25%,#222 50%,#1a1a1a 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px;}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+.skel-img{height:200px;border-radius:0;}
+.skel-body{padding:18px;display:flex;flex-direction:column;gap:10px;}
+.skel-title{height:20px;}
+.skel-desc{height:14px;}
+.skel-desc2{height:14px;width:70%;}
+.skel-btn{height:44px;margin:0 18px 18px;border-radius:var(--radius-sm);}
+
+/* ── EMPTY STATE ── */
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);}
+.empty-icon{font-size:48px;margin-bottom:16px;opacity:0.5;}
+.empty-state h3{font-family:'Rajdhani',sans-serif;font-size:22px;margin-bottom:8px;color:var(--text);}
+
+/* ── AFFILIATE NOTICE ── */
+.affiliate-notice{background:rgba(0,200,255,0.06);border:1px solid rgba(0,200,255,0.15);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:24px;font-size:13px;color:#aaa;display:flex;align-items:center;gap:10px;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--accent);color:#000;padding:12px 20px;border-radius:var(--radius-md);font-weight:700;font-size:13px;z-index:9999;transform:translateY(20px);opacity:0;transition:all .3s ease;box-shadow:0 6px 24px rgba(0,255,153,.35);}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* ── FADE IN ── */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* ── FOOTER ── */
+.footer{background:var(--surface);border-top:1px solid var(--border);padding:32px 28px;text-align:center;}
+.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:12px;}
+.footer-links a{color:var(--muted);font-size:13px;transition:var(--transition);}
+.footer-links a:hover{color:var(--accent);}
+.footer-copy{color:var(--muted);font-size:12px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .hero h1{font-size:30px;}
+  .main{padding:28px 16px 60px;}
+  .stats-bar{gap:24px;}
+  .search-wrap{width:100%;}
+}
 </style>
-
 </head>
-
 <body>
 
-<h1>
-Gaming Products
-</h1>
+<!-- HEADER -->
+<header class="header">
+  <a href="index.html" class="header-logo">
+    <img src="hero.gaming.jpg" alt="Hero Verse">
+    <span>HERO VERSE</span>
+  </a>
+  <a href="index.html" class="back-btn">← Home</a>
+</header>
 
-<section class="products" id="productsContainer">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🛒 Gaming Store</div>
+  <h1>Gaming <span>Products</span></h1>
+  <p>Top gaming peripherals, accessories and gear — handpicked for serious gamers.</p>
 
+  <div class="search-filter">
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Search products...">
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+
+  <div class="filter-chips" id="filterChips">
+    <span class="chip active" data-cat="all">All Products</span>
+  </div>
 </section>
 
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num" id="totalProducts">0</div>
+    <div class="stat-label">Products Listed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" id="totalClicks">0</div>
+    <div class="stat-label">Total Clicks</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">⭐ 4.8</div>
+    <div class="stat-label">Avg Rating</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">🚀 Fast</div>
+    <div class="stat-label">Delivery</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- Affiliate notice -->
+  <div class="affiliate-notice fade-in">
+    ℹ️ Hero Verse may earn a small commission when you purchase through our links — at no extra cost to you. This helps us keep the platform free!
+  </div>
+
+  <!-- Sort bar -->
+  <div class="sort-bar fade-in">
+    <h2>🛒 All <span>Products</span></h2>
+    <select class="sort-select" id="sortSelect">
+      <option value="default">Default</option>
+      <option value="clicks">Most Popular</option>
+      <option value="az">A → Z</option>
+      <option value="za">Z → A</option>
+    </select>
+  </div>
+
+  <!-- Products grid -->
+  <div class="products-grid" id="productsContainer">
+    <!-- Skeleton loaders -->
+    <div class="skeleton-card">
+      <div class="skeleton skel-img"></div>
+      <div class="skel-body">
+        <div class="skeleton skel-title"></div>
+        <div class="skeleton skel-desc"></div>
+        <div class="skeleton skel-desc2"></div>
+      </div>
+      <div class="skeleton skel-btn"></div>
+    </div>
+    <div class="skeleton-card">
+      <div class="skeleton skel-img"></div>
+      <div class="skel-body">
+        <div class="skeleton skel-title"></div>
+        <div class="skeleton skel-desc"></div>
+        <div class="skeleton skel-desc2"></div>
+      </div>
+      <div class="skeleton skel-btn"></div>
+    </div>
+    <div class="skeleton-card">
+      <div class="skeleton skel-img"></div>
+      <div class="skel-body">
+        <div class="skeleton skel-title"></div>
+        <div class="skeleton skel-desc"></div>
+        <div class="skeleton skel-desc2"></div>
+      </div>
+      <div class="skeleton skel-btn"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="sodium.html">Mods</a>
+    <a href="backrooms.html">Articles</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="about.html">About</a>
+  </div>
+  <p class="footer-copy">© 2026 Hero Verse | herogamingxyz | All Rights Reserved</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2500);
+}
+
+/* Fade-in observer */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add("visible"); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll(".fade-in").forEach(el => obs.observe(el));
+</script>
+
 <script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import{getFirestore,collection,getDocs,doc,updateDoc,increment}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+const firebaseConfig={apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",authDomain:"hero-verse-67e33.firebaseapp.com",projectId:"hero-verse-67e33",storageBucket:"hero-verse-67e33.firebasestorage.app",messagingSenderId:"227494840218",appId:"1:227494840218:web:c0d0f311a6e75737eadc23"};
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
 
-import {
-getFirestore,
-collection,
-getDocs,
-doc,
-updateDoc,
-increment
+let allProducts = [];
+let categories  = new Set(["all"]);
+
+/* ── Render products ── */
+function renderProducts(list) {
+  const container = document.getElementById("productsContainer");
+  container.innerHTML = "";
+
+  if(list.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <h3>No products found</h3>
+        <p>Try a different search or category</p>
+      </div>`;
+    return;
   }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-const firebaseConfig = {
+  list.forEach((item, i) => {
+    const p = item.data;
+    const id = item.id;
+    const clicks = p.clicks || 0;
 
-apiKey:"AIzaSyCcPC9jpeX5LfIvwB1OCCNHa4MAv3hVVJA",
+    /* Badge logic */
+    let badge = "";
+    if(i === 0) badge = `<span class="card-badge badge-hot">🔥 Hot</span>`;
+    else if(clicks > 50) badge = `<span class="card-badge badge-top">👑 Top</span>`;
+    else if(p.isNew) badge = `<span class="card-badge badge-new">✨ New</span>`;
+    else if(p.onSale) badge = `<span class="card-badge badge-sale">💸 Sale</span>`;
 
-authDomain:"hero-verse-67e33.firebaseapp.com",
+    const card = document.createElement("div");
+    card.className = "product-card fade-in";
+    card.dataset.category = p.category || "general";
+    card.dataset.title = (p.title || "").toLowerCase();
 
-projectId:"hero-verse-67e33",
+    card.innerHTML = `
+      ${badge}
+      <div class="card-img-wrap">
+        <img src="${p.image}" alt="${p.title}" loading="lazy">
+      </div>
+      <div class="card-body">
+        <div class="card-title">${p.title}</div>
+        <div class="card-desc">${p.description || ""}</div>
+        <div class="card-meta">
+          <span class="card-clicks">🔥 <span>${clicks}</span> clicks</span>
+          <span class="card-rating">⭐ ${p.rating || "4.5"}</span>
+        </div>
+      </div>
+      <button class="buy-btn" onclick="productClick('${id}','${p.affiliateLink}')">
+        🛒 Buy Now
+      </button>
+    `;
 
-storageBucket:"hero-verse-67e33.firebasestorage.app",
+    container.appendChild(card);
 
-messagingSenderId:"227494840218",
+    /* Observe for fade-in */
+    obs2.observe(card);
+  });
+}
 
-appId:"1:227494840218:web:c0d0f311a6e75737eadc23"
+const obs2 = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add("visible"); obs2.unobserve(e.target); } });
+}, { threshold: 0.05 });
 
+/* ── Filter + Search ── */
+function applyFilters() {
+  const activeChip = document.querySelector(".chip.active");
+  const cat = activeChip ? activeChip.dataset.cat : "all";
+  const q = document.getElementById("searchInput").value.toLowerCase().trim();
+  const sort = document.getElementById("sortSelect").value;
+
+  let filtered = allProducts.filter(item => {
+    const matchCat = cat === "all" || (item.data.category || "").toLowerCase() === cat;
+    const matchQ   = !q || (item.data.title || "").toLowerCase().includes(q) || (item.data.description || "").toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+
+  /* Sort */
+  if(sort === "clicks") filtered.sort((a,b) => (b.data.clicks||0) - (a.data.clicks||0));
+  if(sort === "az") filtered.sort((a,b) => (a.data.title||"").localeCompare(b.data.title||""));
+  if(sort === "za") filtered.sort((a,b) => (b.data.title||"").localeCompare(a.data.title||""));
+
+  renderProducts(filtered);
+}
+
+document.getElementById("searchInput").addEventListener("input", applyFilters);
+document.getElementById("sortSelect").addEventListener("change", applyFilters);
+
+/* ── Load products from Firestore ── */
+getDocs(collection(db,"products")).then(snapshot => {
+  allProducts = [];
+  let totalClicks = 0;
+
+  snapshot.forEach(docu => {
+    const p = docu.data();
+    allProducts.push({ id: docu.id, data: p });
+    totalClicks += p.clicks || 0;
+
+    /* Collect categories */
+    if(p.category) categories.add(p.category.toLowerCase());
+  });
+
+  /* Update stats */
+  document.getElementById("totalProducts").textContent = allProducts.length;
+  document.getElementById("totalClicks").textContent = totalClicks.toLocaleString();
+
+  /* Build category chips */
+  const chipsContainer = document.getElementById("filterChips");
+  chipsContainer.innerHTML = `<span class="chip active" data-cat="all">All Products</span>`;
+  categories.forEach(cat => {
+    if(cat === "all") return;
+    const chip = document.createElement("span");
+    chip.className = "chip";
+    chip.dataset.cat = cat;
+    chip.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+    chipsContainer.appendChild(chip);
+  });
+
+  /* Chip click events */
+  chipsContainer.querySelectorAll(".chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      chipsContainer.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      applyFilters();
+    });
+  });
+
+  renderProducts(allProducts);
+});
+
+/* ── Product click ── */
+window.productClick = async function(id, link) {
+  try {
+    await updateDoc(doc(db,"products",id), { clicks: increment(1) });
+  } catch(e) {}
+  showToast("🛒 Opening product...");
+  setTimeout(() => { window.open(link, "_blank"); }, 400);
 };
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-const productsContainer =
-document.getElementById("productsContainer");
-
-getDocs(collection(db,"products"))
-.then((snapshot)=>{
-
-snapshot.forEach((docu)=>{
-
-const p = docu.data();
-
-productsContainer.innerHTML += `
-
-<div class="card">
-
-<img src="${p.image}">
-
-<div class="content">
-
-<h2>${p.title}</h2>
-
-<p>${p.description}</p>
-
-<p>
-🔥 ${p.clicks || 0} Clicks
-</p>
-
-<button
-onclick="productClick('${docu.id}','${p.affiliateLink}')"
-class="btn">
-Buy Now
-</button>
-
-</div>
-
-</div>
-`;
-
-});
-
-});
-
-window.productClick = async function(id,link){
-
-const productRef =
-doc(db,"products",id);
-
-await updateDoc(productRef,{
-clicks: increment(1)
-});
-
-window.location.href = link;
-
-};
-
 </script>
 
 </body>
