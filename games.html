@@ -245,22 +245,28 @@ document.getElementById("searchInput");
 
 let allGames = [];
 
-const snapshot =
-await getDocs(collection(db,"games"));
+try {
 
-snapshot.forEach((docu)=>{
+  const snapshot = await getDocs(collection(db,"games"));
 
-const game = docu.data();
+  snapshot.forEach((docu)=>{
+    const game = docu.data();
+    allGames.push({
+      id:docu.id,
+      ...game
+    });
+  });
 
-allGames.push({
+  if(allGames.length === 0){
+    gamesContainer.innerHTML = "<p style='color:#bbb'>Koi games nahi mile. Firestore 'games' collection check karo.</p>";
+  }
 
-id:docu.id,
+} catch(err){
 
-...game
+  console.error("Firestore fetch error:", err);
+  gamesContainer.innerHTML = "<p style='color:#ff4444'>Games load nahi ho paye. Console check karo (F12) ya Firestore rules dekho.</p>";
 
-});
-
-});
+}
 
 function renderGames(list){
 
@@ -376,5 +382,4 @@ renderGames(filtered);
 </script>
 
 </body>
-
 </html>
